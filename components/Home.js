@@ -1,4 +1,6 @@
-import useSWR from "swr";
+import useSWR from "swr"
+import Head from 'next/head'
+import Countries from "./CountryList";
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -16,6 +18,7 @@ async function fetcher(url){
 const API = "https://restcountries.com/v3.1/all?fields=alpha2Code,alpha3Code,borders,area,capital,flag,latlng,name,population,subregion,region";
 
 function Home(){
+
   const { data, error } = useSWR(API, fetcher);
   
   if(error) return <div>{error.message}</div>
@@ -25,7 +28,15 @@ function Home(){
 
   return(
     <div>
+      <Head>
+        {/* todo */}
+        <title>Country Statistics - a portfolio project</title>
+        <meta name="description" content="An overview of statistics per country, fed by different api's." />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
       hello from Test
+      <Countries data={data} />
     </div>
   )
 }
