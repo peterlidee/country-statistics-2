@@ -1,0 +1,9 @@
+{
+    "files.exclude": {
+        "": true,
+        "**/node_modules": true,
+        "**/.next": true,
+    },
+    "editor.tabSize": 2,
+    "editor.detectIndentation": false
+}
