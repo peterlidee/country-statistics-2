@@ -1,3 +1,4 @@
+import 'html5-boilerplate/dist/css/normalize.css';
 import '../styles/globals.css'
 import Page from '../components/Page'
 
