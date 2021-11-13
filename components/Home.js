@@ -1,6 +1,8 @@
 import useSWR from "swr"
 import Head from 'next/head'
-import Countries from "./CountryList";
+import CountryList from "./countries/CountryList";
+import { FieldsContextProvider } from "./context/FieldsContext";
+import { addExtraData } from "../lib/addExtraData";
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -15,16 +17,19 @@ async function fetcher(url){
   return res.json();
 }
 
-const API = "https://restcountries.com/v3.1/all?fields=alpha2Code,alpha3Code,borders,area,capital,flag,latlng,name,population,subregion,region";
+const APIold = "https://restcountries.com/v3.1/all?fields=alpha2Code,alpha3Code,borders,area,capital,flag,latlng,name,population,subregion,region";
+const API = "https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region,code";
 
 function Home(){
 
-  const { data, error } = useSWR(API, fetcher);
+  const { data, error } = useSWR(API, fetcher, { revalidateOnFocus: false });
   
   if(error) return <div>{error.message}</div>
   if(!data) return <div>Loading ...</div>
 
-  console.log('data',data)
+  // we need to do some cleanup and some adding to the data
+  // we do in this component to prevent rerendering on filtering or display changes
+  const dataExtra = addExtraData(data);
 
   return(
     <div>
@@ -35,8 +40,10 @@ function Home(){
         <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      hello from Test
-      <Countries data={data} />
+      <p>this is some text from the Home component. Lets see how it works for typography? hello from Test</p>
+      <FieldsContextProvider>
+        <CountryList data={dataExtra} />
+      </FieldsContextProvider>
     </div>
   )
 }

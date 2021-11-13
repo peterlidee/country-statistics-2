@@ -1,0 +1,60 @@
+.country-list{
+  display: grid;
+  // grid-template-columns: auto minmax(9em, 15em) repeat(3, minmax(auto, 9em));
+  grid-gap: .25em .75em;
+  justify-content: start; // stack columns to the left
+  align-items: baseline;
+
+  width: 100%;
+  padding: 0 .75em;
+  overflow-x: auto;
+}
+
+@media screen and (min-width: 40em){
+  .country-list{
+    // grid-template-columns: auto minmax(8em, 15em) 25px repeat(3, auto);
+    grid-gap: .25em 1.5em;
+    padding: 1em;
+  }
+}
+
+.country-row{
+  &__index{
+    @extend %mono-font;
+    text-align: right;
+    margin-right: .5em;
+  }
+  &__name{}
+  &__flag{
+    width: 100%;
+    height: auto;
+    max-width: 30px;
+    max-height: 20px;
+    background: hotpink;
+    &-wrapper{
+      height: 100%;
+      background: black;
+      // display: flex;
+      // align-content: center;
+    }
+  }
+  &__population{}
+  &__area{}
+  &__density{}
+
+
+  &__population,
+  &__area,
+  &__density{
+    @extend %mono-font;
+    text-align: right;
+  }
+}
+
+@media screen and (min-width: 40em){
+  .country-row{
+    &__index{
+      margin-right: 0;
+    }
+  }
+}
