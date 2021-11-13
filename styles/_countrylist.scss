@@ -18,6 +18,17 @@
   }
 }
 
+.country-list-header{
+  &__index{
+  }
+  &__country{
+    margin-bottom: .5em;
+  }
+  &__population{}
+  &__area{}
+  &__density{}
+}
+
 .country-row{
   &__index{
     @extend %mono-font;
