@@ -14,12 +14,12 @@ const FieldsContextProvider = props => {
     {
       field: 'country',
       label: 'Country',
-      key: ['name', 'common'],
+      key: 'countryName',
       display: true,
       displayToggle: false,
       tooltip: false,
       tooltipText: '',
-      sortActive: false,
+      sortActive: true,
       sortAsc: true,
     },
     {

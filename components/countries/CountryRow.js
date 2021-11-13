@@ -22,7 +22,7 @@ function CountryRow({country, index}){
       <DivWrap field="index">{index + 1}</DivWrap>
       <DivWrap field={fields[0].field}>
         <Link href={`/country/${country.cca3}`}>
-          <a>{country.name.common}</a>
+          <a>{country[fields[0].key]}</a>
         </Link>
       </DivWrap>
       {fields[1].display && <DivWrap field={fields[1].field}>{country[fields[1].key]}</DivWrap>}
