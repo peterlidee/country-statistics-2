@@ -1,6 +1,7 @@
-import useSWR from "swr"
-import Head from 'next/head'
-import CountryList from "./countries/CountryList";
+import useSWR from "swr";
+import Head from 'next/head';
+
+import CountryList from "./countryList/CountryList";
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { addExtraData } from "../lib/addExtraData";
 
