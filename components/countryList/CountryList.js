@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import FieldsContext from '../context/FieldsContext';
 
 import FieldSettings from '../display/FieldSettings';
@@ -15,8 +15,12 @@ function Countries({ data }){
   // 1. check the sorting options
   // get the currently active sorting option from fieldsContext
   const sortByField = fields.filter(field => field.sortActive)[0];
-  const sortedData = sortData([...data], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType);
-  // TODO: add useMemo
+  
+  // useMemo so we don't recalculate the sorting if f.e. display or filter changes
+  const sortedData = useMemo(
+    () => sortData([...data], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType), 
+    [sortByField.sortKey, sortByField.sortAsc]
+  )
   
   // 2. check the filter options
 
