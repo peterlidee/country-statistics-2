@@ -29,6 +29,16 @@
   &__density{}
 }
 
+.sort__icon{
+  &__upper, &__lower{
+    fill: #ccc;
+    &.active{
+      fill: #f00;
+    }
+  }
+
+}
+
 .country-row{
   &__index{
     @extend %mono-font;

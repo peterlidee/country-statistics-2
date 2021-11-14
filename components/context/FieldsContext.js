@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 // create context with default value
 const FieldsContext = React.createContext({
     fields: [],
-    handleDisplay: () => {}
+    handleDisplay: () => {},
+    handleSort: () => {},
 })
 
 const FieldsContextProvider = props => {
@@ -21,6 +22,9 @@ const FieldsContextProvider = props => {
       tooltipText: '',
       sortActive: true,
       sortAsc: true,
+      sortDefault: true,
+      sortKey: 'countryName',
+      sortType: 'text',
     },
     {
       field: 'population',
@@ -31,7 +35,10 @@ const FieldsContextProvider = props => {
       tooltip: true,
       tooltipText: 'Number of inhabitants',
       sortActive: false,
-      sortAsc: true,
+      sortAsc: false,
+      sortDefault: false,
+      sortKey: 'population',
+      sortType: 'number',
     },
     {
       field: 'area',
@@ -43,6 +50,9 @@ const FieldsContextProvider = props => {
       tooltipText: 'Country size in km²',
       sortActive: false,
       sortAsc: true,
+      sortDefault: false,
+      sortKey: 'area',
+      sortType: 'number',
     },
     {
       field: 'density',
@@ -54,6 +64,9 @@ const FieldsContextProvider = props => {
       tooltipText: 'Inhabitants per km²',
       sortActive: false,
       sortAsc: true,
+      sortDefault: false,
+      sortKey: 'density',
+      sortType: 'number',
     },
   ])
 
@@ -80,10 +93,47 @@ const FieldsContextProvider = props => {
 
   }
 
+  // handle the sort settings
+  // the sort buttons will return index
+  const handleSort = (index) => {
+    // copy state
+    const fieldsCopy = [...fields];
+    // get a copy of the field that is now active
+    const fieldCopy = {...fieldsCopy[index]};
+
+    // if it was previously active, flip the sortAsc value
+    // else, use current value (should be default)
+    if(fieldCopy.sortActive){
+      fieldCopy.sortAsc = !fieldCopy.sortAsc
+    }else{
+      fieldCopy.sortActive = true;
+    }
+
+    const newFields = fields.map((field, i) => {
+      if(i == index){
+        return fieldCopy
+      }
+      return({
+        ...fields[i],
+        sortActive: false,
+        sortAsc: fields[i].sortDefault
+      })
+    })
+
+    // console.log('newFields',newFields)
+    
+    setFields(newFields);
+    
+    //console.log('field copy',fieldCopy)
+    // deactivate the other fields and set them to default sortAsc
+
+  }
+
   return(
       <FieldsContext.Provider value={{ 
         fields, 
-        handleDisplay 
+        handleDisplay,
+        handleSort,
       }}>
           {props.children}
       </FieldsContext.Provider>
