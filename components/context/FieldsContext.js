@@ -56,7 +56,7 @@ const FieldsContextProvider = props => {
       key: 'densityPrettyFormat',
       display: true,
       displayToggle: true,
-      legend: 'Inhabitants/km²',
+      legend: 'Inh./km²',
       sortActive: false,
       sortAsc: true,
       sortDefault: false,

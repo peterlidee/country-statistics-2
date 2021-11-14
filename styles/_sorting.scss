@@ -1,5 +1,6 @@
 // styling of sort buttons, icons
 
+// button
 .button__sort{
   // reset button styles
   background: none;
@@ -13,8 +14,13 @@
   display: flex;
   gap: 3px;
   align-items: center;
+
+  &--country{
+    margin-left: -20px;
+  }
 }
 
+// svg icon
 .icon__sort{
   width: 18px;
   

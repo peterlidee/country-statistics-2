@@ -1,3 +1,4 @@
+// grid
 .country-list{
   display: grid;
   grid-gap: .25em 1em;
@@ -16,7 +17,7 @@
   }
 }
 
-// headers
+// headers and legends
 .country-list{
   &-header{
     &--population, 
@@ -38,31 +39,25 @@
     }
   }
 }
-// legend
 
-.country-row{
-  &__index{
+// data cells
+.country-cell{
+  &--index{
     @extend %mono-font;
     text-align: right;
     margin-right: .5em;
   }
-  &__name{}
-  &__population{}
-  &__area{}
-  &__density{}
-
-
-  &__population,
-  &__area,
-  &__density{
+  &--population,
+  &--area,
+  &--density{
     @extend %mono-font;
     text-align: right;
   }
 }
 
 @media screen and (min-width: 40em){
-  .country-row{
-    &__index{
+  .country-cell{
+    &--index{
       margin-right: 0;
     }
   }

@@ -1,11 +1,7 @@
 import { useContext } from "react";
-//import DisplayContext from "../context/DisplayContext";
 import FieldsContext from "../context/FieldsContext";
 
 function DisplayOptions(){
-  
-  // const { options, displayOptions, handleDisplayOptions } = useContext(DisplayContext);
-  // console.log('displayoptions',displayOptions)
 
   const { fields, handleDisplay } = useContext(FieldsContext);
 
@@ -30,20 +26,6 @@ function DisplayOptions(){
         )
       })}
     </div>
-  )
-
-  return(
-      <div>
-        displayoptions
-        {options.map(option => (
-          <div key={`display-${option}`}>
-            <input type="checkbox" value={option} checked={displayOptions[option]} onChange={handleDisplayOptions} id={`display-${option}`} />
-            <label htmlFor={`display-${option}`}>
-              {option}
-            </label>
-          </div>
-        ))}
-      </div>
   )
 }
 

@@ -18,7 +18,6 @@ async function fetcher(url){
   return res.json();
 }
 
-const APIold = "https://restcountries.com/v3.1/all?fields=alpha2Code,alpha3Code,borders,area,capital,flag,latlng,name,population,subregion,region";
 const API = "https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region,code";
 
 function Home(){

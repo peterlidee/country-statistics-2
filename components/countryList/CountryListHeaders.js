@@ -9,20 +9,18 @@ import Wrapper from '../general/Wrapper';
 
 // a single header field for countries list
 function CountryListHeader({ field, handleSort }){
-  if(field.display){ // only show if display = true
-    return(
-      <Wrapper base={'country-list-header'} modifier={field.field}>
-        <button 
-          onClick={handleSort}
-          className={`button__sort button__sort--${field.field}`}
-        >
-          <IconSort sortActive={field.sortActive} sortAsc={field.sortAsc} />
-          {field.label}
-        </button>
-      </Wrapper>
-    )
-  }
-  return null;
+  if(!field.display) return null;
+  return(
+    <Wrapper base={'country-list-header'} modifier={field.field}>
+      <button 
+        onClick={handleSort}
+        className={`button__sort button__sort--${field.field}`}
+      >
+        <IconSort sortActive={field.sortActive} sortAsc={field.sortAsc} />
+        {field.label}
+      </button>
+    </Wrapper>
+  )
 }
 
 CountryListHeader.propTypes = {
