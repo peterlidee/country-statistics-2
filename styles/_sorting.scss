@@ -1,0 +1,27 @@
+// styling of sort buttons, icons
+
+.button__sort{
+  // reset button styles
+  background: none;
+  border: none;
+  line-height: 1.5em;
+  padding: 0;
+  cursor: pointer;
+
+  text-decoration: underline;
+  font-weight: 500;
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+
+.icon__sort{
+  width: 18px;
+  
+  &--upper, &--lower{
+    fill: #ccc; // TODO color
+    &--active{
+      fill: #0f0; // TODO color
+    }
+  }
+}

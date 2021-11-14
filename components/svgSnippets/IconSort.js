@@ -18,8 +18,8 @@ function IconSort({ sortActive, sortAsc }){
 
   return(
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" className="icon__sort">
-      <polygon points="12,2 20,12 4,12" className={`sort__icon__upper ${upperTriangleClass}`} />
-      <polygon points="20,14 4,14 12,24" className={`sort__icon__lower ${lowerTriangleClass}`} />
+      <polygon points="12,2 20,12 4,12" className={`icon__sort--upper icon__sort--upper--${upperTriangleClass}`} />
+      <polygon points="20,14 4,14 12,24" className={`icon__sort--lower icon__sort--upper--${lowerTriangleClass}`} />
     </svg>
   )
 }

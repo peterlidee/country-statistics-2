@@ -1,7 +1,6 @@
 .country-list{
   display: grid;
-  // grid-template-columns: auto minmax(9em, 15em) repeat(3, minmax(auto, 9em));
-  grid-gap: .25em .75em;
+  grid-gap: .25em 1em;
   justify-content: start; // stack columns to the left
   align-items: baseline;
 
@@ -12,34 +11,34 @@
 
 @media screen and (min-width: 40em){
   .country-list{
-    // grid-template-columns: auto minmax(8em, 15em) 25px repeat(3, auto);
     grid-gap: .25em 1.5em;
     padding: 1em;
   }
 }
 
 // headers
-
-.country-list-header{
-  &__index{
-  }
-  &__country{
-    margin-bottom: .5em;
-  }
-  &__population{}
-  &__area{}
-  &__density{}
-}
-
-.sort__icon{
-  &__upper, &__lower{
-    fill: #ccc;
-    &.active{
-      fill: #f00;
+.country-list{
+  &-header{
+    &--population, 
+    &--area, 
+    &--density{
+      justify-self: end;
     }
   }
+  &-legend{
+    font-size: 16px;
+    color: #666; // TODO dimmed text
+    margin-top: -5px;
 
+    &--population, 
+    &--area, 
+    &--density{
+      text-align: right;
+      margin-bottom: .75em;
+    }
+  }
 }
+// legend
 
 .country-row{
   &__index{
@@ -48,19 +47,6 @@
     margin-right: .5em;
   }
   &__name{}
-  &__flag{
-    width: 100%;
-    height: auto;
-    max-width: 30px;
-    max-height: 20px;
-    background: hotpink;
-    &-wrapper{
-      height: 100%;
-      background: black;
-      // display: flex;
-      // align-content: center;
-    }
-  }
   &__population{}
   &__area{}
   &__density{}
