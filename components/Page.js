@@ -6,7 +6,6 @@ function Page(props){
         <>
             <Header />
             <main>
-                main content
                 {props.children}
             </main>
             <Footer />

@@ -7,6 +7,7 @@ import { addExtraData } from "../lib/addExtraData";
 
 import getFilterData from "../lib/getFilterData";
 import Filters from "./filters/Filters";
+import { FilterContextProvider } from "./context/FilterContext";
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -51,7 +52,9 @@ function Home(){
         <link rel="icon" href="/favicon.png" />
       </Head>
       <FieldsContextProvider>
-        <Filters filterData={filterData} />
+        <FilterContextProvider>
+          <Filters filterData={filterData} />
+        </FilterContextProvider>
         <CountryList countries={countries} />
       </FieldsContextProvider>
     </div>
