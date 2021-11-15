@@ -1,19 +1,27 @@
 import { useContext } from "react";
 import FilterContext from "../context/FilterContext";
 import TextFilter from "./TextFilter";
+import RegionFilter from "./RegionFilter";
+import SubRegionFilter from "./SubRegionFilter";
 import NumberFilter from "./NumberFilter";
+
+function Filter(props){
+  if(props.filter.name == 'region') return <RegionFilter {...props} />
+  if(props.filter.name == 'subregion') return <SubRegionFilter {...props} />
+  return <NumberFilter {...props} />
+}
 
 function Filters(props){
   console.log('rendering Filters',)
 
-  const { filters, handleFilters, handleToggle } = useContext(FilterContext);
+  const { filters, handleFilters } = useContext(FilterContext);
+
   return(
     <aside>
-      filters go here
-      {filters.map(filter => {
-        if(filter.type == 'text') return <TextFilter filter={filter} handleFilters={handleFilters} handleToggle={handleToggle} />
-        return <NumberFilter filter={filter} />
-      })}
+      <h3>filter</h3>
+      {filters.map((filter, i) => 
+        <Filter key={`filter-${filter.name}`} filter={filter} handleFilters={handleFilters} /> 
+      )}
     </aside>
   )
 }

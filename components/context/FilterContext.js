@@ -1,53 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 
 const FilterContext = React.createContext({
   filters: [],
   handleFilters: () => {},
-  toggleFilters: () => {},
 })
 
 const FilterContextProvider = props => {
 
+  const [ filters, setFilters ] = useState([
+    {
+      name: 'region',
+      label: 'Region',
+      type: 'text',
+    },
+    {
+      name: 'subregion',
+      label: 'Subregion',
+      type: 'text',
+    },
+    {
+      name: 'population',
+      label: 'Population',
+      type: 'number',
+    },
+    {
+      name: 'area',
+      label: 'Area',
+      type: 'number',
+    },
+    {
+      name: 'density',
+      label: 'Density',
+      type: 'number',
+    },
+  ]);
+
   const handleFilters = () => {
     return null;
   }
-
-  const toggleFilters = () => {
-    
-  }
-
-  const filters = [
-    {
-      filter: 'region',
-      label: 'Region',
-      type: 'text',
-      open: false,
-    },
-    {
-      filter: 'subregion',
-      label: 'Subregion',
-      type: 'text',
-      open: false,
-    },
-    {
-      filter: 'population',
-      label: 'Population',
-      type: 'number',
-      open: false,
-    },
-    {
-      filter: 'area',
-      label: 'Area',
-      type: 'number',
-      open: false,
-    },
-    {
-      filter: 'density',
-      label: 'Density',
-      type: 'number',
-      open: false,
-    },
-  ]
 
   return(
     <FilterContext.Provider value={{ 
