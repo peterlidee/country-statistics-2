@@ -5,6 +5,9 @@ import CountryList from "./countryList/CountryList";
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { addExtraData } from "../lib/addExtraData";
 
+import getFilterData from "../lib/getFilterData";
+import Filters from "./filters/Filters";
+
 async function fetcher(url){
   const res = await fetch(url)
   if (!res.ok) {
@@ -29,7 +32,14 @@ function Home(){
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
-  const dataExtra = addExtraData(data);
+  const countries = addExtraData(data);
+
+  // calculate filter data from the country data
+  // this operation will only be called once
+
+  // we need data to filter along: region, subregion, population, area and density
+  const filterData = getFilterData(countries);
+
 
   return(
     <div>
@@ -40,9 +50,9 @@ function Home(){
         <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <p>this is some text from the Home component. Lets see how it works for typography? hello from Test</p>
       <FieldsContextProvider>
-        <CountryList data={dataExtra} />
+        <Filters filterData={filterData} />
+        <CountryList countries={countries} />
       </FieldsContextProvider>
     </div>
   )

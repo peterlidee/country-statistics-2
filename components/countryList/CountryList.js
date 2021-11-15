@@ -8,21 +8,23 @@ import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
 import sortData from '../../lib/sortData';
 
-function Countries({ data }){
+function Countries({ countries }){
 
   const { fields } = useContext(FieldsContext);
 
-  // 1. check the sorting options
+  // 1. check the filter options
+
+  // 2. check the sorting options after the filtering
+  // (we can't sort indexes)
   // get the currently active sorting option from fieldsContext
   const sortByField = fields.filter(field => field.sortActive)[0];
   
   // useMemo so we don't recalculate the sorting if f.e. display or filter changes
-  const sortedData = useMemo(
-    () => sortData([...data], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType), 
+  const sortedData = useMemo( // TODO check memo dependicies
+    () => sortData([...countries], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType), 
     [sortByField.sortKey, sortByField.sortAsc]
   )
-  
-  // 2. check the filter options
+
 
   // 3. check the display options
   // set the grid template columns to reflect number of fields to display
@@ -51,7 +53,7 @@ function Countries({ data }){
 }
 
 Countries.propTypes = {
-  data: PropTypes.array.isRequired
+  countries: PropTypes.array.isRequired,
 }
 
 export default Countries;
