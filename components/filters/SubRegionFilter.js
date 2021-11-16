@@ -2,9 +2,11 @@ import Collapse from './Collapse';
 
 function SubRegionFilter(props){
   return(
-    <Collapse label={props.filter.label}>
-      the collapsed content
-    </Collapse>
+    <div>
+      {/*<Collapse label={props.filter.label}>*/}
+        the collapsed content
+      {/*</Collapse>*/}
+    </div>
   )
 }
 

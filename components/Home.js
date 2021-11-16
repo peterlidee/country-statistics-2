@@ -52,7 +52,7 @@ function Home(){
         <link rel="icon" href="/favicon.png" />
       </Head>
       <FieldsContextProvider>
-        <FilterContextProvider>
+        <FilterContextProvider defaultRegionState={filterData.fauxRegionState}>
           <Filters filterData={filterData} />
         </FilterContextProvider>
         <CountryList countries={countries} />

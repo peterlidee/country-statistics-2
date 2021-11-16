@@ -4,6 +4,7 @@ import TextFilter from "./TextFilter";
 import RegionFilter from "./RegionFilter";
 import SubRegionFilter from "./SubRegionFilter";
 import NumberFilter from "./NumberFilter";
+import Collapse from "./Collapse";
 
 function Filter(props){
   if(props.filter.name == 'region') return <RegionFilter {...props} />
@@ -14,13 +15,15 @@ function Filter(props){
 function Filters(props){
   console.log('rendering Filters',)
 
-  const { filters, handleFilters } = useContext(FilterContext);
+  const { filters, handleFilters, regions } = useContext(FilterContext);
 
   return(
     <aside>
       <h3>filter</h3>
-      {filters.map((filter, i) => 
-        <Filter key={`filter-${filter.name}`} filter={filter} handleFilters={handleFilters} /> 
+      {filters.map((filter, i) =>
+        <Collapse label={filter.label} key={`filter-${filter.name}`}>
+          <Filter filter={filter} handleFilters={handleFilters} /> 
+        </Collapse>
       )}
     </aside>
   )

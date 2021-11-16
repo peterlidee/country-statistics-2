@@ -3,9 +3,13 @@ import React, { useState } from "react";
 const FilterContext = React.createContext({
   filters: [],
   handleFilters: () => {},
+  regionFilter: {},
+  setRegionFilter: () => {},
 })
 
 const FilterContextProvider = props => {
+
+  const [ regionFilter, setRegionFilter ] = useState(props.defaultRegionState);
 
   const [ filters, setFilters ] = useState([
     {
@@ -43,6 +47,7 @@ const FilterContextProvider = props => {
     <FilterContext.Provider value={{ 
       filters, 
       handleFilters,
+      regionFilter,
     }}>
         {props.children}
     </FilterContext.Provider>
