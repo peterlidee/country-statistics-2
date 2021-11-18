@@ -1,28 +1,25 @@
-import { useContext } from "react";
-import FilterContext from "../context/FilterContext";
-import TextFilter from "./TextFilter";
 import RegionFilter from "./RegionFilter";
-import SubRegionFilter from "./SubRegionFilter";
 import NumberFilter from "./NumberFilter";
 import Collapse from "./Collapse";
 
-function Filter(props){
-  if(props.filter.name == 'region') return <RegionFilter {...props} />
-  if(props.filter.name == 'subregion') return <SubRegionFilter {...props} />
-  return <NumberFilter {...props} />
-}
+import PropTypes from 'prop-types';
+import { RegionFilterContextProvider } from "../context/RegionFilterContext";
 
 function Filters(props){
   console.log('rendering Filters',)
-
-  const { filters, handleFilters, regions } = useContext(FilterContext);
+  const filters = ["region", "population", "area", "density" ];
 
   return(
     <aside>
       <h3>filter</h3>
       {filters.map((filter, i) =>
-        <Collapse label={filter.label} key={`filter-${filter.name}`}>
-          <Filter filter={filter} handleFilters={handleFilters} /> 
+        <Collapse label={filter} key={`collapse-${filter}`}>
+          {filter == "region" && 
+            <RegionFilterContextProvider defaultRegionState={props.filterData.defaultRegionState}>
+              <RegionFilter regionIndexes={props.filterData.regionIndexes} />
+            </RegionFilterContextProvider>
+          }
+          {filter !== "region" && <NumberFilter filter={filter} />}
         </Collapse>
       )}
     </aside>

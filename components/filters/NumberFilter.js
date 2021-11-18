@@ -1,6 +1,6 @@
 function NumberFilter(props){
   return(
-    <div>numberfilter {props.filter.filter}</div>
+    <div>numberfilter {props.filter.name}</div>
   )
 }
 

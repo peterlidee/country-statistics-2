@@ -9,38 +9,12 @@ const FilterContext = React.createContext({
 
 const FilterContextProvider = props => {
 
+  // this holds the state for all regions and subregions
+  // { region: { regionActive: bool, subRegionNames: [String, ...], subregionActive[bool, ...] }, ...}
   const [ regionFilter, setRegionFilter ] = useState(props.defaultRegionState);
 
-  const [ filters, setFilters ] = useState([
-    {
-      name: 'region',
-      label: 'Region',
-      type: 'text',
-    },
-    {
-      name: 'subregion',
-      label: 'Subregion',
-      type: 'text',
-    },
-    {
-      name: 'population',
-      label: 'Population',
-      type: 'number',
-    },
-    {
-      name: 'area',
-      label: 'Area',
-      type: 'number',
-    },
-    {
-      name: 'density',
-      label: 'Density',
-      type: 'number',
-    },
-  ]);
-
-  const handleFilters = () => {
-    return null;
+  const handleRegionFilter = () => {
+    
   }
 
   return(
