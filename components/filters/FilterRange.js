@@ -1,4 +1,5 @@
 import { Range, getTrackBackground } from 'react-range';
+import PropTypes from 'prop-types';
 
 function FilterRange(props){
   const sliderMin = props.min;
@@ -74,11 +75,19 @@ function FilterRange(props){
             />
           </div>
         )}
-
-
       />
     </div>
   )
+}
+
+FilterRange.propTypes = {
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  steps: PropTypes.number.isRequired,
+  sliderSelection: PropTypes.array.isRequired,
+  handleSliderSelection: PropTypes.func.isRequired,
+  sliderFinalSelection: PropTypes.array.isRequired,
+  handleSliderFinalSelection: PropTypes.func.isRequired,
 }
 
 export default FilterRange;
