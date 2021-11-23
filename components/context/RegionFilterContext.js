@@ -6,6 +6,7 @@ const RegionFilterContext = React.createContext({
   handleRegionFilter: () => {},
   handleSubregionFilter: () => {},
   handleRegionClear: () => {},
+  getActiveRegionfilters: () => {},
 })
 
 const RegionFilterContextProvider = props => {
@@ -55,12 +56,36 @@ const RegionFilterContextProvider = props => {
     setRegionFilter(props.defaultRegionState)
   }
 
+  // this function checks if there are active region filters
+  // it there are none, it returns []
+  // if there are, it returns a flat array of all the active regions and subregions
+  const getActiveRegionfilters = () => {
+    const actives = []
+    Object.keys(regionFilter).map(currRegion => {
+      // if the region is active, the subregions are also included
+      if(regionFilter[currRegion].regionActive){
+        actives.push(currRegion);
+      }else{
+        // if there are subregions
+        if(regionFilter[currRegion].subregionNames.length > 0){
+          // loop over them to see if any of them is active
+          for(let i = 0; i < regionFilter[currRegion].subregionNames.length; i++){
+            // active then push
+            if(regionFilter[currRegion].subregionActive[i]) actives.push(regionFilter[currRegion].subregionNames[i]);
+          }
+        }
+      }
+    })
+    return actives;
+  }
+
   return(
     <RegionFilterContext.Provider value={{ 
       regionFilter,
       handleRegionFilter,
       handleSubregionFilter,
       handleRegionClear,
+      getActiveRegionfilters,
     }}>
         {props.children}
     </RegionFilterContext.Provider>
