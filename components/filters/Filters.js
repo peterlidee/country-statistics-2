@@ -13,10 +13,10 @@ function Filters(props){
 
   return(
     <NumberFiltersContextProvider filterData={props.filterData}>
-      <aside>
+      <aside className="filters">
         <h3>filter</h3>
         {filters.map((filter, i) =>
-          <Collapse label={filter} key={`collapse-${filter}`}>
+          <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">
             {filter == "region" && 
               <RegionFilterContextProvider defaultRegionState={props.filterData.defaultRegionState}>
                 <RegionFilter regionIndexes={props.filterData.regionIndexes} />

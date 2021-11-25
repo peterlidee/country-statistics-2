@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import RegionFilterContext from '../context/RegionFilterContext';
-import Collapse from './Collapse';
-
+import FilterBlockRegion from './FilterBlockRegion';
+import FilterRow from './FilterRow';
 import PropTypes from 'prop-types';
-import FilterCheckBox from './FilterCheckbox';
 
 function RegionFilter(props){
 
@@ -15,41 +14,34 @@ function RegionFilter(props){
   } = useContext(RegionFilterContext);
 
   return(
-    <div className="filter-section">
+    <div className="filter">
       {Object.keys(regionFilter).map(regionName => (
-          <div className="filter-section__region-block" key={`region-filter-${regionName}`}>
-            {/* one block per region */}
-            <div className="filter-section__row filter-section__row--region">
-              <FilterCheckBox 
-                label={regionName} 
-                active={regionFilter[regionName].regionActive} 
-                handler={() => handleRegionFilter(regionName)} 
-              />
-              <span>{props.regionIndexes[regionName].length}</span>
+        <FilterBlockRegion
+          key={`region-filter-${regionName}`}
+          name={regionName} 
+          active={regionFilter[regionName].regionActive} 
+          handler={() => handleRegionFilter(regionName)}
+          count={props.regionIndexes[regionName].length}
+          hasSubFilter={regionFilter[regionName].subregionNames.length > 0}
+        >
+          {(regionFilter[regionName].subregionNames.length > 0) && 
+            <div className="filter__block__subregion">
+              {/* one block for all the subregions */}
+              {regionFilter[regionName].subregionNames.map((subregionName, i) => (
+                <FilterRow 
+                  key={`subregion-filter-${subregionName}`}
+                  name={subregionName} 
+                  active={regionFilter[regionName].subregionActive[i]} 
+                  handler={() => handleSubregionFilter(regionName, i)} 
+                  count={props.regionIndexes[subregionName].length} 
+                />
+              ))}
             </div>
-            {/* if there are subregions */}
-            {(regionFilter[regionName].subregionNames.length > 0) && 
-              <Collapse label="show subregions">
-                <div className="filter-section__subregion-block">
-                  {/* one block for all the subregions */}
-                  {regionFilter[regionName].subregionNames.map((subregionName, i) => (
-                    <div className="filter-section__row filter-section__row--subregion" key={`subregion-filter-${subregionName}`}>
-                      <FilterCheckBox 
-                        label={subregionName} 
-                        active={regionFilter[regionName].subregionActive[i]}
-                        handler={() => handleSubregionFilter(regionName, i)} 
-                      />
-                      <span>{props.regionIndexes[subregionName].length}</span>
-                    </div>
-                  ))}
-                </div>
-              </Collapse>
-            }
-          {/* close filter-section__region-block */}
-          </div>
+          }
+        </FilterBlockRegion>
         )
       )}
-      <button onClick={handleRegionClear}>clear</button>
+      <button onClick={handleRegionClear} className="filter__clear-button">clear</button>
     </div>
   )
 }

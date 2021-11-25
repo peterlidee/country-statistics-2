@@ -3,11 +3,7 @@
 // button
 .button__sort{
   // reset button styles
-  background: none;
-  border: none;
-  line-height: 1.5em;
-  padding: 0;
-  cursor: pointer;
+  @extend %reset-button;
 
   text-decoration: underline;
   font-weight: 500;

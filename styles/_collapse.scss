@@ -1,0 +1,58 @@
+// styles collapse and collapse--subfilter
+
+.collapse{
+  &__controller{
+    @extend %reset-button;
+    &--subfilter{
+      background: #ccc;
+      margin-left: auto;
+      border-radius: 3px;
+    }
+  }
+  &__status{
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+    margin-right: .25em;
+    &--subfilter{
+      font-size: 16px;
+      // todo new colors
+      background: #aaa; 
+      color: #222; 
+    }
+  }
+  &__label{
+    text-transform: lowercase;
+    font-variant: small-caps;
+    text-decoration: underline;
+    padding-right: .5em;
+    &--subfilter{
+      font-size: 16px;
+      text-decoration: none;
+    }
+  }
+  &__content{}
+}
+
+
+
+.collapse123{
+  &__status{
+    font-size: 16px;
+    display: inline-block;
+    width: 1em;
+    text-align: center;
+    margin-right: .25em;
+    background: #aaa; color: #222; // todo new colors
+    // padding: 0 .25em;
+  }
+  &__label{
+    font-size: 16px;
+    text-transform: lowercase;
+    font-variant: small-caps;
+    padding-right: .5em;
+  }
+  &__content{
+    margin-bottom: 1.5em;
+  }
+}

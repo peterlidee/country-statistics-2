@@ -1,0 +1,51 @@
+.filters{
+  max-width: 18em; // todo remove
+}
+
+.filter{
+  margin-bottom: 1.5em;
+
+  &__block{
+    &__region{
+      padding-left: 1.25em;
+    }
+    &__subregion{
+      border: 1px solid #ccc;
+      padding: .25em 1.25em;
+      margin-top: .25em;
+      margin-bottom: .4em;
+    }
+  }
+  &__row{
+    display: flex;
+    align-items: baseline;
+  }
+  &__clear-button{
+    @extend %reset-button;
+    margin-top: .75em;
+    margin-left: 1.25em;
+    background: #222;
+    color: #fff;
+    padding: 0 .5em;
+    border-radius: 3px;
+  }
+}
+
+
+// filter checkboxes
+.filtercheckbox{
+  &__input{
+    margin-right: .5em;
+  }
+  &__label{}
+  &__count{
+    font-size: 14px;
+    margin-left: .5em;
+    color: #666; // TODO
+    &-inner{
+      @extend %mono-font;
+    }
+  }
+}
+
+
