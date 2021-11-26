@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import NumberFiltersContext from "../context/NumberFiltersContext";
+import NumberFiltersContext from "../../context/NumberFiltersContext";
 import FilterRange from "./FilterRange";
 import PropTypes from 'prop-types';
 

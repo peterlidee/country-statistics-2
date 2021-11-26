@@ -1,5 +1,5 @@
 import RegionFilter from "./region/RegionFilter";
-import NumberFilter from "./NumberFilter";
+import NumberFilter from "./number/NumberFilter";
 import Collapse from "../general/Collapse";
 
 import PropTypes from 'prop-types';
