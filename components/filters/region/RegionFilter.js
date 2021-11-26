@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import RegionFilterContext from '../context/RegionFilterContext';
+import RegionFilterContext from '../../context/RegionFilterContext';
 import FilterBlockRegion from './FilterBlockRegion';
 import FilterRow from './FilterRow';
 import PropTypes from 'prop-types';

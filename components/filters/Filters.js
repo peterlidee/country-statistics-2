@@ -1,6 +1,6 @@
-import RegionFilter from "./RegionFilter";
+import RegionFilter from "./region/RegionFilter";
 import NumberFilter from "./NumberFilter";
-import Collapse from "./Collapse";
+import Collapse from "../general/Collapse";
 
 import PropTypes from 'prop-types';
 import { RegionFilterContextProvider } from "../context/RegionFilterContext";
