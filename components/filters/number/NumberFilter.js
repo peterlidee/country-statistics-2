@@ -3,6 +3,8 @@ import NumberFiltersContext from "../../context/NumberFiltersContext";
 import FilterRange from "./FilterRange";
 import PropTypes from 'prop-types';
 
+// TODO: check settings if they are active
+
 function NumberFilter(props){
 
   // get data from context
@@ -70,40 +72,46 @@ function NumberFilter(props){
   }
 
   return(
-    <div>
-      <FilterRange 
-        min={props.currFilterData.sliderStart} 
-        max={props.currFilterData.sliderEnd} 
-        steps={props.currFilterData.sliderStep}
-        sliderSelection={sliderSelection} 
-        handleSliderSelection={handleSliderSelection}
-        sliderFinalSelection={currContext[props.filter].selection} 
-        handleSliderFinalSelection={currContext[props.filter].handler}
-      />
-      <div>
-        <label htmlFor={`numberfilter-${props.filter}-from`}>from</label>
-        <input 
-          type="number" 
-          id={`numberfilter-${props.filter}-from`} 
+    <div className="filter">
+      <div className="filter__block__number">
+        <FilterRange 
           min={props.currFilterData.sliderStart} 
           max={props.currFilterData.sliderEnd} 
-          value={inputChange[0]} 
-          onChange={(e) => handleInputChange([Number(e.target.value), inputChange[1]])} 
+          steps={props.currFilterData.sliderStep}
+          sliderSelection={sliderSelection} 
+          handleSliderSelection={handleSliderSelection}
+          sliderFinalSelection={currContext[props.filter].selection} 
+          handleSliderFinalSelection={currContext[props.filter].handler}
         />
-        <label htmlFor={`numberfilter-${props.filter}-to`}>to</label>
-        <input 
-          type="number" 
-          id={`numberfilter-${props.filter}-to`} 
-          min={props.currFilterData.sliderStart} 
-          max={props.currFilterData.sliderEnd} 
-          value={inputChange[1]} 
-          onChange={(e) => handleInputChange([inputChange[0], Number(e.target.value)])} 
-          />
-        <button onClick={handleInputSelection}>filter</button>
+        <div className="number-filter__input-grid">
+          <div className="number-filter_input-grid-item">
+            <label htmlFor={`numberfilter-${props.filter}-from`} className="number-filter__label">from</label>
+            <input 
+              className="number-filter__input"
+              type="number" 
+              id={`numberfilter-${props.filter}-from`} 
+              min={props.currFilterData.sliderStart} 
+              max={props.currFilterData.sliderEnd} 
+              value={inputChange[0]} 
+              onChange={(e) => handleInputChange([Number(e.target.value), inputChange[1]])} 
+            />
+          </div>
+          <div className="number-filter__input-grid-item">
+            <label htmlFor={`numberfilter-${props.filter}-to`} className="number-filter__label">to</label>
+            <input 
+             className="number-filter__input"
+              type="number" 
+              id={`numberfilter-${props.filter}-to`} 
+              min={props.currFilterData.sliderStart} 
+              max={props.currFilterData.sliderEnd} 
+              value={inputChange[1]} 
+              onChange={(e) => handleInputChange([inputChange[0], Number(e.target.value)])} 
+              />
+          </div>
+          <button onClick={handleInputSelection} className="number-filter__submit">&gt;</button>
+        </div>
       </div>
-      <button onClick={clearFilter}>
-        clear
-      </button>
+      <button onClick={clearFilter} className="filter__clear-button">clear</button>
     </div>
   )
 }

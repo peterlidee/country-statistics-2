@@ -10,7 +10,11 @@ function FilterRange(props){
       style={{
         display: 'flex',
         justifyContent: 'center',
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        paddingRight: '15px',
+        paddingLeft: '15px',
+        marginTop: '15px',
+        marginBottom: '5px',
       }}
     >
       <Range
@@ -27,9 +31,9 @@ function FilterRange(props){
             onTouchStart={props.onTouchStart}
             style={{
               ...props.style,
-              height: '36px',
+              height: '32px',
               display: 'flex',
-              width: '100%'
+              width: '100%',
             }}
           >
             <div
@@ -56,9 +60,9 @@ function FilterRange(props){
             {...props}
             style={{
               ...props.style,
-              height: '42px',
-              width: '42px',
-              borderRadius: '4px',
+              height: '30px',
+              width: '30px',
+              borderRadius: '50%',
               backgroundColor: '#FFF',
               display: 'flex',
               justifyContent: 'center',
@@ -68,8 +72,9 @@ function FilterRange(props){
           >
             <div
               style={{
-                height: '16px',
-                width: '5px',
+                height: '8px',
+                width: '8px',
+                borderRadius: '50%',
                 backgroundColor: isDragged ? '#548BF4' : '#CCC'
               }}
             />
