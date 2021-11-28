@@ -67,7 +67,7 @@ const FieldsContextProvider = props => {
 
   // this function handles changes in fields being displayed or not
   // TODO: do we need event????
-  const handleDisplay = (index, event) => {
+  const handleDisplay = (index) => {
     
     // from e.target.value, we know which field to change
     // and the change to make is !currentValue
@@ -114,13 +114,8 @@ const FieldsContextProvider = props => {
         sortAsc: fields[i].sortDefault
       })
     })
-
-    // console.log('newFields',newFields)
     
     setFields(newFields);
-    
-    //console.log('field copy',fieldCopy)
-    // deactivate the other fields and set them to default sortAsc
 
   }
 

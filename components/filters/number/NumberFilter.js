@@ -3,8 +3,6 @@ import NumberFiltersContext from "../../context/NumberFiltersContext";
 import FilterRange from "./FilterRange";
 import PropTypes from 'prop-types';
 
-// TODO: check settings if they are active
-
 function NumberFilter(props){
 
   // get data from context

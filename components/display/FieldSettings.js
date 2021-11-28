@@ -16,7 +16,7 @@ function DisplayOptions(){
               type="checkbox" 
               value={field.field}
               checked={field.display} 
-              onChange={(event) => handleDisplay(index, event)} 
+              onChange={() => handleDisplay(index)} 
               id={`fieldsetting-${field.field}`} 
             />
             <label htmlFor={`fieldsetting-${field.field}`}>
