@@ -1,0 +1,8 @@
+.site__grid--home{
+  display: grid;
+  grid-template-columns: 18em 1fr;
+  gap: 2em;
+}
+.site__header{
+  grid-column: 1 / -1;
+}

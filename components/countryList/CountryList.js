@@ -42,13 +42,10 @@ function Countries({ countries }){
   
   // 5. display data
   return(
-    <>
-      <FieldSettings />
-      <div className="country-list" style={gridTemplateColumnsStyle}>
-        <CountryListHeaders />
-        {sortedData.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
-      </div>
-    </>
+    <main className="country-list" style={gridTemplateColumnsStyle}>
+      <CountryListHeaders />
+      {sortedData.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
+    </main>
   )
 }
 

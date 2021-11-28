@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import Head from 'next/head';
+import Header from './header/Header'
 
 import CountryList from "./countryList/CountryList";
 import { FieldsContextProvider } from "./context/FieldsContext";
@@ -44,23 +45,24 @@ function Home(){
 
 
   return(
-    <div>
-      <Head>
-        {/* todo */}
-        <title>Country Statistics - a portfolio project</title>
-        <meta name="description" content="An overview of statistics per country, fed by different api's." />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-      <FieldsContextProvider>
-        <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
-          <NumberFiltersContextProvider filterData={filterData}>
+    <FieldsContextProvider>
+      <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
+        <NumberFiltersContextProvider filterData={filterData}>
+          <Head>
+            {/* todo */}
+            <title>Country Statistics - a portfolio project</title>
+            <meta name="description" content="An overview of statistics per country, fed by different api's." />
+            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+            <link rel="icon" href="/favicon.png" />
+          </Head>
+          <div className="site__grid--home">
+            <Header home={true} />
             <Filters filterData={filterData} />
             <CountryList countries={countries} />
-          </NumberFiltersContextProvider>
-        </RegionFilterContextProvider>
-      </FieldsContextProvider>
-    </div>
+          </div>
+        </NumberFiltersContextProvider>
+      </RegionFilterContextProvider>
+    </FieldsContextProvider>
   )
 }
 

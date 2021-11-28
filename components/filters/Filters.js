@@ -23,7 +23,7 @@ function Filters(props){
   }
 
   return(
-    <aside className="filters">
+    <aside className="site__filters">
       <h3>filter</h3>
       {filters.map((filter, i) =>
         <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">

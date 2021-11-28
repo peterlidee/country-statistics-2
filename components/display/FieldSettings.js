@@ -6,7 +6,7 @@ function DisplayOptions(){
   const { fields, handleDisplay } = useContext(FieldsContext);
 
   return(
-    <div>
+    <div className="site__settings">
       fieldsettings
       {fields.map((field, index) => {
         if(!field.displayToggle) return null;
