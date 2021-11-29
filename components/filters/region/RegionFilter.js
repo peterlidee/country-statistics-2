@@ -14,7 +14,7 @@ function RegionFilter(props){
   } = useContext(RegionFilterContext);
 
   return(
-    <div className="filter">
+    <div className="filter filter--region">
       {Object.keys(regionFilter).map(regionName => (
         <FilterBlockRegion
           key={`region-filter-${regionName}`}

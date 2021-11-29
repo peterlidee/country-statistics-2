@@ -1,8 +1,13 @@
-.site__grid--home{
-  display: grid;
-  grid-template-columns: 18em 1fr;
-  gap: 2em;
+@media screen and (min-width: 64em){
+  .site__grid--home{
+    display: grid;
+    grid-template-columns: 18em 1fr;
+    gap: 3em;
+  }
 }
-.site__header{
-  grid-column: 1 / -1;
+
+@media screen and (min-width: 70em){
+  .site__grid--home{
+    grid-template-columns: 20em 1fr;
+  }
 }

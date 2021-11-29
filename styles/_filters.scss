@@ -1,6 +1,69 @@
+// filters grid
+.filters{
+  padding: 1em 0;
+  margin-bottom: 4em;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+
+  &--closed{
+    display: none;
+  }
+  &--open{
+    display: block;
+  }
+
+  &__title{
+    display: none; // we hide title but show toggle button on mobile
+  }
+}
+.filter{
+  max-width: 22em;
+  
+}
+
+@media screen and (min-width: 40em){
+  .filters{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(15em, 20em));
+    gap: 0 2em;
+    // margin-left: 1em;
+    // margin-right: 1em;
+
+    &--closed{
+      display: none;
+    }
+    &--open{
+      display: grid;
+    }
+  }
+}
+
+@media screen and (min-width: 64em){
+  .filters{
+    display: block; // one sidecolumn
+    border: none;
+    padding: 0;
+    // margin: 0;
+
+    &--closed{
+      display: block;
+    }
+
+    &__title{
+      display: block; // we hide title but show toggle button on mobile
+    }
+    &__toggler{
+      display: none;
+    }
+  }
+}
+
 .filter{
   margin-bottom: 1.5em;
 
+  &--region{
+    padding-top: .5em;
+  }
   &__block{
     &__region{
       padding-left: 1.25em;

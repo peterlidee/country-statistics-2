@@ -6,14 +6,12 @@
   align-items: baseline;
 
   width: 100%;
-  padding: 0 .75em;
   overflow-x: auto;
 }
 
 @media screen and (min-width: 40em){
   .country-list{
     grid-gap: .25em 1.5em;
-    padding: 1em;
   }
 }
 

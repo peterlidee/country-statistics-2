@@ -1,0 +1,91 @@
+.site__header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3em;
+}
+.site__logo{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.icon__logo{
+  margin-right: .75em;
+  width: 40px;
+  height: 32px;
+}
+.site__title{
+  @extend %mono-font;
+  font-size: 1.25em;
+  font-weight: 700;
+  text-transform: capitalize;
+  margin: 0;
+  color: #222;
+}
+
+@media screen and (min-width: 30em){
+  .icon__logo{
+    margin-right: 1em;
+    width: 50px;
+    height: 40px;
+  }
+  .site__title{
+    font-size: 1.5em;
+  }
+}
+
+
+// settings
+
+.settings{
+  position: relative;
+
+  &__button{
+    @extend %reset-button;
+    display: flex;
+    gap: .5em;
+    align-items: center;
+    text-decoration: underline;
+  }
+  &__button__innertext{
+    display: none;
+  }
+  &__collapse{
+    position: absolute;
+    background: #fff;
+    box-shadow: 0 4px 10px #aaa;
+    width: 14em;
+    padding: 2em;
+    right: 0;
+    top: 2.5em;
+  }
+  &__title{
+    font-weight: 500;
+    margin-bottom: .5em;
+  }
+  &__checkbox{
+    margin-right: .5em;
+  }
+}
+
+// settings icon
+.icon__settings{
+  fill: #ccc;
+  transition: fill ease-in .125s, transform ease-in .25s;
+  .settings__button:hover &{
+    fill: #222;
+  }
+  .settings__button--active &{
+    fill: #222;
+    transform: rotate(100deg);
+  }
+}
+
+@media screen and (min-width: 30em){
+  .settings{
+    &__button__innertext{
+      display: inline;
+    }
+  }
+
+}

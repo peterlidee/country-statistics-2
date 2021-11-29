@@ -2,10 +2,20 @@
   box-sizing: border-box;
 }
 
+body{
+  padding: 1em .75em;
+}
+@media screen and (min-width: 40em){
+  body{
+    padding: 1em;
+  }
+}
+
 @import "variables";
 @import "placeholders";
 @import "typography";
 @import "grids";
+@import "header";
 
 
 @import "countrylist";
