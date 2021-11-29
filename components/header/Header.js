@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import FieldSettings from '../display/FieldSettings'
+import FieldSettings from './FieldSettings'
 import IconLogo from '../svgSnippets/IconLogo';
 
 function Header(props){

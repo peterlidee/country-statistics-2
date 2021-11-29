@@ -11,3 +11,7 @@
     grid-template-columns: 20em 1fr;
   }
 }
+
+.country-count{
+  grid-column: 1 / -1;
+}

@@ -8,6 +8,7 @@ import Filters from '../filters/Filters';
 import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
 import sortData from '../../lib/sortData';
+import CountryCount from '../header/CountryCount';
 
 function Countries({ countries, filterData }){
 
@@ -44,7 +45,7 @@ function Countries({ countries, filterData }){
   // 5. display data
   return(
     <div className="site__grid--home">
-      <div>displaying ...</div>
+      <CountryCount count={10} />
       <Filters filterData={filterData} />
       <main className="country-list" style={gridTemplateColumnsStyle}>
         <CountryListHeaders />
