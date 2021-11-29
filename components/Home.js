@@ -7,7 +7,6 @@ import { FieldsContextProvider } from "./context/FieldsContext";
 import { addExtraData } from "../lib/addExtraData";
 
 import getFilterData from "../lib/getFilterData";
-import Filters from "./filters/Filters";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
 import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
 
@@ -46,20 +45,17 @@ function Home(){
 
   return(
     <FieldsContextProvider>
+      <Head>
+        {/* todo */}
+        <title>Country Statistics - a portfolio project</title>
+        <meta name="description" content="An overview of statistics per country, fed by different api's." />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
+        <link rel="icon" href="/favicon.png" />
+      </Head>
+      <Header home={true} />
       <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
         <NumberFiltersContextProvider filterData={filterData}>
-          <Head>
-            {/* todo */}
-            <title>Country Statistics - a portfolio project</title>
-            <meta name="description" content="An overview of statistics per country, fed by different api's." />
-            <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
-            <link rel="icon" href="/favicon.png" />
-          </Head>
-          <div className="site__grid--home">
-            <Header home={true} />
-            <Filters filterData={filterData} />
-            <CountryList countries={countries} />
-          </div>
+          <CountryList countries={countries} filterData={filterData} />
         </NumberFiltersContextProvider>
       </RegionFilterContextProvider>
     </FieldsContextProvider>

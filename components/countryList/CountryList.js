@@ -3,12 +3,13 @@ import PropTypes from 'prop-types';
 import { useContext, useMemo } from 'react';
 import FieldsContext from '../context/FieldsContext';
 
-import FieldSettings from '../display/FieldSettings';
+// import FieldSettings from '../display/FieldSettings';
+import Filters from '../filters/Filters';
 import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
 import sortData from '../../lib/sortData';
 
-function Countries({ countries }){
+function Countries({ countries, filterData }){
 
   const { fields } = useContext(FieldsContext);
 
@@ -20,7 +21,7 @@ function Countries({ countries }){
   const sortByField = fields.filter(field => field.sortActive)[0];
   
   // useMemo so we don't recalculate the sorting if f.e. display or filter changes
-  const sortedData = useMemo( // TODO check memo dependicies
+  const sortedData = useMemo( // TODO check memo dependecies
     () => sortData([...countries], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType), 
     [sortByField.sortKey, sortByField.sortAsc]
   )
@@ -42,15 +43,20 @@ function Countries({ countries }){
   
   // 5. display data
   return(
-    <main className="country-list" style={gridTemplateColumnsStyle}>
-      <CountryListHeaders />
-      {sortedData.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
-    </main>
+    <div className="site__grid--home">
+      <div>displaying ...</div>
+      <Filters filterData={filterData} />
+      <main className="country-list" style={gridTemplateColumnsStyle}>
+        <CountryListHeaders />
+        {sortedData.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
+      </main>
+    </div>
   )
 }
 
 Countries.propTypes = {
   countries: PropTypes.array.isRequired,
+  filterData: PropTypes.object.isRequired,
 }
 
 export default Countries;

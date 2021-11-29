@@ -3,7 +3,7 @@ import NumberFilter from "./number/NumberFilter";
 import Collapse from "../general/Collapse";
 
 import PropTypes from 'prop-types';
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import FieldsContext from "../context/FieldsContext";
 
 function Filters(props){
@@ -22,15 +22,21 @@ function Filters(props){
     if(currFilter[0].display) filters.push(filtersToCheckForDisplay[i])
   }
 
+  const [ toggle, setToggle ] = useState(false);
+  const toggleClass = toggle ? 'filters filters--open' : 'filters filters--closed';
+
   return(
     <aside className="site__filters">
-      <h3>filter</h3>
-      {filters.map((filter, i) =>
-        <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">
-          {filter == "region" && <RegionFilter regionIndexes={props.filterData.regionIndexes} />}
-          {filter !== "region" && <NumberFilter filter={filter} currFilterData={props.filterData[filter]} />}
-        </Collapse>
-      )}
+      <h3 className="filters__title">filter</h3>
+      <button className="filters__toggler" onClick={() => setToggle(!toggle)}>filter</button>
+      <div className={toggleClass}>
+        {filters.map((filter, i) =>
+          <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">
+            {filter == "region" && <RegionFilter regionIndexes={props.filterData.regionIndexes} />}
+            {filter !== "region" && <NumberFilter filter={filter} currFilterData={props.filterData[filter]} />}
+          </Collapse>
+        )}
+      </div>
     </aside>
   )
 }
