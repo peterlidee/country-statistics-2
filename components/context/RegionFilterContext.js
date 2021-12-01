@@ -59,7 +59,7 @@ const RegionFilterContextProvider = props => {
   // this function checks if there are active region filters
   // it there are none, it returns []
   // if there are, it returns a flat array of all the active regions and subregions
-  const getActiveRegionfilters = () => {
+  const getActiveRegionFilters = () => {
     const actives = []
     Object.keys(regionFilter).map(currRegion => {
       // if the region is active, the subregions are also included
@@ -85,7 +85,7 @@ const RegionFilterContextProvider = props => {
       handleRegionFilter,
       handleSubregionFilter,
       handleRegionClear,
-      getActiveRegionfilters,
+      getActiveRegionFilters,
     }}>
         {props.children}
     </RegionFilterContext.Provider>
