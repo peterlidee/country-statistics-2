@@ -7,7 +7,7 @@ import FieldsContext from '../context/FieldsContext';
 import Filters from '../filters/Filters';
 import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
-import sortData from '../../lib/sortData';
+import sortCountries from '../../lib/sortCountries';
 import CountryCount from '../header/CountryCount';
 import RegionFilterContext from '../context/RegionFilterContext';
 import filterCountriesByRegion from '../../lib/filterCountriesByRegion';
@@ -54,7 +54,7 @@ function Countries({ countries, filterData }){
   // (we can't sort indexes)
   // get the currently active sorting option from fieldsContext
   const sortByField = fields.filter(field => field.sortActive)[0];
-  const sortedData = sortData([...countriesFilteredByNumbers], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType)
+  const sortedCountries = sortCountries([...countriesFilteredByNumbers], sortByField.sortKey, sortByField.sortAsc, sortByField.sortType)
 
   // 3. check the display options
   // set the grid template columns to reflect number of fields to display
@@ -73,11 +73,11 @@ function Countries({ countries, filterData }){
   // 5. display data
   return(
     <div className="site__grid--home">
-      <CountryCount count={10} />
+      <CountryCount count={sortedCountries.length} />
       <Filters filterData={filterData} />
       <main className="country-list" style={gridTemplateColumnsStyle}>
         <CountryListHeaders />
-        {sortedData.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
+        {sortedCountries.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
       </main>
     </div>
   )
