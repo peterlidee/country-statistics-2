@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types';
 
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import FieldsContext from '../context/FieldsContext';
+import NumberFiltersContext from '../context/NumberFiltersContext';
+import RegionFilterContext from '../context/RegionFilterContext';
 
-// import FieldSettings from '../display/FieldSettings';
+import CountryCount from '../header/CountryCount';
 import Filters from '../filters/Filters';
 import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
+
 import sortCountries from '../../lib/sortCountries';
-import CountryCount from '../header/CountryCount';
-import RegionFilterContext from '../context/RegionFilterContext';
 import filterCountriesByRegion from '../../lib/filterCountriesByRegion';
-import NumberFiltersContext from '../context/NumberFiltersContext';
 import filterCountriesByNumbers from '../../lib/filterCountriesByNumbers';
 
 function Countries({ countries, filterData }){
@@ -42,12 +42,9 @@ function Countries({ countries, filterData }){
       }
     }
   }
-  console.log('activeNumberFilters',activeNumberFilters)
   // for each value in activeNumberFilters we know it's displayed and active (a selection has been made)
   // now do the actual filtering
   const countriesFilteredByNumbers = filterCountriesByNumbers(countriesFilteredByRegion, activeNumberFilters, areaSelection, populationSelection, densitySelection);
-  console.log('countriesFilteredByNuimbers',countriesFilteredByNumbers)
-  
 
 
   // 2. check the sorting options after the filtering

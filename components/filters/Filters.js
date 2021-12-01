@@ -7,8 +7,7 @@ import { useContext, useState } from "react";
 import FieldsContext from "../context/FieldsContext";
 
 function Filters(props){
-  // TODO: remove cl
-  console.log('rendering Filters',)
+
   const filters = ["region"];
   const filtersToCheckForDisplay = [ "population", "area", "density" ];
   
