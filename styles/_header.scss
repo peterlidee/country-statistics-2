@@ -20,7 +20,7 @@
   font-weight: 700;
   text-transform: capitalize;
   margin: 0;
-  color: #222;
+  color: $black;
 }
 
 @media screen and (min-width: 30em){
@@ -55,12 +55,12 @@
     background: #fff;
     box-shadow: 0 4px 10px #aaa;
     width: 14em;
-    padding: 2em;
+    padding: 1.5em 2em;
     right: 0;
     top: 2.5em;
   }
   &__title{
-    font-weight: 500;
+    font-weight: 700;
     margin-bottom: .5em;
   }
   &__checkbox{
@@ -70,13 +70,13 @@
 
 // settings icon
 .icon__settings{
-  fill: #ccc;
+  fill: $lightGrey;
   transition: fill ease-in .125s, transform ease-in .25s;
   .settings__button:hover &{
-    fill: #222;
+    fill: $black;
   }
   .settings__button--active &{
-    fill: #222;
+    fill: $black;
     transform: rotate(100deg);
   }
 }
@@ -87,5 +87,4 @@
       display: inline;
     }
   }
-
 }
