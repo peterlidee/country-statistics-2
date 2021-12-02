@@ -5,6 +5,7 @@ import Collapse from "../general/Collapse";
 import PropTypes from 'prop-types';
 import { useContext, useState } from "react";
 import FieldsContext from "../context/FieldsContext";
+import IconFilters from "../svgSnippets/IconFilters";
 
 function Filters(props){
 
@@ -22,12 +23,22 @@ function Filters(props){
   }
 
   const [ toggle, setToggle ] = useState(false);
+  const buttonClass=  toggle ? 'filters__toggle-button filters__toggle-button--active' : 'filters__toggle-button';
   const toggleClass = toggle ? 'filters filters--open' : 'filters filters--closed';
 
   return(
     <aside className="site__filters">
-      <h3 className="filters__title">filter</h3>
-      <button className="filters__toggler" onClick={() => setToggle(!toggle)}>filter</button>
+      <div className="filters__title">
+        <IconFilters />
+        filter by
+      </div>
+      <button 
+        className={buttonClass} 
+        onClick={() => setToggle(!toggle)}
+      >
+        <IconFilters />
+        <span>filter by</span>
+      </button>
       <div className={toggleClass}>
         {filters.map((filter, i) =>
           <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">

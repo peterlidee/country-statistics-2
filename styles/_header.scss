@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3em;
+  max-width: 90em;
 }
 .site__logo{
   display: flex;
@@ -86,5 +87,22 @@
     &__button__innertext{
       display: inline;
     }
+  }
+}
+
+
+.country-count{
+  margin-bottom: 1em;
+  &__number{
+    @extend %mono-font;
+    background: $blue;
+    color: #fff;
+    padding: .1em .25em;
+  }
+}
+
+@media screen and (min-width: 64em){
+  .country-count{
+    margin-bottom: 0;
   }
 }

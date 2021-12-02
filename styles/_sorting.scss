@@ -21,9 +21,9 @@
   width: 18px;
   
   &--upper, &--lower{
-    fill: #ccc; // TODO color
+    fill: $lightGrey;
     &--active{
-      fill: #0f0; // TODO color
+      fill: $blue;
     }
   }
 }
