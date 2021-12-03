@@ -2,13 +2,18 @@ import useSWR from "swr";
 import Head from 'next/head';
 import Header from './header/Header'
 
-import CountryList from "./countryList/CountryList";
-import { FieldsContextProvider } from "./context/FieldsContext";
-import { addExtraData } from "../lib/addExtraData";
+import endpoints from '../config/endpoints';
 
-import getFilterData from "../lib/getFilterData";
+import { FieldsContextProvider } from "./context/FieldsContext";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
 import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
+
+import addExtraData from "../lib/addExtraData";
+import getFilterData from "../lib/getFilterData";
+
+import CountryList from "./countryList/CountryList";
+import Sources from "./Sources";
+
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -23,14 +28,10 @@ async function fetcher(url){
   return res.json();
 }
 
-const API = "https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region,code";
-
 function Home(){
 
-  const { data, error } = useSWR(API, fetcher, { revalidateOnFocus: false });
-  
-  if(error) return <div>{error.message}</div>
-  if(!data) return <div>Loading ...</div>
+  // fetch the data
+  const { data, error } = useSWR(endpoints.home.url, fetcher, { revalidateOnFocus: false });
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
@@ -42,7 +43,6 @@ function Home(){
   // we need data to filter along: region, subregion, population, area and density
   const filterData = getFilterData(countries);
 
-
   return(
     <FieldsContextProvider>
       <Head>
@@ -53,11 +53,16 @@ function Home(){
         <link rel="icon" href="/favicon.png" />
       </Head>
       <Header home={true} />
-      <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
-        <NumberFiltersContextProvider filterData={filterData}>
-          <CountryList countries={countries} filterData={filterData} />
-        </NumberFiltersContextProvider>
-      </RegionFilterContextProvider>
+      {error && <div className="faux-site__grid--home">No data found.</div>}
+      {!error && !data && <div className="faux-site__grid--home">Loading...</div>}
+      {!error && data &&  
+        <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
+          <NumberFiltersContextProvider filterData={filterData}>
+            <CountryList countries={countries} filterData={filterData} />
+          </NumberFiltersContextProvider>
+        </RegionFilterContextProvider>
+      }
+      <Sources error={error} loading={!error && !data} endpoint={endpoints.home} extraClass="home" />
     </FieldsContextProvider>
   )
 }

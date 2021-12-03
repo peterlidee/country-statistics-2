@@ -1,0 +1,59 @@
+.source{
+  display: flex;
+  gap: .5em;
+
+  &__container{
+    border-top: 1px solid $lightGrey;
+    padding-top: .5em;
+    margin: 2em 0;
+    max-width: 50em;
+  }
+
+  &__title{
+    font-size: inherit;
+    margin: 0;
+    font-weight: 700;
+    font-variant: small-caps;
+
+  }
+  &__icon{
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-top: 10px;
+    background: $lightGrey;
+
+    &--error{
+      background: $error;
+    }
+    &--loaded{
+      background: $blue;
+    }
+  }
+  &__status{
+    text-transform: lowercase;
+    font-variant: small-caps;
+    color: $lightText;
+    font-size: 16px;
+    width: 4em;
+  }
+  &__link{
+    color: $black;
+  }
+  &__errormessage{
+    color: $error;
+  }
+}
+
+// this aligns with grids.scss .site__grid--home
+@media screen and (min-width: 64em){
+  .source__container--home{
+    margin-left: 21em;
+  }
+}
+
+@media screen and (min-width: 70em){
+  .source__container--home{
+    margin-left: 23em;
+  }
+}

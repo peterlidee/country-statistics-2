@@ -22,3 +22,8 @@ body{
 @import "sorting";
 @import "collapse";
 @import "filters";
+@import "source";
+
+.error-message{
+  color: $error;
+}
