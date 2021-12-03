@@ -69,9 +69,8 @@ const FieldsContextProvider = props => {
   // TODO: do we need event????
   const handleDisplay = (index) => {
     
-    // from e.target.value, we know which field to change
-    // and the change to make is !currentValue
     // the index gives us with item in state fields array to change
+    // and the change to make is !currentValue
 
     // make a copy of state
     const fieldsCopy =  [...fields];

@@ -1,8 +1,5 @@
-import useSWR from "swr";
-import Head from 'next/head';
-import Header from './header/Header'
-
 import endpoints from '../config/endpoints';
+import useSWR from "swr";
 
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
@@ -11,9 +8,10 @@ import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
 import addExtraData from "../lib/addExtraData";
 import getFilterData from "../lib/getFilterData";
 
+import Head from 'next/head';
+import Header from './header/Header'
 import CountryList from "./countryList/CountryList";
 import Sources from "./Sources";
-
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -39,7 +37,6 @@ function Home(){
 
   // calculate filter data from the country data
   // this operation will only be called once
-
   // we need data to filter along: region, subregion, population, area and density
   const filterData = getFilterData(countries);
 
