@@ -14,8 +14,8 @@ function Sources(props){
         <div className={`source__icon source__icon--${status}`}></div>
         <div className="source__status">{status}</div>
         <div>
-          {!props.endpoint.url && <span className="source__nolink">{props.endpoint.label}</span>}
-          {props.endpoint.url && <a className="source__link" href={props.endpoint.url} target="_blank">{props.endpoint.label}</a>}
+          {!props.endpoint && <span className="source__nolink">{props.label}</span>}
+          {props.endpoint && <a className="source__link" href={props.endpoint} target="_blank">{props.label}</a>}
           {props.error && props.error.message && <div className="source__errormessage">[{props.error.message}]</div>}
         </div>
       </div>
@@ -25,7 +25,7 @@ function Sources(props){
 
 Sources.propTypes = {
   loading: PropTypes.bool.isRequired,
-  endpoint: PropTypes.object.isRequired,
+  label: PropTypes.string.isRequired,  
 }
 
 Sources.defaultProps = {

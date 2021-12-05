@@ -59,7 +59,7 @@ function Home(){
           </NumberFiltersContextProvider>
         </RegionFilterContextProvider>
       }
-      <Sources error={error} loading={!error && !data} endpoint={endpoints.home} extraClass="home" />
+      <Sources error={error} loading={!error && !data} endpoint={endpoints.home.endpoint} label={endpoints.home.label} extraClass="home" />
     </FieldsContextProvider>
   )
 }

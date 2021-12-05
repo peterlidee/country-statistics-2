@@ -1,3 +1,5 @@
+import SingleCountry from "../../components/single/SingleCountry";
+
 export async function getServerSideProps(context) {
   return {
     props: {
@@ -8,9 +10,7 @@ export async function getServerSideProps(context) {
 
 function Country(props){
   return(
-    <div>
-      country code = {props.countryCode}
-    </div>
+    <SingleCountry countryCode={props.countryCode} />
   )
 }
 
