@@ -1,5 +1,6 @@
 import Proptypes from 'prop-types';
 import { formatNumber, roundNumber } from "../../../lib/helpers";
+import Wrapper from '../../general/Wrapper';
 
 function SingleCountryBasisStats(props){
 
@@ -9,7 +10,7 @@ function SingleCountryBasisStats(props){
   const density = formatNumber(roundNumber(Math.round( data.population / data.area )));
 
   return(
-    <div className="single-country__component single-country__component--basis-stats">
+    <Wrapper base="single-country__component" modifier="basic-stats">
       <div className="single-country__label">Total population</div>
       <div className="single-country__value">{population}</div>
       <div className="single-country__label">Size</div>
@@ -21,7 +22,7 @@ function SingleCountryBasisStats(props){
         </>
       }
       {props.children}
-    </div>
+    </Wrapper>
   )
 }
 

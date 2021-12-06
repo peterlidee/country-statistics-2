@@ -1,15 +1,10 @@
 .single-country{
-  max-width: 1400px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 2em;
 
   &__title{
     grid-column: 1 / -1;
     h1{ margin: 0; }
   }
   &__component{
-    grid-column: span 2;
     &--flags{
       text-align: center;
     }

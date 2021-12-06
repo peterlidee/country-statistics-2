@@ -21,3 +21,18 @@
 .country-count{
   grid-column: 1 / -1;
 }
+
+
+
+.single-country{
+  max-width: 1500px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 2em;
+
+  &__component{
+    &--basic-stats, &--flags, &--weather{
+      grid-column: span 2;
+    }
+  }
+}

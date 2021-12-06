@@ -7,9 +7,9 @@ function SingleCountryFlags(props){
   return(
     <Wrapper base="single-country__component" modifier="flags">
       {active == "flag" && 
-        <img src={props.flag} alt={`flag of ${props.name}`} className="single-country__flag" />}
+        <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
       {active == "coatOfArms" && 
-          <img src={props.coatOfArms} alt={`coat of arms of  ${props.name}`} className="single-country__coatOfArms" />}
+          <img src={props.coatOfArms} alt={`coat of arms of  ${props.countryName}`} className="single-country__coatOfArms" />}
       {props.coatOfArms && 
         <div className="flags__controles">
           <button 

@@ -1,0 +1,127 @@
+.weather{
+  display: grid;
+  grid-template-columns: minmax(80px, 120px) minmax(70px, 90px) minmax(80px, 120px);
+  justify-content: center;
+  grid-gap: .5em;
+  padding: .25em;
+}
+
+.weather__description{
+  grid-column: 1/-1;
+  text-align: center;
+}
+
+.weather__component--temperature, .weather__component--wind{
+  display: grid;
+  grid-template-rows: 26px 1fr 26px;
+  justify-items: center;
+}
+
+.weather__component__header{
+  text-transform: lowercase;
+  font-variant: small-caps;
+  border-bottom: 1px solid $black;
+}
+.weather__component__footer{
+  text-transform: lowercase;
+  font-variant: small-caps;
+}
+.weather__component__body{
+  display: flex;
+  align-items: center;
+  div:first-child{ margin-right: 6px; } // no flex-gap
+}
+
+.weather__component--state{
+  display: flex;
+  padding-top: 1em;
+}
+
+.weather__temp--max{
+  font-size: 45px;
+}
+.weather__temp--min{
+  font-size: 25px;
+}
+
+.weather__wind__direction{
+  padding-top: 10px;
+}
+.weather__windspeed{
+  font-size: 45px;
+}
+// wind direction icon
+.winddirection__pointer { fill: $black;}
+
+// the night versions
+.night{
+  color: $white;
+  .weather__component__header{
+    border-bottom: 1px solid $white;
+  }
+  .winddirection__pointer { fill: $white;}
+}
+
+
+$day-grey : #e2e2e2;
+$night-grey : #191919;
+
+.weather__container{
+  max-width: 450px;
+  &.day   {  }
+  &.night {}
+}
+
+.day{
+  background: $blue;
+  .clear   { }
+  .few     { background: transparentize($day-grey, 0.5); }
+  .scat    { background: transparentize($day-grey, 0.2); }
+  .broken  { background: transparentize($day-grey, 0.1); }
+  .shower,
+  .rain,
+  .thunder,
+  .snow,
+  .mist    { background: $day-grey;  }
+}
+
+.night{
+  background: #0a0b3a;
+  .clear   { }
+  .few     { background: transparentize($night-grey, 0.8); }
+  .scat    { background: transparentize($night-grey, 0.4); }
+  .broken  { background: transparentize($night-grey, 0.1); }
+  .shower  { background: $night-grey; }
+  .rain    { background: $night-grey; }
+  .thunder { background: $night-grey; }
+  .snow    { background: $night-grey; }
+  .mist    { background: $night-grey;  }
+}
+
+.cloud1   { fill: $white; }
+.cloud2   { fill: #ccc; }
+.shower,
+.rain{
+  .cloud1 { fill: #bbb; }
+}
+.thunder{
+  .cloud1 { fill: #bbb; }
+  .cloud2 { fill: #888; }
+}
+.raindrops line{ stroke: $blue; }
+.lightning{ fill: #e2c400; }
+.snow     { fill: $white; }
+.mist line{ stroke: $white; }
+
+.day{
+  .sun      { fill: #fedf00; }
+}
+
+.night{
+  .sun      { fill: none; }
+  .shower,
+  .rain{
+    .cloud1 { fill: #888; }
+  }
+  .raindrops line{ stroke: $white; }
+}

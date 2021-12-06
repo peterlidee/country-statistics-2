@@ -6,6 +6,7 @@ import BreadCrumb from "./BreadCrumb";
 import SingleCountryBasisStats from "./components/SingleCountryBasicStats";
 import SingleCountryFlags from "./components/SingleCountryFlags";
 import SingleCountryTitle from "./components/SingleCountryTitle";
+import SingleCountryWeather from "./components/SingleCountryWeather";
 
 function SingleCountry(props){
 
@@ -16,7 +17,7 @@ function SingleCountry(props){
 
   //const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo`;
 
-  const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo`;
+  const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2`;
 
   const { isLoading, error, data } = useFetch(endpoint);
 
@@ -34,9 +35,9 @@ function SingleCountry(props){
           <SingleCountryBasisStats data={data}>
             <Sources label="restcountries.com" endpoint={endpoint} error={error} loading={isLoading} />
           </SingleCountryBasisStats>
+          {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
         </div>
       )}
-      country {props.countryCode}
     </div>
   )
 
