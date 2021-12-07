@@ -52,3 +52,15 @@
     font-weight: 500;
   }
 }
+
+.neighbours-grid{
+  columns: 2;
+  column-gap: 1em;
+}
+.neighbour-country{
+  color: $lightText;
+  transition: color ease-out .12s;
+  &:hover{
+    color: $black;
+  }
+}

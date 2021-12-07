@@ -11,7 +11,8 @@ import getFilterData from "../lib/getFilterData";
 import Head from 'next/head';
 import Header from './header/Header'
 import CountryList from "./countryList/CountryList";
-import Sources from "./Sources";
+import Sources from "./sources/Sources";
+import Source from "./sources/Source";
 
 async function fetcher(url){
   const res = await fetch(url)
@@ -59,7 +60,9 @@ function Home(){
           </NumberFiltersContextProvider>
         </RegionFilterContextProvider>
       }
-      <Sources error={error} loading={!error && !data} endpoint={endpoints.home.endpoint} label={endpoints.home.label} extraClass="home" />
+      <Sources extraClass="home">
+        <Source error={error} loading={!error && !data} endpoint={endpoints.home.url} label={endpoints.home.label} />
+      </Sources>
     </FieldsContextProvider>
   )
 }

@@ -11,6 +11,8 @@ function SingleCountryWeather(props){
     <SingleCountryFetch 
       endpoint={endpoint}
       extraClass="weather"
+      label={label}
+      showSource={true}
     >
       {(data) => <WeatherWidget data={data} />}
     </SingleCountryFetch>
