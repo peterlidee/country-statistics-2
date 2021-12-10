@@ -19,10 +19,10 @@ function SingleCountryRegion(props){
           <div className="single-country__value">{props.data.subregion}</div>
         </>
       }
-      {props.data.capital && 
+      {props.data.capital[0] && 
         <>
           <div className="single-country__label">capital</div>
-          <div className="single-country__value">{props.data.capital}</div>
+          <div className="single-country__value">{props.data.capital[0]}</div>
         </>
       }
       <NeighbouringCountries borders={props.data.borders}>
