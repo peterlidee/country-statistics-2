@@ -1,8 +1,8 @@
 import useFetch from "react-fetch-hook";
 import PropTypes from 'prop-types';
-import Wrapper from "../../general/Wrapper";
-import Sources from "../../sources/Sources";
-import Source from "../../sources/Source";
+import Wrapper from "../general/Wrapper";
+import Sources from "../sources/Sources";
+import Source from "../sources/Source";
 
 function SingleCountryFetch(props){
 

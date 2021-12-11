@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import SingleCountryFetch from "./SingleCountryFetch";
+import SingleCountryFetch from "../SingleCountryFetch";
 import WeatherWidget from "./WeatherWidget";
 
 function SingleCountryWeather(props){
