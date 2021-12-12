@@ -15,21 +15,27 @@ const LabelAndValue = (props) => (
 
 function NeighbouringCountries(props){
 
+  if(props.borders.length == 0) return(
+    <>
+      <LabelAndValue>None (island)</LabelAndValue>
+      <Sources>
+        {props.children}
+      </Sources>
+    </>
+  )
+
   const endpoint = `https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=${props.borders.join(',')}`;
   const { isLoading, error, data } = useFetch(endpoint);
 
   // filter out the matchin country
   const findMatchingCountry = (border) => data.filter(country => country.cca3 == border);
-  // check if there are borders
-  const hasBorders = props.borders.length > 0;
 
   return(
     <>
       <LabelAndValue>
         {isLoading && "Loading..."}
-        {!isLoading && !hasBorders && "None (island)"}
-        {!isLoading && error && hasBorders &&  "No data found."}
-        {!isLoading && !error && hasBorders &&
+        {!isLoading && error &&  "No data found."}
+        {!isLoading && !error && 
           <div className={props.borders.length > 6 ? "neighbours-grid" : ""}>
             {props.borders.map(border => {
               const country = findMatchingCountry(border);
