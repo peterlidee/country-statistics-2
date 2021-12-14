@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import MapControles from './MapControles';
-import Sources from '../sources/Sources';
-import Source from '../sources/Source';
+import Sources from '../../sources/Sources';
+import Source from '../../sources/Source';
 import PropTypes from 'prop-types';
 
 // MapWidget loads google map and sets it up

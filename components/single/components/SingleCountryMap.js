@@ -1,6 +1,6 @@
 import Wrapper from '../../general/Wrapper';
-import FetchRegionCountries from '../../map/FetchRegionCountries';
-import MapWidget from '../../map/MapWidget';
+import FetchRegionCountries from '../map/FetchRegionCountries';
+import MapWidget from '../map/MapWidget';
 import Proptypes from 'prop-types';
 
 function SingleCountryMap(props){
