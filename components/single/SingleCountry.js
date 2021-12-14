@@ -17,14 +17,10 @@ function SingleCountry(props){
 
   // in this component, we make the main fetch to restcountries
   // it powers title, breadcrumbs and a number of single-country-sections
-
-  // https://restcountries.com/v3.1/alpha/AFG?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo
-
-  //const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo`;
-
-  const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders`;
-
+  const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders,latlng,tld`;
   const { isLoading, error, data } = useFetch(endpoint);
+
+  console.log('data from country fetch',data)
 
   return(
     <div>
@@ -43,7 +39,7 @@ function SingleCountry(props){
             </Sources>
           </SingleCountryBasisStats>
           {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
-          <SingleCountryMap />
+          <SingleCountryMap country={data} />
           <SingleCountryRegion data={data}>
             <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
           </SingleCountryRegion>

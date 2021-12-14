@@ -20,7 +20,6 @@ function Source(props){
 }
 
 Source.propTypes = {
-  endpoint: PropTypes.string.isRequired,
   loading: PropTypes.bool.isRequired,
   label: PropTypes.string.isRequired,  
 }
