@@ -5,12 +5,12 @@ import Sources from "../sources/Sources";
 import Source from "../sources/Source";
 import BreadCrumb from "./BreadCrumb";
 
-import SingleCountryBasisStats from "./components/SingleCountryBasicStats";
-import SingleCountryFlags from "./components/SingleCountryFlags";
-import SingleCountryMap from "./components/SingleCountryMap";
-import SingleCountryRegion from "./components/SingleCountryRegion";
-import SingleCountryTitle from "./components/SingleCountryTitle";
-import SingleCountryWeather from "./components/SingleCountryWeather";
+import SingleCountryBasisStats from "./sections/SingleCountryBasicStats";
+import SingleCountryFlags from "./sections/SingleCountryFlags";
+import SingleCountryMap from "./sections/SingleCountryMap";
+import SingleCountryRegion from "./sections/SingleCountryRegion";
+import SingleCountryTitle from "./sections/SingleCountryTitle";
+import SingleCountryWeather from "./sections/SingleCountryWeather";
 
 
 function SingleCountry(props){
