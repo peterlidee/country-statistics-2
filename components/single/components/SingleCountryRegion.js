@@ -1,6 +1,6 @@
 import Proptypes from 'prop-types';
 import Wrapper from '../../general/Wrapper';
-import NeighbouringCountries from './NeighbouringCountries';
+import NeighbouringCountries from '../neighbours/NeighbouringCountries';
 
 
 function SingleCountryRegion(props){
