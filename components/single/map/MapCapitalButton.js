@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
+import IconPan from '../../svgSnippets/IconPan';
 import { useState } from 'react';
+import PropTypes from 'prop-types';
 
 // the function renders a button that centers the map on the current country's capital
 // it makes a geocode request to get the capital bounds and saves it to state
@@ -26,7 +27,8 @@ function MapCapitalButton(props){
       // reset loading and error
       props.setGeoCodeLoading(false);
       props.setGeoCodeError(null);
-
+      // set current active class
+      props.setActive("capital");
 
     }else{
       // calculate the bounds
@@ -62,8 +64,12 @@ function MapCapitalButton(props){
       });
     }
   }
-  const buttonClass = props.active == "capital" ? `map-controles__button map-controles__button--active` : `map-controles__button`;
-  return <button onClick={handleButton} className={buttonClass}>{props.capital}</button>;
+  return(
+    <div className="map-controles__button-container">
+      <IconPan active={props.active == "capital"} />
+      <button onClick={handleButton} className="map-controles__button">{props.capital}</button>
+    </div>
+  )
 }
 
 MapCapitalButton.propTypes = {

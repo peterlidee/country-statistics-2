@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
 import { useState } from 'react';
+import IconPan from '../../svgSnippets/IconPan';
+import PropTypes from 'prop-types';
 
 // MapRegionButton is used to pan the map to region and subregion
 // (panning to country is handled in MapWidget itself)
@@ -50,8 +51,14 @@ function MapRegionButton(props){
     }
   }
 
-  const buttonClass = props.active == props.type ? `map-controles__button map-controles__button--active` : `map-controles__button`;
-  return <button onClick={setMap} className={buttonClass} disabled={props.countries.isLoading}>{props.label}</button>;
+  // const buttonClass = props.active == props.type ? `map-controles__button map-controles__button--active` : `map-controles__button`;
+  // return <button onClick={setMap} className={buttonClass} disabled={props.countries.isLoading}>{props.label}</button>;
+  return(
+    <div className="map-controles__button-container">
+      <IconPan active={props.active == props.type} />
+      <button onClick={setMap} className="map-controles__button" disabled={props.countries.isLoading}>{props.label}</button>
+    </div>
+  )
 }
 
 MapRegionButton.propTypes = {
