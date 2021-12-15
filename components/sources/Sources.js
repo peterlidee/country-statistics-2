@@ -1,7 +1,11 @@
 function Sources(props){
-  const containerClass = props.extraClass ? `source__container source__container--${props.extraClass}` : "source__container";
+
+  const base = 'source__container';
+  const topBorder = props.topBorder ? `${base}--topBorder` : '';
+  const extraClass = props.extraClass ? `${base}--${props.extraClass}` : '';
+  
   return(
-    <div className={containerClass}>
+    <div className={`${base} ${topBorder} ${extraClass}`}>
       <h4 className="source__title">source</h4>
       {props.children}
     </div>
@@ -10,6 +14,7 @@ function Sources(props){
 
 Sources.defaultProps = {
   extraClass: '',
+  topBorder: false,
 }
 
 export default Sources;

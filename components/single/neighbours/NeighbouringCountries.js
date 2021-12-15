@@ -18,7 +18,7 @@ function NeighbouringCountries(props){
   if(props.borders.length == 0) return(
     <>
       <LabelAndValue>None (island)</LabelAndValue>
-      <Sources>
+      <Sources topBorder={true}>
         {props.children}
       </Sources>
     </>
@@ -49,7 +49,7 @@ function NeighbouringCountries(props){
         }
       </LabelAndValue>
       {/* props.children is a <Source> component from the parent SingleCountry */}
-      <Sources>
+      <Sources topBorder={true}>
         {props.children}
         {props.borders.length > 0 && 
           <Source endpoint={endpoint} label={"restcountries.com/{codes}"} loading={isLoading} error={error} />}

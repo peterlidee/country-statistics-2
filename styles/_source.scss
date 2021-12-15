@@ -1,13 +1,18 @@
 .source{
   display: flex;
-  gap: .5em;
+  flex-wrap: wrap;
+  gap: 0 .5em;
   font-size: 16px;
 
   &__container{
-    border-top: 1px solid $lightGrey;
-    padding-top: .5em;
-    margin: 2em 0 0 0;
     max-width: 80em;
+    margin-top: .5em;
+    
+    &--topBorder{
+      margin: 2em 0 0 0;
+      padding-top: .5em;
+      border-top: 1px solid $lightGrey;
+    }
   }
 
   &__title{

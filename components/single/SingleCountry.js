@@ -34,7 +34,7 @@ function SingleCountry(props){
           <SingleCountryTitle countryName={data.name.common} />
           <SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
           <SingleCountryBasisStats data={data}>
-            <Sources>
+            <Sources topBorder={true}>
               <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
             </Sources>
           </SingleCountryBasisStats>

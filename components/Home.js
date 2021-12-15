@@ -60,7 +60,7 @@ function Home(){
           </NumberFiltersContextProvider>
         </RegionFilterContextProvider>
       }
-      <Sources extraClass="home">
+      <Sources extraClass="home" topBorder={true}>
         <Source error={error} loading={!error && !data} endpoint={endpoints.home.url} label={endpoints.home.label} />
       </Sources>
     </FieldsContextProvider>
