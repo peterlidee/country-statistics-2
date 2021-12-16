@@ -7,6 +7,14 @@ import Source from "../sources/Source";
 function SingleCountryFetch(props){
 
   const { isLoading, error, data } = useFetch(props.endpoint);
+  
+  // for gdp and gdpc we make an exception
+  // if there are no records in data, 
+  // don't show anything! no wrapper, source or child component
+  let noRecordsError = false
+  if(props.type && !isLoading && !error && data && data.records.length == 0){
+    noRecordsError = new Error('No data records for this country')
+  }
 
   return(
     <Wrapper base="single-country__component" modifier={props.extraClass}>
@@ -16,7 +24,7 @@ function SingleCountryFetch(props){
       {!error && !isLoading && data && props.children(data)}
       <Sources extraClass={props.extraClass}>
         <Source 
-          error={error} 
+          error={error || noRecordsError} 
           loading={isLoading} 
           endpoint={props.endpoint}
           label={props.label} />
@@ -32,6 +40,7 @@ SingleCountryFetch.propTypes = {
 
 SingleCountryFetch.defaultProps = {
   extraClass: "",
+  type: false,
 }
 
 export default SingleCountryFetch;

@@ -11,6 +11,7 @@ import SingleCountryMap from "./sections/SingleCountryMap";
 import SingleCountryRegion from "./sections/SingleCountryRegion";
 import SingleCountryTitle from "./sections/SingleCountryTitle";
 import SingleCountryWeather from "./sections/SingleCountryWeather";
+import SingleCountryChart from "./sections/SingleCountryChart";
 
 
 function SingleCountry(props){
@@ -26,11 +27,12 @@ function SingleCountry(props){
     <div>
       <Header />
       <BreadCrumb countryName={data?.name?.common} />
+      <div className="single-country">
       {error && <div>There was a problem with the data.</div>}
       {!error && isLoading && <div>Loading...</div>}
       {!error && !isLoading && !data && <div>There was a problem with the data.</div>}
       {!error && !isLoading && data && (
-        <div className="single-country">
+        <>
           <SingleCountryTitle countryName={data.name.common} />
           <SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
           <SingleCountryBasisStats data={data}>
@@ -43,11 +45,14 @@ function SingleCountry(props){
           <SingleCountryRegion data={data}>
             <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
           </SingleCountryRegion>
-        </div>
+        </>
       )}
+      {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
+      <SingleCountryChart countryCode={props.countryCode} type="gdp" />
+      <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
+      </div>
     </div>
   )
-
 }
 
 export default SingleCountry;
