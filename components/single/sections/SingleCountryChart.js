@@ -25,7 +25,7 @@ function SingleCountryChart(props){
       showSource={true}
       type={props.type}
     >
-      {(data) => <ChartWidget data={data} />}
+      {(data) => <ChartWidget data={data} type={props.type} />}
     </SingleCountryFetch>
   )
 }
