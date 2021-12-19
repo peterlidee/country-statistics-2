@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import SingleCountryFetch from '../SingleCountryFetch';
 import ChartWidget from '../chart/ChartWidget';
+import getChartData from '../../../lib/getChartData';
 
 function SingleCountryChart(props){
 
@@ -25,7 +26,15 @@ function SingleCountryChart(props){
       showSource={true}
       type={props.type}
     >
-      {(data) => <ChartWidget data={data} type={props.type} />}
+      {(isLoading, error, data) => {
+        // no data -> send dummy data
+        if(error || isLoading || !data || data.records.length == 0){
+          return <ChartWidget chartLabels={[]} chartValues={[]} type={props.type} />
+        }
+        // data -> calculate labels and values
+        const { chartLabels, chartValues } = getChartData(data.records, props.type);
+        return <ChartWidget chartLabels={chartLabels} chartValues={chartValues} type={props.type} />
+      }}
     </SingleCountryFetch>
   )
 }

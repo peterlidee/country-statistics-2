@@ -16,24 +16,17 @@ ChartJS.register(
 
 import { Bar } from 'react-chartjs-2';
 import colors from '../../../config/colors';
-import getChartData from '../../../lib/getChartData';
 import formatGDP from '../../../lib/formatGDP';
 import PropTypes from 'prop-types';
 
 function ChartWidget(props){
-  
-  // check if there is data records
-  if(props.data.records.length == 0) return <div>No data to generate a chart for this country.</div>
-  
-  // get data arrays from props.data
-  const { chartLabels, chartValues } = getChartData(props.data.records, props.type);
 
   const barData = {
-    labels: chartLabels,
+    labels: props.chartLabels,
     datasets: [
       {
         label: props.type,
-        data: chartValues,
+        data: props.chartValues,
         backgroundColor: colors.blue,
         hoverBackgroundColor: colors.blue,
         barPercentage: 1.15, // make them wider
@@ -71,7 +64,8 @@ function ChartWidget(props){
 }
 
 ChartWidget.propTypes = {
-  data: PropTypes.object.isRequired,
+  chartLabels: PropTypes.array.isRequired,
+  chartValues: PropTypes.array.isRequired,
   type: PropTypes.string.isRequired,
 }
 export default ChartWidget;

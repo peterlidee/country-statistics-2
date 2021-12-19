@@ -34,7 +34,7 @@ function SingleCountry(props){
         {!error && !isLoading && data && (
           <>
             <SingleCountryTitle countryName={data.name.common} />
-            <SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
+            {/*<SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
             <SingleCountryBasisStats data={data}>
               <Sources topBorder={true}>
                 <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
@@ -42,6 +42,7 @@ function SingleCountry(props){
             </SingleCountryBasisStats>
             {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
             <SingleCountryMap country={data} />
+          */}
             <SingleCountryRegion data={data}>
               <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
             </SingleCountryRegion>
