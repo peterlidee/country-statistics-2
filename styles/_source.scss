@@ -1,6 +1,5 @@
 .source{
   display: flex;
-  flex-wrap: wrap;
   gap: 0 .5em;
   font-size: 16px;
 
@@ -20,10 +19,11 @@
     margin: 0;
     font-weight: 700;
     font-variant: small-caps;
-
   }
+
   &__icon{
-    width: 8px;
+    flex: 0 0 8px;
+    // width: 8px;
     height: 8px;
     border-radius: 50%;
     margin-top: 10px;
@@ -40,10 +40,15 @@
     text-transform: lowercase;
     font-variant: small-caps;
     color: $lightText;
-    width: 4em;
+    // width: 4em;
+    flex: 0 0 4em;
   }
   &__link{
     color: $black;
+    overflow-wrap: anywhere;
+  }
+  &__nolink{
+    overflow-wrap: anywhere; // TODO check
   }
   &__errormessage{
     color: $error;
