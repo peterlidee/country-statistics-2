@@ -1,5 +1,3 @@
-// import { Chart as ChartJS } from 'chart.js/auto'
-
 // https://www.chartjs.org/docs/latest/getting-started/integration.html
 import { 
   Chart as ChartJS,
@@ -7,10 +5,6 @@ import {
   LinearScale,
   BarElement,
   Tooltip,
-  // LineController, 
-  // LineElement, 
-  // PointElement,
-  // Title 
 } from 'chart.js';
 
 ChartJS.register(
@@ -18,26 +12,21 @@ ChartJS.register(
   LinearScale,
   BarElement,
   Tooltip,
-  // LineController, 
-  // LineElement, 
-  // PointElement, 
-  // Title
 );
 
 import { Bar } from 'react-chartjs-2';
 import colors from '../../../config/colors';
-import PropTypes from 'prop-types';
 import getChartData from '../../../lib/getChartData';
+import formatGDP from '../../../lib/formatGDP';
+import PropTypes from 'prop-types';
 
 function ChartWidget(props){
-
-  // console.log('rendering ChartWidget',props)
-
   
   // check if there is data records
   if(props.data.records.length == 0) return <div>No data to generate a chart for this country.</div>
   
-  const { chartLabels, chartValues } = getChartData(props.data.records, props.type)
+  // get data arrays from props.data
+  const { chartLabels, chartValues } = getChartData(props.data.records, props.type);
 
   const barData = {
     labels: chartLabels,
@@ -47,19 +36,35 @@ function ChartWidget(props){
         data: chartValues,
         backgroundColor: colors.blue,
         hoverBackgroundColor: colors.blue,
-        barPercentage: 1.15,
+        barPercentage: 1.15, // make them wider
       }
     ]
   }
   const barOptions = {
-    responsive: true,
-    // legend: {
-    //   display: false
-    // },
+    responsive: true, // default
+    maintainAspectRatio: true, // default
+    scales: {
+      x: {
+        grid: {
+          display: false,
+        },
+      },
+      y: {
+        ticks: {
+          callback: function(value, index, values) {
+            return props.type == "gdp" ? formatGDP(value) : value;
+          }
+        }
+      }
+    },
+    legend: {
+      display: false
+    },
   }
 
   return(
-    <div style={{position: "relative"}}>
+    <div>
+      <h4 className="chart__title">{`Gross Domestic Product ${props.type == "gdpc" ? "per capita" : ""} in USD: evolution`}</h4>
       <Bar data={barData} options={barOptions} />
     </div>
   )
@@ -69,5 +74,4 @@ ChartWidget.propTypes = {
   data: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
 }
-
 export default ChartWidget;

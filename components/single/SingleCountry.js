@@ -28,28 +28,30 @@ function SingleCountry(props){
       <Header />
       <BreadCrumb countryName={data?.name?.common} />
       <div className="single-country">
-      {error && <div>There was a problem with the data.</div>}
-      {!error && isLoading && <div>Loading...</div>}
-      {!error && !isLoading && !data && <div>There was a problem with the data.</div>}
-      {!error && !isLoading && data && (
-        <>
-          <SingleCountryTitle countryName={data.name.common} />
-          <SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
-          <SingleCountryBasisStats data={data}>
-            <Sources topBorder={true}>
+        {error && <div>There was a problem with the data.</div>}
+        {!error && isLoading && <div>Loading...</div>}
+        {!error && !isLoading && !data && <div>There was a problem with the data.</div>}
+        {!error && !isLoading && data && (
+          <>
+            <SingleCountryTitle countryName={data.name.common} />
+            <SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
+            <SingleCountryBasisStats data={data}>
+              <Sources topBorder={true}>
+                <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+              </Sources>
+            </SingleCountryBasisStats>
+            {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
+            <SingleCountryMap country={data} />
+            <SingleCountryRegion data={data}>
               <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-            </Sources>
-          </SingleCountryBasisStats>
-          {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
-          <SingleCountryMap country={data} />
-          <SingleCountryRegion data={data}>
-            <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-          </SingleCountryRegion>
-        </>
-      )}
-      {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
-      <SingleCountryChart countryCode={props.countryCode} type="gdp" />
-      <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
+            </SingleCountryRegion>
+          </>
+        )}
+        {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
+        <div className="single-country__component single-country__component--charts">
+          <SingleCountryChart countryCode={props.countryCode} type="gdp" />
+          <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
+        </div>
       </div>
     </div>
   )

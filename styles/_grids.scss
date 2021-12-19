@@ -40,8 +40,8 @@
     &--region{
       grid-column: span 2;
     }
-    &--gdp, &--gdpc{
-      grid-column: span 3;
+    &--charts{
+      grid-column: 1 / -1;
     }
   }
 }
