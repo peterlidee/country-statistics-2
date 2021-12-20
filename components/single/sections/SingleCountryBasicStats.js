@@ -4,10 +4,9 @@ import Wrapper from '../../general/Wrapper';
 
 function SingleCountryBasisStats(props){
 
-  const data = props.data;
-  const population = formatNumber(roundNumber(data.population));
-  const area = formatNumber(roundNumber(data.area));
-  const density = formatNumber(roundNumber(Math.round( data.population / data.area )));
+  const population = formatNumber(roundNumber(props.population));
+  const area = formatNumber(roundNumber(props.area));
+  const density = formatNumber(roundNumber(Math.round( props.population / props.area )));
 
   return(
     <Wrapper base="single-country__component" modifier="basic-stats">
@@ -15,7 +14,7 @@ function SingleCountryBasisStats(props){
       <div className="single-country__value">{population}</div>
       <div className="single-country__label">Size</div>
       <div className="single-country__value">{area} km²</div>
-      {data.area > 0 && data.population > 0 && 
+      {props.area > 0 && props.population > 0 && 
         <>
           <div className="single-country__label">Population density</div>
           <div className="single-country__value">{density} inhabitants / km²</div>
@@ -27,7 +26,8 @@ function SingleCountryBasisStats(props){
 }
 
 SingleCountryBasisStats.propTypes = {
-  data: Proptypes.object.isRequired,
+  population: Proptypes.number.isRequired,
+  area: Proptypes.number.isRequired,
 }
 
 export default SingleCountryBasisStats;

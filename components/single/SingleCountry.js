@@ -23,23 +23,37 @@ function SingleCountry(props){
 
   console.log('data from country fetch',data)
 
+  // on loading or error or !data return code else the actual name
+  const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
+
+  // on loading or error or !data return "placeholder" else the actual flag url
+  // const flag = (error || isLoading || !data || !data.flags) ? "placeholder" : data.flags.svg;
+  const flag = data?.flags?.svg;
+
+
   return(
     <div>
       <Header />
       <BreadCrumb countryName={data?.name?.common} />
       <div className="single-country">
+        <SingleCountryTitle countryName={countryName} />
+        {error && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
+        {!isLoading && !error && !data && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
+        <SingleCountryFlags countryName={countryName} flag={data?.flags.svg} coatOfArms={data?.coatOfArms.svg} />
+        <SingleCountryBasisStats population={data?.population || 0} area={data?.area || 0}>
+          <Sources topBorder={true}>
+            <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+          </Sources>
+        </SingleCountryBasisStats>
+
+
+
         {error && <div>There was a problem with the data.</div>}
         {!error && isLoading && <div>Loading...</div>}
         {!error && !isLoading && !data && <div>There was a problem with the data.</div>}
         {!error && !isLoading && data && (
           <>
-            <SingleCountryTitle countryName={data.name.common} />
-            {/*<SingleCountryFlags countryName={data.name.common} flag={data.flags.svg} coatOfArms={data.coatOfArms.svg} />
-            <SingleCountryBasisStats data={data}>
-              <Sources topBorder={true}>
-                <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-              </Sources>
-            </SingleCountryBasisStats>
+            {/*
             {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
             <SingleCountryMap country={data} />
           */}

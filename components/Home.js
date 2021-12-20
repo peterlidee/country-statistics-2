@@ -29,6 +29,8 @@ async function fetcher(url){
 
 function Home(){
 
+  // TODO: remove endpoint from config
+
   // fetch the data
   const { data, error } = useSWR(endpoints.home.url, fetcher, { revalidateOnFocus: false });
 
