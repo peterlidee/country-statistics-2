@@ -1,4 +1,3 @@
-import endpoints from '../config/endpoints';
 import useSWR from "swr";
 
 import { FieldsContextProvider } from "./context/FieldsContext";
@@ -29,10 +28,11 @@ async function fetcher(url){
 
 function Home(){
 
-  // TODO: remove endpoint from config
+  const endpoint =  'https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region';
+  //label: 'restcountries.com/{all}',
 
   // fetch the data
-  const { data, error } = useSWR(endpoints.home.url, fetcher, { revalidateOnFocus: false });
+  const { data, error } = useSWR(endpoint, fetcher, { revalidateOnFocus: false });
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
@@ -63,7 +63,7 @@ function Home(){
         </RegionFilterContextProvider>
       }
       <Sources extraClass="home" topBorder={true}>
-        <Source error={error} loading={!error && !data} endpoint={endpoints.home.url} label={endpoints.home.label} />
+        <Source error={error} loading={!error && !data} endpoint={endpoint} label="restcountries.com/{all}" />
       </Sources>
     </FieldsContextProvider>
   )
