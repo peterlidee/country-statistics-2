@@ -20,8 +20,10 @@ function SingleCountry(props){
   // it powers title, breadcrumbs and a number of single-country-sections
   const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders,latlng,tld`;
   const { isLoading, error, data } = useFetch(endpoint);
-
+  
   console.log('data from country fetch',data)
+  // construct a source component
+  const source = <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />;
 
   // on loading or error or !data return code else the actual name
   const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
@@ -30,23 +32,27 @@ function SingleCountry(props){
   // const flag = (error || isLoading || !data || !data.flags) ? "placeholder" : data.flags.svg;
   const flag = data?.flags?.svg;
 
-
   return(
-    <div>
+    <>
       <Header />
       <BreadCrumb countryName={data?.name?.common} />
       <div className="single-country">
+        
         <SingleCountryTitle countryName={countryName} />
         {error && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
         {!isLoading && !error && !data && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
-        <SingleCountryFlags countryName={countryName} flag={data?.flags.svg} coatOfArms={data?.coatOfArms.svg} />
+        <SingleCountryFlags 
+          countryName={countryName} 
+          flag={data?.flags.svg} 
+          coatOfArms={data?.coatOfArms.svg} />
         <SingleCountryBasisStats population={data?.population || 0} area={data?.area || 0}>
-          <Sources topBorder={true}>
-            <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-          </Sources>
+          <Sources topBorder={true}>{source}</Sources>
         </SingleCountryBasisStats>
-
-
+        <SingleCountryRegion 
+          data={data}
+          error={error}
+          loading={isLoading}
+          source={source} />
 
         {error && <div>There was a problem with the data.</div>}
         {!error && isLoading && <div>Loading...</div>}
@@ -57,9 +63,6 @@ function SingleCountry(props){
             {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
             <SingleCountryMap country={data} />
           */}
-            <SingleCountryRegion data={data}>
-              <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-            </SingleCountryRegion>
           </>
         )}
         {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
@@ -68,7 +71,7 @@ function SingleCountry(props){
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

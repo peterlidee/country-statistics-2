@@ -1,39 +1,30 @@
-import Proptypes from 'prop-types';
 import Wrapper from '../../general/Wrapper';
 import NeighbouringCountries from '../neighbours/NeighbouringCountries';
 
+const RenderLabelValue = (props) => (
+  <>
+    <div className="single-country__label">{props.label}</div>
+    <div className="single-country__value">
+      {props.loading && "..."}
+      {!props.loading && props.error && "No data"}
+      {!props.loading && !props.error && !props.value && "None"}
+      {!props.loading && !props.error && props.value}
+    </div>
+  </>
+)
 
-function SingleCountryRegion(props){
-
-  return(
-    <Wrapper base="single-country__component" modifier="region">
-      {props.data.region && 
-        <>
-          <div className="single-country__label">region</div>
-          <div className="single-country__value">{props.data.region}</div>
-        </>
-      }
-      {props.data.subregion && 
-        <>
-          <div className="single-country__label">subregion</div>
-          <div className="single-country__value">{props.data.subregion}</div>
-        </>
-      }
-      {props.data.capital[0] && 
-        <>
-          <div className="single-country__label">capital</div>
-          <div className="single-country__value">{props.data.capital[0]}</div>
-        </>
-      }
-      <NeighbouringCountries borders={props.data.borders}>
-        {props.children}
-      </NeighbouringCountries>
-    </Wrapper>
-  )
-}
-
-SingleCountryRegion.propTypes = {
-  data: Proptypes.object.isRequired,
-}
+const SingleCountryRegion = (props) => (
+  <Wrapper base="single-country__component" modifier="region">
+    <RenderLabelValue loading={props.loading} error={props.error} value={props.data?.region} label="region" />
+    <RenderLabelValue loading={props.loading} error={props.error} value={props.data?.subregion} label="subregion" />
+    <RenderLabelValue loading={props.loading} error={props.error} value={props.data?.capital[0]} label="capital" />
+    <NeighbouringCountries 
+      loading={props.loading} 
+      error={props.error} 
+      borders={props?.data?.borders}
+      source={props.source} 
+    />
+  </Wrapper>
+)
 
 export default SingleCountryRegion;
