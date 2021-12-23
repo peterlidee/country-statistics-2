@@ -21,9 +21,7 @@ const SingleCountryRegion = (props) => (
     <NeighbouringCountries 
       loading={props.loading} 
       error={props.error} 
-      borders={props?.data?.borders}
-      source={props.source} 
-    />
+      borders={props?.data?.borders} />
   </Wrapper>
 )
 

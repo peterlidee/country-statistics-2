@@ -9,11 +9,11 @@ const LabelAndValue = (props) => (
     <div className="single-country__value">
       {props.children}
     </div>
-    <Sources topBorder={true}>
-      {/* props.parentSource is a <Source> component from the parent SingleCountry */}
-      {props.parentSource}
-      {props.childSource && props.childSource}
-    </Sources>
+    {props.source &&
+      <Sources topBorder={true}>
+        {props.source}
+      </Sources>
+    }
   </>
 );
 
@@ -21,7 +21,7 @@ function NeighbouringCountries(props){
 
   // we first need to handle the loading, error and data of the components fetch
   if(props.loading || props.error || !props.borders || props.borders.length == 0) return(
-    <LabelAndValue parentSource={props.source}>
+    <LabelAndValue>
       {props.loading && "..."}
       {props.error && "No data found."}
       {!props.loading && !props.error && !props.borders && "No data found."}
@@ -36,10 +36,8 @@ function NeighbouringCountries(props){
   const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border);
 
   return(
-    <LabelAndValue 
-      parentSource={props.source} 
-      childSource={props.borders.length > 0 && 
-        <Source endpoint={endpoint} label={"restcountries.com/{codes}"} loading={isLoading} error={error} />}
+    <LabelAndValue source={props.borders.length > 0 && 
+      <Source endpoint={endpoint} label={"restcountries.com/{codes}"} loading={isLoading} error={error} />}
     >
       <div className={props.borders.length > 6 ? "neighbours-grid" : ""}>
         {props.borders.map(border => {
