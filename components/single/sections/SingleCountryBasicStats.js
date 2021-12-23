@@ -20,7 +20,6 @@ function SingleCountryBasisStats(props){
           <div className="single-country__value">{density} inhabitants / km²</div>
         </>
       }
-      {props.children}
     </Wrapper>
   )
 }
