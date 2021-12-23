@@ -12,6 +12,11 @@
       padding-top: .5em;
       border-top: 1px solid $lightGrey;
     }
+    // styles SingleCountryStatus
+    &--status{
+      margin-top: 0;
+      max-width: none;
+    }
   }
 
   &__title{

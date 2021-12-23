@@ -31,6 +31,12 @@
   gap: 2em;
 
   &__component{
+    &--title{
+      grid-column: 1 / -1;
+    }
+    &--status{
+      grid-column: 1 / -1;
+    }
     &--basic-stats, &--flags, &--weather{
       grid-column: span 2;
     }
@@ -43,8 +49,5 @@
     &--charts{
       grid-column: 1 / -1;
     }
-  }
-  &__error-message{
-    grid-column: 1 / -1;
   }
 }

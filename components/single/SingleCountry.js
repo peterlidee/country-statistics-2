@@ -5,12 +5,13 @@ import Sources from "../sources/Sources";
 import Source from "../sources/Source";
 import BreadCrumb from "./BreadCrumb";
 
-import SingleCountryBasisStats from "./sections/SingleCountryBasicStats";
+import SingleCountryTitle from "./sections/SingleCountryTitle";
+import SingleCountryStatus from "./sections/SingleCountryStatus";
 import SingleCountryFlags from "./sections/SingleCountryFlags";
+import SingleCountryBasisStats from "./sections/SingleCountryBasicStats";
+import SingleCountryWeather from "./sections/SingleCountryWeather";
 import SingleCountryMap from "./sections/SingleCountryMap";
 import SingleCountryRegion from "./sections/SingleCountryRegion";
-import SingleCountryTitle from "./sections/SingleCountryTitle";
-import SingleCountryWeather from "./sections/SingleCountryWeather";
 import SingleCountryChart from "./sections/SingleCountryChart";
 
 
@@ -23,13 +24,19 @@ function SingleCountry(props){
   
   console.log('data from country fetch',data)
   // construct a source component
-  const source = <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />;
+  const sources = (
+    <Sources topBorder={true} extraClass="title">
+      <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+    </Sources>
+  )
+  const source = (
+      <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
+  )
 
   // on loading or error or !data return code else the actual name
   const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
 
-  // on loading or error or !data return "placeholder" else the actual flag url
-  // const flag = (error || isLoading || !data || !data.flags) ? "placeholder" : data.flags.svg;
+  // return undefined of flag
   const flag = data?.flags?.svg;
 
   return(
@@ -39,8 +46,13 @@ function SingleCountry(props){
       <div className="single-country">
         
         <SingleCountryTitle countryName={countryName} />
-        {error && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
-        {!isLoading && !error && !data && <div className="single-country__error-message">No data found for {props.countryCode}</div>}
+
+        <SingleCountryStatus loading={isLoading} error={error} data={data} countryCode={props.countryCode}>
+          <Sources topBorder={true} extraClass="status">
+            <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+          </Sources>
+        </SingleCountryStatus>
+
         <SingleCountryFlags 
           countryName={countryName} 
           flag={data?.flags.svg} 
@@ -48,11 +60,14 @@ function SingleCountry(props){
         <SingleCountryBasisStats population={data?.population || 0} area={data?.area || 0}>
           <Sources topBorder={true}>{source}</Sources>
         </SingleCountryBasisStats>
-        <SingleCountryRegion 
-          data={data}
-          error={error}
-          loading={isLoading}
-          source={source} />
+
+        <SingleCountryWeather 
+          loading={false}
+          error={false}
+          // data={data}
+          cca2={data?.cca2} 
+          capitalName={data?.capital[0]} 
+        />
 
         {error && <div>There was a problem with the data.</div>}
         {!error && isLoading && <div>Loading...</div>}
@@ -66,6 +81,11 @@ function SingleCountry(props){
           </>
         )}
         {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
+        <SingleCountryRegion 
+          data={data}
+          error={error}
+          loading={isLoading}
+          source={source} />
         <div className="single-country__component single-country__component--charts">
           <SingleCountryChart countryCode={props.countryCode} type="gdp" />
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
