@@ -83,6 +83,7 @@ $night-grey : #191919;
   .thunder,
   .snow,
   .mist    { background: $day-grey;  }
+  .nodata  { background: $day-grey;  }
 }
 
 .night{
@@ -124,4 +125,9 @@ $night-grey : #191919;
     .cloud1 { fill: #888; }
   }
   .raindrops line{ stroke: $white; }
+}
+
+.placeholder__weatherwidget{
+  width: 100%;
+  height: auto;
 }

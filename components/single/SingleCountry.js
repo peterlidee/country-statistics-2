@@ -24,11 +24,6 @@ function SingleCountry(props){
   
   console.log('data from country fetch',data)
   // construct a source component
-  const sources = (
-    <Sources topBorder={true} extraClass="title">
-      <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-    </Sources>
-  )
   const source = (
       <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
   )
@@ -57,16 +52,17 @@ function SingleCountry(props){
           countryName={countryName} 
           flag={data?.flags.svg} 
           coatOfArms={data?.coatOfArms.svg} />
-        <SingleCountryBasisStats population={data?.population || 0} area={data?.area || 0}>
-          <Sources topBorder={true}>{source}</Sources>
-        </SingleCountryBasisStats>
+
+        <SingleCountryBasisStats 
+          population={data?.population || 0} 
+          area={data?.area || 0} />
 
         <SingleCountryWeather 
           loading={false}
           error={false}
-          // data={data}
           cca2={data?.cca2} 
-          capitalName={data?.capital[0]} 
+          capitalName={data?.capital[0]}
+          countryCode={props.countryCode}
         />
 
         {error && <div>There was a problem with the data.</div>}
@@ -81,11 +77,12 @@ function SingleCountry(props){
           </>
         )}
         {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
+
         <SingleCountryRegion 
           data={data}
           error={error}
-          loading={isLoading}
-          source={source} />
+          loading={isLoading}/>
+
         <div className="single-country__component single-country__component--charts">
           <SingleCountryChart countryCode={props.countryCode} type="gdp" />
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
