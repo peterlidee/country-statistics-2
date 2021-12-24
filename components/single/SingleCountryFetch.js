@@ -10,8 +10,8 @@ function SingleCountryFetch(props){
   
   // for gdp and gdpc we make an exception
   // if there are no records in data, 
-  // don't show anything! no wrapper, source or child component
-  // TODO: not needed????
+  // we throw error as to indicate there are no data
+  // the request itself however, will be succesfull and throw no error
   let noRecordsError = false
   if(props.type && !isLoading && !error && data && data.records.length == 0){
     noRecordsError = new Error('No data available for this country')
