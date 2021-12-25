@@ -22,7 +22,6 @@ function SingleCountry(props){
   const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders,latlng,tld`;
   const { isLoading, error, data } = useFetch(endpoint);
   
-  console.log('data from country fetch',data)
   // construct a source component
   const source = (
       <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
@@ -31,7 +30,7 @@ function SingleCountry(props){
   // on loading or error or !data return code else the actual name
   const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
 
-  // return undefined of flag
+  // return undefined or flag
   const flag = data?.flags?.svg;
 
   return(
@@ -58,12 +57,16 @@ function SingleCountry(props){
           area={data?.area || 0} />
 
         <SingleCountryWeather 
-          loading={false}
-          error={false}
+          loading={isLoading}
+          error={error}
           cca2={data?.cca2} 
           capitalName={data?.capital[0]}
-          countryCode={props.countryCode}
-        />
+          countryCode={props.countryCode} />
+
+        <SingleCountryMap 
+          country={data} 
+          loading={isLoading} 
+          error={error} />
 
         {error && <div>There was a problem with the data.</div>}
         {!error && isLoading && <div>Loading...</div>}
@@ -71,7 +74,6 @@ function SingleCountry(props){
         {!error && !isLoading && data && (
           <>
             {/*
-            {data.capital[0] && <SingleCountryWeather cca2={data.cca2} capitalName={data.capital[0]} />}
             <SingleCountryMap country={data} />
           */}
           </>

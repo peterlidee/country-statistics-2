@@ -19,10 +19,10 @@ function SingleCountryFlags(props){
       {active == "flag" && 
         <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
       {active == "coatOfArms" && props.coatOfArms &&
-          <img src={props.coatOfArms} alt={`coat of arms of  ${props.countryName}`} className="single-country__coatOfArms" />}
+        <img src={props.coatOfArms} alt={`coat of arms of  ${props.countryName}`} className="single-country__coatOfArms" />}
       {active == "coatOfArms" && !props.coatOfArms &&
-          // if cOA is active but there is no coa, show the flag instead
-          <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
+        // if cOA is active but there is no coa, show the flag instead
+        <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
 
       {props.coatOfArms && 
         <div className="flags__controles">

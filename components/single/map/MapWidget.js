@@ -15,24 +15,16 @@ const containerStyle = {
 };
 
 function MapWidget(props){
-
-  // we make 2 geocode request, for country and capital
-  // their loading and error states are captured here
-  const [geoCodeLoading, setGeoCodeLoading] = useState(true);
-  const [geoCodeError, setGeoCodeError] = useState(null);
-
-  // an instance of the GoogleMap is saved in here
-  // that way, we can use it in map buttons that pan to f.e. region
-  const [mapInState, setMapInState] = useState(null);
-
-  // these are used by setCountryMap to store the calculated bounds of the current country
-  const [countryBounds, setCountryBounds] = useState(false);
-
+  
   // connect to google maps
   const { isLoaded, loadError } = useJsApiLoader({
     googleMapsApiKey: process.env.API_KEY_GOOGLE,
     language: "en",
   })
+
+  // an instance of the GoogleMap is saved in here
+  // that way, we can use it in map buttons that pan to f.e. region
+  const [mapInState, setMapInState] = useState(null);
 
   // onLoad function saves map instance in state and sets map to current country bounds
   const onLoad = useCallback(function callback(map){
@@ -100,6 +92,15 @@ function MapWidget(props){
       })
     }
   }
+
+  // these are used by setCountryMap to store the calculated bounds of the current country
+  const [countryBounds, setCountryBounds] = useState(false);
+
+  // for panButtons
+  // we make 2 geocode request, for country and capital
+  // their loading and error states are captured here
+  const [geoCodeLoading, setGeoCodeLoading] = useState(true);
+  const [geoCodeError, setGeoCodeError] = useState(null);
 
   return(
     <>
