@@ -46,11 +46,8 @@ function Home(){
   return(
     <FieldsContextProvider>
       <Head>
-        {/* todo */}
         <title>Country Statistics - a portfolio project</title>
         <meta name="description" content="An overview of statistics per country, fed by different api's." />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" key="viewport" />
-        <link rel="icon" href="/favicon.png" />
       </Head>
       <Header home={true} />
       {error && <div className="faux-site__grid--home">No data found.</div>}

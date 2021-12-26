@@ -1,4 +1,5 @@
 import useFetch from "react-fetch-hook";
+import Head from "next/head";
 
 import Header from "../header/Header";
 import Sources from "../sources/Sources";
@@ -22,11 +23,6 @@ function SingleCountry(props){
   // it powers title, breadcrumbs and a number of single-country-sections
   const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders,latlng,tld`;
   const { isLoading, error, data } = useFetch(endpoint);
-  
-  // construct a source component
-  const source = (
-    <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
-  )
 
   // on loading or error or !data return code else the actual name
   const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
@@ -36,6 +32,10 @@ function SingleCountry(props){
 
   return(
     <>
+      <Head>
+        <title>Country Statistics of {countryName}</title>
+        <meta name="description" content={`Country Statistics of ${countryName}`} />
+      </Head>
       <Header />
       <BreadCrumb countryName={data?.name?.common} />
       <div className="single-country">
