@@ -37,7 +37,7 @@ function SingleCountry(props){
         <meta name="description" content={`Country Statistics of ${countryName}`} />
       </Head>
       <Header />
-      <BreadCrumb countryName={data?.name?.common} />
+      <BreadCrumb countryName={countryName} />
       <div className="single-country">
         
         <SingleCountryTitle countryName={countryName} />
