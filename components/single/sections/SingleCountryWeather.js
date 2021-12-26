@@ -6,7 +6,7 @@ import WeatherWidget from "../weather/WeatherWidget";
 
 function SingleCountryWeather(props){
 
-  const placeHolder = <Placeholder extraClass="placeholder__weatherwidget" backgroundColor="#ddd" />;
+  const placeHolder = <Placeholder extraClass="placeholder__weatherwidget" backgroundColor="#aaa" />;
   
   // first handle the loading, error and data states of the parent component
   if(props.loading || props.error) return(

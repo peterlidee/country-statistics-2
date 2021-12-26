@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 // (panning to country is handled in MapWidget itself)
 
 // it gets all countries in region or subregion via props
-// on click, it calculates LatLngBounds from countries and then saves it in state as cache
+// on click, it calculates LatLngBounds and sets map to it
 
 function MapRegionButton(props){
   
@@ -15,9 +15,6 @@ function MapRegionButton(props){
 
   // catch errors and no data
   if(props.countries.error || (!props.countries.isLoading && !props.countries.data)) return null;
-
-  // on calulculation, we save the bounds in here
-  const [savedBounds, setSavedBounds] = useState(false)
   
   // convert data to latlng and feed them into google latlngbounds
   const calculateBounds = () => {
@@ -26,8 +23,6 @@ function MapRegionButton(props){
     for(let i = 0; i < props.countries.data.length; i++){
       bounds.extend(new google.maps.LatLng(props.countries.data[i].latlng[0], props.countries.data[i].latlng[1]))
     }
-    // save in state
-    setSavedBounds(bounds);
     // return to use
     return bounds;
   }
@@ -43,16 +38,14 @@ function MapRegionButton(props){
       props.map.setZoom(2)
 
     }else if(props.map){
-      // get the bounds from state or calculate them
-      const bounds = savedBounds ? savedBounds : calculateBounds();
+      // calculate
+      const bounds = calculateBounds();
       // set map to bounds
       props.map.fitBounds(bounds);       // # auto-zoom
       props.map.panToBounds(bounds);     // # auto-center
     }
   }
 
-  // const buttonClass = props.active == props.type ? `map-controles__button map-controles__button--active` : `map-controles__button`;
-  // return <button onClick={setMap} className={buttonClass} disabled={props.countries.isLoading}>{props.label}</button>;
   return(
     <div className="map-controles__button-container">
       <IconPan active={props.active == props.type} />

@@ -14,6 +14,7 @@ import SingleCountryMap from "./sections/SingleCountryMap";
 import SingleCountryRegion from "./sections/SingleCountryRegion";
 import SingleCountryChart from "./sections/SingleCountryChart";
 
+// todo HEAD
 
 function SingleCountry(props){
 
@@ -24,7 +25,7 @@ function SingleCountry(props){
   
   // construct a source component
   const source = (
-      <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
+    <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} extraClass={"title"} />
   )
 
   // on loading or error or !data return code else the actual name
@@ -64,21 +65,7 @@ function SingleCountry(props){
           countryCode={props.countryCode} />
 
         <SingleCountryMap 
-          country={data} 
-          loading={isLoading} 
-          error={error} />
-
-        {error && <div>There was a problem with the data.</div>}
-        {!error && isLoading && <div>Loading...</div>}
-        {!error && !isLoading && !data && <div>There was a problem with the data.</div>}
-        {!error && !isLoading && data && (
-          <>
-            {/*
-            <SingleCountryMap country={data} />
-          */}
-          </>
-        )}
-        {/* we don't need the data from the fetch so we put it outside of the loading, error and data conditionals */}
+          country={data} />
 
         <SingleCountryRegion 
           data={data}

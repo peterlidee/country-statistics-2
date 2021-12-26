@@ -1,5 +1,4 @@
 import IconPan from '../../svgSnippets/IconPan';
-import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 // the function renders a button that centers the map on the current country's capital
@@ -7,8 +6,6 @@ import PropTypes from 'prop-types';
 // if the bounds are in state, no request is made
 
 function MapCapitalButton(props){
-
-  const [capitalBounds, setCapitalBounds] = useState(false);
 
   const setMap = (bounds) => {
     // set map to bounds
@@ -21,49 +18,35 @@ function MapCapitalButton(props){
     // set loading true
     props.setGeoCodeLoading(true);
 
-    // check if countryBounds were saved in state first
-    if(capitalBounds){
-      setMap(capitalBounds);
-      // reset loading and error
-      props.setGeoCodeLoading(false);
-      props.setGeoCodeError(null);
-      // set current active class
-      props.setActive("capital");
+    // calculate the bounds
+    const geoCoder = new window.google.maps.Geocoder();
+    geoCoder.geocode({ 'address': `${props.capital} ${props.countryName}`, 'region': props.subregion },function(results, status){
 
-    }else{
-      // calculate the bounds
-      const geoCoder = new window.google.maps.Geocoder();
-      geoCoder.geocode({ 'address': `${props.capital} ${props.countryName}`, 'region': props.subregion },function(results, status){
+      if( status == "OK"){ // we have a result
 
-        if( status == "OK"){ // we have a result
+        const bounds = new google.maps.LatLngBounds();
+        const viewport = results[0].geometry.viewport;
+        const ne = new google.maps.LatLng(viewport.getNorthEast().lat(), viewport.getNorthEast().lng());
+        const sw = new google.maps.LatLng(viewport.getSouthWest().lat(), viewport.getSouthWest().lng());
+        bounds.extend(ne);
+        bounds.extend(sw);
+        
+        // set map to bounds
+        setMap(bounds)
+        // set current active class
+        props.setActive("capital");
+        // set loading and error
+        props.setGeoCodeLoading(false);
+        props.setGeoCodeError(null);
 
-          const bounds = new google.maps.LatLngBounds();
-          const viewport = results[0].geometry.viewport;
-          const ne = new google.maps.LatLng(viewport.getNorthEast().lat(), viewport.getNorthEast().lng());
-          const sw = new google.maps.LatLng(viewport.getSouthWest().lat(), viewport.getSouthWest().lng());
-          bounds.extend(ne);
-          bounds.extend(sw);
-          
-          // set map to bounds
-          setMap(bounds)
-          // save to state
-          setCapitalBounds(bounds);
-          // set current active class
-          props.setActive("capital");
-          // set loading and error
-          props.setGeoCodeLoading(false);
-          props.setGeoCodeError(null);
-
-        }else{ // handle error
-          // clear out state just in case
-          setCapitalBounds(false);
-          // set error and loading
-          props.setGeoCodeError(new Error(`No data found: ${status}`));
-          props.setGeoCodeLoading(false);
-        }
-      });
-    }
+      }else{ // handle error
+        // set error and loading
+        props.setGeoCodeError(new Error(`No data found: ${status}`));
+        props.setGeoCodeLoading(false);
+      }
+    });
   }
+
   return(
     <div className="map-controles__button-container">
       <IconPan active={props.active == "capital"} />

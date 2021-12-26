@@ -32,69 +32,49 @@ function MapWidget(props){
     setCountryOnMap(map)
   });
 
-  const onUnmount = useCallback(function callback(map) {
-    console.log('Am I being unmounted???',)
-  }, []);
+  // const onUnmount = useCallback(function callback(map) {
+  //   console.log('Am I being unmounted???',)
+  // }, []);
 
   const setMap = (map, bounds) => {
     map.fitBounds(bounds);       // # auto-zoom
     map.panToBounds(bounds);     // # auto-center
   }
 
-  // this function sets the map to country borders
-  // it first checks to see if the countryBounds were already calculated
-  // use those if yes, else calculate them if they don't exist yet
+  // this function calculates the countries boundaries and sets the map to them
   const setCountryOnMap = (map) => {
 
     setGeoCodeLoading(true);
 
-    // check if countryBounds were saved in state first
-    if(countryBounds){
+    // calculate the bounds and set map to auto zoom and center or handle error
+    const geoCoder = new window.google.maps.Geocoder();
+    geoCoder.geocode(
+      { 'address': props.country.name.common, 'region': props.country.tld[0].replace('.','') },
+      function(results, status){
 
-      // set map to bounds
-      setMap(map, countryBounds);
-      // set error and loading
-      setGeoCodeError(null);
-      setGeoCodeLoading(false);
+        if( status == "OK"){ // we have a result
 
-    }else{
-      // calculate the bounds and set map to auto zoom and center or handle error
-      const geoCoder = new window.google.maps.Geocoder();
-      geoCoder.geocode(
-        { 'address': props.country.name.common, 'region': props.country.tld[0].replace('.','') },
-        function(results, status){
+          const bounds = new google.maps.LatLngBounds();
+          const viewport = results[0].geometry.viewport;
+          const ne = new google.maps.LatLng(viewport.getNorthEast().lat(), viewport.getNorthEast().lng());
+          const sw = new google.maps.LatLng(viewport.getSouthWest().lat(), viewport.getSouthWest().lng());
+          bounds.extend(ne);
+          bounds.extend(sw);
+          
+          // set map to bounds
+          setMap(map, bounds);
+          // set error and loading
+          setGeoCodeError(null);
+          setGeoCodeLoading(false);
 
-          if( status == "OK"){ // we have a result
-
-            const bounds = new google.maps.LatLngBounds();
-            const viewport = results[0].geometry.viewport;
-            const ne = new google.maps.LatLng(viewport.getNorthEast().lat(), viewport.getNorthEast().lng());
-            const sw = new google.maps.LatLng(viewport.getSouthWest().lat(), viewport.getSouthWest().lng());
-            bounds.extend(ne);
-            bounds.extend(sw);
-            
-            // set map to bounds
-            setMap(map, bounds);
-
-            // set error State (back) to null
-            setCountryBounds(bounds);
-            // set error and loading
-            setGeoCodeError(null);
-            setGeoCodeLoading(false);
-
-          }else{ // handle error
-            // clear out state just in case
-            setCountryBounds(false);
-            // set error and loading
-            setGeoCodeError(new Error(`No data found: ${status}`));
-            setGeoCodeLoading(false);
-          }
-      })
-    }
+        }else{ // handle error
+          // set error and loading
+          setGeoCodeError(new Error(`No data found: ${status}`));
+          setGeoCodeLoading(false);
+        }
+      }
+    )
   }
-
-  // these are used by setCountryMap to store the calculated bounds of the current country
-  const [countryBounds, setCountryBounds] = useState(false);
 
   // for panButtons
   // we make 2 geocode request, for country and capital
@@ -117,7 +97,8 @@ function MapWidget(props){
           <GoogleMap
             mapContainerStyle={containerStyle}
             onLoad={onLoad}
-            onUnmount={onUnmount}/>
+            //onUnmount={onUnmount}
+            />
         </> : <div>Loading...</div>}
       <Sources extraClass="map">
         <Source label="Google Maps API" loading={!isLoaded} error={loadError} />

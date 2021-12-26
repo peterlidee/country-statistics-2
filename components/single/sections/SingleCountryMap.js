@@ -1,7 +1,6 @@
 import Wrapper from '../../general/Wrapper';
 import FetchRegionCountries from '../map/FetchRegionCountries';
 import MapWidget from '../map/MapWidget';
-import Proptypes from 'prop-types';
 import Placeholder from '../../svgSnippets/Placeholder';
 
 function SingleCountryMap(props){
@@ -41,10 +40,6 @@ function SingleCountryMap(props){
       </FetchRegionCountries>
     </Wrapper>
   )
-}
-
-SingleCountryMap.propTypes = {
-  country: Proptypes.object.isRequired,
 }
 
 export default SingleCountryMap;
