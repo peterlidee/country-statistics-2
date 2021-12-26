@@ -27,9 +27,6 @@ function SingleCountry(props){
   // on loading or error or !data return code else the actual name
   const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
 
-  // return undefined or flag
-  const flag = data?.flags?.svg;
-
   return(
     <>
       <Head>
