@@ -35,6 +35,7 @@ function SingleCountry(props){
       </Head>
       <Header />
       <BreadCrumb countryName={countryName} />
+
       <div className="single-country">
         
         <SingleCountryTitle countryName={countryName} />
@@ -60,7 +61,7 @@ function SingleCountry(props){
           cca2={data?.cca2} 
           capitalName={data?.capital[0]}
           countryCode={props.countryCode} />
-
+        
         <SingleCountryMap 
           country={data} />
 
@@ -73,6 +74,7 @@ function SingleCountry(props){
           <SingleCountryChart countryCode={props.countryCode} type="gdp" />
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
         </div>
+
       </div>
     </>
   )

@@ -17,36 +17,55 @@ const LabelAndValue = (props) => (
   </>
 );
 
+// helper function to filter out the matching country
+const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border);
+
 function NeighbouringCountries(props){
 
-  // we first need to handle the loading, error and data of the components fetch
-  if(props.loading || props.error || !props.borders || props.borders.length == 0) return(
+  // we first need to handle the loading, error and data of the parent components fetch
+  // if there's loading and no data
+  // (if there's loading and data, we just display the previous data)
+  if(props.loading && !props.data) return(
+    <LabelAndValue>...</LabelAndValue>
+  )
+
+  // if error
+  if(props.error) return(
+    <LabelAndValue>No data found.</LabelAndValue>
+  )
+
+  // no data or no borders
+  if(!props.loading && !props.error && (!props.data.borders || props.data.borders.length == 0)) return(
     <LabelAndValue>
-      {props.loading && "..."}
-      {props.error && "No data found."}
-      {!props.loading && !props.error && !props.borders && "No data found."}
-      {!props.loading && !props.error && props.borders && props.borders.length == 0 && "None (island)."}
+      {!props.data.borders && "No data"}
+      {props.data.borders.length == 0 && "None (island)."}
     </LabelAndValue>
   )
 
-  const endpoint = `https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=${props.borders.join(',')}`;
+  // make the fetch
+  const endpoint = `https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=${props.data.borders.join(',')}`;
   const { isLoading, error, data } = useFetch(endpoint);
 
-  // filter out the matching country
-  const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border);
+  // construct source for this fetch
+  const source = <Source endpoint={endpoint} label={"restcountries.com/{codes}"} loading={isLoading} error={error} />;
 
   return(
-    <LabelAndValue source={props.borders.length > 0 && 
-      <Source endpoint={endpoint} label={"restcountries.com/{codes}"} loading={isLoading} error={error} />}
-    >
-      <div className={props.borders.length > 6 ? "neighbours-grid" : ""}>
-        {props.borders.map(border => {
-          if(isLoading || error) return <div key={border}>{border}</div>
-          const country = findMatchingCountry(border, data);
+    <LabelAndValue source={source}>
+      <div className={props.data.borders.length > 6 ? "neighbours-grid" : ""}>
+        {props.data.borders.map(border => {
+
+          // find the country from the fetch that matches current border
+          // or return [] when there is no data yet (fetch still loading)
+          const matchingCountry = data ? findMatchingCountry(border, data) : [];
+          // the singleCountry parent fetch will happen before the fetch in this component
+          // so there will be border with no country data
+          // we catch this by using border as temporary name instead of country.name
+          const countryName = matchingCountry[0]?.name?.common || border;
+          
           return(
-            <div key={border}>
-              <Link href={`/country/${country[0].cca3}`}>
-                <a className="neighbour-country">{country[0].name.common}</a>
+            <div key={`country-${border}`}>
+              <Link href={`/country/${border}`}>
+                <a className="neighbour-country">{countryName}</a>
               </Link>
             </div>
           )

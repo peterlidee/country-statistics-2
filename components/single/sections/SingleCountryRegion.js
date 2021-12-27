@@ -48,7 +48,7 @@ const SingleCountryRegion = (props) => {
       <NeighbouringCountries 
         loading={props.loading} 
         error={props.error} 
-        borders={props?.data?.borders} />
+        data={props.data} />
     </Wrapper>
   )
 }
