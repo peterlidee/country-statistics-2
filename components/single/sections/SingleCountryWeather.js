@@ -9,7 +9,7 @@ function SingleCountryWeather(props){
   const placeHolder = <Placeholder extraClass="placeholder__weatherwidget" backgroundColor="#aaa" />;
   
   // first handle the loading, error and data states of the parent component
-  if(props.loading || props.error) return(
+  if((props.loading && !props.capitalName) || props.error) return(
     <Wrapper base="single-country__component" modifier={"weather"}>
       {placeHolder}
     </Wrapper>
