@@ -48,8 +48,12 @@ function MapWidget(props){
 
     // calculate the bounds and set map to auto zoom and center or handle error
     const geoCoder = new window.google.maps.Geocoder();
+
+    // check if there is a tld
+    const tld = props.country.tld.length > 0 ? props.country.tld[0].replace('.','') : props.country.region ? props.country.region : "";
+
     geoCoder.geocode(
-      { 'address': props.country.name.common, 'region': props.country.tld[0].replace('.','') },
+      { 'address': props.country.name.common, 'region': tld },
       function(results, status){
 
         if( status == "OK"){ // we have a result
