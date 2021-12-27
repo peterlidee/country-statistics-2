@@ -67,7 +67,7 @@ function SingleCountry(props){
         <SingleCountryRegion 
           data={data}
           error={error}
-          loading={isLoading}/>
+          loading={isLoading} />
 
         <div className="single-country__component single-country__component--charts">
           <SingleCountryChart countryCode={props.countryCode} type="gdp" />
