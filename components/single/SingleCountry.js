@@ -6,7 +6,7 @@ import Sources from "../sources/Sources";
 import Source from "../sources/Source";
 import BreadCrumb from "./BreadCrumb";
 
-import SingleCountryTitle from "./sections/SingleCountryTitle";
+import SingleCountryHeader from "./sections/SingleCountryHeader";
 import SingleCountryStatus from "./sections/SingleCountryStatus";
 import SingleCountryFlags from "./sections/SingleCountryFlags";
 import SingleCountryBasisStats from "./sections/SingleCountryBasicStats";
@@ -14,8 +14,6 @@ import SingleCountryWeather from "./sections/SingleCountryWeather";
 import SingleCountryMap from "./sections/SingleCountryMap";
 import SingleCountryRegion from "./sections/SingleCountryRegion";
 import SingleCountryChart from "./sections/SingleCountryChart";
-
-// todo HEAD
 
 function SingleCountry(props){
 
@@ -36,15 +34,15 @@ function SingleCountry(props){
       <Header />
       <BreadCrumb countryName={countryName} />
 
-      <div className="single-country">
+      <article className="single-country">
         
-        <SingleCountryTitle countryName={countryName} />
-
-        <SingleCountryStatus loading={isLoading} error={error} data={data} countryCode={props.countryCode}>
-          <Sources topBorder={true} extraClass="status">
-            <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
-          </Sources>
-        </SingleCountryStatus>
+        <SingleCountryHeader countryName={countryName}>
+          <SingleCountryStatus loading={isLoading} error={error} data={data} countryCode={props.countryCode}>
+            <Sources topBorder={true} extraClass="status">
+              <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+            </Sources>
+          </SingleCountryStatus>
+        </SingleCountryHeader>
 
         <SingleCountryFlags 
           countryName={countryName} 
@@ -75,7 +73,7 @@ function SingleCountry(props){
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
         </div>
 
-      </div>
+      </article>
     </>
   )
 }

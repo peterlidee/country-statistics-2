@@ -22,29 +22,38 @@
   grid-column: 1 / -1;
 }
 
-
+// single country
 
 .single-country{
   max-width: 1500px;
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
   gap: 2em;
+}
 
-  &__component{
-    &--status{
+@media screen and (min-width: 54em){
+  .single-country{
+    max-width: 1500px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2em;
+
+    &__header{
       grid-column: 1 / -1;
     }
-    &--basic-stats, &--flags, &--weather{
-      grid-column: span 2;
-    }
-    &--map{
-      grid-column: span 4;
-    }
-    &--region{
-      grid-column: span 2;
-    }
-    &--charts{
-      grid-column: 1 / -1;
+  
+    &__component{
+      &--basic-stats, &--flags, &--weather{
+        grid-column: span 2;
+      }
+      &--map{
+        grid-column: span 4;
+      }
+      &--region{
+        grid-column: span 2;
+      }
+      &--charts{
+        grid-column: 1 / -1;
+      }
     }
   }
 }

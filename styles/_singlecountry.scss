@@ -1,8 +1,10 @@
 .single-country{
+
   &__title{
-    grid-column: 1 / -1;
-    h1{ margin: 0; }
+    line-height: 1em;
+    margin: 0 0 .5em 0; 
   }
+
   &__component{
     &--flags{
       text-align: center;
