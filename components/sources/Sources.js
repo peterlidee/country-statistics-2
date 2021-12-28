@@ -6,7 +6,6 @@ function Sources(props){
   
   return(
     <div className={`${base} ${topBorder} ${extraClass}`}>
-      <h4 className="source__title">source</h4>
       {props.children}
     </div>
   )

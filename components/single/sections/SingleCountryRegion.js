@@ -30,25 +30,27 @@ const SingleCountryRegion = (props) => {
   const hasData = props.data ? true : false;
   return(
     <Wrapper base="single-country__component" modifier="region">
-      <RenderLabelValue 
-        loading={props.loading} 
-        hasData={hasData} 
-        value={props.data?.region} 
-        label="region" />
-      <RenderLabelValue 
-        loading={props.loading} 
-        value={props.data?.subregion} 
-        label="subregion" 
-        hasData={hasData} />
-      <RenderLabelValue 
-        loading={props.loading} 
-        value={props.data?.capital[0]} 
-        label="capital" 
-        hasData={hasData} />
-      <NeighbouringCountries 
-        loading={props.loading} 
-        error={props.error} 
-        data={props.data} />
+      <div className="single-country__inner-mobile-container">
+        <RenderLabelValue 
+          loading={props.loading} 
+          hasData={hasData} 
+          value={props.data?.region} 
+          label="region" />
+        <RenderLabelValue 
+          loading={props.loading} 
+          value={props.data?.subregion} 
+          label="subregion" 
+          hasData={hasData} />
+        <RenderLabelValue 
+          loading={props.loading} 
+          value={props.data?.capital[0]} 
+          label="capital" 
+          hasData={hasData} />
+        <NeighbouringCountries 
+          loading={props.loading} 
+          error={props.error} 
+          data={props.data} />
+      </div>
     </Wrapper>
   )
 }

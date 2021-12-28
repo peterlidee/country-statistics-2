@@ -1,16 +1,26 @@
 .single-country__component--gdp,
 .single-country__component--gdpc{
-  width: calc(50% - 1em);
-  float: left;
+  width: 99%; // charts are not responsive at 100%, some kind of bug
 }
 .single-country__component--gdp{
-  margin-right: 2em; 
-}
-.single-country__component--gdpc{
-
+  margin-bottom: 3em; 
 }
 
-.chart__title{
-  font-variant: small-caps;
-  text-transform: lowercase;
+@media screen and (min-width: 56em){
+
+  .single-country__component--gdp,
+  .single-country__component--gdpc{
+    width: calc(50% - 1.5em);
+    float: left;
+  }
+  .single-country__component--gdp{
+    margin-right: 3em; 
+    margin-bottom: 0;
+  }
+
+  .chart__title{
+    font-variant: small-caps;
+    text-transform: lowercase;
+  }
+
 }

@@ -8,14 +8,14 @@
   &__component{
     &--flags{
       text-align: center;
+      max-width: 28em;
     }
   }
   &__flag, 
   &__coatOfArms{
     width: 100%;
-    // max-width: 100%;
     height: auto;
-    box-shadow: 0 4px 8px $lightGrey;
+    box-shadow: 0 4px 8px #ddd;
   }
   &__coatOfArms{
     padding: .5em;
@@ -31,7 +31,29 @@
     color: $lightText;
     margin-bottom: .75em;
   }
+  // this container 
+  &__inner-mobile-container{
+    background: #fff;
+    max-width: 28em;
+    padding: 1em 1.5em;
+    box-shadow: 0 4px 8px #ddd;
+    border-left: 4px solid $lightGrey;
+  }
   
+}
+
+@media screen and (min-width: 54em){
+  .single-country{
+    &--flags{
+      max-width: none;
+    }
+    &__inner-mobile-container{
+      // background: #fff;
+      // max-width: 28em;
+      // padding: 1em;
+      border-left: none;
+    }
+  }
 }
 
 .flags__controles{

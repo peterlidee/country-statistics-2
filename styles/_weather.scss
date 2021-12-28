@@ -67,14 +67,14 @@ $day-grey : #e2e2e2;
 $night-grey : #191919;
 
 .weather__container{
-  max-width: 450px;
-  &.day   {  }
-  &.night {}
+  max-width: 28em;
+  // &.day   {  }
+  // &.night {}
 }
 
 .day{
   background: $blue;
-  .clear   { }
+  // .clear   { }
   .few     { background: transparentize($day-grey, 0.5); }
   .scat    { background: transparentize($day-grey, 0.2); }
   .broken  { background: transparentize($day-grey, 0.1); }
@@ -88,7 +88,7 @@ $night-grey : #191919;
 
 .night{
   background: #0a0b3a;
-  .clear   { }
+  // .clear   { }
   .few     { background: transparentize($night-grey, 0.8); }
   .scat    { background: transparentize($night-grey, 0.4); }
   .broken  { background: transparentize($night-grey, 0.1); }

@@ -90,6 +90,11 @@ function MapWidget(props){
     <>
       { isLoaded ? 
         <>
+          <GoogleMap
+            mapContainerStyle={containerStyle}
+            onLoad={onLoad}
+            //onUnmount={onUnmount}
+            />
           <MapControles 
             country={props.country} 
             map={mapInState} 
@@ -98,13 +103,8 @@ function MapWidget(props){
             setGeoCodeError={setGeoCodeError}
             regionCountries={props.regionCountries}
             subregionCountries={props.subregionCountries} />
-          <GoogleMap
-            mapContainerStyle={containerStyle}
-            onLoad={onLoad}
-            //onUnmount={onUnmount}
-            />
         </> : <div>Loading...</div>}
-      <Sources extraClass="map">
+      <Sources extraClass="map" topBorder={true}>
         <Source label="Google Maps API" loading={!isLoaded} error={loadError} />
         <Source label="Google GeoCode API" loading={geoCodeLoading} error={geoCodeError} />
         <Source 
