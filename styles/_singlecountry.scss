@@ -42,6 +42,10 @@
     padding: 1em 1.5em;
     box-shadow: 0 4px 8px #ddd;
 
+    .single-country__component--basic-stats &{
+      height: 100%;
+    }
+
   }
   &__inner-container + &__inner-container{
     margin-top: 1.5em;

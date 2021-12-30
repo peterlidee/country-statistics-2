@@ -3,7 +3,13 @@
   width: 99%; // charts are not responsive at 100%, some kind of bug
 }
 .single-country__component--gdp{
-  margin-bottom: 3em; 
+  margin-bottom: 2em; 
+}
+
+.chart__inner-container{
+  background: #fff;
+  padding: 1em 1.5em;
+  box-shadow: 0 4px 8px #ddd;
 }
 
 @media screen and (min-width: 56em){
@@ -14,13 +20,22 @@
     float: left;
   }
   .single-country__component--gdp{
-    margin-right: 3em; 
+    margin-right: 2em; 
     margin-bottom: 0;
   }
 
   .chart__title{
     font-variant: small-caps;
     text-transform: lowercase;
+    margin: 0 0 1em 0;
+  }
+
+}
+
+@media screen and (min-width: 65em){
+
+  .single-country__component--gdp{
+    margin-right: 3em; 
   }
 
 }
