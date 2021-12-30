@@ -1,33 +1,14 @@
 import Link from 'next/link';
 import useFetch from "react-fetch-hook";
-import Wrapper from '../../general/Wrapper';
 import Sources from '../../sources/Sources';
 import Source from '../../sources/Source';
 
-/*
- this is quit a complex component
-we need 
-
-<Wrapper>
-  <div> region subregion capital neighbours </div>
-  <Sources>
-</Wrapper>
-
-But the source props come from neighbours
-So we have to feed region, subregion and capital to neighbours and render them from there as props.children
-On the same level (here) as we can use source with the fetch data from neighbours
-
-On top of that we need a lot of checks to see if we have to call the neighbours fetch.
-
-*/
-
 const RegionComponent = (props) => (
-  <Wrapper base="single-country__component" modifier="region">
+  <>
     <div className="single-country__inner-mobile-container">
-      {props.children}
       <div className="single-country__label">neighbouring countries</div>
       <div className="single-country__value">
-        {props.value}
+        {props.children}
       </div>
     </div>
     {props.source &&
@@ -35,7 +16,7 @@ const RegionComponent = (props) => (
         {props.source}
       </Sources>
     }
-  </Wrapper>
+  </>
 )
 
 // helper function to filter out the matching country
@@ -47,26 +28,22 @@ function NeighbouringCountries(props){
   // if there's loading and no data
   // (if there's loading and data, we just display the previous data)
   if(props.loading && !props.data) return(
-    <RegionComponent value="...">{props.children}</RegionComponent>
+    <RegionComponent>...</RegionComponent>
   )
 
   // if error
   if(props.error) return(
-    <RegionComponent value="No data found.">{props.children}</RegionComponent>
+    <RegionComponent>No data found."</RegionComponent>
   )
 
   // no data
   if(!props.loading && !props.error && !props.data.borders) return(
-    <RegionComponent value="No data.">
-      {props.children}
-    </RegionComponent>
+    <RegionComponent>No data.</RegionComponent>
   )
 
   // no borders
   if(!props.loading && !props.error && props.data.borders.length == 0) return(
-    <RegionComponent value="None (island).">
-      {props.children}
-    </RegionComponent>
+    <RegionComponent>None (island).</RegionComponent>
   )
 
   // make the fetch
@@ -101,8 +78,8 @@ function NeighbouringCountries(props){
   )
 
   return(
-    <RegionComponent source={source} value={neighbours}>
-      {props.children}
+    <RegionComponent source={source}>
+      {neighbours}
     </RegionComponent>
   )
 }
