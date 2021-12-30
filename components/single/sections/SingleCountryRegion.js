@@ -1,4 +1,3 @@
-import Wrapper from '../../general/Wrapper';
 import NeighbouringCountries from '../neighbours/NeighbouringCountries';
 
 // we need a more complex loading, error and data handling
@@ -26,32 +25,33 @@ const RenderLabelValue = (props) => {
   )
 }
 
+// this component feeds validated region, subregion and capital to NeighbouringCountries
+// there, they are actually rendered and wrapped
+
 const SingleCountryRegion = (props) => {
   const hasData = props.data ? true : false;
   return(
-    <Wrapper base="single-country__component" modifier="region">
-      <div className="single-country__inner-mobile-container">
-        <RenderLabelValue 
-          loading={props.loading} 
-          hasData={hasData} 
-          value={props.data?.region} 
-          label="region" />
-        <RenderLabelValue 
-          loading={props.loading} 
-          value={props.data?.subregion} 
-          label="subregion" 
-          hasData={hasData} />
-        <RenderLabelValue 
-          loading={props.loading} 
-          value={props.data?.capital[0]} 
-          label="capital" 
-          hasData={hasData} />
-        <NeighbouringCountries 
-          loading={props.loading} 
-          error={props.error} 
-          data={props.data} />
-      </div>
-    </Wrapper>
+    <NeighbouringCountries 
+      loading={props.loading} 
+      error={props.error} 
+      data={props.data}
+    >
+      <RenderLabelValue 
+        loading={props.loading} 
+        hasData={hasData} 
+        value={props.data?.region} 
+        label="region" />
+      <RenderLabelValue 
+        loading={props.loading} 
+        value={props.data?.subregion} 
+        label="subregion" 
+        hasData={hasData} />
+      <RenderLabelValue 
+        loading={props.loading} 
+        value={props.data?.capital[0]} 
+        label="capital" 
+        hasData={hasData} />
+    </NeighbouringCountries>
   )
 }
 

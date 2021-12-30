@@ -37,7 +37,6 @@
     max-width: 28em;
     padding: 1em 1.5em;
     box-shadow: 0 4px 8px #ddd;
-    border-left: 4px solid $lightGrey;
   }
   
 }
@@ -46,12 +45,6 @@
   .single-country{
     &--flags{
       max-width: none;
-    }
-    &__inner-mobile-container{
-      // background: #fff;
-      // max-width: 28em;
-      // padding: 1em;
-      border-left: none;
     }
   }
 }
