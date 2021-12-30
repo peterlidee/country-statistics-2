@@ -32,11 +32,11 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
   const code = weatherObj?.icon ? weatherObj.icon.slice(0,2) : '404';
   const weather = codes[code];
 
-  const tempMin = data?.main?.temp_max ? Math.ceil(data.main.temp_max) : "__";
-  const tempMax = data?.main?.temp_min ? Math.ceil(data.main.temp_max) : "__";
+  const tempMin = (data?.main?.temp_max || data?.main?.temp_max == 0) ? Math.ceil(data.main.temp_max) : "__";
+  const tempMax = (data?.main?.temp_min || data?.main?.temp_min == 0) ? Math.ceil(data.main.temp_max) : "__";
 
-  const windDeg = data?.wind?.deg || 90;
-  const windSpeed = data?.wind?.speed ? Math.round(data.wind.speed * 3.6) : "__";
+  const windDeg = (data?.wind?.deg || data?.wind?.deg == 0) || 90;
+  const windSpeed = (data?.wind?.speed || data?.wind?.speed == 0) ? Math.round(data.wind.speed * 3.6) : "__";
 
   return(
     <div className={`weather__container ${dayNight}`}>
