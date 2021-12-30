@@ -37,6 +37,10 @@
     max-width: 28em;
     padding: 1em 1.5em;
     box-shadow: 0 4px 8px #ddd;
+
+  }
+  &__inner-mobile-container + &__inner-mobile-container{
+    margin-top: 1.5em;
   }
   
 }
