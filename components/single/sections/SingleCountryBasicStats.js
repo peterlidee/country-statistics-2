@@ -10,7 +10,7 @@ function SingleCountryBasisStats(props){
 
   return(
     <Wrapper base="single-country__component" modifier="basic-stats">
-      <div className="single-country__inner-mobile-container">
+      <div className="single-country__inner-container">
         <div className="single-country__label">Total population</div>
         <div className="single-country__value">{population}</div>
         <div className="single-country__label">Size</div>

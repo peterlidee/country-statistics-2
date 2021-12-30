@@ -5,7 +5,7 @@ import Source from '../../sources/Source';
 
 const RegionComponent = (props) => (
   <>
-    <div className="single-country__inner-mobile-container">
+    <div className="single-country__inner-container">
       <div className="single-country__label">neighbouring countries</div>
       <div className="single-country__value">
         {props.children}

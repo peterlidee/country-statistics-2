@@ -33,7 +33,7 @@ const SingleCountryRegion = (props) => {
   const hasData = props.data ? true : false;
   return(
     <Wrapper base="single-country__component" modifier="region">
-      <div className="single-country__inner-mobile-container">
+      <div className="single-country__inner-container">
         <RenderLabelValue 
           loading={props.loading} 
           hasData={hasData} 

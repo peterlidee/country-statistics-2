@@ -2,7 +2,11 @@
 
   &__title{
     line-height: 1em;
-    margin: 0 0 .5em 0; 
+    margin: 0 0 .3em 0;
+    background: #fff;
+    padding: .6em .5em;
+    box-shadow: 0 4px 8px #ddd;
+    text-align: center;
   }
 
   &__component{
@@ -32,14 +36,14 @@
     margin-bottom: .75em;
   }
   // this container 
-  &__inner-mobile-container{
+  &__inner-container{
     background: #fff;
     max-width: 28em;
     padding: 1em 1.5em;
     box-shadow: 0 4px 8px #ddd;
 
   }
-  &__inner-mobile-container + &__inner-mobile-container{
+  &__inner-container + &__inner-container{
     margin-top: 1.5em;
   }
   
