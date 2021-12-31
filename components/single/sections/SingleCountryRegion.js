@@ -1,4 +1,3 @@
-import Wrapper from '../../general/Wrapper';
 import NeighbouringCountries from '../neighbours/NeighbouringCountries';
 
 // we need a more complex loading, error and data handling
@@ -32,8 +31,8 @@ const RenderLabelValue = (props) => {
 const SingleCountryRegion = (props) => {
   const hasData = props.data ? true : false;
   return(
-    <Wrapper base="single-country__component" modifier="region">
-      <div className="single-country__inner-container">
+    <div className="single-country__region">
+      <div className="single-country__box">
         <RenderLabelValue 
           loading={props.loading} 
           hasData={hasData} 
@@ -55,7 +54,7 @@ const SingleCountryRegion = (props) => {
         error={props.error} 
         data={props.data}
       />
-    </Wrapper>
+    </div>
   )
 }
 

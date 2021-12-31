@@ -1,6 +1,5 @@
 import useFetch from "react-fetch-hook";
 import PropTypes from "prop-types";
-import Wrapper from "../general/Wrapper";
 import Sources from "../sources/Sources";
 import Source from "../sources/Source";
 
@@ -18,16 +17,18 @@ function SingleCountryFetch(props){
   }
 
   return(
-    <Wrapper base="single-country__component" modifier={props.extraClass}>
-      {props.children(isLoading, error, data)}
-      <Sources extraClass={props.extraClass}>
+    <div className={`single-country__${props.extraClass}`}>
+      <div className="single-country__box">
+        {props.children(isLoading, error, data)}
+      </div>
+      <Sources extraClass={props.extraClass}> {/* todo remove extraclass from source */}
         <Source 
           error={error || noRecordsError} 
           loading={isLoading} 
           endpoint={props.endpoint}
           label={props.label} />
       </Sources>
-    </Wrapper>
+    </div>
   )
 }
 

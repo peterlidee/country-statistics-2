@@ -1,3 +1,7 @@
+.weather__container{
+  max-width: 28em;
+}
+
 .weather{
   display: grid;
   grid-template-columns: minmax(80px, 120px) minmax(70px, 90px) minmax(80px, 120px);
@@ -65,12 +69,6 @@
 
 $day-grey : #e2e2e2;
 $night-grey : #191919;
-
-.weather__container{
-  max-width: 28em;
-  // &.day   {  }
-  // &.night {}
-}
 
 .day{
   background: $blue;

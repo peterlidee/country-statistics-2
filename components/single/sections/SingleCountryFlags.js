@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
-import Wrapper from '../../general/Wrapper';
+import BoxWrapper from '../../general/BoxWrapper';
 import Placeholder from '../../svgSnippets/Placeholder';
 
 function SingleCountryFlags(props){
@@ -8,14 +8,14 @@ function SingleCountryFlags(props){
 
   if(!props.flag && !props.coatOfArms){
     return(
-      <Wrapper base="single-country__component" modifier="flags">
-        <Placeholder extraClass="single-country__flag" />
-      </Wrapper>
+      <BoxWrapper name="flags">
+        <Placeholder extraClass="single-country__flag" backgroundColor="#eee" />
+      </BoxWrapper>
     )
   }
   
   return(
-    <Wrapper base="single-country__component" modifier="flags">
+    <BoxWrapper name="flags">
       {active == "flag" && 
         <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
       {active == "coatOfArms" && props.coatOfArms &&
@@ -23,7 +23,7 @@ function SingleCountryFlags(props){
       {active == "coatOfArms" && !props.coatOfArms &&
         // if cOA is active but there is no coa, show the flag instead
         <img src={props.flag} alt={`flag of ${props.countryName}`} className="single-country__flag" />}
-
+    
       {props.coatOfArms && 
         <div className="flags__controles">
           <button 
@@ -38,7 +38,7 @@ function SingleCountryFlags(props){
           </button>
         </div>
       }
-    </Wrapper>
+    </BoxWrapper>
   )
 }
 

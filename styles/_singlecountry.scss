@@ -1,31 +1,41 @@
 .single-country{
 
-  &__title{
-    line-height: 1em;
-    margin: 0 0 .3em 0;
+  // the white boxes with drop shadows
+  &__box{
     background: #fff;
-    padding: .6em .5em;
     box-shadow: 0 4px 8px #ddd;
-    text-align: center;
-  }
-
-  &__component{
-    &--flags{
-      text-align: center;
+    padding: 1em 1.5em;
+    
+    .single-country__header &{
+      margin-bottom: .5em;
+    }
+    .single-country__flags &{
+      padding: .75em;
       max-width: 28em;
     }
+    .single-country__basic-stats &{
+      height: 100%;
+      max-width: 28em;
+    }
+    .single-country__weather &{
+      max-width: 28em;
+      padding: .75em;
+      height: calc(100% - 2em); // 1.5 line height and then some padding to make room for source
+    }
+
   }
-  &__flag, 
-  &__coatOfArms{
-    width: 100%;
-    height: auto;
-    box-shadow: 0 4px 8px #ddd;
-  }
-  &__coatOfArms{
-    padding: .5em;
-    background: #fff;
+  &__box + &__box{
+    margin-top: 1.5em;
   }
 
+  // title
+  &__title{
+    line-height: 1em;
+    text-align: center;
+    margin: 0;
+  }
+
+  // general
   &__label{
     font-weight: 700;
     font-variant: small-caps;
@@ -35,34 +45,29 @@
     color: $lightText;
     margin-bottom: .75em;
   }
-  // this container 
-  &__inner-container{
-    background: #fff;
-    max-width: 28em;
-    padding: 1em 1.5em;
-    box-shadow: 0 4px 8px #ddd;
-
-    .single-country__component--basic-stats &{
-      height: 100%;
-    }
-
-  }
-  &__inner-container + &__inner-container{
-    margin-top: 1.5em;
-  }
   
 }
 
-@media screen and (min-width: 54em){
-  .single-country{
-    &--flags{
-      max-width: none;
-    }
+// flags
+
+.single-country{
+  &__flag{
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid #eee;
+  }
+  &__coatOfArms{
+    display: block;
+    height: 100%;
+    max-height: 250px;
+    width: auto;
+    margin: 0 auto;
   }
 }
 
 .flags__controles{
-  margin-top: .25em;
+  margin-top: .50em;
   text-align: center;
 }
 .flags__controle{
@@ -72,16 +77,29 @@
   color: $lightText;
   transition: color ease-in .12s;
 
+  &:before{
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    background: $lightGrey;
+    margin-right: .25em;
+  }
+
   &:first-child{
-    margin-right: .5em;
+    margin-right: 1em;
   }
   &--active, &:hover{
     color: $black;
   }
   &--active{
     font-weight: 500;
+    &:before{
+      background: $blue;
+    }
   }
 }
+
+// neighbours
 
 .neighbours-grid{
   columns: 2;

@@ -1,5 +1,4 @@
 import PropTypes from "prop-types";
-import Wrapper from "../../general/Wrapper";
 import Placeholder from "../../svgSnippets/Placeholder";
 import SingleCountryFetch from "../SingleCountryFetch";
 import WeatherWidget from "../weather/WeatherWidget";
@@ -10,13 +9,13 @@ function SingleCountryWeather(props){
   
   // first handle the loading, error and data states of the parent component
   if((props.loading && !props.capitalName) || props.error) return(
-    <Wrapper base="single-country__component" modifier={"weather"}>
+    <div className="single-country__weather">
       {placeHolder}
-    </Wrapper>
+    </div>
   )
   // no capital, no weather widget
   if(!props.loading && !props.error && !props.capitalName) return( 
-    <Wrapper base="single-country__component" modifier={"weather"}></Wrapper>
+    <div className="single-country__weather"></div>
   )
   
   const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(props.capitalName)},${props.cca2}&APPID=${process.env.API_KEY_WEATHER}&units=metric`;

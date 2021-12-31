@@ -33,43 +33,45 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
   const weather = codes[code];
 
   const tempMin = (data?.main?.temp_max || data?.main?.temp_max == 0) ? Math.ceil(data.main.temp_max) : "__";
-  const tempMax = (data?.main?.temp_min || data?.main?.temp_min == 0) ? Math.ceil(data.main.temp_max) : "__";
+  const tempMax = (data?.main?.temp_min || data?.main?.temp_min == 0) ? Math.ceil(data.main.temp_min) : "__";
 
   const windDeg = (data?.wind?.deg || data?.wind?.deg == 0) ? data.wind.deg : 90;
   const windSpeed = (data?.wind?.speed || data?.wind?.speed == 0) ? Math.round(data.wind.speed * 3.6) : "__";
 
   return(
-    <div className={`weather__container ${dayNight}`}>
-      <div className={`weather ${weather}`}>
+    <div className="single-country__box">
+      <div className={`weather__container ${dayNight}`}>
+        <div className={`weather ${weather}`}>
 
-        <div className="weather__description">weather in {countryName}</div>
+          <div className="weather__description">weather in {countryName}</div>
 
-        <div className="weather__component weather__component--temperature">
-          <div className="weather__component__header">temp</div>
-          <div className="weather__component__body">
-            <div className="weather__temp--max">{tempMax}</div>
-            <div className="weather__temp--min">{tempMin}</div>
-          </div>
-          <div className="weather__component__footer">°C</div>
-        </div>
-
-        <div className="weather__component weather__component--state">
-          <IconWeather type={weather} />
-        </div>
-
-        <div className="weather__component weather__component--wind">
-          <div className="weather__component__header">wind</div>
-          <div className="weather__component__body">
-            <div className="weather__wind__direction">
-              <IconWindDirection deg={windDeg} />
+          <div className="weather__component weather__component--temperature">
+            <div className="weather__component__header">temp</div>
+            <div className="weather__component__body">
+              <div className="weather__temp--max">{tempMax}</div>
+              <div className="weather__temp--min">{tempMin}</div>
             </div>
-            <div className="weather__windspeed">{windSpeed}</div>
+            <div className="weather__component__footer">°C</div>
           </div>
-          <div className="weather__component__footer">km/h</div>
+
+          <div className="weather__component weather__component--state">
+            <IconWeather type={weather} />
+          </div>
+
+          <div className="weather__component weather__component--wind">
+            <div className="weather__component__header">wind</div>
+            <div className="weather__component__body">
+              <div className="weather__wind__direction">
+                <IconWindDirection deg={windDeg} />
+              </div>
+              <div className="weather__windspeed">{windSpeed}</div>
+            </div>
+            <div className="weather__component__footer">km/h</div>
+          </div>
+
+          <div className="weather__description">{description}</div>
+
         </div>
-
-        <div className="weather__description">{description}</div>
-
       </div>
     </div>
   )

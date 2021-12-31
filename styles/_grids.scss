@@ -1,3 +1,7 @@
+/*
+  home
+*/
+
 @media screen and (min-width: 64em){
   .site__grid--home{
     display: grid;
@@ -22,7 +26,10 @@
   grid-column: 1 / -1;
 }
 
-// single country
+
+/* 
+  single country
+*/
 
 .single-country{
   max-width: 1500px;
@@ -41,19 +48,21 @@
       grid-column: 1 / -1;
     }
   
+    &__basic-stats, &__flags, &__weather, &__region{
+      grid-column: span 2;
+    }
+
+    &__charts{
+      grid-column: 1 / -1;
+    }
+
     &__component{
-      &--basic-stats, &--flags, &--weather{
-        grid-column: span 2;
-      }
       &--map{
         grid-column: span 4;
       }
-      &--region{
-        grid-column: span 2;
-      }
-      &--charts{
-        grid-column: 1 / -1;
-      }
+      // &__region{
+      //   grid-column: span 2;
+      // }
     }
   }
 }

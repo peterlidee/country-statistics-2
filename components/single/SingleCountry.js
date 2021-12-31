@@ -68,7 +68,7 @@ function SingleCountry(props){
           error={error}
           loading={isLoading} />
 
-        <div className="single-country__component single-country__component--charts">
+        <div className="single-country__charts">
           <SingleCountryChart countryCode={props.countryCode} type="gdp" />
           <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
         </div>
