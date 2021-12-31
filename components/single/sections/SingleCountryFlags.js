@@ -8,8 +8,8 @@ function SingleCountryFlags(props){
 
   if(!props.flag && !props.coatOfArms){
     return(
-      <BoxWrapper name="flags">
-        <Placeholder extraClass="single-country__flag" backgroundColor="#eee" />
+      <BoxWrapper name="placeholder">
+        <Placeholder backgroundColor="#eee" />
       </BoxWrapper>
     )
   }

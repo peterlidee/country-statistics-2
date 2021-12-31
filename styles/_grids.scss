@@ -47,15 +47,15 @@
     &__header{
       grid-column: 1 / -1;
     }
-  
     &__basic-stats, &__flags, &__weather, &__region{
       grid-column: span 2;
     }
-
     &__charts{
       grid-column: 1 / -1;
     }
-
+    &__placeholder{
+      grid-column: span 2;
+    }
     &__component{
       &--map{
         grid-column: span 4;

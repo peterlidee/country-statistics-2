@@ -1,17 +1,17 @@
 import PropTypes from "prop-types";
 import Placeholder from "../../svgSnippets/Placeholder";
+import BoxWrapper from '../../general/BoxWrapper';
 import SingleCountryFetch from "../SingleCountryFetch";
 import WeatherWidget from "../weather/WeatherWidget";
 
-function SingleCountryWeather(props){
 
-  const placeHolder = <Placeholder extraClass="placeholder__weatherwidget" backgroundColor="#aaa" />;
+function SingleCountryWeather(props){
   
   // first handle the loading, error and data states of the parent component
   if((props.loading && !props.capitalName) || props.error) return(
-    <div className="single-country__weather">
-      {placeHolder}
-    </div>
+    <BoxWrapper name="placeholder">
+      <Placeholder />
+    </BoxWrapper>
   )
   // no capital, no weather widget
   if(!props.loading && !props.error && !props.capitalName) return( 

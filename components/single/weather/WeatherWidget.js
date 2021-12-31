@@ -39,7 +39,6 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
   const windSpeed = (data?.wind?.speed || data?.wind?.speed == 0) ? Math.round(data.wind.speed * 3.6) : "__";
 
   return(
-    <div className="single-country__box">
       <div className={`weather__container ${dayNight}`}>
         <div className={`weather ${weather}`}>
 
@@ -73,7 +72,6 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
 
         </div>
       </div>
-    </div>
   )
 }
 
