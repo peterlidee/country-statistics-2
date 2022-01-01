@@ -4,6 +4,7 @@ import MapControles from './MapControles';
 import Sources from '../../sources/Sources';
 import Source from '../../sources/Source';
 import PropTypes from 'prop-types';
+import Placeholder from '../../svgSnippets/Placeholder';
 
 // MapWidget loads google map and sets it up
 // it also handles pan buttons and sources
@@ -87,9 +88,9 @@ function MapWidget(props){
   const [geoCodeError, setGeoCodeError] = useState(null);
 
   return(
-    <>
+    <div className="single-country__map">
       { isLoaded ? 
-        <>
+        <div className="single-country__box">
           <GoogleMap
             mapContainerStyle={containerStyle}
             onLoad={onLoad}
@@ -103,8 +104,8 @@ function MapWidget(props){
             setGeoCodeError={setGeoCodeError}
             regionCountries={props.regionCountries}
             subregionCountries={props.subregionCountries} />
-        </> : <div>Loading...</div>}
-      <Sources extraClass="map" topBorder={true}>
+        </div> : <Placeholder />}
+      <Sources extraClass="map">
         <Source label="Google Maps API" loading={!isLoaded} error={loadError} />
         <Source label="Google GeoCode API" loading={geoCodeLoading} error={geoCodeError} />
         <Source 
@@ -119,7 +120,7 @@ function MapWidget(props){
             loading={props.subregionCountries.isLoading} 
             error={props.subregionCountries.error} />}
       </Sources>
-    </>
+    </div>
   )
 }
 

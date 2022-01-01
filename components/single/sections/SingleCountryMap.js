@@ -1,4 +1,6 @@
 import Wrapper from '../../general/Wrapper';
+import BoxWrapper from '../../general/BoxWrapper';
+
 import FetchRegionCountries from '../map/FetchRegionCountries';
 import MapWidget from '../map/MapWidget';
 import Placeholder from '../../svgSnippets/Placeholder';
@@ -6,39 +8,36 @@ import Placeholder from '../../svgSnippets/Placeholder';
 function SingleCountryMap(props){
 
   // wait for the parent query in SingleCountry to load
+  // TODO
   if(!props.country) return(
-    <Wrapper base="single-country__component" modifier="map">
-      <Placeholder backgroundColor={"#aaa"} extraClass="placeholder-map" />
-    </Wrapper>
+    <BoxWrapper name="map">
+      <Placeholder />
+    </BoxWrapper>
   )
 
   if(!props.country.subregion){
     return(
-      <Wrapper base="single-country__component" modifier="map">
-        <FetchRegionCountries type="region" label={props.country.region}>
-          {(regionCountries) => 
-            <MapWidget 
-              country={props.country} 
-              regionCountries={regionCountries} />}
-        </FetchRegionCountries>
-      </Wrapper>
+      <FetchRegionCountries type="region" label={props.country.region}>
+        {(regionCountries) => 
+          <MapWidget 
+            country={props.country} 
+            regionCountries={regionCountries} />}
+      </FetchRegionCountries>
     )
   }
 
   return(
-    <Wrapper base="single-country__component" modifier="map">
-      <FetchRegionCountries type="region" label={props.country.region}>
-        {(regionCountries) => (
-          <FetchRegionCountries type="subregion" label={props.country.subregion}>
-            {(subregionCountries) => 
-              <MapWidget 
-                country={props.country} 
-                regionCountries={regionCountries} 
-                subregionCountries={subregionCountries} />}
-          </FetchRegionCountries>
-        )}
-      </FetchRegionCountries>
-    </Wrapper>
+    <FetchRegionCountries type="region" label={props.country.region}>
+      {(regionCountries) => (
+        <FetchRegionCountries type="subregion" label={props.country.subregion}>
+          {(subregionCountries) => 
+            <MapWidget 
+              country={props.country} 
+              regionCountries={regionCountries} 
+              subregionCountries={subregionCountries} />}
+        </FetchRegionCountries>
+      )}
+    </FetchRegionCountries>
   )
 }
 
