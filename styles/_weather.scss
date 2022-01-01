@@ -1,71 +1,79 @@
-.weather__container{
-  max-width: 28em;
+.fullHeight{
+  height: 100%;
 }
 
 .weather{
-  display: grid;
-  grid-template-columns: minmax(80px, 120px) minmax(70px, 90px) minmax(80px, 120px);
-  justify-content: center;
-  grid-gap: .5em;
-  padding: .25em;
+
+  &__grid{
+    padding: .5em;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(80px, 120px) minmax(60px, 90px) minmax(80px, 120px);
+    grid-template-rows: 1.5em minmax(100px, 200px) 1.5em;
+    grid-gap: .5em;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+  }
+
+  &__description{
+    grid-column: 1/-1;
+  }
 }
 
-.weather__description{
-  grid-column: 1/-1;
-  text-align: center;
+.weather__component{
+  &__header{
+    text-transform: lowercase;
+    font-variant: small-caps;
+    border-bottom: 1px solid $black;
+    text-align: center;
+  }
+  &__footer{
+     text-transform: lowercase;
+     font-variant: small-caps;
+     text-align: center;
+  }
+  &__body{
+    padding: 1em 0;
+  }
 }
 
-.weather__component--temperature, .weather__component--wind{
-  display: grid;
-  grid-template-rows: 26px 1fr 26px;
-  justify-items: center;
+.weather__temp{
+  &--max{
+    display: inline-block;
+    font-size: 45px;
+    margin-right: .1em;
+  }
+  &--min{
+    display: inline-block;
+    font-size: 20px;
+    transform: translateY(-5px);
+  }
 }
-
-.weather__component__header{
-  text-transform: lowercase;
-  font-variant: small-caps;
-  border-bottom: 1px solid $black;
+.icon__weather{
+  width: 100%;
 }
-.weather__component__footer{
-  text-transform: lowercase;
-  font-variant: small-caps;
+.weather__wind{
+  &-direction{
+    display: inline-block;
+  }
+  &-speed{
+    display: inline-block;
+    font-size: 45px;
+    margin-left: .2em;
+  }
 }
-.weather__component__body{
-  display: flex;
-  align-items: center;
-  div:first-child{ margin-right: 6px; } // no flex-gap
-}
-
-.weather__component--state{
-  display: flex;
-  padding-top: 1em;
-}
-
-.weather__temp--max{
-  font-size: 45px;
-}
-.weather__temp--min{
-  font-size: 25px;
-}
-
-.weather__wind__direction{
-  padding-top: 10px;
-}
-.weather__windspeed{
-  font-size: 45px;
-}
-// wind direction icon
 .winddirection__pointer { fill: $black;}
 
 // the night versions
-.night{
+.night, .clear{
   color: $white;
   .weather__component__header{
     border-bottom: 1px solid $white;
   }
   .winddirection__pointer { fill: $white;}
 }
-
 
 $day-grey : #e2e2e2;
 $night-grey : #191919;
@@ -97,6 +105,8 @@ $night-grey : #191919;
   .mist    { background: $night-grey;  }
 }
 
+// styling the icons
+
 .cloud1   { fill: $white; }
 .cloud2   { fill: #ccc; }
 .shower,
@@ -122,10 +132,5 @@ $night-grey : #191919;
   .rain{
     .cloud1 { fill: #888; }
   }
-  .raindrops line{ stroke: $white; }
-}
-
-.placeholder__weatherwidget{
-  width: 100%;
-  height: auto;
+  // .raindrops line{ stroke: $white; }
 }

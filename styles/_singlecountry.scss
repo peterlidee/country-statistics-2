@@ -6,12 +6,13 @@
     box-shadow: 0 4px 8px #ddd;
     padding: 1em 1.5em;
     
-    .single-country__header &{
-      margin-bottom: .5em;
-    }
+    // .single-country__header &{
+    //   margin-bottom: .5em;
+    // }
     .single-country__flags &{
       padding: .75em;
       max-width: 28em;
+      height: 100%;
     }
     .single-country__basic-stats &{
       height: 100%;
@@ -21,6 +22,9 @@
       max-width: 28em;
       padding: .75em;
       height: calc(100% - 2em); // 1.5 line height and then some padding to make room for source
+    }
+    .single-country__region &{
+      max-width: 28em;
     }
     // on loading or error, a placeholder is displayed in it's own container
     .single-country__placeholder &{
@@ -36,9 +40,10 @@
 
   // title
   &__title{
+    font-size: 2em;
     line-height: 1em;
-    text-align: center;
-    margin: 0;
+    // text-align: center;
+    margin: 0 0 .25em 0;
   }
 
   // general
@@ -52,6 +57,14 @@
     margin-bottom: .75em;
   }
   
+}
+
+@media screen and (min-width: 30em){
+  .single-country{
+    &__title{
+      font-size: 2.5em;
+    }
+  }
 }
 
 // flags

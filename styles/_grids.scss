@@ -37,7 +37,7 @@
   gap: 3em;
 }
 
-@media screen and (min-width: 56em){
+@media screen and (min-width: 62em){
   .single-country{
     //display: grid;
     grid-template-columns: repeat(6, 1fr);
@@ -67,7 +67,7 @@
   }
 }
 
-@media screen and (min-width: 65em){
+@media screen and (min-width: 70em){
   .single-country{
     gap: 3em;
   }
