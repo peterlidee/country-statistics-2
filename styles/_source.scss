@@ -8,6 +8,10 @@
     max-width: 80em;
     margin-top: .5em;
     padding-left: .7em;
+
+    .single-country__header &{
+      padding-left: .15em;
+    }
     
     &--topBorder{
       margin: 2em 0 0 0;
