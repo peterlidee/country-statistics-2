@@ -57,7 +57,7 @@ function ChartWidget(props){
 
   return(
     <>
-      <h4 className="chart__title">{`Gross Domestic Product ${props.type == "gdpc" ? "per capita" : ""} in USD: evolution`}</h4>
+      <h4 className="chart__title">{`Gross Domestic Product ${props.type == "gdpc" ? "per capita" : ""} - USD`}</h4>
       <Bar data={barData} options={barOptions} />
     </>
   )

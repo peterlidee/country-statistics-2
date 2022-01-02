@@ -15,13 +15,17 @@ function SingleCountryChart(props){
     "gdp": 'gdp-from-1960-to-2017@euler-hermes',
     "gdpc": 'gdp-1960-2017@euler-hermes',
   }
+  const labels = {
+    "gdp": 'gdp-from-1960-to-2017',
+    "gdpc": 'gdp-1960-2017',
+  }
   
   const endpoint = `${endpointBase}?dataset=${dataset[props.type]}&sort=year&rows=100&refine.country_code=${props.countryCode.toUpperCase()}`;
 
   return(
     <SingleCountryFetch
       endpoint={endpoint}
-      label={`opendatasoft.com (${dataset[props.type]})`}
+      label={`opendatasoft.com (${labels[props.type]})`}
       extraClass={props.type}
       showSource={true}
       type={props.type}
