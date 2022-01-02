@@ -35,6 +35,7 @@
       background: $blue;
     }
   }
+
   &__status{
     text-transform: lowercase;
     font-variant: small-caps;
@@ -47,7 +48,7 @@
     overflow-wrap: anywhere;
   }
   &__nolink{
-    overflow-wrap: anywhere; // TODO check
+    overflow-wrap: anywhere;
   }
   &__errormessage{
     color: $error;

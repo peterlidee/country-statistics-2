@@ -6,9 +6,6 @@
     box-shadow: 0 4px 8px #ddd;
     padding: 1em 1.5em;
     
-    // .single-country__header &{
-    //   margin-bottom: .5em;
-    // }
     .single-country__flags &{
       padding: .75em;
       max-width: 28em;
@@ -35,7 +32,6 @@
       padding: .75em;
       height: 100%;
     }
-
   }
   &__box + &__box{
     margin-top: 1.5em;
@@ -111,7 +107,6 @@
     background: $lightGrey;
     margin-right: .25em;
   }
-
   &:first-child{
     margin-right: 1em;
   }
@@ -127,10 +122,11 @@
 }
 
 // neighbours
-
-.neighbours-grid{
-  columns: 2;
-  column-gap: 1em;
+@media screen and (min-width: 20em){
+  .neighbours-grid{
+    columns: 2;
+    column-gap: 1em;
+  }
 }
 .neighbour-country{
   color: $lightText;
