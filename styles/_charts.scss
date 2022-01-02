@@ -5,6 +5,11 @@
 .single-country__gdp{
   margin-bottom: 2em; 
 }
+.chart__title{
+  font-variant: small-caps;
+  text-transform: lowercase;
+  margin: 0 0 1em 0;
+}
 
 @media screen and (min-width: 56em){
 
@@ -16,12 +21,6 @@
   .single-country__gdp{
     margin-right: 2em; 
     margin-bottom: 0;
-  }
-
-  .chart__title{
-    font-variant: small-caps;
-    text-transform: lowercase;
-    margin: 0 0 1em 0;
   }
 
 }
