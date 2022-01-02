@@ -1,4 +1,5 @@
 import { Range, getTrackBackground } from 'react-range';
+import colors from '../../../config/colors';
 import PropTypes from 'prop-types';
 
 function FilterRange(props){
@@ -44,7 +45,7 @@ function FilterRange(props){
                 borderRadius: '4px',
                 background: getTrackBackground({
                   values,
-                  colors: ['#ccc', '#548BF4', '#ccc'],
+                  colors: [colors.lightGrey, colors.blue, colors.lightGrey],
                   min: sliderMin,
                   max: sliderMax,
                 }),
@@ -75,7 +76,7 @@ function FilterRange(props){
                 height: '8px',
                 width: '8px',
                 borderRadius: '50%',
-                backgroundColor: isDragged ? '#548BF4' : '#CCC'
+                backgroundColor: isDragged ? colors.blue : colors.lightGrey,
               }}
             />
           </div>

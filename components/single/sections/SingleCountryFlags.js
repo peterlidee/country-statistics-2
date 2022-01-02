@@ -9,7 +9,7 @@ function SingleCountryFlags(props){
   if(!props.flag && !props.coatOfArms){
     return(
       <BoxWrapper name="placeholder">
-        <Placeholder backgroundColor="#eee" />
+        <Placeholder />
       </BoxWrapper>
     )
   }
