@@ -66,7 +66,6 @@ const FieldsContextProvider = props => {
   ])
 
   // this function handles changes in fields being displayed or not
-  // TODO: do we need event????
   const handleDisplay = (index) => {
     
     // the index gives us with item in state fields array to change

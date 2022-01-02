@@ -1,4 +1,3 @@
-import Wrapper from '../../general/Wrapper';
 import BoxWrapper from '../../general/BoxWrapper';
 
 import FetchRegionCountries from '../map/FetchRegionCountries';
@@ -8,7 +7,6 @@ import Placeholder from '../../svgSnippets/Placeholder';
 function SingleCountryMap(props){
 
   // wait for the parent query in SingleCountry to load
-  // TODO
   if(!props.country) return(
     <BoxWrapper name="map">
       <Placeholder />
