@@ -105,7 +105,7 @@ function MapWidget(props){
             regionCountries={props.regionCountries}
             subregionCountries={props.subregionCountries} />
         </div> : <Placeholder />}
-      <Sources extraClass="map">
+      <Sources>
         <Source label="Google Maps API" loading={!isLoaded} error={loadError} />
         <Source label="Google GeoCode API" loading={geoCodeLoading} error={geoCodeError} />
         <Source 

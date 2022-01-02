@@ -12,16 +12,11 @@
     .single-country__header &{
       padding-left: .15em;
     }
-    
-    &--topBorder{
+    // home page gets top border
+    .sources__home &{
       margin: 2em 0 0 0;
-      padding-top: .5em;
+      padding-top: 1em;
       border-top: 1px solid $lightGrey;
-    }
-    // styles SingleCountryStatus
-    &--status{
-      margin-top: 0;
-      max-width: none;
     }
   }
 

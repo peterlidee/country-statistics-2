@@ -12,7 +12,7 @@
     .single-country__flags &{
       padding: .75em;
       max-width: 28em;
-      height: 100%;
+      // height: 100%; // see media query below (62em)
     }
     .single-country__basic-stats &{
       height: 100%;
@@ -45,7 +45,6 @@
   &__title{
     font-size: 2em;
     line-height: 1em;
-    // text-align: center;
     margin: 0 0 .25em 0;
   }
 
@@ -67,6 +66,12 @@
     &__title{
       font-size: 2.5em;
     }
+  }
+}
+
+@media screen and (min-width: 62em){
+  .single-country__flags .single-country__box{
+    height: 100%;
   }
 }
 

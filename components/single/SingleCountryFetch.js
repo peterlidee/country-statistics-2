@@ -21,7 +21,7 @@ function SingleCountryFetch(props){
       <div className="single-country__box">
         {props.children(isLoading, error, data)}
       </div>
-      <Sources extraClass={props.extraClass}> {/* todo remove extraclass from source */}
+      <Sources>
         <Source 
           error={error || noRecordsError} 
           loading={isLoading} 

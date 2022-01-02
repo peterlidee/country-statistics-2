@@ -59,9 +59,11 @@ function Home(){
           </NumberFiltersContextProvider>
         </RegionFilterContextProvider>
       }
-      <Sources extraClass="home" topBorder={true}>
-        <Source error={error} loading={!error && !data} endpoint={endpoint} label="restcountries.com/{all}" />
-      </Sources>
+      <div className="sources__home">
+        <Sources topBorder={true}>
+          <Source error={error} loading={!error && !data} endpoint={endpoint} label="restcountries.com/{all}" />
+        </Sources>
+      </div>
     </FieldsContextProvider>
   )
 }

@@ -38,7 +38,7 @@ function SingleCountry(props){
         
         <SingleCountryHeader countryName={countryName}>
           <SingleCountryStatus loading={isLoading} error={error} data={data} countryCode={props.countryCode}>
-            <Sources extraClass="status">
+            <Sources>
               <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
             </Sources>
           </SingleCountryStatus>
