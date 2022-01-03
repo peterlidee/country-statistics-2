@@ -46,9 +46,7 @@
 
   // general
   &__label{
-    font-weight: 700;
-    font-variant: small-caps;
-    text-transform: lowercase;
+    @extend %small-lower-bold;
   }
   &__value{
     color: $lightText;
@@ -95,9 +93,8 @@
 }
 .flags__controle{
   @extend %reset-button;
-  font-variant: small-caps;
+  @extend %small-lower-light;
   text-decoration: underline;
-  color: $lightText;
   transition: color ease-in .125s;
 
   &:before{

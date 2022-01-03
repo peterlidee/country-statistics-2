@@ -9,3 +9,18 @@
   padding: 0;
   cursor: pointer;
 }
+
+%small-lower{
+  font-variant: small-caps;
+  text-transform: lowercase;
+}
+
+%small-lower-bold{
+  @extend %small-lower;
+  font-weight: bold;
+}
+
+%small-lower-light{
+  @extend %small-lower;
+  color: $lightText;
+}

@@ -6,9 +6,7 @@
   margin: .75em 0;
 
   &__label{
-    text-transform: lowercase;
-    font-variant: small-caps;
-    color: $lightText;
+    @extend %small-lower-light;
     font-size: 16px;
     margin-right: .5em;
   }

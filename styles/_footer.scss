@@ -36,11 +36,9 @@
     }
   }
   &__subtitle{
-    font-weight: 700;
-    font-variant: small-caps;
-    text-transform: lowercase;
-    margin: 0 0 .5em 0;
+    @extend %small-lower-bold;
     color: $lightGrey;
+    margin: 0 0 .5em 0;
   }
   &__footer{
     color: $lightGrey;

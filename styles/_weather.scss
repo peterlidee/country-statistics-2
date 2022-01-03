@@ -24,15 +24,13 @@
 
 .weather__component{
   &__header{
-    text-transform: lowercase;
-    font-variant: small-caps;
+    @extend %small-lower;
     border-bottom: 1px solid $black;
     text-align: center;
   }
   &__footer{
-     text-transform: lowercase;
-     font-variant: small-caps;
-     text-align: center;
+    @extend %small-lower;
+    text-align: center;
   }
   &__body{
     padding: 1em 0;

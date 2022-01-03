@@ -37,9 +37,7 @@
   }
 
   &__status{
-    text-transform: lowercase;
-    font-variant: small-caps;
-    color: $lightText;
+    @extend %small-lower-light;
     // width: 4em;
     flex: 0 0 4em;
   }
