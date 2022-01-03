@@ -4,26 +4,11 @@
 }
 
 .footer{
-  
-  // &__inner{
-  //   display: grid;
-  //   max-width: 1500px;
-  //   grid-template-columns: repeat(3, 1fr);
-  //   gap: 1.5em 3em;
-  //   grid-template-areas: 
-  //   " data framework deployment"
-  //     "data packages sourcecode"
-  //     "data packages contact";
-    
-  // }
 
-  &__header{
-
-  }
   &__logo{
     display: flex;
     align-items: center;
-    margin: 0 0 1em 0;
+    margin: 0;
     
     .icon__logo{
       width: 45px;
@@ -44,48 +29,39 @@
   }
 
 
-
+// todo transition
+// todo titles small caps
 
 
 
 
   &__section{
-
-    
-    // &--data{
-    //   grid-area: data;
-    // }
-    // &--framework{
-    //   grid-area: framework;
-    // }
-    // &--deployment{
-    //   grid-area: deployment;
-    // }
-    // &--packages{
-    //   grid-area: packages;
-    // }
-    // &--sourcecode{
-    //   grid-area: sourcecode;
-    // }
-    // &--contact{
-    //   grid-area: contact;
-    // }
-
     display: flex;
     flex-direction: column;
-    // margin-bottom: 1.5em;
-    // background: rgba(0,0,0,.1);
-    // padding:  .75em;
     a{
-      color: $lightText; color: $blue;
+      color: $blue;
+      margin-bottom: .5em;
     }
   }
   &__subtitle{
     font-weight: 700;
     font-variant: small-caps;
     text-transform: lowercase;
-    margin: 0;
+    margin: 0 0 .5em 0;
     color: $lightGrey;
+  }
+
+  &__footer{
+    //text-align: right;
+    color: $lightGrey;
+  }
+  &__contact-link{
+    color: $lightGrey;
+    margin-right: .5em;
+    transition: color ease-in .15s;
+    &:hover{
+      color: $blue;
+    }
   }
 }
 
@@ -101,7 +77,7 @@
     }
   }
   .logo__divider{
-    fill: $white;
+    fill: $lightGrey;
   }
   .logo__graph{
     fill: #444;

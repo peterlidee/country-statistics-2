@@ -10,9 +10,13 @@ const Footer = () => (
         <h3 className="footer__logo">
           <IconLogo />
           <div className="footer__title">Country Statistics</div>
-        </h3>
-        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and uses open source API's.</p>
+        </h3> 
       </div>
+
+      <Wrapper base="footer__section" modifier="about">
+        <h4 className="footer__subtitle">about</h4>
+        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and uses open source API's.</p>
+      </Wrapper>
 
       <Wrapper base="footer__section" modifier="data">
         <h4 className="footer__subtitle">data api's</h4>
@@ -48,8 +52,8 @@ const Footer = () => (
       </Wrapper>
 
       <div className="footer__footer">
+        <a href="mailto:peter@lidee.be" className="footer__contact-link">peter@lidee.be</a>
         <span className="footer__copy">&copy; 2022</span>
-        <a href="mailto:peter@lidee.be" className="footer__link">peter@lidee.be</a>
       </div>
 
     </div>

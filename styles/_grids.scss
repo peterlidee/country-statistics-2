@@ -1,3 +1,5 @@
+// the 'body' padding
+
 body{
   padding-top: 1em;
 }
@@ -5,7 +7,7 @@ body{
   padding: 0 .75em;
 }
 .site__footer{
-  padding: 3em .75em 4em .75em;
+  padding: 3em .75em;
 }
 @media screen and (min-width: 40em){
   .site__container{
@@ -63,14 +65,12 @@ body{
 */
 
 .single-country{
-  max-width: 1500px;
   display: grid;
   gap: 3em;
 }
 
 @media screen and (min-width: 64em){
   .single-country{
-    //display: grid;
     grid-template-columns: repeat(6, 1fr);
     max-width: 1500px;
     gap: 3em 2em;
@@ -107,28 +107,51 @@ body{
 .footer__inner{
   display: grid;
   max-width: 1500px;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5em 3em;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2em;
   grid-template-areas: 
-  "header header header"
-  "data framework deployment"
-  "data packages sourcecode"
-  "data packages contact"
-  "footer footer footer";
+  "header header"
+  "about about"
+  "data data"
+  "framework framework"
+  "packages packages"
+  "deployment sourcecode"
+  "footer footer";
+}
+
+@media screen and (min-width: 30em){
+
+  .footer__inner{
+    grid-template-areas: 
+    "header header"
+    "about about"
+    "data framework"
+    "data packages"
+    "sourcecode deployment"
+    "footer footer";
+  }
 }
 
 @media screen and (min-width: 64em){
   .footer__inner{
-    gap: 3em 2em;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-areas: 
+    "header header header"
+    "about about about"
+    "data framework deployment"
+    "data packages sourcecode"
+    "data packages contact"
+    "footer footer footer";
   }
 }
 
 @media screen and (min-width: 70em){
   .footer__inner{
-    gap: 3em;
+    gap: 2em 3em;
   }
 }
 
+// place the items on the grid
 .footer__header{
   grid-area: header;
 }
@@ -136,6 +159,9 @@ body{
   grid-area: footer;
 }
 .footer__section{
+  &--about{
+    grid-area: about;
+  }
   &--data{
     grid-area: data;
   }
