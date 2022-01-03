@@ -98,7 +98,7 @@
   font-variant: small-caps;
   text-decoration: underline;
   color: $lightText;
-  transition: color ease-in .12s;
+  transition: color ease-in .125s;
 
   &:before{
     content: '';
@@ -130,7 +130,7 @@
 }
 .neighbour-country{
   color: $lightText;
-  transition: color ease-out .12s;
+  transition: color ease-out .125s;
   &:hover{
     color: $black;
   }

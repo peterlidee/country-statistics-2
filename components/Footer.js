@@ -15,7 +15,7 @@ const Footer = () => (
 
       <Wrapper base="footer__section" modifier="about">
         <h4 className="footer__subtitle">about</h4>
-        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and uses open source API's.</p>
+        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and gets the data from open source API's.</p>
       </Wrapper>
 
       <Wrapper base="footer__section" modifier="data">

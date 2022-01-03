@@ -27,14 +27,6 @@
     color: $lightGrey;
     margin: 0;
   }
-
-
-// todo transition
-// todo titles small caps
-
-
-
-
   &__section{
     display: flex;
     flex-direction: column;
@@ -50,24 +42,17 @@
     margin: 0 0 .5em 0;
     color: $lightGrey;
   }
-
   &__footer{
-    //text-align: right;
     color: $lightGrey;
   }
   &__contact-link{
     color: $lightGrey;
     margin-right: .5em;
-    transition: color ease-in .15s;
-    &:hover{
-      color: $blue;
-    }
   }
 }
 
 // color the logo in the footer
 .footer__logo{
-
   .logo-globe{
     &__meridians{
       stroke: $black;
@@ -82,5 +67,4 @@
   .logo__graph{
     fill: #444;
   }
-
 }
