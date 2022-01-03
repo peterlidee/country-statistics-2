@@ -1,0 +1,110 @@
+.site__footer{
+  margin-top: 5em;
+  background: $black;
+}
+
+.footer{
+  
+  // &__inner{
+  //   display: grid;
+  //   max-width: 1500px;
+  //   grid-template-columns: repeat(3, 1fr);
+  //   gap: 1.5em 3em;
+  //   grid-template-areas: 
+  //   " data framework deployment"
+  //     "data packages sourcecode"
+  //     "data packages contact";
+    
+  // }
+
+  &__header{
+
+  }
+  &__logo{
+    display: flex;
+    align-items: center;
+    margin: 0 0 1em 0;
+    
+    .icon__logo{
+      width: 45px;
+      height: 36px;
+      margin-right: .75em;
+    }
+  }
+  &__title{
+    @extend %mono-font;
+    color: $white;
+    font-size: 1.15em;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  &__text{
+    color: $lightGrey;
+    margin: 0;
+  }
+
+
+
+
+
+
+
+  &__section{
+
+    
+    // &--data{
+    //   grid-area: data;
+    // }
+    // &--framework{
+    //   grid-area: framework;
+    // }
+    // &--deployment{
+    //   grid-area: deployment;
+    // }
+    // &--packages{
+    //   grid-area: packages;
+    // }
+    // &--sourcecode{
+    //   grid-area: sourcecode;
+    // }
+    // &--contact{
+    //   grid-area: contact;
+    // }
+
+    display: flex;
+    flex-direction: column;
+    // margin-bottom: 1.5em;
+    // background: rgba(0,0,0,.1);
+    // padding:  .75em;
+    a{
+      color: $lightText; color: $blue;
+    }
+  }
+  &__subtitle{
+    font-weight: 700;
+    font-variant: small-caps;
+    text-transform: lowercase;
+    margin: 0;
+    color: $lightGrey;
+  }
+}
+
+// color the logo in the footer
+.footer__logo{
+
+  .logo-globe{
+    &__meridians{
+      stroke: $black;
+    }
+    &__parallels{
+      fill: $black;
+    }
+  }
+  .logo__divider{
+    fill: $white;
+  }
+  .logo__graph{
+    fill: #444;
+  }
+
+}

@@ -1,5 +1,11 @@
 import PropTypes from 'prop-types';
 
+// https://www.flaticon.com/free-icon/black-cloud_33486
+// https://www.flaticon.com/free-icon/snowflake_642000
+// https://www.flaticon.com/free-icon/flash_252851
+// https://www.flaticon.com/free-icon/settings_23408
+
+
 const IconWeather = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 90 90" width="90" height="90" className="icon__weather">
 

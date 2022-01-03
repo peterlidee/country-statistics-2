@@ -1,5 +1,36 @@
+body{
+  padding-top: 1em;
+}
+.site__container{
+  padding: 0 .75em;
+}
+.site__footer{
+  padding: 3em .75em 4em .75em;
+}
+@media screen and (min-width: 40em){
+  .site__container{
+    padding: 0 1em;
+  }
+  .site__footer{
+    padding-left: 1em;
+    padding-right: 1em;
+  }
+}
+@media screen and (min-width: 70em){
+  body{
+    padding-top: 2em;
+  }
+  .site__container{
+    padding: 0 2em;
+  }
+  .site__footer{
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}
+
 /*
-  home
+  home grid
 */
 
 @media screen and (min-width: 64em){
@@ -28,7 +59,7 @@
 
 
 /* 
-  single country
+  single country grid
 */
 
 .single-country{
@@ -65,5 +96,62 @@
 @media screen and (min-width: 70em){
   .single-country{
     gap: 3em;
+  }
+}
+
+
+/* 
+  footer grid
+*/
+
+.footer__inner{
+  display: grid;
+  max-width: 1500px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5em 3em;
+  grid-template-areas: 
+  "header header header"
+  "data framework deployment"
+  "data packages sourcecode"
+  "data packages contact"
+  "footer footer footer";
+}
+
+@media screen and (min-width: 64em){
+  .footer__inner{
+    gap: 3em 2em;
+  }
+}
+
+@media screen and (min-width: 70em){
+  .footer__inner{
+    gap: 3em;
+  }
+}
+
+.footer__header{
+  grid-area: header;
+}
+.footer__footer{
+  grid-area: footer;
+}
+.footer__section{
+  &--data{
+    grid-area: data;
+  }
+  &--framework{
+    grid-area: framework;
+  }
+  &--deployment{
+    grid-area: deployment;
+  }
+  &--packages{
+    grid-area: packages;
+  }
+  &--sourcecode{
+    grid-area: sourcecode;
+  }
+  &--contact{
+    grid-area: contact;
   }
 }
