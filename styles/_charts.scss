@@ -14,7 +14,7 @@
 
   .single-country__gdp,
   .single-country__gdpc{
-    width: calc(50% - 1.5em);
+    width: calc(50% - 1em);
     float: left;
   }
   .single-country__gdp{
@@ -26,6 +26,10 @@
 
 @media screen and (min-width: 70em){
 
+  .single-country__gdp,
+  .single-country__gdpc{
+    width: calc(50% - 1.5em);
+  }
   .single-country__gdp{
     margin-right: 3em; 
   }

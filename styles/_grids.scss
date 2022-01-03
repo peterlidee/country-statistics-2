@@ -59,6 +59,35 @@ body{
   grid-column: 1 / -1;
 }
 
+/*
+  country list (home)
+*/
+
+// grid
+.country-list{
+  display: grid;
+  grid-gap: .25em 1em;
+  justify-content: start; // stack columns to the left
+  align-items: baseline;
+  align-content: start; // don't stretch row but stack them from the top
+  width: 100%;
+  overflow-x: auto;
+
+  &-header{
+    &--population, 
+    &--area, 
+    &--density{
+      justify-self: end;
+    }
+  }
+}
+
+@media screen and (min-width: 40em){
+  .country-list{
+    grid-gap: .25em 1.5em;
+  }
+}
+
 
 /* 
   single country grid

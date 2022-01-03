@@ -1,27 +1,29 @@
-.site__header{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 3em;
-  max-width: 90em;
-}
-.site__logo{
-  display: flex;
-  align-items: center;
-  text-decoration: none;
+.site{
+  &__header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3em;
+    max-width: 90em;
+  }
+  &__logo{
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  &__title{
+    @extend %mono-font;
+    font-size: 1.25em;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin: 0;
+    color: $black;
+  }
 }
 .icon__logo{
   margin-right: .75em;
   width: 40px;
   height: 32px;
-}
-.site__title{
-  @extend %mono-font;
-  font-size: 1.25em;
-  font-weight: 700;
-  text-transform: capitalize;
-  margin: 0;
-  color: $black;
 }
 
 @media screen and (min-width: 30em){
@@ -35,8 +37,9 @@
   }
 }
 
-
-// settings
+/*
+  settings
+*/
 
 .settings{
   position: relative;

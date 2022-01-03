@@ -2,9 +2,7 @@
 
 // button
 .button__sort{
-  // reset button styles
   @extend %reset-button;
-
   text-decoration: underline;
   font-weight: 500;
   display: flex;
