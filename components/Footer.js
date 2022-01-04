@@ -15,11 +15,11 @@ const Footer = () => (
 
       <Wrapper base="footer__section" modifier="about">
         <h4 className="footer__subtitle">about</h4>
-        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and gets the data from open source API's.</p>
+        <p className="footer__text">Country statistics is a portfolio project to show my React knowledge. It is built in Next and gets the data from open source APIs.</p>
       </Wrapper>
 
       <Wrapper base="footer__section" modifier="data">
-        <h4 className="footer__subtitle">data api's</h4>
+        <h4 className="footer__subtitle">data apis</h4>
         <a href="https://restcountries.com/">restcountries.com</a>
         <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps Javascript Api</a>
         <a href="https://developers.google.com/maps/documentation/geocoding/overview">Google GeoCode Api</a>
