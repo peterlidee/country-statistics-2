@@ -14,7 +14,6 @@ const IconFilters = () => {
         <circle cx="20" cy="22" r="3"/>
       </g>
     </svg>
-
   )
 }
 

@@ -32,4 +32,4 @@ Country statistics is a portfolio project to show my React knowledge. It is buil
 
 ## Contact
 
-[peter [at] lidee.be](peter@lidee.be)
+<peter@lidee.be>
