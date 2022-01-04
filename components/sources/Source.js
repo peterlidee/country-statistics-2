@@ -12,7 +12,7 @@ function Source(props){
       <div className="source__status">{status}</div>
       <div>
         {!props.endpoint && <span className="source__nolink">{props.label}</span>}
-        {props.endpoint && <a className="source__link" href={props.endpoint} target="_blank">{props.label}</a>}
+        {props.endpoint && <a className="source__link" href={props.endpoint} target="_blank" rel="noreferrer">{props.label}</a>}
         {props.error && props.error.message && <div className="source__errormessage">[{props.error.message}]</div>}
       </div>
     </div>
