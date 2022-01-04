@@ -31,7 +31,7 @@ function MapWidget(props){
   const onLoad = useCallback(function callback(map){
     setMapInState(map)
     setCountryOnMap(map)
-  });
+  }, []);
 
   // const onUnmount = useCallback(function callback(map) {
   //   console.log('Am I being unmounted???',)
