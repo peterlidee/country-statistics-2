@@ -1,53 +1,23 @@
-import Link from 'next/link';
 import useFetch from "react-fetch-hook";
-import Sources from '../../sources/Sources';
+import Link from 'next/link';
 import Source from '../../sources/Source';
+import NeighbourComponent from './NeighbourComponent';
+import PropTypes from "prop-types";
 
-const RegionComponent = (props) => (
-  <>
-    <div className="single-country__box">
-      <div className="single-country__label">neighbouring countries</div>
-      <div className="single-country__value">
-        {props.children}
-      </div>
-    </div>
-    {props.source &&
-      <Sources>
-        {props.source}
-      </Sources>
-    }
-  </>
-)
 
 // helper function to filter out the matching country
 const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border);
 
+// by the time this component get loaded,
+// the error, loading and data of the parent (singleCountries) are already
+// handled by ValidateNeighbouringCountries
+// and props.borders is garanteed
+// we did all this to avoid conditional useFetch
+// (having a return before useFetch)
 function NeighbouringCountries(props){
 
-  // we first need to handle the loading, error and data of the parent components fetch
-  // if there's loading and no data
-  // (if there's loading and data, we just display the previous data)
-  if(props.loading && !props.data) return(
-    <RegionComponent>...</RegionComponent>
-  )
-
-  // if error
-  if(props.error) return(
-    <RegionComponent>No data found."</RegionComponent>
-  )
-
-  // no data
-  if(!props.loading && !props.error && !props.data.borders) return(
-    <RegionComponent>No data.</RegionComponent>
-  )
-
-  // no borders
-  if(!props.loading && !props.error && props.data.borders.length == 0) return(
-    <RegionComponent>None (island).</RegionComponent>
-  )
-
   // make the fetch
-  const endpoint = `https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=${props.data.borders.join(',')}`;
+  const endpoint = `https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=${props.borders.join(',')}`;
   const { isLoading, error, data } = useFetch(endpoint);
 
   // construct source for this fetch
@@ -55,8 +25,8 @@ function NeighbouringCountries(props){
 
   // construct the neighbours
   const neighbours = (
-    <div className={props.data.borders.length > 6 ? "neighbours-grid" : ""}>
-      {props.data.borders.map(border => {
+    <div className={props.borders.length > 6 ? "neighbours-grid" : ""}>
+      {props.borders.map(border => {
 
         // find the country from the fetch that matches current border
         // or return [] when there is no data yet (fetch still loading)
@@ -78,10 +48,14 @@ function NeighbouringCountries(props){
   )
 
   return(
-    <RegionComponent source={source}>
+    <NeighbourComponent source={source}>
       {neighbours}
-    </RegionComponent>
+    </NeighbourComponent>
   )
+}
+
+NeighbouringCountries.propTypes = {
+  borders: PropTypes.array.isRequired,
 }
 
 export default NeighbouringCountries;

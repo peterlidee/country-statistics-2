@@ -1,4 +1,4 @@
-import NeighbouringCountries from '../neighbours/NeighbouringCountries';
+import ValidateNeighbouringCountries from '../neighbours/ValidateNeighbouringCountries';
 
 // we need a more complex loading, error and data handling
 // because some value props to RenderLabelValue will be undefined
@@ -49,7 +49,7 @@ const SingleCountryRegion = (props) => {
           label="capital" 
           hasData={hasData} />
       </div>
-      <NeighbouringCountries 
+      <ValidateNeighbouringCountries 
         loading={props.loading} 
         error={props.error} 
         data={props.data}
