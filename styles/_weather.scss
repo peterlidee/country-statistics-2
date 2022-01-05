@@ -1,3 +1,13 @@
+.single-country__weather{
+  display: flex;
+  flex-direction: column;
+  .single-country__box{
+    // we want the box to take the full available height
+    flex: 1 1 auto; 
+  }
+}
+
+
 .fullHeight{
   height: 100%;
 }

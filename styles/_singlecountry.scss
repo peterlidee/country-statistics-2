@@ -21,7 +21,6 @@
     .single-country__weather &{
       max-width: 28em;
       padding: .75em;
-      height: calc(100% - 2em); // 1.5 line height and then some padding to make room for source
     }
     .single-country__map &{
       padding: .75em;
