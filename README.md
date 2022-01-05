@@ -27,8 +27,7 @@ Country statistics is a portfolio project to show my React knowledge. It is buil
 
 ## Live url
 
-// Todo
-[country statistics]()
+[country statistics](https://country-statistics-2.vercel.app/)
 
 ## Contact
 
