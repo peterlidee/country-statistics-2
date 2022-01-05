@@ -19,7 +19,7 @@ function MapWidget(props){
   
   // connect to google maps
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: process.env.API_KEY_GOOGLE,
+    googleMapsApiKey: process.env.NEXT_PUBLIC_API_KEY_GOOGLE,
     language: "en",
   })
 

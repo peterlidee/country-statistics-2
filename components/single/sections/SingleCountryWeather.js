@@ -18,7 +18,7 @@ function SingleCountryWeather(props){
     <div className="single-country__weather"></div>
   )
   
-  const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(props.capitalName)},${props.cca2}&APPID=${process.env.API_KEY_WEATHER}&units=metric`;
+  const endpoint = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(props.capitalName)},${props.cca2}&APPID=${process.env.NEXT_PUBLIC_API_KEY_WEATHER}&units=metric`;
   const label = 'Openweather API';
 
   return(
