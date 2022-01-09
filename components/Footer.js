@@ -23,8 +23,7 @@ const Footer = () => (
         <a href="https://restcountries.com/">restcountries.com</a>
         <a href="https://developers.google.com/maps/documentation/javascript/tutorial">Google Maps Javascript Api</a>
         <a href="https://developers.google.com/maps/documentation/geocoding/overview">Google GeoCode Api</a>
-        <a href="https://data.opendatasoft.com/explore/dataset/gdp-from-1960-to-2017%40euler-hermes/information/?disjunctive.country_name">Opendatasoft (GDP)</a>
-        <a href="https://data.opendatasoft.com/explore/dataset/gdp-1960-2017%40euler-hermes/information/?disjunctive.country_name">Opendatasoft (GDP per capita)</a>
+        <a href="https://databank.worldbank.org/source/health-nutrition-and-population-statistics">Worldbank Api</a>
         <a href="https://openweathermap.org/current">openweathermap.org</a>
       </Wrapper>
 
