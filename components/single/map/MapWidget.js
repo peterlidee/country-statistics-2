@@ -11,8 +11,7 @@ import Placeholder from '../../svgSnippets/Placeholder';
 
 const containerStyle = {
   width: '100%',
-  height: '500px',
-  borderRadius: '3px',
+  height: '450px',
 };
 
 function MapWidget(props){
