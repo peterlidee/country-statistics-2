@@ -7,7 +7,7 @@ Country statistics is a portfolio project to show my React knowledge. It is buil
 [restcountries.com](https://restcountries.com/)  
 [Google Maps Javascript Api](https://developers.google.com/maps/documentation/javascript/tutorial)  
 [Google GeoCode Api](https://developers.google.com/maps/documentation/geocoding/overview)  
-[Worldbank Api](https://databank.worldbank.org/source/health-nutrition-and-population-statistics)
+[Worldbank Api](https://databank.worldbank.org/source/health-nutrition-and-population-statistics)  
 [openweathermap.org](https://openweathermap.org/current)
 
 ## Framework
