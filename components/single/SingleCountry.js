@@ -13,7 +13,7 @@ import SingleCountryBasisStats from "./sections/SingleCountryBasicStats";
 import SingleCountryWeather from "./sections/SingleCountryWeather";
 import SingleCountryMap from "./sections/SingleCountryMap";
 import SingleCountryRegion from "./sections/SingleCountryRegion";
-import SingleCountryChart from "./sections/SingleCountryChart";
+import SingleCountryPopulationChart from "./sections/SingleCountryPopulationChart";
 
 function SingleCountry(props){
 
@@ -68,12 +68,7 @@ function SingleCountry(props){
           error={error}
           loading={isLoading} />
 
-        {/*
-        <div className="single-country__charts">
-          <SingleCountryChart countryCode={props.countryCode} type="gdp" />
-          <SingleCountryChart countryCode={props.countryCode} type="gdpc" />
-        </div>
-        */}
+        <SingleCountryPopulationChart countryCode={props.countryCode} />
 
       </article>
     </>
