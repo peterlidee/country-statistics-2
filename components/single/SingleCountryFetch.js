@@ -6,14 +6,33 @@ import Source from "../sources/Source";
 function SingleCountryFetch(props){
 
   const { isLoading, error, data } = useFetch(props.endpoint);
-  
-  // for gdp and gdpc we make an exception
-  // if there are no records in data, 
-  // we throw error as to indicate there are no data
-  // the request itself however, will be succesfull and throw no error
-  let noRecordsError = false
-  if(props.type && !isLoading && !error && data && data.records.length == 0){
-    noRecordsError = new Error('No data available for this country')
+
+  // for the world bank api, we add an extra error detection
+  // because some invalid request will return a valid response
+  // https://datahelpdesk.worldbank.org/knowledgebase/articles/898620-api-error-codes
+  // also, we want to consider no data an error also
+
+  let extraError = false;
+
+  if(props.type == "population" && data && !isLoading && !error){
+
+    if(Array.isArray(data)){
+      // data is an array
+      
+      // if first item in array has message prop, there is an error
+      if(data[0]?.message){ 
+        extraError = new Error(data[0].message[0].value)
+      }
+
+      // check for empty results (total = 0)
+      if(data[0]?.total == 0){
+        extraError = new Error("No data for this country.")
+      }
+      
+    }else{
+      // data is not an array
+      extraError = new Error("No data for this country.");
+    }
   }
 
   return(
@@ -23,7 +42,7 @@ function SingleCountryFetch(props){
       </div>
       <Sources>
         <Source 
-          error={error || noRecordsError} 
+          error={error || extraError} 
           loading={isLoading} 
           endpoint={props.endpoint}
           label={props.label} />

@@ -1,37 +1,31 @@
-.single-country__gdp,
-.single-country__gdpc{
-  width: 99%; // charts are not responsive at 100%, some kind of bug
+.single-country__population-chart .single-country__box{
+  // we need to give the chart as much space as possible on smallest screens
+  // this gets reset on bigger screens
+  padding: 1em .25em; 
 }
-.single-country__gdp{
-  margin-bottom: 2em; 
+.chart-container{
+  // use 99% instead of 100%, weird bug
+  // the chart responsive mode needs this to calculate with of canvas element
+  width: 99%; 
+  height: 350px;
+  overflow-x: auto;
 }
 .chart__title{
   @extend %small-lower-bold;
-  margin: 0 0 1em 0;
+  margin: 0 0 1em 1.25em; // extra left margin on title to compensate nearly 0
 }
 
-@media screen and (min-width: 64em){
-
-  .single-country__gdp,
-  .single-country__gdpc{
-    width: calc(50% - 1em);
-    float: left;
+@media screen and (min-width: 30em){
+  .single-country__population-chart .single-country__box{
+    padding: 1em 1.5em;
   }
-  .single-country__gdp{
-    margin-right: 2em; 
-    margin-bottom: 0;
+  .chart__title{
+    margin: 0 0 1em 0;
   }
-
 }
 
-@media screen and (min-width: 70em){
-
-  .single-country__gdp,
-  .single-country__gdpc{
-    width: calc(50% - 1.5em);
+@media screen and (min-width: 45em){
+  .chart-container{
+    height: 450px;
   }
-  .single-country__gdp{
-    margin-right: 3em; 
-  }
-
 }
