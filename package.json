@@ -1,5 +1,7 @@
 {
   "name": "country-statistics-2",
+  "version": "2.1.0",
+  "description": "A portfolio project.",
   "private": true,
   "scripts": {
     "dev": "next dev",
