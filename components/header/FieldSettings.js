@@ -4,7 +4,7 @@ import IconSettings from "../svgSnippets/IconSettings";
 
 function DisplayOptions(){
 
-  const { fields, handleDisplay } = useContext(FieldsContext);
+  const { fields, dispatch } = useContext(FieldsContext);
   const [ toggle, setToggle ] = useState(false);
 
   return(
@@ -23,7 +23,7 @@ function DisplayOptions(){
                 type="checkbox" 
                 value={field.field}
                 checked={field.display} 
-                onChange={() => handleDisplay(index)} 
+                onChange={() => dispatch({ type: "display", index: index })} 
                 id={`fieldsetting-${field.field}`} 
                 className="settings__checkbox"
               />

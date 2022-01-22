@@ -44,14 +44,14 @@ CountryListLegend.prototype = {
 // all header fields for countries list
 function CountryListHeaders(){
 
-  const { fields, handleSort } = useContext(FieldsContext);
+  const { fields, dispatch } = useContext(FieldsContext);
   return(
     <>
       <Wrapper base={'country-list-header'} modifier={'index'}>{null}</Wrapper>
       {fields.map((field, i) => 
         <CountryListHeader 
           field={field} 
-          handleSort={() => handleSort(i)} 
+          handleSort={() => dispatch({ type: "sort", index: i })} 
           key={`country-list-header-${field.field}`} 
           />
       )}
