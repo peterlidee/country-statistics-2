@@ -1,4 +1,5 @@
-import useSWR from "swr";
+// TODO: remove from package
+// import useSWR from "swr"; 
 
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
@@ -13,30 +14,30 @@ import CountryList from "./countryList/CountryList";
 import Sources from "./sources/Sources";
 import Source from "./sources/Source";
 
-async function fetcher(url){
-  const res = await fetch(url)
-  if (!res.ok) {
-    let message = '';
-    if(res.statusText){
-      message += res.statusText;
-    }
-    const error = new Error(`An error occurred while fetching the data. ${message}`)
-    throw error
-  }
-  return res.json();
-}
+// async function fetcher(url){
+//   const res = await fetch(url)
+//   if (!res.ok) {
+//     let message = '';
+//     if(res.statusText){
+//       message += res.statusText;
+//     }
+//     const error = new Error(`An error occurred while fetching the data. ${message}`)
+//     throw error
+//   }
+//   return res.json();
+// }
 
-function Home(){
+function Home(props){
 
-  const endpoint =  'https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region';
+  // const endpoint =  'https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region';
   //label: 'restcountries.com/{all}',
 
   // fetch the data
-  const { data, error } = useSWR(endpoint, fetcher, { revalidateOnFocus: false });
+  // const { data, error } = useSWR(endpoint, fetcher, { revalidateOnFocus: false });
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
-  const countries = addExtraData(data);
+  const countries = addExtraData(props.countries);
 
   // calculate filter data from the country data
   // this operation will only be called once
@@ -50,18 +51,19 @@ function Home(){
         <meta name="description" content="An overview of statistics per country, fed by different api's." />
       </Head>
       <Header home={true} />
-      {error && <div className="faux-site__grid--home">No data found.</div>}
-      {!error && !data && <div className="faux-site__grid--home">Loading...</div>}
-      {!error && data &&  
+      {/*error && <div className="faux-site__grid--home">No data found.</div>*/}
+      {/*!props.countries && <div className="faux-site__grid--home">Loading...</div>*/}
         <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
           <NumberFiltersContextProvider filterData={filterData}>
             <CountryList countries={countries} filterData={filterData} />
           </NumberFiltersContextProvider>
         </RegionFilterContextProvider>
+      {/*!error && data &&  */
       }
       <div className="sources__home">
         <Sources topBorder={true}>
-          <Source error={error} loading={!error && !data} endpoint={endpoint} label="restcountries.com/{all}" />
+          {/* since we use ssg, there is data, no loading cause pre rendered and no error cause build succeeded */}
+          <Source error={false} loading={false} endpoint={props.endpoint} label="restcountries.com/{all}" />
         </Sources>
       </div>
     </FieldsContextProvider>
