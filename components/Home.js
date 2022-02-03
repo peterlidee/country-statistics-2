@@ -1,4 +1,3 @@
-// TODO: remove from package
 // TODO: favicon.ico not found in dev
 // TODO: check problem with id diff server, client
 
