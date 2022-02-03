@@ -14,7 +14,7 @@ export async function getStaticProps(){
   return {
     props: {
       countries: countries,
-      endpoint: endpoint, // todo: rework source
+      endpoint: endpoint,
     }
   }
 }
