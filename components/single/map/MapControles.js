@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
 import MapCapitalButton from './MapCapitalButton';
 import MapRegionButton from './MapRegionButton';
 import IconPan from '../../svgSnippets/IconPan';
@@ -38,12 +37,13 @@ class MapControles extends React.Component{
   }
 
   render(){
+    const capital = this.props?.country?.capital && this.props.country.capital.length > 0 && this.props.country.capital[0] || null;
     return(
       <div className="map-controles">
         <span className='map-controles__label'>pan to</span>
-        {this.props.country.capital[0] &&
+        {capital &&
           <MapCapitalButton 
-            capital={this.props.country.capital[0]} 
+            capital={capital} 
             countryName={this.props.country.name.common}
             subregion={this.props.country.subregion ? this.props.country.subregion : this.props.country.region}
             map={this.props.map} 

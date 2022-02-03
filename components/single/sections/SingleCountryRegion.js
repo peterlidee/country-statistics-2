@@ -45,7 +45,7 @@ const SingleCountryRegion = (props) => {
           hasData={hasData} />
         <RenderLabelValue 
           loading={props.loading} 
-          value={props.data?.capital[0]} 
+          value={props?.data?.capital && props.data.capital[0] || null} 
           label="capital" 
           hasData={hasData} />
       </div>
