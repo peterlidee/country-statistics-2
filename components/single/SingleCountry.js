@@ -34,7 +34,7 @@ function SingleCountry(props){
         <SingleCountryHeader countryName={countryName}>
           <SingleCountryStatus loading={false} error={false} data={country} countryCode={props.countryCode}>
             <Sources>
-              {/* TODO since we get data from getStaticProps ... no loading or error */}
+              {/* since we get data from getStaticProps ... no loading or error */}
               <Source label="restcountries.com/{code}" endpoint={props.singleEndpoint} error={false} loading={false} />
             </Sources>
           </SingleCountryStatus>
