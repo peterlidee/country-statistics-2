@@ -1,6 +1,4 @@
-import useFetch from "react-fetch-hook";
 import Head from "next/head";
-
 import Header from "../header/Header";
 import Sources from "../sources/Sources";
 import Source from "../sources/Source";
@@ -17,13 +15,10 @@ import SingleCountryPopulationChart from "./sections/SingleCountryPopulationChar
 
 function SingleCountry(props){
 
-  // in this component, we make the main fetch to restcountries
-  // it powers title, breadcrumbs and a number of single-country-sections
-  const endpoint = `https://restcountries.com/v3.1/alpha/${props.countryCode}?fields=name,population,area,subregion,region,flags,coatOfArms,capital,capitalInfo,cca2,borders,latlng,tld`;
-  const { isLoading, error, data } = useFetch(endpoint);
-
-  // on loading or error or !data return code else the actual name
-  const countryName = (error || !data || !data.name) ? props.countryCode : isLoading ? `${props.countryCode}...` : data.name.common;
+  // we get the data from getStaticProps
+  const country = props.country;
+  // countryName should be assured with SSG but we still gave it fallback
+  const countryName = country.name.common || `${props.countryCode}...`;
 
   return(
     <>
@@ -37,38 +32,40 @@ function SingleCountry(props){
       <article className="single-country">
         
         <SingleCountryHeader countryName={countryName}>
-          <SingleCountryStatus loading={isLoading} error={error} data={data} countryCode={props.countryCode}>
+          <SingleCountryStatus loading={false} error={false} data={country} countryCode={props.countryCode}>
             <Sources>
-              <Source label="restcountries.com/{code}" endpoint={endpoint} error={error} loading={isLoading} />
+              {/* TODO since we get data from getStaticProps ... no loading or error */}
+              <Source label="restcountries.com/{code}" endpoint={props.singleEndpoint} error={false} loading={false} />
             </Sources>
           </SingleCountryStatus>
         </SingleCountryHeader>
 
         <SingleCountryFlags 
           countryName={countryName} 
-          flag={data?.flags.svg} 
-          coatOfArms={data?.coatOfArms.svg} />
+          flag={country?.flags.svg} 
+          coatOfArms={country?.coatOfArms.svg} />
 
         <SingleCountryBasisStats 
-          population={data?.population || 0} 
-          area={data?.area || 0} />
+          population={country?.population || 0} 
+          area={country?.area || 0} />
 
         <SingleCountryWeather 
-          loading={isLoading}
-          error={error}
-          cca2={data?.cca2} 
-          capitalName={data?.capital[0]}
+          loading={false}
+          error={false}
+          cca2={country?.cca2} 
+          capitalName={country?.capital && country.capital[0] || null}
           countryCode={props.countryCode} />
         
         <SingleCountryMap 
-          country={data} />
+          country={country} />
 
         <SingleCountryRegion 
-          data={data}
-          error={error}
-          loading={isLoading} />
+          data={country}
+          error={false}
+          loading={false} />
 
-        <SingleCountryPopulationChart countryCode={props.countryCode} />
+        <SingleCountryPopulationChart 
+          countryCode={props.countryCode} />
 
       </article>
     </>

@@ -1,3 +1,7 @@
+// the component is useless with SSG
+// however, if we ever use fallback true on ssg, it might prove usefull again
+// so, we're leaving it in for now
+
 import PropTypes from "prop-types";
 
 function SingleCountryStatus(props){

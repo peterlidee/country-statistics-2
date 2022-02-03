@@ -8,6 +8,7 @@ import WeatherWidget from "../weather/WeatherWidget";
 function SingleCountryWeather(props){
   
   // first handle the loading, error and data states of the parent component
+  // no longer usefull with SSG but leaving it in for now
   if((props.loading && !props.capitalName) || props.error) return(
     <BoxWrapper name="placeholder">
       <Placeholder />
