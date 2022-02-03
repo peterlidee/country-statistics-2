@@ -7,8 +7,6 @@
   reported as bug https://gitlab.com/amatos/rest-countries/-/issues/107
 */
 
-// TODO: make custom error page
-
 import SingleCountry from "../../components/single/SingleCountry";
 
 function Country(props){
