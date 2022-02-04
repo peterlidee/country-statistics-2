@@ -1,6 +1,3 @@
-// TODO: favicon.ico not found in dev
-// TODO: check problem with id diff server, client
-
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
 import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
