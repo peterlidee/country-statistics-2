@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 function FilterCheckBox(props){
   return(
     <>
-      <input type="checkbox" className="filtercheckbox__input" value={""} checked={props.active} id={`filter-checkbox-${props.label}`} onChange={props.handler} />
-      <label className="filtercheckbox__label" htmlFor={`filter-checkbox-${props.label}`}>{props.label}</label>
+      <label className="filtercheckbox__label">
+        <input type="checkbox" className="filtercheckbox__input" value={""} checked={props.active} onChange={props.handler} />
+        {props.label}
+      </label>
     </>
   )
 }

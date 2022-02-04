@@ -15,30 +15,30 @@ function RegionFilter(props){
 
   return(
     <div className="filter filter--region">
-      {Object.keys(regionFilter).map(regionName => (
-        <FilterBlockRegion
-          key={`region-filter-${regionName}`}
-          name={regionName} 
-          active={regionFilter[regionName].regionActive} 
-          handler={() => handleRegionFilter(regionName)}
-          count={props.regionIndexes[regionName].length}
-          hasSubFilter={regionFilter[regionName].subregionNames.length > 0}
-        >
-          {(regionFilter[regionName].subregionNames.length > 0) && 
-            <div className="filter__block__subregion">
-              {/* one block for all the subregions */}
-              {regionFilter[regionName].subregionNames.map((subregionName, i) => (
-                <FilterRow 
-                  key={`subregion-filter-${subregionName}`}
-                  name={subregionName} 
-                  active={regionFilter[regionName].subregionActive[i]} 
-                  handler={() => handleSubregionFilter(regionName, i)} 
-                  count={props.regionIndexes[subregionName].length} 
-                />
-              ))}
-            </div>
-          }
-        </FilterBlockRegion>
+      {Object.keys(regionFilter).sort().map(regionName => (
+          <FilterBlockRegion
+            key={`region-filter-${regionName}`}
+            name={regionName} 
+            active={regionFilter[regionName].regionActive} 
+            handler={() => handleRegionFilter(regionName)}
+            count={props.regionIndexes[regionName].length}
+            hasSubFilter={regionFilter[regionName].subregionNames.length > 0}
+          >
+            {(regionFilter[regionName].subregionNames.length > 0) && 
+              <div className="filter__block__subregion">
+                {/* one block for all the subregions */}
+                {regionFilter[regionName].subregionNames.map((subregionName, i) => (
+                  <FilterRow 
+                    key={`subregion-filter-${subregionName}`}
+                    name={subregionName} 
+                    active={regionFilter[regionName].subregionActive[i]} 
+                    handler={() => handleSubregionFilter(regionName, i)} 
+                    count={props.regionIndexes[subregionName].length} 
+                  />
+                ))}
+              </div>
+            }
+          </FilterBlockRegion>  
         )
       )}
       <button onClick={handleRegionClear} className="filter__clear-button">clear</button>
