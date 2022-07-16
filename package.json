@@ -8,7 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch"
+    "test": "jest --watchAll"
   },
   "dependencies": {
     "@react-google-maps/api": "^2.12.1",
