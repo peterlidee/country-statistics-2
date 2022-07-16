@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@react-google-maps/api": "^2.n.0",
+    "@react-google-maps/api": "^2.12.1",
     "chart.js": "^3.6.2",
     "html5-boilerplate": "^8.0.0",
     "next": "^12.2.2",
