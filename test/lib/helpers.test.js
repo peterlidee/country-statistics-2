@@ -1,4 +1,4 @@
-import { formatNumber, roundNumber, fillArrayWithBool } from '../helpers'
+import { formatNumber, roundNumber, fillArrayWithBool } from '../../lib/helpers'
 
 describe('function formatNumber', () => {
   test('It returns empty string when given empty string', () => {

@@ -5,7 +5,7 @@ import {
   selectOptimalSteps,
   calculateNumberSliderSetting,
 
-} from '../getNumberFilterData'
+} from '../../lib/getNumberFilterData'
 
 describe('function getMinMax', () => {
   test('It returns the minimum and maximum data out of an array', () => {

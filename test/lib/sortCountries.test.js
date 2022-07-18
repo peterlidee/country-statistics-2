@@ -1,4 +1,4 @@
-import sortCountries from "../sortCountries"
+import sortCountries from "../../lib/sortCountries"
 
 describe('function sortCountries', () => {
   const arr = [

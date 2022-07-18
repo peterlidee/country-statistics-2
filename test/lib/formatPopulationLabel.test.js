@@ -1,4 +1,4 @@
-import formatPopulationLabel, { formatNumber } from '../formatPopulationLabel'
+import formatPopulationLabel, { formatNumber } from '../../lib/formatPopulationLabel'
 
 describe('function formatNumber', () => {
   test('It returns a formatted number', () => {
