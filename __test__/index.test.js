@@ -14,7 +14,6 @@ test('HomePage renders because Home was called', () => {
 
 test('Home mock is called with the correct props', () => {
   render(<HomePage countries={[1,2,3]} endpoint="url" />)
-  screen.debug()
   expect(Home).toHaveBeenCalledWith(
     expect.objectContaining({
     endpoint: 'url',
