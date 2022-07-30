@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function calculateTriangleClass( triangle, sortActive, sortAsc ){
+export function calculateTriangleClass( triangle, sortActive, sortAsc ){
   if(sortActive){
     if(triangle == "upper"){
       return sortAsc ? 'active' : ''
