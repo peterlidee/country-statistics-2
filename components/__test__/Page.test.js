@@ -10,7 +10,6 @@ jest.mock('../Footer', () => {
 describe('components/Page', () => {
   test('It renders', () => {
     const { container } = render(<Page />)
-    screen.debug()
     expect(container.querySelector('.site__container')).toBeInTheDocument()
     expect(Footer).toHaveBeenCalled()
   })
