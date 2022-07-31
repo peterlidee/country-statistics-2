@@ -15,7 +15,7 @@ describe('components/general/Wrapper', () => {
     expect(container.querySelector('div')).toHaveClass('base2 base2--modifier2')
   })
   test('It passes children correctly', () => {
-    const { container } = render(<Wrapper base="base" modifier="modifier"><div data-testid="Child" /></Wrapper>)
+    render(<Wrapper base="base" modifier="modifier"><div data-testid="Child" /></Wrapper>)
     expect(screen.getByTestId('Child')).toBeInTheDocument()
   })
 })
