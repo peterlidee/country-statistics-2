@@ -71,7 +71,6 @@ describe('components/sources/Source errors', () => {
   it('It does not show error when error but no error.message', () => {
     const error = new Error()
     const { errorMessage } = setupRender(false, error, 'label', undefined)
-    screen.debug()
     expect(errorMessage).toBeNull()
   })
   it('It does not show error when no error', () => {
