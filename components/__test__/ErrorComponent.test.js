@@ -1,4 +1,4 @@
-import { render, screen, toHaveBeenCalled, waitFor } from '@testing-library/react'
+import { render, screen, toHaveBeenCalled } from '@testing-library/react'
 import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import ErrorComponent from "../ErrorComponent"
