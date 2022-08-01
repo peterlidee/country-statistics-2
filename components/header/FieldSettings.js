@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import FieldsContext from "../context/FieldsContext";
 import IconSettings from "../svgSnippets/IconSettings";
 
-function DisplayOptions(){
+function FieldSettings(){
 
   const { fields, dispatch } = useContext(FieldsContext);
   const [ toggle, setToggle ] = useState(false);
@@ -38,4 +38,4 @@ function DisplayOptions(){
   )
 }
 
-export default DisplayOptions;
+export default FieldSettings;
