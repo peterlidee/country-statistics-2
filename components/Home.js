@@ -35,7 +35,7 @@ function Home(props){
         </NumberFiltersContextProvider>
       </RegionFilterContextProvider>
       <div className="sources__home">
-        <Sources topBorder={true}>
+        <Sources>
           {/* since we use ssg, there is data, no loading cause pre rendered and no error cause build succeeded */}
           <Source error={false} loading={false} endpoint={props.endpoint} label="restcountries.com/{all}" />
         </Sources>
