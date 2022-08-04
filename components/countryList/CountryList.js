@@ -74,7 +74,12 @@ function CountryList({ countries, filterData }){
       <Filters filterData={filterData} />
       <main className="country-list" style={gridTemplateColumnsStyle}>
         <CountryListHeaders />
-        {sortedCountries.map((country, i) => <CountryRow country={country} index={i} key={country.cca3} />)}
+        {sortedCountries.map((country, i) => 
+          <CountryRow 
+            country={country} 
+            index={i} 
+            key={country.cca3} />
+        )}
       </main>
     </div>
   )
