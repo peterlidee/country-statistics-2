@@ -14,7 +14,7 @@ import sortCountries from '../../lib/sortCountries';
 import filterCountriesByRegion from '../../lib/filterCountriesByRegion';
 import filterCountriesByNumbers from '../../lib/filterCountriesByNumbers';
 
-function Countries({ countries, filterData }){
+function CountryList({ countries, filterData }){
 
   const { fields } = useContext(FieldsContext);
   const { getActiveRegionFilters } = useContext(RegionFilterContext);
@@ -80,9 +80,9 @@ function Countries({ countries, filterData }){
   )
 }
 
-Countries.propTypes = {
+CountryList.propTypes = {
   countries: PropTypes.array.isRequired,
   filterData: PropTypes.object.isRequired,
 }
 
-export default Countries;
+export default CountryList;
