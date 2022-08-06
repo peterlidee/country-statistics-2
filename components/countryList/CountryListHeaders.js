@@ -8,7 +8,7 @@ import IconSort from "../svgSnippets/IconSort";
 import Wrapper from '../general/Wrapper';
 
 // a single header field for countries list
-function CountryListHeader({ field, handleSort }){
+export function CountryListHeader({ field, handleSort }){
   if(!field.display) return null;
   return(
     <Wrapper base={'country-list-header'} modifier={field.field}>
@@ -29,7 +29,7 @@ CountryListHeader.propTypes = {
 }
 
 // a single legend field for countries list
-function CountryListLegend({ field }){
+export function CountryListLegend({ field }){
   if(!field.display) return null;
   return(
     <Wrapper base={'country-list-legend'} modifier={field.field}>
