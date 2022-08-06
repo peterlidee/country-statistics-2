@@ -1,45 +1,11 @@
 // displays the header row for CountryList
 
-import PropTypes from 'prop-types';
+import { useContext } from 'react'
 
-import { useContext } from "react";
-import FieldsContext from "../context/FieldsContext";
-import IconSort from "../svgSnippets/IconSort";
-import Wrapper from '../general/Wrapper';
-
-// a single header field for countries list
-export function CountryListHeader({ field, handleSort }){
-  if(!field.display) return null;
-  return(
-    <Wrapper base={'country-list-header'} modifier={field.field}>
-      <button 
-        onClick={handleSort}
-        className={`button__sort button__sort--${field.field}`}
-      >
-        <IconSort sortActive={field.sortActive} sortAsc={field.sortAsc} />
-        {field.label}
-      </button>
-    </Wrapper>
-  )
-}
-
-CountryListHeader.propTypes = {
-  field: PropTypes.object.isRequired,
-  handleSort: PropTypes.func.isRequired,
-}
-
-// a single legend field for countries list
-export function CountryListLegend({ field }){
-  if(!field.display) return null;
-  return(
-    <Wrapper base={'country-list-legend'} modifier={field.field}>
-      {field.hasOwnProperty('legend') && field.legend}
-    </Wrapper>
-  )
-}
-CountryListLegend.prototype = {
-  field: PropTypes.object.isRequired
-}
+import FieldsContext from '../context/FieldsContext'
+import Wrapper from '../general/Wrapper'
+import CountryListHeader from './CountryListHeader'
+import CountryListLegend from './CountryListLegend'
 
 // all header fields for countries list
 function CountryListHeaders(){
