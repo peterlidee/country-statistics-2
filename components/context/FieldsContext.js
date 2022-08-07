@@ -135,4 +135,4 @@ const FieldsContextProvider = props => {
 }
 
 export default FieldsContext;
-export { FieldsContextProvider };
+export { FieldsContextProvider, initialState, reducer };
