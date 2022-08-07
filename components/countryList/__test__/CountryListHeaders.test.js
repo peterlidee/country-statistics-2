@@ -9,12 +9,12 @@ import Wrapper from '../../general/Wrapper'
 jest.mock('../../general/Wrapper', () => {
   return jest.fn((props) => <div className="Wrapper">{props.children}</div>)
 })
-jest.mock('../CountryListHeader')
 jest.mock('../CountryListLegend')
+jest.mock('../CountryListHeader')
 
 describe('components/countryList/CountryListHeaders', () => {
   test('It renders', () => {
-    render(
+    const { container } = render(
       <FieldsContextProvider>
         <CountryListHeaders />
       </FieldsContextProvider>
