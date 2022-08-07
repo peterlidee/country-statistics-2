@@ -13,7 +13,7 @@ jest.mock('../../svgSnippets/IconSort')
 
 describe('components/countryList/CountryListHeader', () => {
   test('It return nothing when no field.display', () => {
-    render(<CountryListHeader field={{}} />)
+    render(<CountryListHeader field={{}} handleSort={() => {}} />)
     expect(Wrapper).not.toHaveBeenCalled()
     expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
