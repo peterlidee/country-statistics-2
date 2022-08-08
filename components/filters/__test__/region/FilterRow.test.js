@@ -17,7 +17,6 @@ describe('components/filters/region/FilterRow', () => {
         <div data-testid="ChildMock" />
       </FilterRow>
     )
-    screen.debug()
     expect(container.querySelector('.filter__row')).toBeInTheDocument()
     expect(FilterCheckBox).toHaveBeenCalledWith(
       expect.objectContaining({
