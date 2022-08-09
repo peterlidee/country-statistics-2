@@ -38,23 +38,4 @@ describe('components/filters/region/RegionFilter', () => {
     expect(FilterRow.mock.calls[4][0].name).toBe('Western Europe')
     expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument()
   })
-
-  test('It resets on button clear', async () => {
-    const User = userEvent.setup()
-    // reset mock calls
-    FilterBlockRegion.mockClear()
-    render(
-      <FieldsContextProvider>
-        <RegionFilterContextProvider
-          defaultRegionState={filterDataMock.defaultRegionState}
-        >
-          <RegionFilter regionIndexes={filterDataMock.regionIndexes} />
-        </RegionFilterContextProvider>
-      </FieldsContextProvider>
-    )
-    const button = screen.getByRole('button', { name: /clear/i })
-    await User.click(button)
-    // TODO don't know how to test this
-    // expect(FilterBlockRegion.mock.calls[0][0]).toHaveProperty('active', false) ????
-  })
 })
