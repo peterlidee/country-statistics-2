@@ -33,7 +33,7 @@ function RegionFilter(props){
                   name={subregionName} 
                   active={regionFilter[regionName].subregionActive[i]} 
                   handler={() => handleSubregionFilter(regionName, i)} 
-                  count={props.regionIndexes[subregionName]?.length} 
+                  count={props.regionIndexes[subregionName].length} 
                 />
               ))}
             </div>
