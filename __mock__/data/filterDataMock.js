@@ -8,7 +8,7 @@ const defaultRegionState = {
   },
   'Americas': {
     regionActive: false,
-    subregionNames: ['Carribean'],
+    subregionNames: ['Caribbean'],
     subregionActive: [false],
   },
   'Antarctic': {
