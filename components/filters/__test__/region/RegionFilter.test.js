@@ -9,7 +9,9 @@ import RegionFilter from '../../region/RegionFilter'
 import FilterBlockRegion from '../../region/FilterBlockRegion'
 import FilterRow from '../../region/FilterRow'
 
-jest.mock('../../region/FilterBlockRegion')
+jest.mock('../../region/FilterBlockRegion', () => {
+  return jest.fn((props) => <div className="FilterBlockRegion">{props.children}</div>)
+})
 jest.mock('../../region/FilterRow')
 
 describe('components/filters/region/RegionFilter', () => {
@@ -24,11 +26,16 @@ describe('components/filters/region/RegionFilter', () => {
       </FieldsContextProvider>
     )
     expect(FilterBlockRegion).toHaveBeenCalledTimes(4)
-    const calls = FilterBlockRegion.mock.calls
-    expect(calls[0][0].name).toBe('Africa')
-    expect(calls[1][0].name).toBe('Americas')
-    expect(calls[2][0].name).toBe('Antarctic')
-    expect(calls[3][0].name).toBe('Europe')
+    expect(FilterBlockRegion.mock.calls[0][0].name).toBe('Africa')
+    expect(FilterBlockRegion.mock.calls[1][0].name).toBe('Americas')
+    expect(FilterBlockRegion.mock.calls[2][0].name).toBe('Antarctic')
+    expect(FilterBlockRegion.mock.calls[3][0].name).toBe('Europe')
+    expect(FilterRow).toHaveBeenCalledTimes(5)
+    expect(FilterRow.mock.calls[0][0].name).toBe('Northern Africa')
+    expect(FilterRow.mock.calls[1][0].name).toBe('Caribbean')
+    expect(FilterRow.mock.calls[2][0].name).toBe('Central Europe')
+    expect(FilterRow.mock.calls[3][0].name).toBe('Northern Europe')
+    expect(FilterRow.mock.calls[4][0].name).toBe('Western Europe')
     expect(screen.getByRole('button', { name: /clear/i })).toBeInTheDocument()
   })
 
