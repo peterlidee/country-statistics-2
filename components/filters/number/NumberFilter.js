@@ -82,7 +82,7 @@ function NumberFilter(props){
           handleSliderFinalSelection={currContext[props.filter].handler}
         />
         <div className="number-filter__input-grid">
-          <div className="number-filter_input-grid-item">
+          <div className="number-filter__input-grid-item">
             <label htmlFor={`numberfilter-${props.filter}-from`} className="number-filter__label">from</label>
             <input 
               className="number-filter__input"
