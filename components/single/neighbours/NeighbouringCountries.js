@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 
 
 // helper function to filter out the matching country
-const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border);
+const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border)
+
 export { findMatchingCountry }
 
 // by the time this component get loaded,
