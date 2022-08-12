@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 
-const SingleCountryTitle = (props) => (
+const SingleCountryHeader = (props) => (
   <div className="single-country__header">
     <h1 className="single-country__title">{props.countryName}</h1>
     {props.children}
   </div>
 )
 
-SingleCountryTitle.propTypes = {
+SingleCountryHeader.propTypes = {
   countryName: PropTypes.string.isRequired,
 }
 
-export default SingleCountryTitle;
+export default SingleCountryHeader;
