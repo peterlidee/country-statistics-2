@@ -40,7 +40,6 @@ jest.mock('../sections/SingleCountryPopulationChart')
 
 describe('components/single/SingleCountry', () => {
   test('It renders', () => {
-    console.log('country',singleCountryMocks[0].name.common)
     const { container } = render(
       <SingleCountry 
         countryCode={'DZA'}
