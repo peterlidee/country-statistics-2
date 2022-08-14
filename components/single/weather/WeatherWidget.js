@@ -21,7 +21,7 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
   }
 
   // we need to handle loading and error, so each value needs a backup value
-  const countryName = data?.name || countryCode;
+  const capitalName = data?.name || countryCode;
   
   const weatherObj = data?.weather[0];
   const description = weatherObj?.description || "___";
@@ -32,8 +32,8 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
   const code = weatherObj?.icon ? weatherObj.icon.slice(0,2) : '404';
   const weather = codes[code];
 
-  const tempMin = (data?.main?.temp_max || data?.main?.temp_max == 0) ? Math.ceil(data.main.temp_max) : "__";
-  const tempMax = (data?.main?.temp_min || data?.main?.temp_min == 0) ? Math.ceil(data.main.temp_min) : "__";
+  const tempMin = (data?.main?.temp_min || data?.main?.temp_min == 0) ? Math.ceil(data.main.temp_min) : "__";
+  const tempMax = (data?.main?.temp_max || data?.main?.temp_max == 0) ? Math.ceil(data.main.temp_max) : "__";
 
   const windDeg = (data?.wind?.deg || data?.wind?.deg == 0) ? data.wind.deg : 90;
   const windSpeed = (data?.wind?.speed || data?.wind?.speed == 0) ? Math.round(data.wind.speed * 3.6) : "__";
@@ -44,7 +44,7 @@ const WeatherWidget = ({ loading, error, data, countryCode }) => {
         <div className={`fullHeight ${weather}`}>
           <div className="fullHeight weather__grid">
 
-            <div className="weather__description">weather in {countryName}</div>
+            <div className="weather__description">weather in {capitalName}</div>
             
             <div className="weather__component weather__component--temperature">
               <div className="weather__component__header">temp</div>
