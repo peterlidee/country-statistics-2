@@ -20,7 +20,6 @@ describe('components/single/map/FetchRegionCountries', () => {
           {(props) => <ChildMock {...props} />}
       </FetchRegionCountries>
     )
-    console.log('mock',ChildMock.mock.calls[0][1])
     expect(ChildMock).toHaveBeenCalledWith(
       expect.objectContaining({
         isLoading: false,
