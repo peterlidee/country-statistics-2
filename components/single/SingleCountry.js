@@ -23,7 +23,7 @@ function SingleCountry(props){
   return(
     <>
       <Head>
-        <title>Country Statistics of {countryName}</title>
+        <title>{`Country Statistics of ${countryName}`}</title>
         <meta name="description" content={`Country Statistics of ${countryName}`} />
       </Head>
       <Header />
