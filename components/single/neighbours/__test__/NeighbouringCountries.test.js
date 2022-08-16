@@ -90,4 +90,31 @@ describe('components/single/sections/NeighbouringCountries', () => {
     expect(container.querySelector('.neighbours-grid')).toBeInTheDocument()
   })
 
+  test('It rerenders correctly', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: undefined,
+      data: [
+        { cca3: 'aaa', name: { common: 'aaaa'}},
+        { cca3: 'bbb', name: { common: 'bbbb'}},
+        { cca3: 'ccc', name: { common: 'cccc'}},
+        { cca3: 'ddd', name: { common: 'dddd'}},
+      ]
+    })
+    const { rerender } = render(
+      <NeighbouringCountries 
+        borders={['aaa', 'bbb']}
+      />
+    )
+    expect(screen.getByRole('link', { name: 'aaaa' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'bbbb' })).toBeInTheDocument()
+    render(
+      <NeighbouringCountries 
+        borders={['ccc', 'ddd']}
+      />
+    )
+    expect(screen.getByRole('link', { name: 'cccc' })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'dddd' })).toBeInTheDocument()
+  })
+
 })
