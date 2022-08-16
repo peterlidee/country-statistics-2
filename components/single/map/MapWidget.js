@@ -50,7 +50,7 @@ function MapWidget(props){
     const geoCoder = new window.google.maps.Geocoder();
 
     // check if there is a tld
-    const tld = props.country.tld.length > 0 ? props.country.tld[0].replace('.','') : props.country.region ? props.country.region : "";
+    const tld = props.country?.tld?.length ? props.country.tld[0].replace('.','') : props.country.region ? props.country.region : "";
 
     geoCoder.geocode(
       { 'address': props.country.name.common, 'region': tld },
