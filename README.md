@@ -22,8 +22,8 @@ Country statistics is a portfolio project to show my React knowledge. It is buil
 
 ## Testing
 
-[jest](https://jestjs.io/)
-[react testing library](https://testing-library.com/docs/react-testing-library/intro/)
+[jest](https://jestjs.io/)   
+[react testing library](https://testing-library.com/docs/react-testing-library/intro/)   
 
 ## Deployment
 
