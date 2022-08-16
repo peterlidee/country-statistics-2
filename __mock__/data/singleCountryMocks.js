@@ -73,6 +73,32 @@ const singleCountryMocks = [
       svg: "https://mainfacts.com/media/images/coats_of_arms/dz.svg"
     },
   },
+  // different country
+  {
+    "name": {
+      common: "Fantasia",
+    },
+    "cca2": "BE",
+    "ccn3": "056",
+    "cca3": "BEL",
+    "cioc": "BEL",
+    capital: ["Brussels"],
+    region: "Europe",
+    subregion: "Western Europe",
+    latlng: [50.83333333, 4],
+    borders: ["FRA","DEU","NLD","LUX"],
+    area: 30528,
+    population: 11555997,
+    flags: {
+      png: "https://flagcdn.com/w320/be.png",
+      svg: "https://flagcdn.com/be.svg"
+      
+    },
+    coatOfArms: {
+      png: "https://mainfacts.com/media/images/coats_of_arms/be.png",
+      svg: "https://mainfacts.com/media/images/coats_of_arms/be.svg"
+    },
+  },
 ]
 
 export default singleCountryMocks
