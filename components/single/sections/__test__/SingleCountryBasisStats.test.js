@@ -11,7 +11,7 @@ import SingleCountryBasisStats from '../SingleCountryBasicStats'
 describe('components/single/sections/SingleCountryBasicStats', () => {
   
   test('It renders', () => {
-    const { container } = render(
+    render(
       <SingleCountryBasisStats 
         population={10000000}
         area={1000000}
@@ -28,4 +28,24 @@ describe('components/single/sections/SingleCountryBasicStats', () => {
     expect(screen.getByText(/Population density/i)).toBeInTheDocument()
     expect(screen.getByText(/10 inhabitants \/ km²/i)).toBeInTheDocument()
   })
+
+  test('It rerenders correctly', () => {
+    const { rerender } = render(
+      <SingleCountryBasisStats 
+        population={10000000}
+        area={1000000}
+      />
+    )
+    expect(screen.getByText(/10.000.000/i)).toBeInTheDocument()
+    expect(screen.getByText(/1.000.000/i)).toBeInTheDocument()
+    rerender(
+      <SingleCountryBasisStats 
+        population={10000}
+        area={100}
+      />
+    )
+    expect(screen.getByText(/10.000/i)).toBeInTheDocument()
+    expect(screen.getByText(/100 km²/)).toBeInTheDocument()
+  })
+  
 })
