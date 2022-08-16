@@ -18,7 +18,12 @@ Country statistics is a portfolio project to show my React knowledge. It is buil
 
 [@react-google-maps/api](https://www.npmjs.com/package/@react-google-maps/api)   
 [react-chartjs-2](https://www.npmjs.com/package/react-chartjs-2)   
-[react-range](https://www.npmjs.com/package/react-range)   
+[react-range](https://www.npmjs.com/package/react-range)
+
+## Testing
+
+[jest](https://jestjs.io/)
+[react testing library](https://testing-library.com/docs/react-testing-library/intro/)
 
 ## Deployment
 

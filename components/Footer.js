@@ -45,6 +45,12 @@ const Footer = () => (
         <a href="https://vercel.com/home">Vercel</a>
       </Wrapper>
 
+      <Wrapper base="footer__section" modifier="testing">
+        <h4 className="footer__subtitle">testing</h4>
+        <a href="https://jestjs.io/">jest</a>
+        <a href="https://testing-library.com/docs/react-testing-library/intro/">react testing library</a>
+      </Wrapper>
+
       <Wrapper base="footer__section" modifier="sourcecode">
         <h4 className="footer__subtitle">sourcecode</h4>
         <a href="https://github.com/peterlidee/country-statistics-2">gitHub</a>

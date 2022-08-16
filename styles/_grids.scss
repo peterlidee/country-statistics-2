@@ -144,6 +144,7 @@ body{
   "data data"
   "framework framework"
   "packages packages"
+  "testing testing"
   "deployment sourcecode"
   "footer footer";
 }
@@ -154,9 +155,9 @@ body{
     grid-template-areas: 
     "header header"
     "about about"
-    "data framework"
     "data packages"
-    "sourcecode deployment"
+    "framework sourcecode"
+    "testing deployment"
     "footer footer";
   }
 }
@@ -168,8 +169,8 @@ body{
     "header header header"
     "about about about"
     "data framework deployment"
+    "data packages testing"
     "data packages sourcecode"
-    "data packages contact"
     "footer footer footer";
   }
 }
@@ -202,6 +203,9 @@ body{
   }
   &--packages{
     grid-area: packages;
+  }
+  &--testing{
+    grid-area: testing;
   }
   &--sourcecode{
     grid-area: sourcecode;
