@@ -56,4 +56,26 @@ describe('components/single/region/RenderLabelValue', () => {
     expect(screen.queryByText('...')).toBeInTheDocument()
   })
 
+  test('It rerenders correctly', () => {
+    const { rerender } = render(
+      <RenderLabelValue 
+        loading={false}
+        label="label"
+        value="first value"
+        hasData={true}
+      />
+    )
+    expect(screen.queryByText('label')).toBeInTheDocument()
+    expect(screen.queryByText('first value')).toBeInTheDocument()
+    rerender(
+      <RenderLabelValue 
+        loading={false}
+        label="label"
+        value="second value"
+        hasData={true}
+      />
+    )
+    expect(screen.queryByText('second value')).toBeInTheDocument()
+  })
+
 })
