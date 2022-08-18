@@ -12,7 +12,7 @@ import NumberFilter from '../number/NumberFilter'
 
 jest.mock('../../svgSnippets/IconFilters')
 jest.mock('../../general/Collapse', () => {
-  return jest.fn((props) => <div className="Collapse">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../region/RegionFilter')
 jest.mock('../number/NumberFilter')
