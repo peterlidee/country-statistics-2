@@ -6,7 +6,7 @@ import FilterBlockRegion from '../../region/FilterBlockRegion'
 import FilterRow from '../../region/FilterRow'
 
 jest.mock('../../region/FilterRow', () => {
-  return jest.fn((props) => <div className="FilterRow">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 const ChildMock = jest.fn()
 
@@ -23,7 +23,6 @@ describe('components/filters/region/FilterBlockRegion', () => {
           <ChildMock />
         </FilterBlockRegion>
     )
-    expect(container.querySelector('.filter__block__region')).toBeInTheDocument()
     expect(FilterRow).toHaveBeenCalledWith(
       expect.objectContaining({
         name: 'name', active: true, count: 1,
