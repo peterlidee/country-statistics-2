@@ -4,6 +4,7 @@ import Page from "../Page"
 import Footer from "../Footer"
 
 jest.mock('../Footer')
+const ChildMock = jest.fn()
 
 describe('components/Page', () => {
   test('It renders', () => {
@@ -16,7 +17,7 @@ describe('components/Page', () => {
     expect(Footer).toHaveBeenCalled()
   })
   test('It passes props.children', () => {
-    render(<Page><div data-testid="Child" /></Page>)
-    expect(screen.getByTestId('Child')).toBeInTheDocument()
+    render(<Page><ChildMock /></Page>)
+    expect(ChildMock).toHaveBeenCalled()
   })
 })
