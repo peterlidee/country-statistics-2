@@ -3,14 +3,12 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import Country from '../../pages/country/[countryCode]'
 import SingleCountry from "../../components/single/SingleCountry"
 
-jest.mock('../../components/single/SingleCountry', () => {
-  return jest.fn(() => <div data-testid='SingleCountry' />)
-})
+jest.mock('../../components/single/SingleCountry')
 
 describe('pages/country/[countryCode]', () => {
   it('Renders the SingleCountry mock', () => {
     render(<Country />)
-    expect(screen.getByTestId('SingleCountry')).toBeInTheDocument()
+    expect(SingleCountry).toHaveBeenCalled()
   })
   it('Passes the correct props to SingleCountry mock child', () => {
     render(<Country country="country" countryCode="countryCode" singleEndpoint="singleEndpoint" />)
