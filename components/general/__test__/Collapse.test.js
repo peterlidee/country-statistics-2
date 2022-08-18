@@ -9,7 +9,6 @@ const elements = {}
 
 beforeEach(() => {
   const { container } = render(<Collapse label="label" extraClass="" />)
-  elements.wrapper = screen.getByTestId('Wrapper')
   elements.button = screen.getByRole('button')
   elements.content = container.querySelector('.collapse__content')
   elements.buttonLabelEl = elements.button.querySelector('.collapse__label')
@@ -17,13 +16,12 @@ beforeEach(() => {
 })
 
 jest.mock('../Wrapper', () => {
-  return jest.fn((props) => <div data-testid="Wrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 
 describe('components/general/Collapse renders', () => {
   test('It renders the wrapper mock and its children', () => {
     expect(Wrapper).toHaveBeenCalled()
-    expect(elements.wrapper).toBeInTheDocument()
   })
   test('It renders content container and button', () => {
     expect(elements.content).toBeInTheDocument()
