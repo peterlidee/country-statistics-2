@@ -5,7 +5,7 @@ import CountryListLegend from '../CountryListLegend'
 import Wrapper from '../../general/Wrapper'
 
 jest.mock('../../general/Wrapper', () => {
-  return jest.fn((props) => <div data-testid="Wrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 
 describe('components/countrylist/CountryListLegend.js', () => {
