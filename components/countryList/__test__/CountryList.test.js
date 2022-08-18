@@ -16,9 +16,7 @@ import filterDataMock from '../../../__mock__/data/filterDataMock'
 
 const { extraDataCountries } = countriesMock
 
-jest.mock('../../header/CountryCount', () => {
-  return jest.fn(() => <div data-testid="CountryCount" />)
-})
+jest.mock('../../header/CountryCount')
 jest.mock('../../filters/Filters')
 jest.mock('../CountryListHeaders')
 jest.mock('../CountryRow')
@@ -36,7 +34,6 @@ describe('components/countryList/CountryList', () => {
     )
 
     expect(container.querySelector('.site__grid--home')).toBeInTheDocument()
-    expect(screen.getByTestId('CountryCount')).toBeInTheDocument()
     expect(CountryCount).toHaveBeenCalledWith(
       { count: 6 },
       expect.anything()
