@@ -3,6 +3,8 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import Wrapper from '../Wrapper'
 
+const ChildMock = jest.fn()
+
 describe('components/general/Wrapper', () => {
   test('It renders', () => {
     const { container } = render(<Wrapper base="base" modifier="modifier" />)
@@ -15,7 +17,7 @@ describe('components/general/Wrapper', () => {
     expect(container.querySelector('div')).toHaveClass('base2 base2--modifier2')
   })
   test('It passes children correctly', () => {
-    render(<Wrapper base="base" modifier="modifier"><div data-testid="Child" /></Wrapper>)
-    expect(screen.getByTestId('Child')).toBeInTheDocument()
+    render(<Wrapper base="base" modifier="modifier"><ChildMock /></Wrapper>)
+    expect(ChildMock).toHaveBeenCalled()
   })
 })
