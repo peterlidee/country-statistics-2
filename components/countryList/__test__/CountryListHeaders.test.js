@@ -7,14 +7,14 @@ import CountryListLegend from '../CountryListLegend'
 import Wrapper from '../../general/Wrapper'
 
 jest.mock('../../general/Wrapper', () => {
-  return jest.fn((props) => <div className="Wrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../CountryListLegend')
 jest.mock('../CountryListHeader')
 
 describe('components/countryList/CountryListHeaders', () => {
   test('It renders', () => {
-    const { container } = render(
+    render(
       <FieldsContextProvider>
         <CountryListHeaders />
       </FieldsContextProvider>
