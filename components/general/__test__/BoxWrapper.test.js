@@ -3,6 +3,8 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import BoxWrapper from '../BoxWrapper'
 
+const ChildMock = jest.fn()
+
 describe('components/general/BoxWrapper', () => {
   test('It renders', () => {
     const { container } = render(<BoxWrapper name="test" />)
@@ -15,7 +17,7 @@ describe('components/general/BoxWrapper', () => {
     expect(container.querySelector('.single-country__test2')).toBeInTheDocument()
   })
   test('It passes children correctly', () => {
-    const { container } = render(<BoxWrapper name="test"><div data-testid="Child" /></BoxWrapper>)
-    expect(screen.getByTestId('Child')).toBeInTheDocument()
+    render(<BoxWrapper name="test"><ChildMock /></BoxWrapper>)
+    expect(ChildMock).toHaveBeenCalled()
   })
 })
