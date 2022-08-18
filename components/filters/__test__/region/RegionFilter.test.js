@@ -10,7 +10,7 @@ import FilterBlockRegion from '../../region/FilterBlockRegion'
 import FilterRow from '../../region/FilterRow'
 
 jest.mock('../../region/FilterBlockRegion', () => {
-  return jest.fn((props) => <div className="FilterBlockRegion">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../region/FilterRow')
 
