@@ -7,7 +7,7 @@ import IconSort from '../../svgSnippets/IconSort'
 // import FieldsContext
 
 jest.mock('../../general/Wrapper', () => {
-  return jest.fn((props) => <div data-testid="Wrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../svgSnippets/IconSort')
 
