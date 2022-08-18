@@ -8,6 +8,7 @@ import FilterRow from '../../region/FilterRow'
 jest.mock('../../region/FilterRow', () => {
   return jest.fn((props) => <div className="FilterRow">{props.children}</div>)
 })
+const ChildMock = jest.fn()
 
 describe('components/filters/region/FilterBlockRegion', () => {
   test('It renders without subfilters', () => {
@@ -19,7 +20,7 @@ describe('components/filters/region/FilterBlockRegion', () => {
           count={1}
           hasSubFilter={false}
         >
-          <div data-testid="ChildMock" />
+          <ChildMock />
         </FilterBlockRegion>
     )
     expect(container.querySelector('.filter__block__region')).toBeInTheDocument()
@@ -31,7 +32,7 @@ describe('components/filters/region/FilterBlockRegion', () => {
     )
     expect(screen.queryByRole('button', { name: /subregions/i })).not.toBeInTheDocument()
     expect(container.querySelector('.collapse__content')).not.toBeInTheDocument()
-    expect(screen.queryByTestId('ChildMock')).not.toBeInTheDocument()
+    expect(ChildMock).not.toHaveBeenCalled()
   })
 
   test('It renders with subfilters', () => {
@@ -43,13 +44,13 @@ describe('components/filters/region/FilterBlockRegion', () => {
           count={1}
           hasSubFilter={true}
         >
-          <div data-testid="ChildMock" />
+          <ChildMock />
         </FilterBlockRegion>
     )
     const button = screen.queryByRole('button', { name: /subregions/i })
     expect(button).toBeInTheDocument()
     expect(container.querySelector('.collapse__content')).toBeInTheDocument()
-    expect(screen.queryByTestId('ChildMock')).toBeInTheDocument()
+    expect(ChildMock).toHaveBeenCalled()
   })
 
   test('It collapses', async() => {
@@ -61,7 +62,7 @@ describe('components/filters/region/FilterBlockRegion', () => {
           count={1}
           hasSubFilter={true}
         >
-          <div data-testid="ChildMock" />
+          <ChildMock />
         </FilterBlockRegion>
     )
     const User = userEvent.setup()
