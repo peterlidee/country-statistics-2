@@ -21,15 +21,15 @@ import singleCountryMocks from '../../../__mock__/data/singleCountryMocks'
 
 jest.mock('../../header/Header')
 jest.mock('../../sources/Sources', () => {
-  return jest.fn((props) => <div data-testid='Sources'>{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../sources/Source')
 jest.mock('../BreadCrumb')
 jest.mock('../sections/SingleCountryHeader', () => {
-  return jest.fn((props) => <div data-testid='SingleCountryHeader'>{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../sections/SingleCountryStatus', () => {
-  return jest.fn((props) => <div data-testid='SingleCountryStatus'>{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../sections/SingleCountryFlags')
 jest.mock('../sections/SingleCountryBasicStats')
@@ -60,7 +60,6 @@ describe('components/single/SingleCountry', () => {
       ),
       expect.anything()
     )
-    expect(screen.getByTestId('SingleCountryHeader')).toBeInTheDocument()
     expect(SingleCountryStatus).toHaveBeenCalledWith(
       expect.objectContaining({
         loading: false, 
@@ -69,9 +68,7 @@ describe('components/single/SingleCountry', () => {
       }),
       expect.anything()
     )
-    expect(screen.getByTestId('SingleCountryStatus')).toBeInTheDocument()
     expect(Sources).toHaveBeenCalled()
-    expect(screen.getByTestId('Sources')).toBeInTheDocument()
     expect(Source).toHaveBeenCalledWith(
       expect.objectContaining({
         label: 'restcountries.com/{code}',
