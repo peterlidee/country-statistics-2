@@ -8,19 +8,19 @@ import MapWidget from '../../map/MapWidget'
 import Placeholder from '../../../svgSnippets/Placeholder'
 
 jest.mock('../../../general/BoxWrapper', () => {
-  return jest.fn(props => <div data-testid="BoxWrapper">{props.children}</div>)
+  return jest.fn(props => <>{props.children}</>)
 })
 jest.mock('../../../svgSnippets/Placeholder')
 jest.mock('../../map/FetchRegionCountries', () => {
   return jest.fn(props => (
-    <div data-testid="FetchRegionCountries">
+    <>
       {props.children({ 
         loading: false, 
         error: undefined, 
         data: 'data', 
         endpoint: 'endpoint'
       })}
-    </div>
+    </>
   ))
 })
 jest.mock('../../map/MapWidget')
