@@ -3,7 +3,7 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import BoxWrapper from '../../../general/BoxWrapper'
 
 jest.mock('../../../general/BoxWrapper', () => {
-  return jest.fn((props) => <div data-testid="BowWrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 
 import SingleCountryBasisStats from '../SingleCountryBasicStats'
