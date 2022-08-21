@@ -8,7 +8,7 @@ import Source from '../../sources/Source'
 
 jest.mock('react-fetch-hook');
 jest.mock('../../sources/Sources', () => {
-  return jest.fn((props) => <div data-testid="Sources">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../sources/Source')
 
