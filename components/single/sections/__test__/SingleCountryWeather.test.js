@@ -9,13 +9,11 @@ import WeatherWidget from '../../weather/WeatherWidget'
 
 jest.mock('../../../svgSnippets/Placeholder')
 jest.mock('../../../general/BoxWrapper', () => {
-  return jest.fn(props => <div data-testid='BoxWrapper'>{props.children}</div>)
+  return jest.fn(props => <>{props.children}</>)
 })
 jest.mock('../../SingleCountryFetch', () => {
   return jest.fn(props => (
-    <div data-testid="SingleCountryFetch">
-      {props.children(false, undefined, [1,2,3])}
-    </div>
+    <>{props.children(false, undefined, [1,2,3])}</>
   ))
 })
 jest.mock('../../weather/WeatherWidget')
