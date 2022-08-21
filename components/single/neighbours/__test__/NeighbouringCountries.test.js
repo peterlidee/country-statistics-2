@@ -28,7 +28,7 @@ test('helper function findMatchingCountry', () => {
 jest.mock('react-fetch-hook')
 jest.mock('../../../sources/Source')
 jest.mock('../NeighbourComponent', () => {
-  return jest.fn((props) => <div data-testid="NeighbourComponent">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 
 describe('components/single/sections/NeighbouringCountries', () => {
