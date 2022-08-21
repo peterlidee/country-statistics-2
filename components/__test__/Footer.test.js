@@ -25,10 +25,10 @@ describe('components/Footer', () => {
   })
   test('It renders wrapper mock', () => {
     render(<Footer />)
-    expect(Wrapper).toHaveBeenCalledTimes(6)
+    expect(Wrapper).toHaveBeenCalledTimes(7)
   })
   test('It renders the children of the mock wrapper', () => {
     render(<Footer />)
-    expect(screen.getAllByRole('heading', { level: 4 })).toHaveLength(6)
+    expect(screen.getAllByRole('heading', { level: 4 })).toHaveLength(7)
   })
 })
