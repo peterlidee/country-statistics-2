@@ -11,7 +11,7 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api'
 
 jest.mock('../MapControles')
 jest.mock('../../../sources/Sources', () => {
-  return jest.fn((props) => <div data-testid="Sources">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../../sources/Source')
 jest.mock('../../../svgSnippets/Placeholder')
