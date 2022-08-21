@@ -7,7 +7,7 @@ import Placeholder from '../../../svgSnippets/Placeholder'
 import SingleCountryFlags from '../SingleCountryFlags'
 
 jest.mock('../../../general/BoxWrapper', () => {
-  return jest.fn((props) => <div data-testid="BoxWrapper">{props.children}</div>)
+  return jest.fn((props) => <>{props.children}</>)
 })
 jest.mock('../../../svgSnippets/Placeholder')
 
