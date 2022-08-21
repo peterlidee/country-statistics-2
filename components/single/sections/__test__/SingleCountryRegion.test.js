@@ -19,7 +19,6 @@ describe('components/single/sections/SingleCountryRegion', () => {
         data={singleCountryMocks[0]}
       />
     )
-    screen.debug()
     expect(container.querySelector('.single-country__region')).toBeInTheDocument()
     expect(container.querySelector('.single-country__box')).toBeInTheDocument()
     expect(RenderLabelValue.mock.calls).toHaveLength(3)
