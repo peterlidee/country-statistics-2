@@ -15,9 +15,7 @@ describe('components/single/sections/SingleCountryPopulationChart', () => {
   test('It renders with no data (undefined)', () => {
     // simulate no data on SingleCountryFetch
     SingleCountryFetch.mockImplementation((props) => (
-      <div data-testid="SingleCountryFetch">
-        {props.children(false, undefined, undefined)}
-      </div>
+      <>{props.children(false, undefined, undefined)}</>
     ))
     render(
       <SingleCountryPopulationChart 
@@ -38,9 +36,7 @@ describe('components/single/sections/SingleCountryPopulationChart', () => {
   test('It renders with mocked data', () => {
     // simulate no data on SingleCountryFetch
     SingleCountryFetch.mockImplementation((props) => (
-      <div data-testid="SingleCountryFetch">
-        {props.children(false, undefined, populationDataMock)}
-      </div>
+      <>{props.children(false, undefined, populationDataMock)}</>
     ))
     render(
       <SingleCountryPopulationChart 
