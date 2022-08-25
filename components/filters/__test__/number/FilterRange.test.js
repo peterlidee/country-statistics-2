@@ -4,9 +4,10 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import FilterRange from '../../number/FilterRange'
 import { Range } from 'react-range'
 
-jest.mock('react-range', () => {
-  return({ Range: jest.fn() })
-})
+// jest.mock('react-range', () => {
+//   return({ Range: jest.fn() })
+// })
+jest.mock('react-range')
 
 describe('components/filters/number/FilterRange', () => {
   test('It renders', () => {
