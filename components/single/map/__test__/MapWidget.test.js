@@ -17,6 +17,7 @@ jest.mock('../../../sources/Source')
 jest.mock('../../../svgSnippets/Placeholder')
 jest.mock('@react-google-maps/api', () => {
   return({
+    __esModule: true,
     GoogleMap: jest.fn(),
     useJsApiLoader: jest.fn(() => ({
       isLoaded: false,
