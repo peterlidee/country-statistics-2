@@ -7,6 +7,7 @@ import { Chart } from 'react-chartjs-2'
 
 jest.mock('react-chartjs-2', () => {
   return({
+    __esModule: true,
     Chart: jest.fn()
   })
 })
