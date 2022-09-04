@@ -51,6 +51,7 @@ describe('components/single/map/MapWidget', () => {
     expect(container.querySelector('.single-country__map')).toBeInTheDocument()
     expect(container.querySelector('.single-country__box')).not.toBeInTheDocument()
     expect(GoogleMap).not.toHaveBeenCalled()
+    expect(useJsApiLoader).toHaveBeenCalled()
     expect(MapControles).not.toHaveBeenCalled()
     expect(Placeholder).toHaveBeenCalled()
     expect(Sources).toHaveBeenCalled()
