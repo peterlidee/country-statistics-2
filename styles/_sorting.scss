@@ -1,9 +1,7 @@
-// styling of sort buttons, icons
+// styling of sort links, icons
 
-// button
-.button__sort{
-  @extend %reset-button;
-  text-decoration: underline;
+.link__sort{
+  color: var(--black);
   font-weight: 500;
   display: flex;
   gap: 3px;
