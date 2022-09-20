@@ -1,9 +1,8 @@
+import PropTypes from 'prop-types'
+
 import { FieldsContextProvider } from "./context/FieldsContext";
 import { RegionFilterContextProvider } from "./context/RegionFilterContext";
 import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
-
-import addExtraData from "../lib/addExtraData";
-import getFilterData from "../lib/getFilterData";
 
 import Head from 'next/head';
 import Header from './header/Header'
@@ -12,16 +11,6 @@ import Sources from "./sources/Sources";
 import Source from "./sources/Source";
 
 function Home(props){
-
-  // we need to do some cleanup and some adding to the data
-  // we do in this component to prevent rerendering on filtering or display changes
-  const countries = addExtraData(props.countries);
-
-  // calculate filter data from the country data
-  // this operation will only be called once
-  // we need data to filter along: region, subregion, population, area and density
-  const filterData = getFilterData(countries);
-
   return(
     <FieldsContextProvider>
       <Head>
@@ -29,9 +18,9 @@ function Home(props){
         <meta name="description" content="An overview of statistics per country, fed by different api's." />
       </Head>
       <Header home={true} />
-      <RegionFilterContextProvider defaultRegionState={filterData.defaultRegionState}>
-        <NumberFiltersContextProvider filterData={filterData}>
-          <CountryList countries={countries} filterData={filterData} />
+      <RegionFilterContextProvider defaultRegionState={props.filterData.defaultRegionState}>
+        <NumberFiltersContextProvider filterData={props.filterData}>
+          <CountryList countries={props.countries} filterData={props.filterData} />
         </NumberFiltersContextProvider>
       </RegionFilterContextProvider>
       <div className="sources__home">
@@ -42,6 +31,12 @@ function Home(props){
       </div>
     </FieldsContextProvider>
   )
+}
+
+Home.propTypes = {
+  countries: PropTypes.array.isRequired,
+  filterData: PropTypes.object.isRequired,
+  endpoint: PropTypes.string.isRequired,
 }
 
 export default Home;
