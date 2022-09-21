@@ -11,11 +11,12 @@ describe('page/index.js', () => {
     expect(Home).toHaveBeenCalled()
   })
   test('Home mock is called with the correct props', () => {
-    render(<HomePage countries={[1,2,3]} endpoint="url" />)
+    render(<HomePage countries={[1,2,3]} endpoint="url" filterData={{}} />)
     expect(Home).toHaveBeenCalledWith(
       expect.objectContaining({
       endpoint: 'url',
       countries: [1,2,3],
+      filterData: expect.anything(),
     }), expect.anything())
   })
 })

@@ -1,6 +1,7 @@
 import Link from 'next/link';
-import IconLogo from '../svgSnippets/IconLogo';
-import FieldSettings from './FieldSettings'
+import IconLogo from '../svgSnippets/IconLogo'
+import SettingsToggle from './SettingsToggle'
+import SettingsOptions from './SettingsOptions'
 
 function Header(props){
   return(
@@ -11,7 +12,11 @@ function Header(props){
           <div className="site__title">country statistics</div>
         </a>
       </Link>
-      {props.home && <FieldSettings />}
+      {props.home && 
+        <SettingsToggle>
+          <SettingsOptions />
+        </SettingsToggle>
+      }
     </header>
   )
 }
