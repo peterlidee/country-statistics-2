@@ -9,35 +9,18 @@ import Wrapper from '../general/Wrapper'
 import IconSort from '../svgSnippets/IconSort'
 
 // a single header field for countries list
-function CountryListHeader({ field }){
+function CountryListHeader({ field, sortBy, sortAsc }){
 
   const router = useRouter()
 
-  // construct the query sort argument
-  let sortAsc = field.sortAscDefault
-  let sortActive = false
-  let sortPrefix = field.sortAscDefault ? '' : '-'
-  let sortParameter = sortPrefix + field.slug
-
-  if(router.query.hasOwnProperty('sort')){
-    // if current field is the active sort
-    if(router.query.sort.includes(field.slug)){
-      // set to reverse of current value
-      sortParameter = router.query.sort.includes('-') ? router.query.sort.slice(1) : `-${router.query.sort}`
-      sortAsc = !router.query.sort.includes('-')
-      sortActive = true
-    }else{
-      // not current field, use default
-      // sortParameter = sortPrefix + field.slug
-    }
-  }else{
-    // use default
-    // sortParameter = sortPrefix + field.slug
-    sortActive = field.slug === 'country' ? true : false
-  }
-
-  // TODO: 
-  // if(!field.display) return null;
+  // construct the link query
+  // if current field is the active field, use reverse props.sortAsc
+  // if current field is NOT the active field, use the defaults
+  const sortActive = sortBy.includes(field.slug)
+  const sortParameter = sortActive ? 
+    `${sortAsc ? '-' : ''}${field.slug}` : 
+    `${field.sortAscDefault ? '' : '-'}${field.slug}`
+    
   return(
     <Wrapper base={'country-list-header'} modifier={field.slug}>
       <Link 
@@ -58,6 +41,8 @@ function CountryListHeader({ field }){
 
 CountryListHeader.propTypes = {
   field: PropTypes.object.isRequired,
+  sortBy: PropTypes.string.isRequired,
+  sortAsc: PropTypes.bool.isRequired,
 }
 
 export default CountryListHeader
