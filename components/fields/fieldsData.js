@@ -7,8 +7,8 @@ const fieldsData = [
     sortType: 'text',
     displayToggle: false,
     legend: '',
-    /*
     key: 'countryName',
+    /*
     display: true,
     sortActive: true,
     sortAsc: true,
@@ -23,8 +23,8 @@ const fieldsData = [
     sortType: 'number',
     legend: 'Inhabitants',
     displayToggle: true,
-    /*
     key: 'populationPrettyFormat',
+    /*
     display: true,
     sortActive: false,
     sortAsc: false,
@@ -39,7 +39,8 @@ const fieldsData = [
     sortType: 'number',
     legend: 'Km²',
     displayToggle: true,
-    /*key: 'areaPrettyFormat',
+    key: 'areaPrettyFormat',
+    /*
     display: true,
     sortActive: false,
     sortAsc: true,
@@ -54,7 +55,8 @@ const fieldsData = [
     sortType: 'number',
     legend: 'Inh./km²',
     displayToggle: true,
-    /*key: 'densityPrettyFormat',
+    key: 'densityPrettyFormat',
+    /*
     display: true,
     sortActive: false,
     sortAsc: true,
