@@ -1,6 +1,9 @@
+import { useContext, useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 
-import { useContext, useState, useEffect } from 'react';
+import fieldsData from '../fields/fieldsData';
+
 import FieldsContext from '../context/FieldsContext';
 import NumberFiltersContext from '../context/NumberFiltersContext';
 import RegionFilterContext from '../context/RegionFilterContext';
@@ -13,17 +16,30 @@ import CountryRow from './CountryRow';
 import sortCountries from '../../lib/sortCountries';
 import filterCountriesByRegion from '../../lib/filterCountriesByRegion';
 import filterCountriesByNumbers from '../../lib/filterCountriesByNumbers';
-import { useRouter } from 'next/router';
-import fieldsData from '../fields/fieldsData';
 
 function CountryList({ countries, filterData }){
-
+  
   const { fields } = useContext(FieldsContext);
+  const router = useRouter()
+
+  // since we are using SSG, the query object on the router will be empty, it needs to be hydrated first
+  // https://nextjs.org/docs/advanced-features/automatic-static-optimization#how-it-works
+  // but, this leads to the list of countries being default ordered first and then after hydration getting sorted
+  // it's like flash from sorted default to sorted along query sorting parameter
+  // we solve this by listening to router.isReady and setting state routerReady, we only render when state routerReady
+  const [ routerReady, setRouterReady ] = useState(false)
+  useEffect(() => {
+    if(router.isReady){
+      setRouterReady(true)
+    }
+  }, [router.isReady])
+
+
   const { getActiveRegionFilters } = useContext(RegionFilterContext);
   const { areaSelection, populationSelection, densitySelection, numberFilterIsActive } = useContext(NumberFiltersContext);
 
-  // the state is used to track if we have router.query or not
-  const [ ready, setReady ] = useState(false)
+
+  // TODO: get sort query from router and pass it to countryrow?
 
   // 1. check the filter options
 
@@ -51,29 +67,19 @@ function CountryList({ countries, filterData }){
   // now do the actual filtering
   const countriesFilteredByNumbers = filterCountriesByNumbers(countriesFilteredByRegion, activeNumberFilters, areaSelection, populationSelection, densitySelection);
   
-  // 2. do the sorting
-
-  // since we are using SSG, the query object on the router will be empty, it needs to be hydrated first
-  // https://nextjs.org/docs/advanced-features/automatic-static-optimization#how-it-works
-  // but, this leads to the list of countries being default ordered first and then after hydration getting sorted
-  // it's like flash from sorted default to sorted along query sorting parameter
-  // obviously, we don't want this, we solve this in 2 ways
-  // 1. look at asPath, if '/' this means default sorting will go
-  // 2. use router.isReady inside useEffect()
-  const router = useRouter()
-  useEffect(() => {
-    if(router.asPath === '/' || router.isReady){
-      setReady(true)
-    }
-  }, [router.isReady, router.asPath])
-
-  // if ready apply sort, copy the data in case !ready
+  
+  // 2. sorting
+  // we need to (1) sort the countries and (2) save the router.query.sort so we can pass it to countryRow
+  
+  // copy countries data in case !routerReady
   let sortedCountries = countriesFilteredByNumbers
-  if(ready){
+  // init default sortAsc and sortBy
+  let sortBy = fieldsData[0].slug
+  let sortAsc = fieldsData[0].sortAscDefault
+
+  if(routerReady){
     
     // default sorting
-    let sortBy = fieldsData[0].slug
-    let sortAsc = fieldsData[0].sortAscDefault
     let currFieldIndex = 0
 
     // is there a sorting param and is it valid
@@ -97,35 +103,38 @@ function CountryList({ countries, filterData }){
     )
   }
 
-  
-  // if ready apply display
-  if(ready){
-
-  }
 
   // 3. check the display options
-  // set the grid template columns to reflect number of fields to display
-  // find out how many fields are to be displayed
-  // we set the startvalue to -1 because the name of the country is always display
-  // and fields[0].display = true always 
-  // (this will make the min result of numberOfFieldsToDisplay always minimal 0, not -1)
-  const numberOfFieldsToDisplay = fields.reduce((prevValue, currValue) => {
-    if(currValue.display) return ++prevValue;
-    return prevValue;
-  }, -1);
-  const gridTemplateColumnsStyle = numberOfFieldsToDisplay < 1 ? 
-    { "gridTemplateColumns": "1.5em minmax(9em, 15em)"} : 
-    { "gridTemplateColumns": `1.5em minmax(9em, 15em) repeat(${numberOfFieldsToDisplay}, minmax(auto, 9em))`};
+  // we don't wait for routerReady because the headers are only display when routerReady
+  // 3.1 we need to know how many fields are displayed to set inline grid
+  // 3.2 pass hiddenFields to CountryListHeaders and countryRow
   
-  // 5. display data
+  // get the val for hide out of query
+  const hiddenFieldsQuery = router.query?.hide
+  // make it into an array, an empty one if no values
+  const hiddenFields = hiddenFieldsQuery && hiddenFieldsQuery !== '' ? hiddenFieldsQuery.split(',') : []
+  // subtract the length of this array from 3 to get number of visible fields
+  const numberOfVisibleFields = 3 - hiddenFields.length
+  // set grid styles
+  const gridTemplateColumnsStyle = numberOfVisibleFields < 1 ? 
+    { "gridTemplateColumns": "1.5em minmax(9em, 15em)"} : 
+    { "gridTemplateColumns": `1.5em minmax(9em, 15em) repeat(${numberOfVisibleFields}, minmax(auto, 9em))`};
+  
+    
+  // 4. display data
   /*  TODO check count!!!!! */
   return(
     <div className="site__grid--home">
       <CountryCount count={sortedCountries.length} />
       <Filters filterData={filterData} />
       <main className="country-list" style={gridTemplateColumnsStyle}>
-        {ready && <CountryListHeaders />}
-        {ready && sortedCountries.map((country, i) => 
+        {routerReady && 
+          <CountryListHeaders 
+            hiddenFields={hiddenFields} 
+            sortBy={sortBy} 
+            sortAsc={sortAsc} />
+        }
+        {routerReady && sortedCountries.map((country, i) => 
           <CountryRow 
             country={country} 
             index={i} 
