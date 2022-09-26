@@ -9,19 +9,9 @@ jest.mock('../../general/Wrapper', () => {
 })
 
 describe('components/countrylist/CountryListLegend.js', () => {
-  test('It does not render when no field.display data', () => {
-    render(<CountryListLegend field={{
-      display: false,
-      field: 'field',
-      legend: 'legend',
-    }} />)
-    expect(Wrapper).not.toHaveBeenCalled()
-    expect(screen.queryByText('legend')).not.toBeInTheDocument()
-  })
   test('It renders', () => {
     render(<CountryListLegend field={{
-      display: true,
-      field: 'field',
+      slug: 'field',
       legend: 'legend',
     }} />)
     expect(Wrapper).toHaveBeenCalled()
