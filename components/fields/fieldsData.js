@@ -6,6 +6,7 @@ const fieldsData = [
     sortKey: 'countryName',
     sortType: 'text',
     displayToggle: false,
+    legend: '',
     /*
     key: 'countryName',
     display: true,
