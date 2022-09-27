@@ -1,12 +1,12 @@
+import fieldsData from '../fields/fieldsData'
+import IconFilters from '../svgSnippets/IconFilters'
+import FiltersToggle from './FiltersToggle'
+import Collapse from '../general/Collapse'
 import RegionFilter from './region/RegionFilter'
 import NumberFilter from './number/NumberFilter'
-import Collapse from '../general/Collapse'
 
 import PropTypes from 'prop-types'
-import IconFilters from '../svgSnippets/IconFilters'
 
-import fieldsData from '../fields/fieldsData'
-import FiltersToggle from './FiltersToggle'
 
 function Filters(props){
 
