@@ -4,7 +4,6 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import CountryListHeader from '../CountryListHeader'
 import Wrapper from '../../general/Wrapper'
 import IconSort from '../../svgSnippets/IconSort'
-// import FieldsContext
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn(() => ({ query: {} }))
