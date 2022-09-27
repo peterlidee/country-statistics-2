@@ -1,26 +1,24 @@
-import RegionFilter from "./region/RegionFilter";
-import NumberFilter from "./number/NumberFilter";
-import Collapse from "../general/Collapse";
+import RegionFilter from './region/RegionFilter'
+import NumberFilter from './number/NumberFilter'
+import Collapse from '../general/Collapse'
 
-import PropTypes from 'prop-types';
-import { useContext, useState } from "react";
-import FieldsContext from "../context/FieldsContext";
-import IconFilters from "../svgSnippets/IconFilters";
+import PropTypes from 'prop-types'
+import { useState } from 'react'
+import IconFilters from '../svgSnippets/IconFilters'
+
+import fieldsData from '../fields/fieldsData'
 
 function Filters(props){
 
-  const filters = ["region"];
-  const filtersToCheckForDisplay = [ "population", "area", "density" ];
-  
-  const { fields } = useContext(FieldsContext);
-  
+  const filters = ["region"];  
   // check if the field / filter is to be displayed
-  for(let i = 0 ; i < filtersToCheckForDisplay.length; i++){
-    const currFilter = fields.filter(field => {
-      if(field.field == filtersToCheckForDisplay[i]) return field; 
-    })
-    if(currFilter[0].display) filters.push(filtersToCheckForDisplay[i])
-  }
+
+  // get the active filters (hiddable && not in hiddenFields)
+  fieldsData.map(field => {
+    if(field.displayToggle && !props.hiddenFields.includes(field.slug)){
+      filters.push(field.slug)
+    }
+  })
 
   const [ toggle, setToggle ] = useState(false);
   const buttonClass=  toggle ? 'filters__toggle-button filters__toggle-button--active' : 'filters__toggle-button';
@@ -52,6 +50,7 @@ function Filters(props){
 }
 
 Filters.propTypes = {
+  hiddenFields: PropTypes.array.isRequired,
   filterData: PropTypes.object.isRequired,
 }
 
