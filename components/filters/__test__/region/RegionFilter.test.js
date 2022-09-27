@@ -3,7 +3,6 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import { RegionFilterContextProvider } from '../../../context/RegionFilterContext'
-import { FieldsContextProvider } from '../../../context/FieldsContext'
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
 import RegionFilter from '../../region/RegionFilter'
 import FilterBlockRegion from '../../region/FilterBlockRegion'
@@ -17,13 +16,11 @@ jest.mock('../../region/FilterRow')
 describe('components/filters/region/RegionFilter', () => {
   test('It renders', () => {
     render(
-      <FieldsContextProvider>
-        <RegionFilterContextProvider
-          defaultRegionState={filterDataMock.defaultRegionState}
-        >
-          <RegionFilter regionIndexes={filterDataMock.regionIndexes} />
-        </RegionFilterContextProvider>
-      </FieldsContextProvider>
+      <RegionFilterContextProvider
+        defaultRegionState={filterDataMock.defaultRegionState}
+      >
+        <RegionFilter regionIndexes={filterDataMock.regionIndexes} />
+      </RegionFilterContextProvider>
     )
     expect(FilterBlockRegion).toHaveBeenCalledTimes(4)
     expect(FilterBlockRegion.mock.calls[0][0].name).toBe('Africa')

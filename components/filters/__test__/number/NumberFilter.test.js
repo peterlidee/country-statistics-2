@@ -3,7 +3,6 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
-import {FieldsContextProvider } from '../../../context/FieldsContext'
 import { NumberFiltersContextProvider } from '../../../context/NumberFiltersContext'
 import NumberFilter from '../../number/NumberFilter'
 import FilterRange from '../../number/FilterRange'
@@ -13,13 +12,11 @@ jest.mock('../../number/FilterRange')
 describe('components/filters/number/NumberFilter', () => {
   test('It renders', () => {
     const { container } = render(
-      <FieldsContextProvider>
-        <NumberFiltersContextProvider filterData={filterDataMock}>
-          <NumberFilter 
-            filter={'density'} 
-            currFilterData={filterDataMock['density']} />
-        </NumberFiltersContextProvider>
-      </FieldsContextProvider>
+      <NumberFiltersContextProvider filterData={filterDataMock}>
+        <NumberFilter 
+          filter={'density'} 
+          currFilterData={filterDataMock['density']} />
+      </NumberFiltersContextProvider>
     )
     expect(container.querySelector('.filter')).toBeInTheDocument()
     expect(container.querySelector('.filter__block__number')).toBeInTheDocument()
@@ -43,13 +40,11 @@ describe('components/filters/number/NumberFilter', () => {
 
   test('Controls work', async () => {
     render(
-      <FieldsContextProvider>
-        <NumberFiltersContextProvider filterData={filterDataMock}>
-          <NumberFilter 
-            filter={'density'} 
-            currFilterData={filterDataMock['density']} />
-        </NumberFiltersContextProvider>
-      </FieldsContextProvider>
+      <NumberFiltersContextProvider filterData={filterDataMock}>
+        <NumberFilter 
+          filter={'density'} 
+          currFilterData={filterDataMock['density']} />
+      </NumberFiltersContextProvider>
     )
     const User = userEvent.setup()
     const inputFrom = screen.getByRole('spinbutton', { name: 'from' })
