@@ -20,7 +20,7 @@ const defaultRegionState = {
   },
   'Europe': {
     regionActive: false,
-    subregionNames: ['Central Europe','Northern Europe','Western Europe', 'Eastern Europe', 'Southern Europe', 'Southeast Europe'],
+    subregionNames: ['Central Europe','Northern Europe','Western Europe'],
     subregionActive: [false, false, false],
   },
 }
@@ -32,6 +32,9 @@ const regionIndexes = {
   'Central Europe' : [0],
   'Northern Europe': [1],
   'Western Europe' : [2],
+  'Eastern Europe' : [0],
+  'Southern Europe' : [0],
+  'Southeast Europe' : [0],
   'Africa': [3],
   'Northern Africa': [3],
   'Antarctic': [5],
