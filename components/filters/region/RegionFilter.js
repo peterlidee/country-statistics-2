@@ -1,52 +1,58 @@
-import { useContext } from 'react';
-import RegionFilterContext from '../../context/RegionFilterContext';
-import FilterBlockRegion from './FilterBlockRegion';
-import FilterRow from './FilterRow';
-import PropTypes from 'prop-types';
+import { useContext } from 'react'
+import { useRouter } from 'next/router'
 
-function RegionFilter(props){
+import RegionFilterContext2 from '../../context/RegionFilterContext2'
+import FilterBlockRegion from './FilterBlockRegion'
+import FilterRow from './FilterRow'
 
-  const { 
-    regionFilter, 
-    handleRegionFilter, 
-    handleSubregionFilter, 
-    handleRegionClear
-  } = useContext(RegionFilterContext);
+function RegionFilter(){
+
+  const { regionNames, regionsAndSubregions, regionsAndSubregionsIndexes } = useContext(RegionFilterContext2)
+  const router = useRouter()
+  // get current active regions, we will pass these all the way through to FilterCheckBox
+  const activeRegions = router.query.regions && router.query.regions !== '' ? router.query.regions.split(',') : []
+
+  function clearRegionFilter(){
+    // take copy of query and delete regions prop
+    const query = {...router.query}
+    delete query.regions
+    router.push(
+      { path: '/', query }, 
+      undefined,
+      { shallow: true }
+    )
+  }
 
   return(
     <div className="filter filter--region">
-      {Object.keys(regionFilter).sort().map(regionName => (
+      {regionNames.sort().map(regionName => (
         <FilterBlockRegion
           key={`region-filter-${regionName}`}
           name={regionName} 
-          active={regionFilter[regionName].regionActive} 
-          handler={() => handleRegionFilter(regionName)}
-          count={props.regionIndexes[regionName].length}
-          hasSubFilter={regionFilter[regionName].subregionNames.length > 0}
+          region={undefined}
+          activeRegions={activeRegions} 
+          count={regionsAndSubregionsIndexes[regionName].length}
+          hasSubFilter={regionsAndSubregions[regionName].subregionNames.length > 0}
         >
-          {(regionFilter[regionName].subregionNames.length > 0) && 
+          {(regionsAndSubregions[regionName].subregionNames.length > 0) && 
             <div className="filter__block__subregion">
               {/* one block for all the subregions */}
-              {regionFilter[regionName].subregionNames.map((subregionName, i) => (
+              {regionsAndSubregions[regionName].subregionNames.map((subregionName, i) => (
                 <FilterRow 
                   key={`subregion-filter-${subregionName}`}
                   name={subregionName} 
-                  active={regionFilter[regionName].subregionActive[i]} 
-                  handler={() => handleSubregionFilter(regionName, i)} 
-                  count={props.regionIndexes[subregionName].length} 
+                  region={regionName}
+                  activeRegions={activeRegions}
+                  count={regionsAndSubregionsIndexes[subregionName].length}
                 />
               ))}
             </div>
           }
-        </FilterBlockRegion>  
+        </FilterBlockRegion>
       ))}
-      <button onClick={handleRegionClear} className="filter__clear-button">clear</button>
+      <button onClick={clearRegionFilter} className="filter__clear-button">clear</button>
     </div>
   )
-}
-
-RegionFilter.propTypes = {
-  regionIndexes: PropTypes.object.isRequired,
 }
 
 export default RegionFilter;  
