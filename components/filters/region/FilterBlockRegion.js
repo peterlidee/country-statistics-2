@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import FilterRow from './FilterRow';
-import PropTypes from 'prop-types';
+import { useState } from 'react'
+import FilterRow from './FilterRow'
+import PropTypes from 'prop-types'
 
 // This function returns a filterblock for a region and optionally subregions
 // it contains a custom collapse if there are subregions
@@ -8,15 +8,15 @@ import PropTypes from 'prop-types';
 
 function FilterBlockRegion(props){
   // label of name, active, handler, count, children, hasSubfilter
-  const [ open, setOpen ] = useState(false);
+  const [ open, setOpen ] = useState(false)
   const displayStyle = { 'display': open ? 'block': 'none' }
   return(
     <div className="filter__block__region">
       {/* one block per region */}
       <FilterRow 
         name={props.name} 
-        active={props.active} 
-        handler={props.handler}
+        region={props.region}
+        activeRegions={props.activeRegions}
         count={props.count}
       >
         {props.hasSubFilter && 
@@ -37,8 +37,8 @@ function FilterBlockRegion(props){
 
 FilterBlockRegion.propTypes = {
   name: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  handler: PropTypes.func.isRequired,
+  // region can be undefined or string
+  activeRegions: PropTypes.array.isRequired,
   count: PropTypes.number.isRequired,
   hasSubFilter: PropTypes.bool.isRequired,
 }

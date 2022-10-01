@@ -11,21 +11,23 @@ jest.mock('../../region/FilterRow', () => {
 const ChildMock = jest.fn()
 
 describe('components/filters/region/FilterBlockRegion', () => {
+
   test('It renders without subfilters', () => {
     const { container } = render(
       <FilterBlockRegion
           name="name"
-          active={true}
-          handler={() => {}}
+          region={undefined}
+          activeRegions={[]}
           count={1}
           hasSubFilter={false}
         >
           <ChildMock />
         </FilterBlockRegion>
     )
+    expect(container.querySelector('.filter__block__region')).toBeInTheDocument()
     expect(FilterRow).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'name', active: true, count: 1,
+        name: 'name', region: undefined, activeRegions: [], count: 1,
       }),
       expect.anything()
     )
@@ -38,8 +40,8 @@ describe('components/filters/region/FilterBlockRegion', () => {
     const { container } = render(
       <FilterBlockRegion
           name="name"
-          active={true}
-          handler={() => {}}
+          region={undefined}
+          activeRegions={[]}
           count={1}
           hasSubFilter={true}
         >
@@ -56,8 +58,8 @@ describe('components/filters/region/FilterBlockRegion', () => {
     const { container } = render(
       <FilterBlockRegion
           name="name"
-          active={true}
-          handler={() => {}}
+          region={undefined}
+          activeRegions={[]}
           count={1}
           hasSubFilter={true}
         >
