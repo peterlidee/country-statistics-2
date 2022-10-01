@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import FilterCheckBox from './FilterCheckbox';
+import PropTypes from 'prop-types'
+import FilterCheckBox from './FilterCheckbox'
 
 // this function return a filterrow (or a subfilter-row)
 // checkbox, label, count and optionally a toggle button for a subfilter
@@ -8,9 +8,9 @@ function FilterRow(props){
   return(
     <div className="filter__row">
       <FilterCheckBox 
-        label={props.name} 
-        active={props.active} 
-        handler={props.handler} 
+        name={props.name} 
+        activeRegions={props.activeRegions} 
+        region={props.region}
       />
       <span className="filtercheckbox__count">
         (<span className="filtercheckbox__count-inner">{props.count}</span>)
@@ -22,8 +22,8 @@ function FilterRow(props){
 
 FilterRow.propTypes = {
   name: PropTypes.string.isRequired,
-  active: PropTypes.bool.isRequired,
-  handler: PropTypes.func.isRequired,
+  // region can be undefined or string
+  activeRegions: PropTypes.array.isRequired,
   count: PropTypes.number.isRequired,
 }
 
