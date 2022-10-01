@@ -55,7 +55,7 @@ describe('It calls router.push with the correct props', () => {
         <FilterCheckBox 
           name="Northern Europe"
           region={"Europe"}
-          activeRegions={['Northern Europe','Western Europe','Eastern Europe','Southern Europe','Southeast Europe','Europe','Central Europe']} />
+          activeRegions={['Northern Europe','Western Europe','Europe','Central Europe']} />
       </RegionFilterContextProvider2>
     )
     const User = userEvent.setup()
@@ -64,7 +64,7 @@ describe('It calls router.push with the correct props', () => {
     expect(mockPush).toHaveBeenCalledWith(
       expect.objectContaining({
         query: expect.objectContaining({
-          regions: 'Western Europe,Eastern Europe,Southern Europe,Southeast Europe,Central Europe'
+          regions: 'Western Europe,Central Europe'
         })
       }),
       undefined,
@@ -101,7 +101,7 @@ describe('It calls router.push with the correct props', () => {
         <FilterCheckBox 
           name="Central Europe"
           region={"Europe"}
-          activeRegions={['Northern Europe', 'Western Europe', 'Eastern Europe', 'Southern Europe', 'Southeast Europe']} />
+          activeRegions={['Northern Europe', 'Western Europe']} />
       </RegionFilterContextProvider2>
     )
     const User = userEvent.setup()
@@ -110,7 +110,7 @@ describe('It calls router.push with the correct props', () => {
     expect(mockPush).toHaveBeenCalledWith(
       expect.objectContaining({
         query: expect.objectContaining({
-          regions: 'Northern Europe,Western Europe,Eastern Europe,Southern Europe,Southeast Europe,Europe,Central Europe'
+          regions: 'Northern Europe,Western Europe,Europe,Central Europe'
         })
       }),
       undefined,
