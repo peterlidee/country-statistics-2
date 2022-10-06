@@ -27,7 +27,7 @@ function Filters(props){
         filter by
       </div>
       <FiltersToggle>
-        {filters.map((filter, i) =>
+        {filters.map((filter) =>
           <Collapse label={filter} key={`collapse-${filter}`} extraClass="filter">
             {filter == "region" && <RegionFilter/>}
             {filter !== "region" && <NumberFilter filter={filter} currFilterData={props.filterData[filter]} />}
