@@ -1,41 +1,23 @@
-import { useContext, useState } from "react";
-import NumberFiltersContext from "../../context/NumberFiltersContext";
-import FilterRange from "./FilterRange";
-import PropTypes from 'prop-types';
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
-function NumberFilter(props){
+import validateQueryValue from '../../../lib/numberFilter/validateQueryValue'
+import validateAgainstDefaults from '../../../lib/numberFilter/validateAgainstDefaults'
+import FilterRange from './FilterRange'
 
-  // get data from context
-  const { 
-    areaSelection, 
-    setAreaSelection, 
-    populationSelection, 
-    setPopulationSelection, 
-    densitySelection, 
-    setDensitySelection,
-  } = useContext(NumberFiltersContext);
+import PropTypes from 'prop-types'
 
-  // depending on what filter we're rendering, we need a different selection and handler,
-  // we set them here
-  const currContext = {
-    area: {
-      selection: areaSelection,
-      handler: setAreaSelection,   
-    },
-    population: {
-      selection: populationSelection,
-      handler: setPopulationSelection,   
-    },
-    density: {
-      selection: densitySelection,
-      handler: setDensitySelection,   
-    },
-  }
+function NumberFilter({ filter, currFilterData }){
+
+  const router = useRouter()
+  
+  // take the query, validate it and use it to populate the slider and input fields
+  const filterSelection = validateQueryValue(router.query[filter], [currFilterData.sliderStart, currFilterData.sliderEnd])
 
   // setup local state
   // populate it with the default sliderStart and sliderEnd values ( = all selected)
-  const [inputChange, setInputChange] = useState(currContext[props.filter].selection)
-  const [sliderSelection, setSliderSelection] = useState(currContext[props.filter].selection)
+  const [inputChange, setInputChange] = useState(filterSelection)
+  const [sliderSelection, setSliderSelection] = useState(filterSelection)
 
   // these handle the input changes, so basic controlled inputs, linked to inputChange state hook
   const handleInputChange = (val) => {
@@ -43,15 +25,12 @@ function NumberFilter(props){
   }
   // this handles the filter button on the controlled inputs, it sets context
   const handleInputSelection = () => {
-    // we need some validation before we set these to context
-    // val > min && val < max
-    const val1 = inputChange[0] > props.currFilterData.sliderStart ? inputChange[0] < props.currFilterData.sliderEnd ? inputChange[0] : props.currFilterData.sliderEnd : props.currFilterData.sliderStart;
-    const val2 = inputChange[1] > props.currFilterData.sliderStart ? inputChange[1] < props.currFilterData.sliderEnd ? inputChange[1] : props.currFilterData.sliderEnd : props.currFilterData.sliderStart;
-    // if min < max
-    const inputValues = val1 < val2 ? [val1,val2] : [val2, val1];
-    currContext[props.filter].handler(inputValues);
-    setSliderSelection(inputValues);
-    setInputChange(inputValues);
+    // validate inputValues
+    const validatedInputValues = validateAgainstDefaults(inputChange[0], inputChange[1], [currFilterData.sliderStart, currFilterData.sliderEnd])
+    // update states
+    filterHandler(validatedInputValues)
+    setSliderSelection(validatedInputValues);
+    setInputChange(validatedInputValues);
   }
   // handle slider on drag
   // (slider on drag stop is handled by context handler [filter]Selection)
@@ -59,49 +38,56 @@ function NumberFilter(props){
     setInputChange(val);
     setSliderSelection(val);
   }
+  // shallow push the new selection to router
+  const filterHandler = (inputValues) => {
+    router.push(
+      { path: '/', query: {
+        ...router.query, [filter] : inputValues.join(','),
+      }},
+      undefined,
+      { shallow: true }
+    )
+  }
   const clearFilter = () => {
-    const defaultValues = [props.currFilterData.sliderStart, props.currFilterData.sliderEnd];
-    // set inputs
+    const defaultValues = [currFilterData.sliderStart, currFilterData.sliderEnd];
     setInputChange(defaultValues);
-    // set slider
     setSliderSelection(defaultValues);
-    // set context
-    currContext[props.filter].handler(defaultValues);
+    filterHandler(defaultValues)
   }
 
   return(
     <div className="filter">
       <div className="filter__block__number">
         <FilterRange 
-          min={props.currFilterData.sliderStart} 
-          max={props.currFilterData.sliderEnd} 
-          steps={props.currFilterData.sliderStep}
+          min={currFilterData.sliderStart} 
+          max={currFilterData.sliderEnd} 
+          steps={currFilterData.sliderStep}
           sliderSelection={sliderSelection} 
           handleSliderSelection={handleSliderSelection}
-          sliderFinalSelection={currContext[props.filter].selection} 
-          handleSliderFinalSelection={currContext[props.filter].handler}
+          sliderFinalSelection={filterSelection} 
+          handleSliderFinalSelection={filterHandler}
         />
         <div className="number-filter__input-grid">
           <div className="number-filter__input-grid-item">
-            <label htmlFor={`numberfilter-${props.filter}-from`} className="number-filter__label">from</label>
+            <label htmlFor={`numberfilter-${filter}-from`} className="number-filter__label">from</label>
             <input 
               className="number-filter__input"
               type="number" 
-              id={`numberfilter-${props.filter}-from`} 
-              min={props.currFilterData.sliderStart} 
-              max={props.currFilterData.sliderEnd} 
+              id={`numberfilter-${filter}-from`} 
+              min={currFilterData.sliderStart} 
+              max={currFilterData.sliderEnd} 
               value={inputChange[0]} 
               onChange={(e) => handleInputChange([Number(e.target.value), inputChange[1]])} 
             />
           </div>
           <div className="number-filter__input-grid-item">
-            <label htmlFor={`numberfilter-${props.filter}-to`} className="number-filter__label">to</label>
+            <label htmlFor={`numberfilter-${filter}-to`} className="number-filter__label">to</label>
             <input 
              className="number-filter__input"
               type="number" 
-              id={`numberfilter-${props.filter}-to`} 
-              min={props.currFilterData.sliderStart} 
-              max={props.currFilterData.sliderEnd} 
+              id={`numberfilter-${filter}-to`} 
+              min={currFilterData.sliderStart} 
+              max={currFilterData.sliderEnd} 
               value={inputChange[1]} 
               onChange={(e) => handleInputChange([inputChange[0], Number(e.target.value)])} 
               />
@@ -119,4 +105,4 @@ NumberFilter.propTypes = {
   currFilterData: PropTypes.object.isRequired,
 }
 
-export default NumberFilter;
+export default NumberFilter
