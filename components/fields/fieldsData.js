@@ -8,12 +8,6 @@ const fieldsData = [
     displayToggle: false,
     legend: '',
     key: 'countryName',
-    /*
-    display: true,
-    sortActive: true,
-    sortAsc: true,
-    sortDefault: true,
-    */
   },
   {
     slug: 'population',
@@ -24,12 +18,6 @@ const fieldsData = [
     legend: 'Inhabitants',
     displayToggle: true,
     key: 'populationPrettyFormat',
-    /*
-    display: true,
-    sortActive: false,
-    sortAsc: false,
-    sortDefault: false,
-    */
   },
   {
     slug: 'area',
@@ -40,12 +28,6 @@ const fieldsData = [
     legend: 'Km²',
     displayToggle: true,
     key: 'areaPrettyFormat',
-    /*
-    display: true,
-    sortActive: false,
-    sortAsc: true,
-    sortDefault: false,
-    */
   },
   {
     slug: 'density',
@@ -56,12 +38,6 @@ const fieldsData = [
     legend: 'Inh./km²',
     displayToggle: true,
     key: 'densityPrettyFormat',
-    /*
-    display: true,
-    sortActive: false,
-    sortAsc: true,
-    sortDefault: false,
-    */
   },
 ]
 
