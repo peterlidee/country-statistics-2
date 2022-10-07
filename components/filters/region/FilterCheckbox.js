@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
 import RegionFilterContext2 from '../../context/RegionFilterContext2'
 
-import updateRegionsQuery from '../../../lib/updateRegionsQuery'
+import updateRegionsQuery from '../../../lib/regionFilter/updateRegionsQuery'
 
 function FilterCheckBox(props){
   
