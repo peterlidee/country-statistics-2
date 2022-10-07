@@ -1,11 +1,9 @@
 import { screen, render } from '@testing-library/react'
 import { toBeInTheDocument, toContainElement } from '@testing-library/jest-dom'
 
-import countriesMock from '../../../__mock__/data/countriesMock'
+import { extraDataCountries } from '../../../__mock__/data/countriesMock'
 import CountryRow from '../CountryRow'
 import Wrapper from '../../general/Wrapper'
-
-const { extraDataCountries } = countriesMock
 
 jest.mock('../../general/Wrapper', () => {
   return jest.fn((props) => <div className='Wrapper'>{props.children}</div>)

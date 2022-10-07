@@ -134,9 +134,4 @@ const extraDataCountries = [
   }
 ]
 
-const countriesMock = {
-  rawCountries,
-  extraDataCountries,
-}
-
-export default countriesMock
+export { rawCountries, extraDataCountries }
