@@ -21,7 +21,7 @@ describe('components/countryList/CountryListHeaders', () => {
       <CountryListHeaders 
         hiddenFields={[]}
         sortBy="country"
-        sortAsc="true"
+        sortAsc={true}
       />
     )
     expect(Wrapper).toHaveBeenCalledTimes(2)
@@ -34,7 +34,7 @@ describe('components/countryList/CountryListHeaders', () => {
       <CountryListHeaders 
         hiddenFields={['population']}
         sortBy="country"
-        sortAsc="true"
+        sortAsc={true}
       />
     )
     expect(CountryListHeader).toHaveBeenCalledTimes(3)
@@ -46,7 +46,7 @@ describe('components/countryList/CountryListHeaders', () => {
       <CountryListHeaders 
         hiddenFields={['population', 'area', 'density']}
         sortBy="country"
-        sortAsc="true"
+        sortAsc={true}
       />
     )
     expect(CountryListHeader).toHaveBeenCalledTimes(1)
