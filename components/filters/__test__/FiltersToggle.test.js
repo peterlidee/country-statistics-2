@@ -24,8 +24,6 @@ describe('components/filters/FiltersToggle', () => {
     const { container } = render(<FiltersToggle><ChildMock /></FiltersToggle>)
     const User = userEvent.setup()
 
-    screen.debug()
-
     const divEl = container.querySelector('div')
     const button = screen.getByRole('button')
 
