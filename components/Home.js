@@ -1,27 +1,23 @@
 import PropTypes from 'prop-types'
 
-import { FieldsContextProvider } from "./context/FieldsContext";
-import { RegionFilterContextProvider } from "./context/RegionFilterContext";
-import { NumberFiltersContextProvider } from "./context/NumberFiltersContext";
+import { RegionFilterContextProvider } from './context/RegionFilterContext'
 
-import Head from 'next/head';
+import Head from 'next/head'
 import Header from './header/Header'
-import CountryList from "./countryList/CountryList";
-import Sources from "./sources/Sources";
-import Source from "./sources/Source";
+import CountryList from './countryList/CountryList'
+import Sources from './sources/Sources'
+import Source from './sources/Source'
 
 function Home(props){
   return(
-    <FieldsContextProvider>
+    <>
       <Head>
         <title>Country Statistics - a portfolio project</title>
         <meta name="description" content="An overview of statistics per country, fed by different api's." />
       </Head>
       <Header home={true} />
-      <RegionFilterContextProvider defaultRegionState={props.filterData.defaultRegionState}>
-        <NumberFiltersContextProvider filterData={props.filterData}>
-          <CountryList countries={props.countries} filterData={props.filterData} />
-        </NumberFiltersContextProvider>
+      <RegionFilterContextProvider filterData={props.filterData}>
+        <CountryList countries={props.countries} filterData={props.filterData} />
       </RegionFilterContextProvider>
       <div className="sources__home">
         <Sources>
@@ -29,7 +25,7 @@ function Home(props){
           <Source error={false} loading={false} endpoint={props.endpoint} label="restcountries.com/{all}" />
         </Sources>
       </div>
-    </FieldsContextProvider>
+    </>
   )
 }
 
