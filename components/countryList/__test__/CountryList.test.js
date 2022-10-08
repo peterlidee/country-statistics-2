@@ -3,7 +3,7 @@ import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import { useRouter } from 'next/router'
 // todo 
-import { RegionFilterContextProvider2 } from '../../context/RegionFilterContext2'
+import { RegionFilterContextProvider } from '../../context/RegionFilterContext'
 
 import CountryList from '../CountryList'
 import CountryCount from '../../header/CountryCount'
@@ -28,9 +28,9 @@ beforeEach(() => {
 
 function setupRender(){
   const { container } = render(
-    <RegionFilterContextProvider2 filterData={filterDataMock}>
+    <RegionFilterContextProvider filterData={filterDataMock}>
       <CountryList countries={extraDataCountries} filterData={filterDataMock} />
-    </RegionFilterContextProvider2>
+    </RegionFilterContextProvider>
   )
   return { container }
 }

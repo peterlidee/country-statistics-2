@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 
 import { useRouter } from 'next/router'
 import FilterCheckBox from '../../region/FilterCheckbox'
-import { RegionFilterContextProvider2 } from '../../../context/RegionFilterContext2'
+import { RegionFilterContextProvider } from '../../../context/RegionFilterContext'
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
 
 jest.mock('next/router', () => ({
@@ -51,12 +51,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a subregion that is active and region is also active [1.1.1]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Northern Europe"
           region={"Europe"}
           activeRegions={['Northern Europe','Western Europe','Europe','Central Europe']} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Northern Europe' })
@@ -74,12 +74,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a subregion that is active and region is not active [1.1.2]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Northern Europe"
           region={"Europe"}
           activeRegions={['Northern Europe','Southeast Europe','Europe','Central Europe']} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Northern Europe' })
@@ -97,12 +97,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a subregion that is not active and all the other subregions are active [1.2.1]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Central Europe"
           region={"Europe"}
           activeRegions={['Northern Europe', 'Western Europe']} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Central Europe' })
@@ -120,12 +120,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a subregion that is not active and NOT all the other subregions are active [1.2.2]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Northern Europe"
           region={"Europe"}
           activeRegions={['Southeast Europe','Central Europe']} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Northern Europe' })
@@ -143,12 +143,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a region that is active [2.1]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Africa"
           region={undefined}
           activeRegions={["Africa"]} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Africa' })
@@ -167,12 +167,12 @@ describe('It calls router.push with the correct props', () => {
 
   test('A click on a region that is not active [2.2]', async () => {
     render(
-      <RegionFilterContextProvider2 filterData={filterDataMock}>
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <FilterCheckBox 
           name="Africa"
           region={undefined}
           activeRegions={[]} />
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const User = userEvent.setup()
     const checkBoxEl = screen.getByRole('checkbox', { name: 'Africa' })

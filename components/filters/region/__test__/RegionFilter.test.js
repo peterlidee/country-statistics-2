@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event'
 
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
 import { useRouter } from 'next/router'
-import { RegionFilterContextProvider2 } from '../../../context/RegionFilterContext2'
+import { RegionFilterContextProvider } from '../../../context/RegionFilterContext'
 
 import RegionFilter from '../../region/RegionFilter'
 import FilterBlockRegion from '../../region/FilterBlockRegion'
@@ -27,11 +27,9 @@ describe('components/filters/region/RegionFilter', () => {
       // push: pushMock()
     })
     render(
-      <RegionFilterContextProvider2
-        filterData={filterDataMock}
-      >
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <RegionFilter/>
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     expect(FilterBlockRegion).toHaveBeenCalledTimes(4)
     expect(FilterBlockRegion).toHaveBeenNthCalledWith(1, 
@@ -131,11 +129,9 @@ describe('components/filters/region/RegionFilter', () => {
     })
     const User = userEvent.setup()
     render(
-      <RegionFilterContextProvider2
-        filterData={filterDataMock}
-      >
+      <RegionFilterContextProvider filterData={filterDataMock}>
         <RegionFilter/>
-      </RegionFilterContextProvider2>
+      </RegionFilterContextProvider>
     )
     const button = screen.getByRole('button', { name: /clear/i })
     await User.click(button)

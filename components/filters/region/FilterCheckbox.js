@@ -1,13 +1,13 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import RegionFilterContext2 from '../../context/RegionFilterContext2'
+import RegionFilterContext from '../../context/RegionFilterContext'
 
 import updateRegionsQuery from '../../../lib/regionFilter/updateRegionsQuery'
 
 function FilterCheckBox(props){
   
-  const { regionsAndSubregions } = useContext(RegionFilterContext2)
+  const { regionsAndSubregions } = useContext(RegionFilterContext)
   const router = useRouter()
   const isActive = props.activeRegions.includes(props.name)
 

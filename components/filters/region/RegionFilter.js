@@ -1,13 +1,13 @@
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
-import RegionFilterContext2 from '../../context/RegionFilterContext2'
+import RegionFilterContext from '../../context/RegionFilterContext'
 import FilterBlockRegion from './FilterBlockRegion'
 import FilterRow from './FilterRow'
 
 function RegionFilter(){
 
-  const { regionNames, regionsAndSubregions, regionsAndSubregionsIndexes } = useContext(RegionFilterContext2)
+  const { regionNames, regionsAndSubregions, regionsAndSubregionsIndexes } = useContext(RegionFilterContext)
   const router = useRouter()
   // get current active regions, we will pass these all the way through to FilterCheckBox
   const activeRegions = router.query.regions && router.query.regions !== '' ? router.query.regions.split(',') : []
