@@ -36,6 +36,14 @@ describe('components/Home', () => {
       expect.anything()
     )
     expect(RegionFilterContextProvider).toHaveBeenCalled()
+    expect(CountryList).toHaveBeenCalled()
+    expect(CountryList).toHaveBeenCalledWith(
+      {
+        countries: [],
+        filterData: {},
+      },
+      expect.anything()
+    )
     expect(Sources).toHaveBeenCalled()
     expect(Source).toHaveBeenCalledWith({
       error: false,
