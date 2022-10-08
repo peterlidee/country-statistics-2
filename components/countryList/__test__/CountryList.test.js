@@ -2,7 +2,6 @@ import { screen, render } from '@testing-library/react'
 import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import { useRouter } from 'next/router'
-// todo 
 import { RegionFilterContextProvider } from '../../context/RegionFilterContext'
 
 import CountryList from '../CountryList'
