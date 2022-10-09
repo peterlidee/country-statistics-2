@@ -1,5 +1,7 @@
-import { render, screen, toHaveBeenCalled } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
+import { render } from '@testing-library/react'
 
 import ErrorComponent from "../ErrorComponent"
 import Header from '../header/Header'
@@ -37,17 +39,17 @@ test("It should render the correct title tag via head mock", () => {
 */
 
 describe('components/ErrorComponent', () => {
+
   test('It renders', () => {
     const { container } = render(<ErrorComponent />)
+    expect(Header).toHaveBeenCalled()
+    expect(Head).toHaveBeenCalled()
     expect(container.querySelectorAll('div')).toHaveLength(3)
   })
+
   test('It gets the correct styles', () => {
     const { container } = render(<ErrorComponent />)
     expect(container.querySelectorAll('div')[0]).toHaveStyle('maxWidth: 1500px')
   })
-  test('It calls the header and head mocks', () => {
-    render(<ErrorComponent />)
-    expect(Header).toHaveBeenCalled()
-    expect(Head).toHaveBeenCalled()
-  })
+
 })
