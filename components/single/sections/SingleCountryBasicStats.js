@@ -1,6 +1,6 @@
 import Proptypes from 'prop-types';
-import { roundNumber } from '../../../lib/helpers'
 import formatNumber from '../../../lib/helpers/formatNumber'
+import roundNumber from '../../../lib/helpers/roundNumber'
 import BoxWrapper from '../../general/BoxWrapper'
 
 function SingleCountryBasisStats(props){
