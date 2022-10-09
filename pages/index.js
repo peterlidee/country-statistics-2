@@ -1,6 +1,6 @@
 import Home from '../components/Home'
-import addExtraData from '../lib/addExtraData'
-import getFilterData from '../lib/getFilterData'
+import addExtraData from '../lib/data/addExtraData'
+import getFilterData from '../lib/data/getFilterData'
 
 function HomePage(props){
   return <Home 
@@ -11,10 +11,10 @@ function HomePage(props){
 
 export async function getStaticProps(){
 
-  const endpoint = 'https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region';
+  const endpoint = 'https://restcountries.com/v3.1/all?fields=cca3,area,name,population,subregion,region'
 
-  const res = await fetch(endpoint);
-  const countries = await res.json();
+  const res = await fetch(endpoint)
+  const countries = await res.json()
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
@@ -33,4 +33,4 @@ export async function getStaticProps(){
   }
 }
 
-export default HomePage;
+export default HomePage
