@@ -1,5 +1,4 @@
-import { render, screen } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 
 import { RegionFilterContextProvider } from '../context/RegionFilterContext'
 
@@ -38,10 +37,7 @@ describe('components/Home', () => {
     expect(RegionFilterContextProvider).toHaveBeenCalled()
     expect(CountryList).toHaveBeenCalled()
     expect(CountryList).toHaveBeenCalledWith(
-      {
-        countries: [],
-        filterData: {},
-      },
+      { countries: [], filterData: {}, },
       expect.anything()
     )
     expect(Sources).toHaveBeenCalled()
