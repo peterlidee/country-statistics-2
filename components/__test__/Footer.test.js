@@ -1,5 +1,4 @@
-import { render, screen, toHaveBeenCalled } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render, screen } from '@testing-library/react'
 
 import Footer from "../Footer"
 import IconLogo from "../svgSnippets/IconLogo"
@@ -10,25 +9,14 @@ jest.mock('../general/Wrapper', () => {
   return jest.fn((props) => <>{props.children}</>)
 })
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('components/Footer', () => {
-  test('It renders the footer', () => {
-    const { container } = render(<Footer />)
-    expect(container.querySelector('footer')).toBeInTheDocument()
-  })
-  test('It renders IconLogo mock', () => {
+
+  test('It renders', () => {
     render(<Footer />)
+    expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(/country statistics/i)
     expect(IconLogo).toHaveBeenCalled()
-  })
-  test('It renders wrapper mock', () => {
-    render(<Footer />)
     expect(Wrapper).toHaveBeenCalledTimes(7)
-  })
-  test('It renders the children of the mock wrapper', () => {
-    render(<Footer />)
     expect(screen.getAllByRole('heading', { level: 4 })).toHaveLength(7)
   })
+
 })
