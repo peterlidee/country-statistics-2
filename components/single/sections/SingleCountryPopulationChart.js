@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
-import SingleCountryFetch from '../SingleCountryFetch';
-import PopulationChartWidget from '../chart/PopulationChartWidget';
-import extractPopulationChartData from '../../../lib/extractPopulationChartData';
+import SingleCountryFetch from '../SingleCountryFetch'
+import PopulationChartWidget from '../chart/PopulationChartWidget'
+import extractPopulationChartData from '../../../lib/single/extractPopulationChartData'
 
 function SingleCountryPopulationChart(props){
   
