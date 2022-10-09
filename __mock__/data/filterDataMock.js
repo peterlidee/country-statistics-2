@@ -1,27 +1,17 @@
 // filterData based on extraDataCountries in mockCountry.js
 
-// TODO: cleanup
-
 const defaultRegionState = {
   'Africa': {
-    regionActive: false,
     subregionNames: ['Northern Africa'],
-    subregionActive: [false],
   },
   'Americas': {
-    regionActive: false,
     subregionNames: ['Caribbean'],
-    subregionActive: [false],
   },
   'Antarctic': {
-    regionActive: false,
     subregionNames: [],
-    subregionActive: [],
   },
   'Europe': {
-    regionActive: false,
     subregionNames: ['Central Europe','Northern Europe','Western Europe'],
-    subregionActive: [false, false, false],
   },
 }
 
