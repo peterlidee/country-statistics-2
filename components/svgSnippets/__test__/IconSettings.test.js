@@ -1,5 +1,7 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-container */
+/* eslint-disable testing-library/no-node-access */
+
+import { render } from '@testing-library/react'
 import IconSettings from '../IconSettings'
 
 test('svgSnippets/IconSettings.js renders', () => {

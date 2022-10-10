@@ -1,5 +1,6 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+import { render } from '@testing-library/react'
 import IconFilters from '../IconFilters'
 
 test('svgSnippets/IconFilters.js renders', () => {

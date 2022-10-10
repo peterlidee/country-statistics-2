@@ -1,8 +1,11 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
+import { render } from '@testing-library/react'
 import IconPan from '../IconPan'
 
 describe.only('svgSnippets/IconPan.js renders', () => {
+
   test('It renders', () => {
     const { container } = render(<IconPan active />)
     expect(container.querySelector('svg')).toBeInTheDocument()
@@ -15,4 +18,5 @@ describe.only('svgSnippets/IconPan.js renders', () => {
     const { container } = render(<IconPan active={false} />)
     expect(container.querySelector('svg')).not.toHaveClass('icon__pan--active')
   })
+
 })

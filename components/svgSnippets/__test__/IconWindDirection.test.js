@@ -1,5 +1,7 @@
-import { render, screen } from '@testing-library/react'
-import { toBeInTheDocument, toHaveStyle } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
+import { render } from '@testing-library/react'
 import IconWindDirection from "../IconWindDirection"
 
 describe('svgSnippets/IconWindDirection', () => {

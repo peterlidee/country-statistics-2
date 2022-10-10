@@ -1,21 +1,20 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument, toHaveAttribute } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
+import { render } from '@testing-library/react'
 import IconLogo from '../IconLogo'
 import colors from '../../../config/colors'
 
-let element;
-beforeEach(() => {
-  const { container } = render(<IconLogo />)
-  element = container
-})
-
 describe('svgSnippets/IconLogo.js', () => {
+
   test('It renders', () => {
-    expect(element.querySelector('svg')).toBeInTheDocument()
+    const { container } = render(<IconLogo />)
+    expect(container.querySelector('svg')).toBeInTheDocument()
   })
-  test('It recieves the correct colors', () => {
-    // screen.debug()
-    const svg = element.querySelector('svg')
+
+  test('It receives the correct colors', () => {
+    const { container } = render(<IconLogo />)
+    const svg = container.querySelector('svg')
     expect(svg.querySelector('.logo-globe__earth')).toHaveAttribute('fill', colors.blue)
     expect(svg.querySelector('.logo-globe__meridians')).toHaveAttribute('stroke', colors.white)
     const parallels = svg.querySelectorAll('.logo-globe__parallels')
@@ -30,4 +29,5 @@ describe('svgSnippets/IconLogo.js', () => {
       expect(graph).toHaveAttribute('fill', colors.lightGrey)
     }
   })
+
 })
