@@ -27,7 +27,7 @@ ChartJS.register(
 import { Chart } from 'react-chartjs-2';
 import colors from '../../../config/colors';
 import PropTypes from 'prop-types';
-import formatPopulationLabel from '../../../lib/formatPopulationLabel';
+import formatPopulationLabel from '../../../lib/single/formatPopulationLabel';
 
 function PopulationChartWidget(props){
 
