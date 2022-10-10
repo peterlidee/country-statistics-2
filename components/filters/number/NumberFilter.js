@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import validateQueryValue from '../../../lib/numberFilter/validateQueryValue'
@@ -10,14 +10,25 @@ import PropTypes from 'prop-types'
 function NumberFilter({ filter, currFilterData }){
 
   const router = useRouter()
-  
+
   // take the query, validate it and use it to populate the slider and input fields
   const filterSelection = validateQueryValue(router.query[filter], [currFilterData.sliderStart, currFilterData.sliderEnd])
-
+  
   // setup local state
   // populate it with the default sliderStart and sliderEnd values ( = all selected)
   const [inputChange, setInputChange] = useState(filterSelection)
   const [sliderSelection, setSliderSelection] = useState(filterSelection)
+
+  // when the logo is clicked, the component rerenders but the inner state: inputChange and sliderSelection remains
+  // so, we listen for router change and no query
+  // when this happens, we reset the state to the defaults
+  useEffect(() => {
+    if(Object.keys(router.query).length === 0){
+      setInputChange(filterSelection)
+      setSliderSelection(filterSelection)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.query])
 
   // these handle the input changes, so basic controlled inputs, linked to inputChange state hook
   const handleInputChange = (val) => {

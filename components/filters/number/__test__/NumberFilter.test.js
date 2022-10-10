@@ -1,11 +1,11 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
-import NumberFilter from '../../number/NumberFilter'
 import { useRouter } from 'next/router'
-import FilterRange from '../../number/FilterRange'
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
+
+import NumberFilter from '../../number/NumberFilter'
+import FilterRange from '../../number/FilterRange'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
@@ -13,12 +13,8 @@ jest.mock('next/router', () => ({
 jest.mock('../../number/FilterRange')
 const mockPush = jest.fn()
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 const setupRender = () => {
-  const { container } = render(
+  const { rerender } = render(
     <NumberFilter 
       filter={'density'} 
       currFilterData={filterDataMock['density']} />
@@ -28,20 +24,19 @@ const setupRender = () => {
   const submitButton = screen.getByRole('button', { name: '>' })
   const clearButton = screen.getByRole('button', { name: 'clear' })
   return {
-    container, inputMin, inputMax, submitButton, clearButton
+    rerender, inputMin, inputMax, submitButton, clearButton
   }
 }
 
 describe('components/filters/number/NumberFilter', () => {
+  
   test('It renders', () => {
     useRouter.mockReturnValue({
       query: {},
       push: () => {}
     })
-    const { container, inputMin, inputMax, submitButton, clearButton } = setupRender()
+    const { inputMin, inputMax, submitButton, clearButton } = setupRender()
 
-    expect(container.querySelector('.filter')).toBeInTheDocument()
-    expect(container.querySelector('.filter__block__number')).toBeInTheDocument()
     expect(FilterRange).toHaveBeenCalledWith(
       expect.objectContaining({
         min: 0,
@@ -52,8 +47,6 @@ describe('components/filters/number/NumberFilter', () => {
       }),
       expect.anything()
     )
-    expect(container.querySelector('.number-filter__input-grid')).toBeInTheDocument()
-    expect(container.querySelectorAll('.number-filter__input-grid-item')).toHaveLength(2)
     expect(inputMin).toBeInTheDocument()
     expect(inputMin).toHaveValue(0)
     expect(inputMax).toBeInTheDocument()
@@ -153,4 +146,30 @@ describe('components/filters/number/NumberFilter', () => {
     )
   })
   
+  test('UseEffect resets state to default when there is a rerender with an empty query', () => {
+    useRouter.mockReturnValue({
+      query: { density: '100,400' },
+      push: () => {},
+    })
+    const { rerender, inputMin, inputMax } = setupRender()
+  
+    // check first render
+    expect(inputMin).toHaveValue(100)
+    expect(inputMax).toHaveValue(400)
+  
+    // make new render with empty query
+    useRouter.mockReturnValue({
+      query: {},
+      push: () => {},
+    })
+    rerender(<NumberFilter 
+      filter={'density'} 
+      currFilterData={filterDataMock['density']} />)
+    
+    // test rerender
+    expect(inputMin).toHaveValue(0)
+    expect(inputMax).toHaveValue(400)
+  
+  })
+
 })
