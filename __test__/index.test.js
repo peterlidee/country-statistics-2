@@ -1,5 +1,5 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
+
 import HomePage from "../pages"
 import Home from '../components/Home'
 

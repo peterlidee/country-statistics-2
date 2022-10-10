@@ -1,5 +1,4 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import Country from '../../pages/country/[countryCode]'
 import SingleCountry from "../../components/single/SingleCountry"
 

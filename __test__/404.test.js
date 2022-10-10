@@ -1,5 +1,4 @@
-import { render, screen } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import CustomErrorPage from '../pages/404.js'
 import ErrorComponent from '../components/ErrorComponent'
 
