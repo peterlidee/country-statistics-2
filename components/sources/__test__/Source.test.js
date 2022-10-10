@@ -1,5 +1,7 @@
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument, toHaveClass } from '@testing-library/jest-dom'
 
 import Source from '../Source'
 
@@ -12,7 +14,6 @@ const setupRender = (loading, error, label, endpoint) => {
       endpoint={endpoint} />
   )
   return({
-    source: container.querySelector('.source'),
     icon: container.querySelector('.source__icon'),
     status: container.querySelector('.source__status'),
     nolink: container.querySelector('.source__nolink'),
@@ -21,60 +22,79 @@ const setupRender = (loading, error, label, endpoint) => {
   })
 }
 
-test('components/sources/Source renders', () => {
-  const elements = setupRender(false, undefined, 'label', undefined)
-  expect(elements.source).toBeInTheDocument()
-  expect(elements.icon).toBeInTheDocument()
-  expect(elements.status).toBeInTheDocument()
-})
+describe('components/sources/Source renders', () => {
 
-describe('components/sources/Source icon and status elements', () => {
-  test('Are correct when loading = false', () => {
-    const { icon, status } = setupRender(false, undefined, 'label', undefined)
-    expect(icon).toHaveClass('source__icon--loaded')
-    expect(status).toHaveTextContent('loaded')
+  test('It renders', () => {
+    const { icon } = setupRender(false, undefined, 'label', "endpoint")
+    expect(icon).toBeInTheDocument()
+    expect(screen.getByText(/loaded/)).toBeInTheDocument()
+    expect(screen.getByText(/label/)).toBeInTheDocument()
   })
-  test('Are correct when loading = true', () => {
-    const { icon, status } = setupRender(true, undefined, 'label', undefined)
-    expect(icon).toHaveClass('source__icon--loading')
-    expect(status).toHaveTextContent('loading')
-  })
-  test('Are correct when error', () => {
-    const { icon, status } = setupRender(false, new Error('Error'), 'label', undefined)
-    expect(icon).toHaveClass('source__icon--error')
-    expect(status).toHaveTextContent('error')
-  })
-})
 
-describe('components/sources/Source link and nolink elements', () => {
-  test('It works correctly with no endpoint', () => {
-    const { link, nolink } = setupRender(false, undefined, 'label', undefined)
-    expect(nolink).toBeInTheDocument()
-    expect(nolink).toHaveTextContent("label")
-    expect(link).toBeNull()
-  })
-  test('It works correctly with an endpoint', () => {
-    const { link, nolink } = setupRender(false, undefined, 'label', 'url')
-    expect(nolink).toBeNull()
-    expect(link).toBeInTheDocument()
-    expect(link).toHaveTextContent("label")
-    expect(link).toHaveAttribute('href', 'url')
-  })
-})
+  describe('Icon and status elements', () => {
 
-describe('components/sources/Source errors', () => {
-  it('It shows an error when error.message', () => {
-    const error = new Error('Error test')
-    const { errorMessage } = setupRender(false, error, 'label', undefined)
-    expect(errorMessage).toHaveTextContent('Error test')
+    test('Are correct when loading = false', () => {
+      const { icon } = setupRender(false, undefined, 'label', undefined)
+      expect(icon).toHaveClass('source__icon--loaded')
+      expect(screen.getByText(/loaded/)).toBeInTheDocument()
+    })
+
+    test('Are correct when loading = true', () => {
+      const { icon } = setupRender(true, undefined, 'label', undefined)
+      expect(icon).toHaveClass('source__icon--loading')
+      expect(screen.getByText(/loading/)).toBeInTheDocument()
+    })
+
+    test('Are correct when error', () => {
+      const { icon } = setupRender(false, new Error('Error'), 'label', undefined)
+      expect(icon).toHaveClass('source__icon--error')
+      expect(screen.getByText(/error/)).toBeInTheDocument()
+    })
+
   })
-  it('It does not show error when error but no error.message', () => {
-    const error = new Error()
-    const { errorMessage } = setupRender(false, error, 'label', undefined)
-    expect(errorMessage).toBeNull()
+
+  describe('link and nolink elements', () => {
+
+    test('It works correctly with no endpoint', () => {
+      const { link, errorMessage } = setupRender(false, undefined, 'label', undefined)
+      expect(link).toBeNull()
+      const label = screen.getByText(/label/)
+      expect(label).toBeInTheDocument()
+      expect(screen.queryByRole('link')).not.toBeInTheDocument()
+      expect(errorMessage).toBeNull()
+    })
+
+    test('It works correctly with an endpoint', () => {
+      const { nolink, errorMessage } = setupRender(false, undefined, 'label', 'url')
+      expect(nolink).toBeNull()
+      const link = screen.getByRole('link')
+      expect(link).toBeInTheDocument()
+      expect(link).toHaveTextContent("label")
+      expect(link).toHaveAttribute('href', 'url')
+      expect(errorMessage).toBeNull()
+    })
+
   })
-  it('It does not show error when no error', () => {
-    const { errorMessage } = setupRender(false, undefined, 'label', undefined)
-    expect(errorMessage).toBeNull()
+
+  describe('errors', () => {
+
+    test('It shows an error when error.message and nothing else', () => {
+      const error = new Error('Error test')
+      setupRender(false, error, 'label', undefined)
+      expect(screen.getByText(/Error test/)).toBeInTheDocument()
+    })
+
+    test('It does not show error when error but no error.message', () => {
+      const error = new Error()
+      const { errorMessage } = setupRender(false, error, 'label', undefined)
+      expect(errorMessage).toBeNull()
+    })
+
+    it('It does not show error when no error', () => {
+      const { errorMessage } = setupRender(false, undefined, 'label', undefined)
+      expect(errorMessage).toBeNull()
+    })
+
   })
+
 })
