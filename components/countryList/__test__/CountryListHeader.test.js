@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import CountryListHeader from '../CountryListHeader'
 import Wrapper from '../../general/Wrapper'
@@ -81,7 +80,7 @@ describe('components/countryList/CountryListHeader', () => {
   })
 
   test('It renders with sortBy country and sort Asc false', () => {
-    const { linkEl } = setup('country', false)
+    setup('country', false)
     expect(IconSort).toHaveBeenCalledWith(
       expect.objectContaining({
         sortActive: true,
