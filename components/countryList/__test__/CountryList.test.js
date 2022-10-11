@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import { useRouter } from 'next/router'
 import { RegionFilterContextProvider } from '../../context/RegionFilterContext'
@@ -26,12 +25,11 @@ beforeEach(() => {
 })
 
 function setupRender(){
-  const { container } = render(
+  render(
     <RegionFilterContextProvider filterData={filterDataMock}>
       <CountryList countries={extraDataCountries} filterData={filterDataMock} />
     </RegionFilterContextProvider>
   )
-  return { container }
 }
 function setupReturnValue(query, ready = true){
   useRouter.mockReturnValue({
@@ -44,12 +42,11 @@ describe('components/countryList/CountryList', () => {
   
   test('It renders', () => {
     setupReturnValue({})
-    const { container } = setupRender()
+    setupRender()
 
-    expect(container.querySelector('.site__grid--home')).toBeInTheDocument()
     expect(CountryCount).toHaveBeenCalled()
     expect(Filters).toHaveBeenCalled()
-    expect(container.querySelector('.country-list')).toBeInTheDocument()
+    expect(screen.getByRole('main')).toBeInTheDocument()
     expect(CountryListHeaders).toHaveBeenCalled()
     expect(CountryRow).toHaveBeenCalledTimes(6)
   })
@@ -62,20 +59,20 @@ describe('components/countryList/CountryList', () => {
 
   test('Grid has the correct styles with none hidden', () => {
     setupReturnValue({})
-    const { container } = setupRender()
-    expect(container.querySelector('.country-list')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(3, minmax(auto, 9em))')
+    setupRender()
+    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(3, minmax(auto, 9em))')
   })
 
   test('Grid has the correct styles with 1 hidden', () => {
     setupReturnValue({ hide: 'area' })
-    const { container } = setupRender()
-    expect(container.querySelector('.country-list')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(2, minmax(auto, 9em))')
+    setupRender()
+    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(2, minmax(auto, 9em))')
   })
 
   test('Grid has the correct styles with all hidden', () => {
     setupReturnValue({ hide: 'area,population,density' })
-    const { container } = setupRender()
-    expect(container.querySelector('.country-list')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em)')
+    setupRender()
+    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em)')
   })
 
   test('It displays no results', () => {
