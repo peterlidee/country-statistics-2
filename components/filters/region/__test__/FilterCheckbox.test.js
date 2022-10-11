@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import { useRouter } from 'next/router'
@@ -18,15 +17,13 @@ useRouter.mockReturnValue({
 describe('components/filters/region/FilterCheckBox', () => {
   
   test('It renders', () => {
-    const { container } = render(
+    render(
       <FilterCheckBox 
         name="name"
         region={undefined}
         activeRegions={[]}
       />
     )
-    expect(container.querySelector('.filtercheckbox__label')).toBeInTheDocument()
-    expect(container.querySelector('.filtercheckbox__label')).toHaveTextContent('name')
     expect(screen.getByRole('checkbox', { name: 'name' })).toBeInTheDocument()
     expect(screen.getByRole('checkbox', { name: 'name' })).not.toBeChecked()
   })

@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import FilterBlockRegion from '../../region/FilterBlockRegion'
@@ -13,7 +12,7 @@ const ChildMock = jest.fn()
 describe('components/filters/region/FilterBlockRegion', () => {
 
   test('It renders without subfilters', () => {
-    const { container } = render(
+    render(
       <FilterBlockRegion
           name="name"
           region={undefined}
@@ -24,7 +23,6 @@ describe('components/filters/region/FilterBlockRegion', () => {
           <ChildMock />
         </FilterBlockRegion>
     )
-    expect(container.querySelector('.filter__block__region')).toBeInTheDocument()
     expect(FilterRow).toHaveBeenCalledWith(
       expect.objectContaining({
         name: 'name', region: undefined, activeRegions: [], count: 1,
@@ -32,12 +30,11 @@ describe('components/filters/region/FilterBlockRegion', () => {
       expect.anything()
     )
     expect(screen.queryByRole('button', { name: /subregions/i })).not.toBeInTheDocument()
-    expect(container.querySelector('.collapse__content')).not.toBeInTheDocument()
     expect(ChildMock).not.toHaveBeenCalled()
   })
 
   test('It renders with subfilters', () => {
-    const { container } = render(
+    render(
       <FilterBlockRegion
           name="name"
           region={undefined}
@@ -50,7 +47,6 @@ describe('components/filters/region/FilterBlockRegion', () => {
     )
     const button = screen.queryByRole('button', { name: /subregions/i })
     expect(button).toBeInTheDocument()
-    expect(container.querySelector('.collapse__content')).toBeInTheDocument()
     expect(ChildMock).toHaveBeenCalled()
   })
 
@@ -68,6 +64,7 @@ describe('components/filters/region/FilterBlockRegion', () => {
     )
     const User = userEvent.setup()
     const button = screen.queryByRole('button', { name: /subregions/i })
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const content = container.querySelector('.collapse__content--subfilter')
     // check initial state
     expect(button).toHaveTextContent('+')
