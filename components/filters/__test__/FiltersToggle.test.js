@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 import FiltersToggle from '../FiltersToggle'
 import IconFilters from '../../svgSnippets/IconFilters'
@@ -24,6 +23,7 @@ describe('components/filters/FiltersToggle', () => {
     const { container } = render(<FiltersToggle><ChildMock /></FiltersToggle>)
     const User = userEvent.setup()
 
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     const divEl = container.querySelector('div')
     const button = screen.getByRole('button')
 
