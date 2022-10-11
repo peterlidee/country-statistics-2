@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import FilterRow from '../../region/FilterRow'
 import FilterCheckBox from '../../region/FilterCheckbox'
@@ -10,14 +9,13 @@ const ChildMock = jest.fn()
 describe('components/filters/region/FilterRow', () => {
 
   test('It renders', () => {
-    const { container } = render(
+    render(
       <FilterRow 
         name="name"
         activeRegions={[]} 
         region={undefined}
-        count={1} />
+        count={"count"} />
     )
-    expect(container.querySelector('.filter__row')).toBeInTheDocument()
     expect(FilterCheckBox).toHaveBeenCalledWith(
       expect.objectContaining({
         name: 'name', 
@@ -26,8 +24,7 @@ describe('components/filters/region/FilterRow', () => {
       }),
       expect.anything()
     )
-    expect(container.querySelector('.filtercheckbox__count')).toBeInTheDocument()
-    expect(container.querySelector('.filtercheckbox__count-inner')).toHaveTextContent('1')
+    expect(screen.getByText(/count/i)).toBeInTheDocument()
   })
 
   test('it renders the child', () => {
