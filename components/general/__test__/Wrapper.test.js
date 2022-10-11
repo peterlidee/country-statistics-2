@@ -1,23 +1,27 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+/* eslint-disable testing-library/no-node-access */
+/* eslint-disable testing-library/no-container */
+
+import { render } from '@testing-library/react'
 
 import Wrapper from '../Wrapper'
 
 const ChildMock = jest.fn()
 
 describe('components/general/Wrapper', () => {
+
   test('It renders', () => {
     const { container } = render(<Wrapper base="base" modifier="modifier" />)
     expect(container.querySelector('div')).toBeInTheDocument()
   })
+
   test('It prints the correct classes', () => {
-    const { container, rerender } = render(<Wrapper base="base" modifier="modifier" />)
+    const { container } = render(<Wrapper base="base" modifier="modifier" />)
     expect(container.querySelector('div')).toHaveClass('base base--modifier')
-    rerender(<Wrapper base="base2" modifier="modifier2" />)
-    expect(container.querySelector('div')).toHaveClass('base2 base2--modifier2')
   })
+
   test('It passes children correctly', () => {
     render(<Wrapper base="base" modifier="modifier"><ChildMock /></Wrapper>)
     expect(ChildMock).toHaveBeenCalled()
   })
+
 })
