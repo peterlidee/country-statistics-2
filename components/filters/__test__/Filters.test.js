@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import Filters from '../Filters'
@@ -27,14 +26,12 @@ beforeEach(() => {
 describe('components/filters/Filters', () => {
 
   test('It renders', () => {
-    const { container } = render(
+    render(
       <Filters hiddenFields={[]} filterData={filterDataMock}/>
     )
-    expect(container.querySelector('.site__filters')).toBeInTheDocument()
-    expect(container.querySelector('.filters__title')).toBeInTheDocument()
-    expect(IconFilters).toHaveBeenCalledTimes(1)
-    expect(container.querySelector('.filters__title')).toHaveTextContent(/filter by/i)
 
+    expect(screen.getByText(/filter by/i)).toBeInTheDocument()
+    expect(IconFilters).toHaveBeenCalledTimes(1)
     expect(Collapse).toHaveBeenCalledTimes(4)
     expect(RegionFilter).toHaveBeenCalledTimes(1)
     expect(NumberFilter).toHaveBeenCalledTimes(3)
