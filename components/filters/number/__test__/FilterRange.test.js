@@ -1,17 +1,13 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 
 import FilterRange from '../../number/FilterRange'
 import { Range } from 'react-range'
 
-// jest.mock('react-range', () => {
-//   return({ Range: jest.fn() })
-// })
 jest.mock('react-range')
 
 describe('components/filters/number/FilterRange', () => {
   test('It renders', () => {
-    const { container } = render(<FilterRange 
+    render(<FilterRange 
       min={0}
       max={100}
       steps={10}
@@ -20,7 +16,6 @@ describe('components/filters/number/FilterRange', () => {
       sliderFinalSelection={[0,100]} 
       handleSliderFinalSelection={() => {}} />
     )
-    expect(container.querySelector('div')).toBeInTheDocument()
     expect(Range).toHaveBeenCalled()
     // not sure how to test the rest ...
   })
