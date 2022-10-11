@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import CountryListLegend from '../CountryListLegend'
 import Wrapper from '../../general/Wrapper'
