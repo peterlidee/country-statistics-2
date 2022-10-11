@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
