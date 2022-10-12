@@ -1,6 +1,5 @@
-import { useState } from 'react';
-import IconPan from '../../svgSnippets/IconPan';
-import PropTypes from 'prop-types';
+import IconPan from '../../svgSnippets/IconPan'
+import PropTypes from 'prop-types'
 
 // MapRegionButton is used to pan the map to region and subregion
 // (panning to country is handled in MapWidget itself)
