@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 function CountryCount(props){
   return(
     <div className="country-count">
-      displaying <span className="country-count__number">{props.count}</span> countr{props.count == 1 ? 'y' : 'ies'}
+      displaying <span className="country-count__number">{props.count}</span> {props.count == 1 ? 'country' : 'countries'}
     </div>
   )
 }
