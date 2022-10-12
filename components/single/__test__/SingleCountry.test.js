@@ -1,13 +1,11 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
-
-import SingleCountry from '../SingleCountry'
 
 import Header from '../../header/Header'
 import Sources from '../../sources/Sources'
 import Source from '../../sources/Source'
 import BreadCrumb from '../BreadCrumb'
 
+import SingleCountry from '../SingleCountry'
 import SingleCountryHeader from '../sections/SingleCountryHeader'
 import SingleCountryStatus from '../sections/SingleCountryStatus'
 import SingleCountryFlags from '../sections/SingleCountryFlags'
@@ -53,7 +51,7 @@ describe('components/single/SingleCountry', () => {
       ),
       expect.anything()
     )
-    expect(container.querySelector('.single-country')).toBeInTheDocument()
+    expect(screen.getByRole('article')).toBeInTheDocument()
     expect(SingleCountryHeader).toHaveBeenCalledWith(
       expect.objectContaining(
         { countryName: 'Algeria' }
