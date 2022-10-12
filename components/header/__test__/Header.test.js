@@ -1,5 +1,4 @@
 import { render, screen } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import Header from '../Header'
 import IconLogo from '../../svgSnippets/IconLogo'
@@ -15,10 +14,17 @@ jest.mock('../SettingsOptions')
 describe('components/header/Header', () => {
 
   test('It renders', () => {
-    const { container } = render(<Header />)
-    expect(container.querySelector('header')).toBeInTheDocument()
+    render(<Header />)
+
+    expect(screen.getByRole('banner')).toBeInTheDocument()
     expect(screen.getByRole('link', { name: /country statistics/i })).toBeInTheDocument()
     expect(IconLogo).toHaveBeenCalled()
+  })
+
+  test('It does not render settings mocks when home prop false', () => {
+    render(<Header home={false} />)
+    expect(SettingsToggle).not.toHaveBeenCalled()
+    expect(SettingsOptions).not.toHaveBeenCalled()
   })
 
   test('It renders settings mocks when home prop true', () => {
