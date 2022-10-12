@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import { useRouter } from 'next/router'
@@ -57,7 +56,6 @@ describe('SettingsOptions', () => {
   })
 
   test('It calls router.push with the correct query', async() => {
-
     const pushMock = jest.fn()
     useRouter.mockReturnValue({ query: { hide: 'population' }, push: pushMock})
     render(<SettingsOptions />)
