@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import singleCountryMocks from '../../../../__mock__/data/singleCountryMocks'
 
@@ -30,8 +29,9 @@ const setGeoCodeLoading = jest.fn()
 const setGeoCodeError = jest.fn()
 
 describe('components/single/map/MapControles', () => {
+
   test('It renders', () => {
-    const { container } = render(<MapControles 
+    render(<MapControles 
       country={singleCountryMocks[0]} 
       map={map} 
       setCountryOnMap={setCountryOnMap}
@@ -40,7 +40,7 @@ describe('components/single/map/MapControles', () => {
       regionCountries={regionCountries}
       subregionCountries={subregionCountries} />
     )
-    expect(container.querySelector('.map-controles')).toBeInTheDocument()
+
     expect(MapCapitalButton).toHaveBeenCalledWith(
       expect.objectContaining({
         capital: 'Algiers',
@@ -50,7 +50,6 @@ describe('components/single/map/MapControles', () => {
       }),
       expect.anything()
     )
-    expect(container.querySelector('.map-controles__button-container')).toBeInTheDocument()
     expect(IconPan).toHaveBeenCalledWith(
       expect.objectContaining({ active: true }),
       expect.anything()
@@ -90,7 +89,6 @@ describe('components/single/map/MapControles', () => {
   })
 
   test('It renders with no capitalname', () => {
-    jest.resetAllMocks()
     render(<MapControles 
       country={singleCountryMocks[2]} 
       map={map} 
@@ -104,7 +102,6 @@ describe('components/single/map/MapControles', () => {
   })
 
   test('It renders with no subregion', () => {
-    jest.resetAllMocks()
     render(<MapControles 
       country={singleCountryMocks[1]} 
       map={map} 
@@ -122,4 +119,5 @@ describe('components/single/map/MapControles', () => {
     )
     expect(MapRegionButton).toHaveBeenCalledTimes(1)
   })
+
 })
