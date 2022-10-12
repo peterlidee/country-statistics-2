@@ -7,6 +7,7 @@ jest.mock('react-fetch-hook')
 const ChildMock = jest.fn()
 
 describe('components/single/map/FetchRegionCountries', () => {
+
   test('It renders', () => {
     useFetch.mockReturnValue({
       isLoading: false,
@@ -30,4 +31,5 @@ describe('components/single/map/FetchRegionCountries', () => {
       expect.anything()
     )
   })
+  
 })
