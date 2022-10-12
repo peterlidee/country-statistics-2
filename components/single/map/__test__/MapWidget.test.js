@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import singleCountriesMock from '../../../../__mock__/data/singleCountryMocks'
 import MapControles from '../MapControles'
@@ -40,6 +39,7 @@ const subregionCountries = {
 }
 
 describe('components/single/map/MapWidget', () => {
+
   test('It renders', () => {
     const { container } = render(
       <MapWidget 
@@ -48,8 +48,6 @@ describe('components/single/map/MapWidget', () => {
         subregionCountries={subregionCountries}
       />
     )
-    expect(container.querySelector('.single-country__map')).toBeInTheDocument()
-    expect(container.querySelector('.single-country__box')).not.toBeInTheDocument()
     expect(GoogleMap).not.toHaveBeenCalled()
     expect(useJsApiLoader).toHaveBeenCalled()
     expect(MapControles).not.toHaveBeenCalled()
