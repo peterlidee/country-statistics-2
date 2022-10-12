@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import MapRegionButton from '../MapRegionButton'
 import IconPan from '../../../svgSnippets/IconPan'
@@ -28,8 +27,9 @@ const subregionCountriesNoData = {
 }
 
 describe('components/single/map/MapControles', () => {
+
   test('It renders with no label', () => {
-    const { container } = render(
+    render(
       <MapRegionButton 
         type="subregion" 
         label=""
@@ -38,11 +38,12 @@ describe('components/single/map/MapControles', () => {
         setActive={() => {}} 
         countries={subregionCountries} />
     )
-    expect(container.querySelector('.map-controles__button-container')).not.toBeInTheDocument()
+    expect(IconPan).not.toHaveBeenCalled()
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
 
   test('It renders', () => {
-    const { container } = render(
+    render(
       <MapRegionButton 
         type="subregion" 
         label="Northern Africa"
@@ -51,7 +52,6 @@ describe('components/single/map/MapControles', () => {
         setActive={() => {}} 
         countries={subregionCountries} />
     )
-    expect(container.querySelector('.map-controles__button-container')).toBeInTheDocument()
     expect(IconPan).toHaveBeenCalledWith(
       expect.objectContaining({ active: false }),
       expect.anything()
@@ -61,7 +61,7 @@ describe('components/single/map/MapControles', () => {
   })
 
   test('It renders with loading', () => {
-    const { container } = render(
+    render(
       <MapRegionButton 
         type="subregion" 
         label="Northern Africa"
@@ -83,6 +83,8 @@ describe('components/single/map/MapControles', () => {
         setActive={() => {}} 
         countries={subregionCountriesNoData} />
     )
-    expect(container.querySelector('.map-controles__button-container')).not.toBeInTheDocument()
+    expect(IconPan).not.toHaveBeenCalled()
+    expect(screen.queryByRole('button')).not.toBeInTheDocument()
   })
+  
 })
