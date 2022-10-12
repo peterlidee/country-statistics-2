@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import SingleCountryFetch from '../SingleCountryFetch'
 import useFetch from 'react-fetch-hook'
@@ -15,6 +14,7 @@ jest.mock('../../sources/Source')
 const ChildMock = jest.fn()
 
 describe('components/single/SingleCountryFetch', () => {
+
   test('It renders', async () => {
     const isLoading = false
     const error = undefined
@@ -29,6 +29,7 @@ describe('components/single/SingleCountryFetch', () => {
         {() => <ChildMock />}
       </SingleCountryFetch>
     )
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.querySelector('.single-country__extraClass')).toBeInTheDocument()
     expect(ChildMock).toHaveBeenCalled()
     expect(Sources).toHaveBeenCalled()
@@ -42,4 +43,5 @@ describe('components/single/SingleCountryFetch', () => {
       expect.anything()
     )
   })
+  
 })
