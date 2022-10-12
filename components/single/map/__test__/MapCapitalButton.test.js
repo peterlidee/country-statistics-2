@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import MapCapitalButton from '../MapCapitalButton'
 import IconPan from '../../../svgSnippets/IconPan'
@@ -7,8 +6,9 @@ import IconPan from '../../../svgSnippets/IconPan'
 jest.mock('../../../svgSnippets/IconPan')
 
 describe('components/single/map/MapControles', () => {
+
   test('It renders', () => {
-    const { container } = render(
+    render(
       <MapCapitalButton 
         capital="Algiers"
         countryName="Algeria"
@@ -19,7 +19,6 @@ describe('components/single/map/MapControles', () => {
         setGeoCodeLoading={() => {}}
         setGeoCodeError={() => {}} />
     )
-    expect(container.querySelector('.map-controles__button-container')).toBeInTheDocument()
     expect(IconPan).toHaveBeenCalledWith(
       expect.objectContaining({
         active: false
@@ -28,4 +27,5 @@ describe('components/single/map/MapControles', () => {
     )
     expect(screen.getByRole('button', { name: 'Algiers' })).toBeInTheDocument()
   })
+
 })
