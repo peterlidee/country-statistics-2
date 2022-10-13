@@ -1,59 +1,96 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 
 import useFetch from 'react-fetch-hook'
-import NeighbouringCountries, { findMatchingCountry } from '../NeighbouringCountries'
+import NeighbouringCountries from '../NeighbouringCountries'
 import Source from '../../../sources/Source'
 import NeighbourComponent from '../NeighbourComponent'
-
-test('helper function findMatchingCountry', () => {
-  const countries = [
-    { cca3: 'aaa' },
-    { cca3: 'bbb' },
-    { cca3: 'ccc' },
-    { cca3: 'ddd' },
-    { cca3: 'eee' },
-    { cca3: 'fff' },
-    { cca3: 'ggg' },
-    { cca3: 'hhh' },
-  ]
-  const find1 = findMatchingCountry('fff', countries)
-  const find2 = findMatchingCountry('ff', countries)
-  const find3 = findMatchingCountry('zzz', countries)
-  expect(find1[0]).toMatchObject({ cca3: 'fff' })
-  expect(find2).toEqual([])
-  expect(find3).toEqual([])
-})
 
 jest.mock('react-fetch-hook')
 jest.mock('../../../sources/Source')
 jest.mock('../NeighbourComponent', () => {
-  return jest.fn((props) => <>{props.children}</>)
+  return jest.fn((props) => 
+    <>
+      {props.source}
+      {props.children}
+    </>
+  )
 })
 
 describe('components/single/sections/NeighbouringCountries', () => {
+
   test('It renders with no data', () => {
     useFetch.mockReturnValue({
       isLoading: false,
       error: undefined,
       data: []
     })
-    const { container } = render(
-      <NeighbouringCountries 
-        borders={['aaa', 'bbb', 'ccc']}
-      />
+    render(
+      <NeighbouringCountries borders={['aaa', 'bbb', 'ccc']} />
     )
     expect(NeighbourComponent).toHaveBeenCalled()
-    expect(container.querySelector('.neighbours-grid')).not.toBeInTheDocument()
     expect(screen.getAllByRole('link')).toHaveLength(3)
     expect(screen.getByRole('link', { name: 'aaa' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'aaa' })).toHaveAttribute('href', '/country/aaa')
     expect(screen.getByRole('link', { name: 'bbb' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'ccc' })).toBeInTheDocument()
   })
 
+  test('It renders no grid when 6 or less then 6 countries', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: undefined,
+      data: []
+    })
+    const { container, rerender } = render(
+      <NeighbouringCountries borders={['aaa', 'bbb', 'ccc']} />
+    )
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('.neighbours-grid')).not.toBeInTheDocument()
+
+    rerender(
+      <NeighbouringCountries borders={['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff']} />
+    )
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('.neighbours-grid')).not.toBeInTheDocument()
+  })
+
+  test('It renders a grid when more then 6 countries', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: undefined,
+      data: []
+    })
+    const { container } = render(
+      <NeighbouringCountries borders={['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff', 'ggg']} />
+    )
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
+    expect(container.querySelector('.neighbours-grid')).toBeInTheDocument()
+  })
+
+  test('It contructs the country links correctly with no data', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: undefined,
+      data: []
+    })
+    render(
+      <NeighbouringCountries borders={['aaa']} />
+    )
+    expect(screen.getByRole('link', { name: 'aaa' })).toHaveAttribute('href', '/country/aaa')
+  })
+
+  test('It contructs the country links correctly with data', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: undefined,
+      data: [{ cca3: 'aaa', name: { common: 'aaaa'}},]
+    })
+    render(
+      <NeighbouringCountries borders={['aaa']} />
+    )
+    expect(screen.getByRole('link', { name: 'aaaa' })).toHaveAttribute('href', '/country/aaa')
+  })
+
   test('It renders with data', () => {
-    // jest.resetAllMocks()
     useFetch.mockReturnValue({
       isLoading: false,
       error: undefined,
@@ -63,31 +100,12 @@ describe('components/single/sections/NeighbouringCountries', () => {
       ]
     })
     render(
-      <NeighbouringCountries 
-        borders={['aaa', 'bbb', 'zzz']}
-      />
+      <NeighbouringCountries borders={['aaa', 'bbb', 'zzz']} />
     )
     expect(screen.getAllByRole('link')).toHaveLength(3)
     expect(screen.getByRole('link', { name: 'aaaa' })).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'aaaa' })).toHaveAttribute('href', '/country/aaa')
-    
     expect(screen.getByRole('link', { name: 'bbbb' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'zzz' })).toBeInTheDocument()
-  })
-
-  test('It gets a grid class with more then 6 border items', () => {
-    // jest.resetAllMocks()
-    useFetch.mockReturnValue({
-      isLoading: false,
-      error: undefined,
-      data: []
-    })
-    const { container } = render(
-      <NeighbouringCountries 
-        borders={['aaa', 'bbb', 'ccc', 'ddd', 'eee', 'fff', 'ggg', 'hhh']}
-      />
-    )
-    expect(container.querySelector('.neighbours-grid')).toBeInTheDocument()
   })
 
   test('It rerenders correctly', () => {
@@ -102,19 +120,51 @@ describe('components/single/sections/NeighbouringCountries', () => {
       ]
     })
     const { rerender } = render(
-      <NeighbouringCountries 
-        borders={['aaa', 'bbb']}
-      />
+      <NeighbouringCountries borders={['aaa', 'bbb']} /> 
     )
     expect(screen.getByRole('link', { name: 'aaaa' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'bbbb' })).toBeInTheDocument()
-    render(
-      <NeighbouringCountries 
-        borders={['ccc', 'ddd']}
-      />
-    )
+    rerender(<NeighbouringCountries borders={['ccc', 'ddd']}/>)
     expect(screen.getByRole('link', { name: 'cccc' })).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'dddd' })).toBeInTheDocument()
   })
+
+  test('It passes source as prop with loading, no error', () => {
+    useFetch.mockReturnValue({
+      isLoading: true,
+      error: undefined,
+      data: []
+    })
+    render( <NeighbouringCountries borders={['aaa']} />)
+
+    expect(Source).toHaveBeenCalledWith(
+      expect.objectContaining({
+        endpoint: 'https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=aaa',
+        loading: true,
+        error: undefined,
+      }),
+      expect.anything()
+    )
+  })
+
+  test('It passes source as prop with no loading, error', () => {
+    useFetch.mockReturnValue({
+      isLoading: false,
+      error: true,
+      data: []
+    })
+    render( <NeighbouringCountries borders={['aaa']} />)
+
+    expect(Source).toHaveBeenCalledWith(
+      expect.objectContaining({
+        endpoint: 'https://restcountries.com/v3.1/alpha/?fields=cca3,name;codes=aaa',
+        loading: false,
+        error: true,
+      }),
+      expect.anything()
+    )
+  })
+
+  // no borders is not needed bc it only gets called when borders
 
 })

@@ -1,21 +1,12 @@
-import useFetch from "react-fetch-hook";
-import Link from 'next/link';
-import Source from '../../sources/Source';
-import NeighbourComponent from './NeighbourComponent';
-import PropTypes from "prop-types";
+import useFetch from 'react-fetch-hook'
+import Link from 'next/link'
+import Source from '../../sources/Source'
+import NeighbourComponent from './NeighbourComponent'
+import findMatchingCountry from '../../../lib/single/findMatchingCountry'
+import PropTypes from 'prop-types'
 
-
-// helper function to filter out the matching country
-const findMatchingCountry = (border, countries) => countries.filter(country => country.cca3 == border)
-
-export { findMatchingCountry }
-
-// by the time this component get loaded,
-// the error, loading and data of the parent (singleCountries) are already
-// handled by ValidateNeighbouringCountries
-// and props.borders is garanteed
-// we did all this to avoid conditional useFetch
-// (having a return before useFetch)
+// by the time this component get loaded, the error, loading and data of the parent (singleCountries) are already handled by  ValidateNeighbouringCountries and props.borders is garanteed
+// we did all this to avoid conditional useFetch (having a return before useFetch)
 function NeighbouringCountries(props){
 
   // make the fetch
