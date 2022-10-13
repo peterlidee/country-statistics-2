@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
 
 import BoxWrapper from '../../../general/BoxWrapper'
@@ -28,7 +27,7 @@ describe('components/single/sections/SingleCountryFlags', () => {
   })
 
   test('It renders with no controles when no coatOfArms prop', () => {
-    const { container } = render(
+    render(
       <SingleCountryFlags 
         countryName='Algeria' 
         flag="flag" />
@@ -41,11 +40,11 @@ describe('components/single/sections/SingleCountryFlags', () => {
     )
     expect(screen.getByRole('img')).toBeInTheDocument()
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'flag of Algeria')
-    expect(container.querySelector('.flags__controles')).not.toBeInTheDocument()
+    expect(screen.queryAllByRole('buttons')).toHaveLength(0)
   })
 
   test('It renders with controles when coatOfArms and flag props', () => {
-    const { container } = render(
+    render(
       <SingleCountryFlags 
         countryName='Algeria'
         coatOfArms='coatOfArms' 
@@ -59,13 +58,12 @@ describe('components/single/sections/SingleCountryFlags', () => {
     )
     expect(screen.getByRole('img')).toBeInTheDocument()
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'flag of Algeria')
-    expect(container.querySelector('.flags__controles')).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'flag' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'coat of arms' })).toBeInTheDocument()
   })
 
   test('It has correctly working controles', async () => {
-    const { container, rerender } = render(
+    const { rerender } = render(
       <SingleCountryFlags 
       countryName='Algeria'
       coatOfArms='coatOfArms' 
@@ -107,7 +105,7 @@ describe('components/single/sections/SingleCountryFlags', () => {
         flag="flag2" />
     )
     // no coa passed
-    expect(container.querySelector('.flag__controles')).not.toBeInTheDocument()
+    expect(screen.queryAllByRole('button')).toHaveLength(0)
     expect(screen.getByRole('img')).toHaveAttribute('src', 'flag2')
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'flag of Belgium')
   })
