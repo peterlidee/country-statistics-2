@@ -30,7 +30,7 @@ describe('components/single/sections/SingleCountryMap', () => {
   test('It renders with no country', () => {
     render(
       <SingleCountryMap 
-          country={undefined} />
+        country={undefined} />
     )
     expect(BoxWrapper).toHaveBeenCalledWith(
       expect.objectContaining({ name: 'map' }),
@@ -67,7 +67,6 @@ describe('components/single/sections/SingleCountryMap', () => {
   })
 
   test('It renders with country and subregion', () => {
-    jest.clearAllMocks()
     render(
       <SingleCountryMap 
         country={singleCountryMocks[0]} />
