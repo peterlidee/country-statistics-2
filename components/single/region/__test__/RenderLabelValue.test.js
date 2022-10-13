@@ -1,5 +1,4 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
 import RenderLabelValue from '../RenderLabelValue'
 
 describe('components/single/region/RenderLabelValue', () => {
@@ -13,8 +12,8 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={true}
       />
     )
-    expect(screen.queryByText('label')).toBeInTheDocument()
-    expect(screen.queryByText('value')).toBeInTheDocument()
+    expect(screen.getByText('label')).toBeInTheDocument()
+    expect(screen.getByText('value')).toBeInTheDocument()
   })
 
   test('It renders with hasData && value=undefined ', () => {
@@ -26,8 +25,8 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={true}
       />
     )
-    expect(screen.queryByText('label')).toBeInTheDocument()
-    expect(screen.queryByText('None')).toBeInTheDocument()
+    expect(screen.getByText('label')).toBeInTheDocument()
+    expect(screen.getByText('None')).toBeInTheDocument()
   })
 
   test('It renders with !hasData && !value', () => {
@@ -39,8 +38,8 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={false}
       />
     )
-    expect(screen.queryByText('label')).toBeInTheDocument()
-    expect(screen.queryByText('No data')).toBeInTheDocument()
+    expect(screen.getByText('label')).toBeInTheDocument()
+    expect(screen.getByText('No data')).toBeInTheDocument()
   })
 
   test('It renders with !hasData && loading', () => {
@@ -52,8 +51,8 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={false}
       />
     )
-    expect(screen.queryByText('label')).toBeInTheDocument()
-    expect(screen.queryByText('...')).toBeInTheDocument()
+    expect(screen.getByText('label')).toBeInTheDocument()
+    expect(screen.getByText('...')).toBeInTheDocument()
   })
 
   test('It rerenders correctly', () => {
@@ -65,8 +64,8 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={true}
       />
     )
-    expect(screen.queryByText('label')).toBeInTheDocument()
-    expect(screen.queryByText('first value')).toBeInTheDocument()
+    expect(screen.getByText('label')).toBeInTheDocument()
+    expect(screen.getByText('first value')).toBeInTheDocument()
     rerender(
       <RenderLabelValue 
         loading={false}
@@ -75,7 +74,7 @@ describe('components/single/region/RenderLabelValue', () => {
         hasData={true}
       />
     )
-    expect(screen.queryByText('second value')).toBeInTheDocument()
+    expect(screen.getByText('second value')).toBeInTheDocument()
   })
 
 })
