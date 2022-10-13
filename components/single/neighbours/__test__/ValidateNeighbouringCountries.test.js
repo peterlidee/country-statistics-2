@@ -1,12 +1,11 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 import NeighbourComponent from '../NeighbourComponent'
 import NeighbouringCountries from '../NeighbouringCountries'
+import ValidateNeighbouringCountries from '../ValidateNeighbouringCountries'
 
 jest.mock('../NeighbourComponent')
 jest.mock('../NeighbouringCountries')
 
-import ValidateNeighbouringCountries from '../ValidateNeighbouringCountries'
 
 describe('components/single/neighbours/ValidateNeighbouringCountries', () => {
   test('It renders with loading and no data', () => {
