@@ -1,12 +1,10 @@
 import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import SingleCountryBasisStats from '../SingleCountryBasicStats'
 import BoxWrapper from '../../../general/BoxWrapper'
 
 jest.mock('../../../general/BoxWrapper', () => {
   return jest.fn((props) => <>{props.children}</>)
 })
-
-import SingleCountryBasisStats from '../SingleCountryBasicStats'
 
 describe('components/single/sections/SingleCountryBasicStats', () => {
   
