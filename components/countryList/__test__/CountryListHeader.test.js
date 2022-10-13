@@ -12,10 +12,6 @@ jest.mock('../../general/Wrapper', () => {
 })
 jest.mock('../../svgSnippets/IconSort')
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 function setup(sortBy, sortAsc){
   render(
     <CountryListHeader 

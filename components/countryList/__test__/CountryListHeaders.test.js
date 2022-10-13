@@ -11,10 +11,6 @@ jest.mock('../../general/Wrapper', () => {
 jest.mock('../CountryListHeader')
 jest.mock('../CountryListLegend')
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('components/countryList/CountryListHeaders', () => {
   test('It renders', () => {
     render(

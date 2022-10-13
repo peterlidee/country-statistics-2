@@ -19,10 +19,6 @@ jest.mock('../../general/Collapse', () => {
 jest.mock('../region/RegionFilter')
 jest.mock('../number/NumberFilter')
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('components/filters/Filters', () => {
 
   test('It renders', () => {

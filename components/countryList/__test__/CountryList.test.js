@@ -20,10 +20,6 @@ jest.mock('../../filters/Filters')
 jest.mock('../CountryListHeaders')
 jest.mock('../CountryRow')
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 function setupRender(){
   render(
     <RegionFilterContextProvider filterData={filterDataMock}>

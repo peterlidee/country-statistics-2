@@ -6,10 +6,6 @@ import IconFilters from '../../svgSnippets/IconFilters'
 jest.mock('../../svgSnippets/IconFilters')
 const ChildMock = jest.fn()
 
-beforeEach(() => {
-  jest.clearAllMocks()
-})
-
 describe('components/filters/FiltersToggle', () => {
   
   test('It renders', () => {

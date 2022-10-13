@@ -42,10 +42,6 @@ describe('components/filters/region/FilterCheckBox', () => {
 
 describe('It calls router.push with the correct props', () => {
 
-  beforeEach(() => {
-    mockPush.mockClear()
-  })
-
   test('A click on a subregion that is active and region is also active [1.1.1]', async () => {
     render(
       <RegionFilterContextProvider filterData={filterDataMock}>
