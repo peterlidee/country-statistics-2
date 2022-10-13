@@ -1,5 +1,4 @@
-import { screen, render } from '@testing-library/react'
-import { toBeInTheDocument } from '@testing-library/jest-dom'
+import { render } from '@testing-library/react'
 
 import SingleCountryWeather from '../SingleCountryWeather'
 import Placeholder from '../../../svgSnippets/Placeholder'
@@ -66,6 +65,7 @@ describe('components/single/sections/SingleCountryWeather', () => {
         capitalName={undefined}
         countryCode={'DZA'} />
     )
+    // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
     expect(container.querySelector('.single-country__weather')).toBeInTheDocument()
   })
 
