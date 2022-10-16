@@ -54,9 +54,9 @@ describe('components/single/sections/SingleCountryRegion', () => {
         data={{}}
       />
     )
-    expect(RenderLabelValue.mock.calls[0][0]).toHaveProperty('value', undefined)
-    expect(RenderLabelValue.mock.calls[1][0]).toHaveProperty('value', undefined)
-    expect(RenderLabelValue.mock.calls[2][0]).toHaveProperty('value', null)
+    expect(RenderLabelValue.mock.calls[0][0]).toMatchObject({ value: undefined })
+    expect(RenderLabelValue.mock.calls[1][0]).toMatchObject({ value: undefined })
+    expect(RenderLabelValue.mock.calls[2][0]).toMatchObject({ value: null })
   })
 
   test('It renders with no data', () => {
@@ -68,9 +68,9 @@ describe('components/single/sections/SingleCountryRegion', () => {
         data={undefined}
       />
     )
-    expect(RenderLabelValue.mock.calls[0][0]).toHaveProperty('value', undefined)
-    expect(RenderLabelValue.mock.calls[1][0]).toHaveProperty('value', undefined)
-    expect(RenderLabelValue.mock.calls[2][0]).toHaveProperty('value', null)
+    expect(RenderLabelValue.mock.calls[0][0]).toMatchObject({ value: undefined })
+    expect(RenderLabelValue.mock.calls[1][0]).toMatchObject({ value: undefined })
+    expect(RenderLabelValue.mock.calls[2][0]).toMatchObject({ value: null })
   })
 
   test('It rerenders correctly', () => {

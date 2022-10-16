@@ -40,6 +40,7 @@ describe('components/single/sections/SingleCountryFlags', () => {
     )
     expect(screen.getByRole('img')).toBeInTheDocument()
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'flag of Algeria')
+    // eslint-disable-next-line jest-dom/prefer-in-document
     expect(screen.queryAllByRole('buttons')).toHaveLength(0)
   })
 
@@ -105,6 +106,7 @@ describe('components/single/sections/SingleCountryFlags', () => {
         flag="flag2" />
     )
     // no coa passed
+    // eslint-disable-next-line jest-dom/prefer-in-document
     expect(screen.queryAllByRole('button')).toHaveLength(0)
     expect(screen.getByRole('img')).toHaveAttribute('src', 'flag2')
     expect(screen.getByRole('img')).toHaveAttribute('alt', 'flag of Belgium')

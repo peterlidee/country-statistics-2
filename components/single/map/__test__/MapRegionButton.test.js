@@ -57,7 +57,7 @@ describe('components/single/map/MapControles', () => {
       expect.anything()
     )
     expect(screen.getByRole('button', { name: 'Northern Africa' })).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: 'Northern Africa' })).not.toHaveAttribute('disabled')
+    expect(screen.getByRole('button', { name: 'Northern Africa' })).toBeEnabled()
   })
 
   test('It renders with loading', () => {
@@ -70,7 +70,7 @@ describe('components/single/map/MapControles', () => {
         setActive={() => {}} 
         countries={subregionCountriesLoading} />
     )
-    expect(screen.getByRole('button', { name: 'Northern Africa' })).toHaveAttribute('disabled')
+    expect(screen.getByRole('button', { name: 'Northern Africa' })).toBeDisabled()
   })
 
   test('It renders with no data', () => {
