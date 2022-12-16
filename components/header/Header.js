@@ -6,11 +6,9 @@ import SettingsOptions from './SettingsOptions'
 function Header(props){
   return(
     <header className="site__header">
-      <Link href="/">
-        <a className="site__logo" >
-          <IconLogo />
-          <div className="site__title">country statistics</div>
-        </a>
+      <Link href="/" className="site__logo">
+        <IconLogo />
+        <div className="site__title">country statistics</div>
       </Link>
       {props.home && 
         <SettingsToggle>

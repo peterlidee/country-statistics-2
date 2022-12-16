@@ -31,9 +31,7 @@ function NeighbouringCountries(props){
         
         return(
           <div key={`country-${border}`}>
-            <Link href={`/country/${border}`}>
-              <a className="neighbour-country">{countryName}</a>
-            </Link>
+            <Link href={`/country/${border}`} className="neighbour-country">{countryName}</Link>
           </div>
         )
       })}

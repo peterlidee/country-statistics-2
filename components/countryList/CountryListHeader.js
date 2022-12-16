@@ -29,11 +29,10 @@ function CountryListHeader({ field, sortBy, sortAsc }){
           pathname: '/', 
           query: { ...router.query, sort: sortParameter }
         }} 
-        shallow>
-          <a className={`link__sort link__sort--${field.slug}`}>
-            {<IconSort sortActive={sortActive} sortAsc={sortAsc} />}
-            {field.label}
-          </a>
+        shallow
+        className={`link__sort link__sort--${field.slug}`}>
+          {<IconSort sortActive={sortActive} sortAsc={sortAsc} />}
+          {field.label}
       </Link>
     </Wrapper>
   ) 

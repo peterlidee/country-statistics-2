@@ -11,9 +11,7 @@ function CountryRow({ country, index, hiddenFields }){
         {index + 1}
       </Wrapper>
       <Wrapper base={'country-cell'} modifier={fieldsData[0].slug}>
-        <Link href={`/country/${country.cca3}`}>
-          <a>{country[fieldsData[0].key]}</a>
-        </Link>
+        <Link href={`/country/${country.cca3}`}>{country[fieldsData[0].key]}</Link>
       </Wrapper>
       {[1,2,3].map(number => (
         !hiddenFields.includes(fieldsData[number].slug) && 
