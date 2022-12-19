@@ -1,5 +1,5 @@
 import Home from '../components/Home'
-import addExtraData from '../lib/data/addExtraData'
+import compileData from '../lib/data/compileData'
 import getFilterData from '../lib/data/getFilterData'
 
 function HomePage(props){
@@ -18,15 +18,15 @@ export async function getStaticProps(){
 
   // we need to do some cleanup and some adding to the data
   // we do in this component to prevent rerendering on filtering or display changes
-  const countriesExtraData = addExtraData(countries)
+  const compiledCountries = compileData(countries)
 
   // calculate filter data from the country data
   // we need data to filter along: region, subregion, population, area and density
-  const filterData = getFilterData(countriesExtraData)
+  const filterData = getFilterData(compiledCountries)
 
   return {
     props: {
-      countries: countriesExtraData,
+      countries: compiledCountries,
       filterData: filterData,
       endpoint: endpoint,
     }
