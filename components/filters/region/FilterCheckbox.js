@@ -1,15 +1,11 @@
-import { useContext } from 'react'
 import { useRouter } from 'next/router'
 import PropTypes from 'prop-types'
-import RegionFilterContext from '../../context/RegionFilterContext'
-
 import updateRegionsQuery from '../../../lib/regionFilter/updateRegionsQuery'
 
-function FilterCheckBox(props){
+function FilterCheckbox({ name, region, activeRegions, regionsAndSubregions }){
   
-  const { regionsAndSubregions } = useContext(RegionFilterContext)
   const router = useRouter()
-  const isActive = props.activeRegions.includes(props.name)
+  const isActive = activeRegions.includes(name)
 
   const handler = () => {
 
@@ -27,27 +23,27 @@ function FilterCheckBox(props){
     let toAdd = []
     let toRemove = []
     
-    if(props.region){ // 1. subregion is clicked
+    if(region){ // 1. subregion is clicked
       if(isActive){ // 1.1 subregion active
-        if(props.activeRegions.includes(props.region)){
+        if(activeRegions.includes(region)){
           // 1.1.1 if the region is active -> deactivate region and subregion
           // toAdd = []
-          toRemove = [ props.name, props.region ]
+          toRemove = [ name, region ]
         }else{
           // 1.1.2 if the region is not active -> deactivate subregion
           // toAdd = []
-          toRemove = [ props.name ]
+          toRemove = [ name ]
         }
       }else{ // 1.2 subregion not active
-        const allOtherSubregions = regionsAndSubregions[props.region].subregionNames.filter(item => item !== props.name)
-        const allOtherSubregionsActive = allOtherSubregions.every(subregion => props.activeRegions.includes(subregion))
+        const allOtherSubregions = regionsAndSubregions[region].subregionNames.filter(item => item !== name)
+        const allOtherSubregionsActive = allOtherSubregions.every(subregion => activeRegions.includes(subregion))
         if(allOtherSubregionsActive){
           // 1.2.1 if all other subregions in this region are active -> activate subregion and region
-          toAdd = [ props.region, props.name ]
+          toAdd = [ region, name ]
           // toRemove = []
         }else{
           // 1.2.2 if not all other subregions in this region are active -> activate subregion
-          toAdd = [ props.name ]
+          toAdd = [ name ]
           // toRemove = []
         }
       }
@@ -55,14 +51,14 @@ function FilterCheckBox(props){
       if(isActive){
         // 2.1 if the region is active -> deactivate region and all subregions
         // toAdd = []
-        toRemove = [ props.name, ...regionsAndSubregions[props.name].subregionNames ]
+        toRemove = [ name, ...regionsAndSubregions[name].subregionNames ]
       }else{
         // 2.2 if the region is not active -> activate region and all subregions
-        toAdd = [ props.name, ...regionsAndSubregions[props.name].subregionNames ]
+        toAdd = [ name, ...regionsAndSubregions[name].subregionNames ]
         // toRemove = []
       }
     }
-    const newRegionsQuery = updateRegionsQuery(props.activeRegions, toAdd, toRemove)
+    const newRegionsQuery = updateRegionsQuery(activeRegions, toAdd, toRemove)
 
     router.push({
       path: '/',
@@ -74,19 +70,18 @@ function FilterCheckBox(props){
   }
 
   return(
-    <>
-      <label className="filtercheckbox__label">
-        <input type="checkbox" className="filtercheckbox__input" value={""} checked={isActive} onChange={handler} />
-        {props.name}
-      </label>
-    </>
+    <label className="filtercheckbox__label">
+      <input type="checkbox" className="filtercheckbox__input" value={""} checked={isActive} onChange={handler} />
+      {name}
+    </label>
   )
 }
 
-FilterCheckBox.propTypes = {
+FilterCheckbox.propTypes = {
   name: PropTypes.string.isRequired,
   activeRegions: PropTypes.array.isRequired,
   // region can be undefined or String
+  regionsAndSubregions: PropTypes.object.isRequired,
 }
 
-export default FilterCheckBox;
+export default FilterCheckbox;
