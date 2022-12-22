@@ -1,9 +1,8 @@
-import { screen, render } from '@testing-library/react'
-
+import { render } from '@testing-library/react'
 import FilterRow from '../../region/FilterRow'
-import FilterCheckBox from '../../region/FilterCheckbox'
 
-jest.mock('../../region/FilterCheckbox')
+const FilterCheckboxMock = jest.fn()
+const FilterCheckboxCountMock = jest.fn()
 const ChildMock = jest.fn()
 
 describe('components/filters/region/FilterRow', () => {
@@ -11,30 +10,20 @@ describe('components/filters/region/FilterRow', () => {
   test('It renders', () => {
     render(
       <FilterRow 
-        name="name"
-        activeRegions={[]} 
-        region={undefined}
-        count={"count"} />
+        filterCheckbox={<FilterCheckboxMock />}
+        filterCheckboxCount={<FilterCheckboxCountMock />} />
     )
-    expect(FilterCheckBox).toHaveBeenCalledWith(
-      expect.objectContaining({
-        name: 'name', 
-        activeRegions: [],
-        region: undefined,
-      }),
-      expect.anything()
-    )
-    expect(screen.getByText(/count/i)).toBeInTheDocument()
+    expect(FilterCheckboxMock).toHaveBeenCalled()
+    expect(FilterCheckboxCountMock).toHaveBeenCalled()
   })
 
   test('it renders the child', () => {
     render(
       <FilterRow 
-        name="name"
-        activeRegions={[]} 
-        region={undefined}
-        count={1}>
-          <ChildMock />
+        filterCheckbox={<FilterCheckboxMock />}
+        filterCheckboxCount={<FilterCheckboxCountMock />}
+      >
+        <ChildMock />
       </FilterRow>
     )
     expect(ChildMock).toHaveBeenCalledTimes(1)
