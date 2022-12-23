@@ -1,7 +1,7 @@
 import { screen, render } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import FilterBlockRegion from '../../region/FilterBlockRegion'
+import SubregionToggle from '../../region/SubregionToggle'
 import FilterRow from '../../region/FilterRow'
 
 jest.mock('../../region/FilterRow', () => {
@@ -9,23 +9,18 @@ jest.mock('../../region/FilterRow', () => {
 })
 const ChildMock = jest.fn()
 
-describe('components/filters/region/FilterBlockRegion', () => {
+describe('components/filters/region/SubregionToggle', () => {
 
-  test('It renders without subfilters', () => {
+  test('It renders without children', () => {
     render(
-      <FilterBlockRegion
-          name="name"
-          region={undefined}
-          activeRegions={[]}
-          count={1}
-          hasSubFilter={false}
-        >
-          <ChildMock />
-        </FilterBlockRegion>
+      <SubregionToggle
+        filterCheckbox="FilterCheckbox"
+        filterCheckboxCount="FilterCheckboxCountMock" />
     )
     expect(FilterRow).toHaveBeenCalledWith(
       expect.objectContaining({
-        name: 'name', region: undefined, activeRegions: [], count: 1,
+        filterCheckbox: "FilterCheckbox",
+        filterCheckboxCount: "FilterCheckboxCountMock",
       }),
       expect.anything()
     )
@@ -33,34 +28,27 @@ describe('components/filters/region/FilterBlockRegion', () => {
     expect(ChildMock).not.toHaveBeenCalled()
   })
 
-  test('It renders with subfilters', () => {
+  test('It renders with children', () => {
     render(
-      <FilterBlockRegion
-          name="name"
-          region={undefined}
-          activeRegions={[]}
-          count={1}
-          hasSubFilter={true}
-        >
-          <ChildMock />
-        </FilterBlockRegion>
+      <SubregionToggle
+        filterCheckbox="FilterCheckbox"
+        filterCheckboxCount="FilterCheckboxCountMock"
+      >
+        <ChildMock />
+      </SubregionToggle>
     )
-    const button = screen.queryByRole('button', { name: /subregions/i })
-    expect(button).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /subregions/i })).toBeInTheDocument()
     expect(ChildMock).toHaveBeenCalled()
   })
 
   test('It collapses', async() => {
     const { container } = render(
-      <FilterBlockRegion
-          name="name"
-          region={undefined}
-          activeRegions={[]}
-          count={1}
-          hasSubFilter={true}
-        >
-          <ChildMock />
-        </FilterBlockRegion>
+      <SubregionToggle
+        filterCheckbox="FilterCheckbox"
+        filterCheckboxCount="FilterCheckboxCountMock"
+      >
+        <ChildMock />
+      </SubregionToggle>
     )
     const User = userEvent.setup()
     const button = screen.queryByRole('button', { name: /subregions/i })

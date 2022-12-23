@@ -6,41 +6,36 @@ import PropTypes from 'prop-types'
 // it contains a custom collapse if there are subregions
 // else if will just return a filterrow component
 
-function FilterBlockRegion(props){
+function SubregionToggle(props){
   // label of name, active, handler, count, children, hasSubfilter
   const [ open, setOpen ] = useState(false)
   const displayStyle = { 'display': open ? 'block': 'none' }
+
   return(
-    <div className="filter__block__region">
-      {/* one block per region */}
+    <>
       <FilterRow 
-        name={props.name} 
-        region={props.region}
-        activeRegions={props.activeRegions}
-        count={props.count}
+        filterCheckbox={props.filterCheckbox}
+        filterCheckboxCount={props.filterCheckboxCount}
       >
-        {props.hasSubFilter && 
+        {props.children && 
           <button className="collapse__controller collapse__controller--subfilter" onClick={() => setOpen(!open)}>
             <span className="collapse__status collapse__status--subfilter">{open ? "-" : "+"}</span>
             <span className="collapse__label collapse__label--subfilter">subregions</span>
           </button>
         }
       </FilterRow>
-      {props.hasSubFilter &&
+      {props.children &&
         <div className="collapse__content collapse__content--subfilter" style={displayStyle}>
           {props.children}
         </div>
       }
-    </div>
+    </>
   )
 }
 
-FilterBlockRegion.propTypes = {
-  name: PropTypes.string.isRequired,
-  // region can be undefined or string
-  activeRegions: PropTypes.array.isRequired,
-  count: PropTypes.number.isRequired,
-  hasSubFilter: PropTypes.bool.isRequired,
+SubregionToggle.propTypes = {
+  filterCheckbox: PropTypes.object.isRequired,
+  filterCheckboxCount: PropTypes.object.isRequired,
 }
 
-export default FilterBlockRegion;
+export default SubregionToggle;
