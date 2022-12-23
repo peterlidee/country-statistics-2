@@ -15,12 +15,12 @@ describe('components/filters/region/SubregionToggle', () => {
     render(
       <SubregionToggle
         filterCheckbox="FilterCheckbox"
-        filterCheckboxCount="FilterCheckboxCountMock" />
+        filterCheckboxCount="FilterCheckboxCount" />
     )
     expect(FilterRow).toHaveBeenCalledWith(
       expect.objectContaining({
         filterCheckbox: "FilterCheckbox",
-        filterCheckboxCount: "FilterCheckboxCountMock",
+        filterCheckboxCount: "FilterCheckboxCount",
       }),
       expect.anything()
     )
@@ -32,7 +32,7 @@ describe('components/filters/region/SubregionToggle', () => {
     render(
       <SubregionToggle
         filterCheckbox="FilterCheckbox"
-        filterCheckboxCount="FilterCheckboxCountMock"
+        filterCheckboxCount="FilterCheckboxCount"
       >
         <ChildMock />
       </SubregionToggle>
@@ -45,7 +45,7 @@ describe('components/filters/region/SubregionToggle', () => {
     const { container } = render(
       <SubregionToggle
         filterCheckbox="FilterCheckbox"
-        filterCheckboxCount="FilterCheckboxCountMock"
+        filterCheckboxCount="FilterCheckboxCount"
       >
         <ChildMock />
       </SubregionToggle>
