@@ -1,13 +1,13 @@
 import { screen, render } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 
 import Filters from '../Filters'
-import FiltersToggle from '../FiltersToggle'
-import filterDataMock from '../../../__mock__/data/filterDataMock'
 import IconFilters from '../../svgSnippets/IconFilters'
+import FiltersToggle from '../FiltersToggle'
 import Collapse from '../../general/Collapse'
 import RegionFilter from '../region/RegionFilter'
 import NumberFilter from '../number/NumberFilter'
+
+import filterDataMock from '../../../__mock__/data/filterDataMock'
 
 jest.mock('../../svgSnippets/IconFilters')
 jest.mock('../FiltersToggle', () => {
@@ -26,8 +26,9 @@ describe('components/filters/Filters', () => {
       <Filters hiddenFields={[]} filterData={filterDataMock}/>
     )
 
-    expect(screen.getByText(/filter by/i)).toBeInTheDocument()
     expect(IconFilters).toHaveBeenCalledTimes(1)
+    expect(screen.getByText(/filter by/i)).toBeInTheDocument()
+    expect(FiltersToggle).toHaveBeenCalled()
     expect(Collapse).toHaveBeenCalledTimes(4)
     expect(RegionFilter).toHaveBeenCalledTimes(1)
     expect(NumberFilter).toHaveBeenCalledTimes(3)
