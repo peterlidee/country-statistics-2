@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
 
 import filterCountriesByRegion from '../../lib/regionFilter/filterCountriesByRegion'
 import applyNumberFilters from '../../lib/numberFilter/applyNumberFilters'
@@ -10,6 +9,8 @@ import CountryCount from '../header/CountryCount';
 import Filters from '../filters/Filters';
 import CountryListHeaders from './CountryListHeaders';
 import CountryRow from './CountryRow';
+
+import PropTypes from 'prop-types'
 
 function CountryList({ countries, filterData }){
   

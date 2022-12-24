@@ -1,7 +1,6 @@
 import { screen, render } from '@testing-library/react'
 
 import { useRouter } from 'next/router'
-import { RegionFilterContextProvider } from '../../context/RegionFilterContext'
 
 import CountryList from '../CountryList'
 import CountryCount from '../../header/CountryCount'
@@ -22,9 +21,7 @@ jest.mock('../CountryRow')
 
 function setupRender(){
   render(
-    <RegionFilterContextProvider filterData={filterDataMock}>
-      <CountryList countries={extraDataCountries} filterData={filterDataMock} />
-    </RegionFilterContextProvider>
+    <CountryList countries={extraDataCountries} filterData={filterDataMock} />
   )
 }
 function setupReturnValue(query, ready = true){
