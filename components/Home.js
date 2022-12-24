@@ -1,12 +1,10 @@
-import PropTypes from 'prop-types'
-
-import { RegionFilterContextProvider } from './context/RegionFilterContext'
-
 import Head from 'next/head'
 import Header from './header/Header'
 import CountryList from './countryList/CountryList'
 import Sources from './sources/Sources'
 import Source from './sources/Source'
+
+import PropTypes from 'prop-types'
 
 function Home(props){
   return(
@@ -16,9 +14,7 @@ function Home(props){
         <meta name="description" content="An overview of statistics per country, fed by different api's." />
       </Head>
       <Header home={true} />
-      <RegionFilterContextProvider filterData={props.filterData}>
-        <CountryList countries={props.countries} filterData={props.filterData} />
-      </RegionFilterContextProvider>
+      <CountryList countries={props.countries} filterData={props.filterData} />
       <div className="sources__home">
         <Sources>
           {/* since we use ssg, there is data, no loading cause pre rendered and no error cause build succeeded */}
