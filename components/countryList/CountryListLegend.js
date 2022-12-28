@@ -7,7 +7,7 @@ import Wrapper from '../general/Wrapper'
 function CountryListLegend({ field }){
   return(
     <Wrapper base={'country-list-legend'} modifier={field.slug}>
-      {field.legend}
+      {field.legend || <>&nbsp;</>}
     </Wrapper>
   )
 }
