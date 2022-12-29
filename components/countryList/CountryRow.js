@@ -1,10 +1,11 @@
 import Link from 'next/link'
-import PropTypes from 'prop-types'
 
 import fieldsData from '../fields/fieldsData'
 import Wrapper from '../general/Wrapper'
 
-function CountryRow({ country, index, hiddenFields }){
+import PropTypes from 'prop-types'
+
+function CountryRow({ country, index, activeHidden }){
   return(
     <>
       <Wrapper base={'country-cell'} modifier="index">
@@ -14,7 +15,7 @@ function CountryRow({ country, index, hiddenFields }){
         <Link href={`/country/${country.cca3}`}>{country[fieldsData[0].key]}</Link>
       </Wrapper>
       {[1,2,3].map(number => (
-        !hiddenFields.includes(fieldsData[number].slug) && 
+        !activeHidden.includes(fieldsData[number].slug) && 
           <Wrapper 
             key={fieldsData[number].slug} 
             base={'country-cell'} 
@@ -30,7 +31,7 @@ function CountryRow({ country, index, hiddenFields }){
 CountryRow.propTypes = {
   country: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
-  hiddenFields: PropTypes.array.isRequired,
+  activeHidden: PropTypes.array.isRequired,
 }
 
 export default CountryRow;

@@ -15,7 +15,7 @@ describe('components/countryList/CountryRow', () => {
       <CountryRow 
         country={extraDataCountries[0]} 
         index={0} 
-        hiddenFields={[]} />
+        activeHidden={[]} />
     )
     expect(Wrapper).toHaveBeenCalledTimes(5)
     expect(Wrapper).toHaveBeenNthCalledWith(
@@ -25,6 +25,7 @@ describe('components/countryList/CountryRow', () => {
       }),
       expect.anything()
     )
+    expect(screen.getByText(/1/)).toBeInTheDocument()
     expect(screen.getByRole('link', { name: 'Austria' })).toBeInTheDocument()
     expect(Wrapper).toHaveBeenNthCalledWith(
       3, 
@@ -33,6 +34,7 @@ describe('components/countryList/CountryRow', () => {
       }),
       expect.anything()
     )
+    expect(screen.getByText(/8.917.205/)).toBeInTheDocument()
     expect(Wrapper).toHaveBeenNthCalledWith(
       4, 
       expect.objectContaining({
@@ -40,6 +42,7 @@ describe('components/countryList/CountryRow', () => {
       }),
       expect.anything()
     )
+    expect(screen.getByText(/83.871/)).toBeInTheDocument()
     expect(Wrapper).toHaveBeenNthCalledWith(
       5, 
       expect.objectContaining({
@@ -47,45 +50,43 @@ describe('components/countryList/CountryRow', () => {
       }),
       expect.anything()
     )
+    expect(screen.getByText(/106/)).toBeInTheDocument()
   })
 
   test('It correctly hides fields population and area', () => {
-    Wrapper.mockClear()
     render(
       <CountryRow 
         country={extraDataCountries[0]} 
         index={0} 
-        hiddenFields={['population', 'area']} />
+        activeHidden={['population', 'area']} />
     )
     expect(Wrapper).toHaveBeenCalledTimes(3)
-    expect(screen.queryByText(/population/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/area/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/8.917.205/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/83.871/)).not.toBeInTheDocument()
   })
 
   test('It correctly hides field density', () => {
-    Wrapper.mockClear()
     render(
       <CountryRow 
         country={extraDataCountries[0]} 
         index={0} 
-        hiddenFields={['density']} />
+        activeHidden={['density']} />
     )
     expect(Wrapper).toHaveBeenCalledTimes(4)
-    expect(screen.queryByText(/density/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/106/)).not.toBeInTheDocument()
   })
 
   test('It correctly hides all fields', () => {
-    Wrapper.mockClear()
     render(
       <CountryRow 
         country={extraDataCountries[0]} 
         index={0} 
-        hiddenFields={['population', 'density', 'area']} />
+        activeHidden={['population', 'density', 'area']} />
     )
     expect(Wrapper).toHaveBeenCalledTimes(2)
-    expect(screen.queryByText(/density/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/population/i)).not.toBeInTheDocument()
-    expect(screen.queryByText(/area/i)).not.toBeInTheDocument()
+    expect(screen.queryByText(/8.917.205/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/106/)).not.toBeInTheDocument()
+    expect(screen.queryByText(/83.871/)).not.toBeInTheDocument()
   })
 
 })
