@@ -18,7 +18,8 @@ const setupRender = () => {
   const button = screen.getByRole('button')
   // eslint-disable-next-line testing-library/no-container, testing-library/no-node-access
   const content = container.querySelector('.collapse__content')
-  return { button, content }
+  const label = screen.getByText(/label/i)
+  return { button, label, content }
 }
 
 describe('components/general/Collapse', () => {
@@ -34,6 +35,35 @@ describe('components/general/Collapse', () => {
     expect(ChildMock).toHaveBeenCalled()
   })
 
+  test('It passes extraClass to Wrapper', () => {
+    setupRender()
+    expect(Wrapper).toHaveBeenCalledWith(
+      expect.objectContaining({
+        modifier: 'extraClass'
+      }),
+      expect.anything()
+    )
+  })
+
+  describe('Testing boldLabel', () => {
+
+    test('It does not print a bold label when no boldLabel prop', () => {
+      const { label } = setupRender()
+      expect(label).not.toHaveStyle('fontWeight:700')
+    })
+
+    test('It has a bold label when boldLabel prop is true', () => {
+      render(
+        <Collapse label="label" boldLabel={true}>
+          <ChildMock />
+        </Collapse>
+      )
+      const label = screen.getByText(/label/i)
+      expect(label).toHaveStyle("fontWeight:700")
+    })
+  
+  })
+    
   describe('It collapses', () => {
 
     test('It has the correct initial values', () => {
