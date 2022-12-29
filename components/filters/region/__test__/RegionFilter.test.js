@@ -37,14 +37,11 @@ jest.mock('../FilterRow', () => {
 describe('components/filters/region/RegionFilter', () => {
 
   test('It renders', () => {
-    useRouter.mockReturnValue({
-      query: {},
-      // push: pushMock()
-    })
     render(
       <RegionFilter 
         regionsAndSubregions={filterDataMock.defaultRegionState}
-        regionsAndSubregionsIndexes={filterDataMock.regionIndexes} />
+        regionsAndSubregionsIndexes={filterDataMock.regionIndexes} 
+        activeRegions={[]} />
     )
 
     expect(SubregionToggle).toHaveBeenCalledTimes(4)
@@ -155,7 +152,8 @@ describe('components/filters/region/RegionFilter', () => {
     render(
       <RegionFilter 
         regionsAndSubregions={filterDataMock.defaultRegionState}
-        regionsAndSubregionsIndexes={filterDataMock.regionIndexes} />
+        regionsAndSubregionsIndexes={filterDataMock.regionIndexes}
+        activeRegions={['Europe,Americas']} />
     )
     const button = screen.getByRole('button', { name: /clear/i })
     await User.click(button)

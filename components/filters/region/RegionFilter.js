@@ -7,12 +7,9 @@ import FilterCheckboxCount from './FilterCheckboxCount'
 
 import PropTypes from 'prop-types'
 
-function RegionFilter({ regionsAndSubregions, regionsAndSubregionsIndexes }){
+function RegionFilter({ regionsAndSubregions, regionsAndSubregionsIndexes, activeRegions }){
   const regionNames = Object.keys(regionsAndSubregions)
-
   const router = useRouter()
-  // get current active regions, we will pass these all the way through to FilterCheckBox
-  const activeRegions = router.query.regions && router.query.regions !== '' ? router.query.regions.split(',') : []
 
   function clearRegionFilter(){
     // take copy of query and delete regions prop
@@ -79,6 +76,7 @@ function RegionFilter({ regionsAndSubregions, regionsAndSubregionsIndexes }){
 RegionFilter.propTypes = {
   regionsAndSubregions: PropTypes.object.isRequired,
   regionsAndSubregionsIndexes: PropTypes.object.isRequired,
+  activeRegions: PropTypes.array.isRequired,
 }
 
 export default RegionFilter;  
