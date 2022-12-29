@@ -10,14 +10,20 @@ import FilterRange from '../../number/FilterRange'
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
-jest.mock('../../number/FilterRange')
 const mockPush = jest.fn()
+jest.mock('../../number/FilterRange')
 
-const setupRender = () => {
+const setupRender = (activeNumbers) => {
   const { rerender } = render(
     <NumberFilter 
       filter={'density'} 
-      currFilterData={filterDataMock['density']} />
+      currFilterData={filterDataMock['density']}
+      activeNumbers={{ 
+        activeNumberFilters: [],
+        currentSelections: {
+          density: activeNumbers
+        }
+      }}/>
   )
   const inputMin = screen.getByRole('spinbutton', { name: 'from' })
   const inputMax = screen.getByRole('spinbutton', { name: 'to' })
@@ -32,10 +38,10 @@ describe('components/filters/number/NumberFilter', () => {
   
   test('It renders', () => {
     useRouter.mockReturnValue({
-      query: {},
+      query: { query: { density: '0,400' }},
       push: () => {}
     })
-    const { inputMin, inputMax, submitButton, clearButton } = setupRender()
+    const { inputMin, inputMax, submitButton, clearButton } = setupRender([0,400])
 
     expect(FilterRange).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -56,21 +62,17 @@ describe('components/filters/number/NumberFilter', () => {
   })
 
   test('It populates the values from query', () => {
-    useRouter.mockReturnValue({
-      query: { density: '100,200' },
-      push: () => {}
-    })
-    const { inputMin, inputMax } = setupRender()
+    const { inputMin, inputMax } = setupRender([100,200])
     expect(inputMin).toHaveValue(100)
     expect(inputMax).toHaveValue(200)
   })
 
   test('Controls work', async () => {
     useRouter.mockReturnValue({
-      query: {},
+      query: { density: '0,400' },
       push: mockPush,
     })
-    const { inputMin, inputMax, submitButton, clearButton } = setupRender()
+    const { inputMin, inputMax, submitButton, clearButton } = setupRender([0,400])
     const User = userEvent.setup()
 
     // enter a string (number) in from field
@@ -151,7 +153,7 @@ describe('components/filters/number/NumberFilter', () => {
       query: { density: '100,400' },
       push: () => {},
     })
-    const { rerender, inputMin, inputMax } = setupRender()
+    const { rerender, inputMin, inputMax } = setupRender([100,400])
   
     // check first render
     expect(inputMin).toHaveValue(100)
@@ -164,7 +166,14 @@ describe('components/filters/number/NumberFilter', () => {
     })
     rerender(<NumberFilter 
       filter={'density'} 
-      currFilterData={filterDataMock['density']} />)
+      currFilterData={filterDataMock['density']} 
+      activeNumbers={{ 
+        activeNumberFilters: [],
+        currentSelections: {
+          density: [0,400]
+        }
+      }}/>
+    )
     
     // test rerender
     expect(inputMin).toHaveValue(0)

@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import validateQueryValue from '../../../lib/numberFilter/validateQueryValue'
-import validateAgainstDefaults from '../../../lib/numberFilter/validateAgainstDefaults'
+import validateNumbersAgainstDefaults from '../../../lib/numberFilter/validateNumbersAgainstDefaults'
 import FilterRange from './FilterRange'
 
 import PropTypes from 'prop-types'
 
-function NumberFilter({ filter, currFilterData }){
+function NumberFilter({ filter, currFilterData, activeNumbers }){
 
   const router = useRouter()
 
-  // take the query, validate it and use it to populate the slider and input fields
-  const filterSelection = validateQueryValue(router.query[filter], [currFilterData.sliderStart, currFilterData.sliderEnd])
+  // take the current filter out of props.currentSelections
+  const filterSelection = activeNumbers.currentSelections[filter]
   
   // setup local state
   // populate it with the default sliderStart and sliderEnd values ( = all selected)
@@ -37,7 +36,7 @@ function NumberFilter({ filter, currFilterData }){
   // this handles the filter button on the controlled inputs, it sets context
   const handleInputSelection = () => {
     // validate inputValues
-    const validatedInputValues = validateAgainstDefaults(inputChange[0], inputChange[1], [currFilterData.sliderStart, currFilterData.sliderEnd])
+    const validatedInputValues = validateNumbersAgainstDefaults(inputChange[0], inputChange[1], [currFilterData.sliderStart, currFilterData.sliderEnd])
     // update states
     filterHandler(validatedInputValues)
     setSliderSelection(validatedInputValues);
@@ -114,6 +113,7 @@ function NumberFilter({ filter, currFilterData }){
 NumberFilter.propTypes = {
   filter: PropTypes.string.isRequired,
   currFilterData: PropTypes.object.isRequired,
+  activeNumbers: PropTypes.object.isRequired,
 }
 
 export default NumberFilter
