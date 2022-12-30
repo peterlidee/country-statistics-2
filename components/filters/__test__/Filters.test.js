@@ -23,10 +23,18 @@ describe('components/filters/Filters', () => {
 
   test('It renders', () => {
     render(
-      <Filters hiddenFields={[]} filterData={filterDataMock}/>
+      <Filters 
+        activeHidden={[]}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
     )
 
-    expect(IconFilters).toHaveBeenCalledTimes(1)
+    expect(IconFilters).toHaveBeenCalled()
     expect(screen.getByText(/filter by/i)).toBeInTheDocument()
     expect(FiltersToggle).toHaveBeenCalled()
     expect(Collapse).toHaveBeenCalledTimes(4)
@@ -34,14 +42,80 @@ describe('components/filters/Filters', () => {
     expect(NumberFilter).toHaveBeenCalledTimes(3)
   })
 
+  test('It calls RegionFilter with correct props', () => {
+    render(
+      <Filters 
+        activeHidden={[]}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
+    expect(RegionFilter).toHaveBeenCalledWith(
+      expect.objectContaining({
+        activeRegions: []
+      }),
+      expect.anything()
+    )
+  })
+
+  test('It calls NumberFilter with correct props', () => {
+    render(
+      <Filters 
+        activeHidden={[]}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
+    expect(NumberFilter).toHaveBeenNthCalledWith(1,
+      expect.objectContaining({ filter: 'population' }),
+      expect.anything()
+    )
+    expect(NumberFilter).toHaveBeenNthCalledWith(2,
+      expect.objectContaining({ filter: 'area' }),
+      expect.anything()
+    )
+    expect(NumberFilter).toHaveBeenNthCalledWith(3,
+      expect.objectContaining({ filter: 'density' }),
+      expect.anything()
+    )
+  })
+
   test('It correctly hides value population', () => {
-    render(<Filters hiddenFields={['population']} filterData={filterDataMock}/>)
+    render(
+      <Filters 
+        activeHidden={['population']}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
     expect(Collapse).toHaveBeenCalledTimes(3)
     expect(NumberFilter).toHaveBeenCalledTimes(2)
   })
 
   test('It correctly hides value population, area and density', () => {
-    render(<Filters hiddenFields={['population', 'area', 'density']} filterData={filterDataMock}/>)
+    render(
+      <Filters 
+        activeHidden={['population', 'area', 'density']}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
     expect(Collapse).toHaveBeenCalledTimes(1)
     expect(NumberFilter).not.toHaveBeenCalled()
   })
