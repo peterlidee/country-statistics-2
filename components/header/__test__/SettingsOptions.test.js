@@ -3,53 +3,56 @@ import userEvent from '@testing-library/user-event'
 
 import { useRouter } from 'next/router'
 import SettingsOptions from '../SettingsOptions'
+import getAndValidateHiddenQuery from '../../../lib/settings/getAndValidateHiddenQuery'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn()}
 ))
+useRouter.mockReturnValue({ query: {}, push: () => {}})
+jest.mock('../../../lib/settings/getAndValidateHiddenQuery')
 
-describe('SettingsOptions', () => {
+function setup(activeHidden){
+  getAndValidateHiddenQuery.mockReturnValue(activeHidden)
+  render(<SettingsOptions />)
+  const checkBoxPopulation = screen.getByRole('checkbox', { name: /population/i })
+  const checkBoxArea = screen.getByRole('checkbox', { name: /area/i })
+  const checkBoxDensity = screen.getByRole('checkbox', { name: /density/i })
+  return { checkBoxPopulation, checkBoxArea, checkBoxDensity }
+}
 
-  test('It renders with no query on the router', () => {
-    useRouter.mockReturnValue({ query: {}, push: () => {}})
-    render(<SettingsOptions />)
+describe('components/header/SettingsOptions', () => {
+  
+  test('It renders with no activeHidden', () => {
+    setup([])
     expect(useRouter).toHaveBeenCalled()
+    expect(getAndValidateHiddenQuery).toHaveBeenCalled()
     expect(screen.getByText(/display columns:/i)).toBeInTheDocument()
     const checkboxes = screen.getAllByRole('checkbox')
     expect(checkboxes).toHaveLength(3)
     expect(checkboxes[0]).toBeChecked()
+    expect(screen.getByText(/population/i)).toBeInTheDocument()
     expect(checkboxes[1]).toBeChecked()
+    expect(screen.getByText(/area/i)).toBeInTheDocument()
     expect(checkboxes[2]).toBeChecked()
+    expect(screen.getByText(/density/i)).toBeInTheDocument()
   })
   
-  test('It renders with router.query.hide = population', () => {
-    useRouter.mockReturnValue({ query: { hide: 'population' }, push: () => {}})
-    render(<SettingsOptions />)
-    const checkBoxPopulation = screen.getByRole('checkbox', { name: /population/i })
-    const checkBoxArea = screen.getByRole('checkbox', { name: /area/i })
-    const checkBoxDensity = screen.getByRole('checkbox', { name: /density/i })
+  test('It renders with activeHidden population', () => {
+    const { checkBoxPopulation, checkBoxArea, checkBoxDensity } = setup(['population'])
     expect(checkBoxPopulation).not.toBeChecked()
     expect(checkBoxArea).toBeChecked()
     expect(checkBoxDensity).toBeChecked()
   })
-
-  test('It renders with router.query.hide = population,area', () => {
-    useRouter.mockReturnValue({ query: { hide: 'population,area' }, push: () => {}})
-    render(<SettingsOptions />)
-    const checkBoxPopulation = screen.getByRole('checkbox', { name: /population/i })
-    const checkBoxArea = screen.getByRole('checkbox', { name: /area/i })
-    const checkBoxDensity = screen.getByRole('checkbox', { name: /density/i })
+  
+  test('It renders with activeHidden population,area', () => {
+    const { checkBoxPopulation, checkBoxArea, checkBoxDensity } = setup(['population', 'area'])
     expect(checkBoxPopulation).not.toBeChecked()
     expect(checkBoxArea).not.toBeChecked()
     expect(checkBoxDensity).toBeChecked()
   })
 
-  test('It renders with router.query.hide = population,area,density', () => {
-    useRouter.mockReturnValue({ query: { hide: 'population,area,density' }, push: () => {}})
-    render(<SettingsOptions />)
-    const checkBoxPopulation = screen.getByRole('checkbox', { name: /population/i })
-    const checkBoxArea = screen.getByRole('checkbox', { name: /area/i })
-    const checkBoxDensity = screen.getByRole('checkbox', { name: /density/i })
+  test('It renders with activeHidden population,area,density', () => {
+    const { checkBoxPopulation, checkBoxArea, checkBoxDensity } = setup(['population', 'area', 'density'])
     expect(checkBoxPopulation).not.toBeChecked()
     expect(checkBoxArea).not.toBeChecked()
     expect(checkBoxDensity).not.toBeChecked()
@@ -58,15 +61,10 @@ describe('SettingsOptions', () => {
   test('It calls router.push with the correct query', async() => {
     const pushMock = jest.fn()
     useRouter.mockReturnValue({ query: { hide: 'population' }, push: pushMock})
-    render(<SettingsOptions />)
+    const { checkBoxPopulation, checkBoxArea, checkBoxDensity } = setup(['population'])
     const user = userEvent.setup()
 
-    const checkBoxPopulation = screen.getByRole('checkbox', { name: /population/i })
-    const checkBoxArea = screen.getByRole('checkbox', { name: /area/i })
-
     await user.click(checkBoxArea)
-    expect(pushMock).toHaveBeenCalled()
-    // test the query
     expect(pushMock).toHaveBeenCalledWith(
       expect.objectContaining({
         query: { hide: 'population,area' }
@@ -76,8 +74,6 @@ describe('SettingsOptions', () => {
     )
 
     await user.click(checkBoxPopulation)
-    expect(pushMock).toHaveBeenCalled()
-    // test the query
     expect(pushMock).toHaveBeenCalledWith(
       expect.objectContaining({
         query: { hide: '' }
@@ -86,4 +82,5 @@ describe('SettingsOptions', () => {
       { shallow: true }
     )
   })
+  
 })
