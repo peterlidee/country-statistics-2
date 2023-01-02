@@ -2,6 +2,16 @@ import { screen, render } from '@testing-library/react'
 
 import { useRouter } from 'next/router'
 
+// functions
+import getAndValidateHiddenQuery from '../../../lib/settings/getAndValidateHiddenQuery'
+import getRegionsQuery from '../../../lib/regionFilter/getRegionsQuery'
+import validateRegionsQuery from '../../../lib/regionFilter/validateRegionsQuery'
+import filterCountriesByRegion from '../../../lib/regionFilter/filterCountriesByRegion'
+import getNumberQueryData from '../../../lib/numberFilter/getNumbersQueryData'
+import filterCountriesByNumbers from '../../../lib/numberFilter/filterCountriesByNumbers'
+import applySorting from '../../../lib/sorting/applySorting'
+
+// components
 import CountryList from '../CountryList'
 import CountryCount from '../../header/CountryCount'
 import Filters from '../../filters/Filters'
@@ -11,32 +21,91 @@ import CountryRow from '../CountryRow'
 import { extraDataCountries } from '../../../__mock__/data/countriesMock'
 import filterDataMock from '../../../__mock__/data/filterDataMock'
 
+// mocking
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
+// useRouter.mockReturnValue({
+//   isReady: true,
+//   query: {},
+// })
+
+jest.mock('../../../lib/settings/getAndValidateHiddenQuery')
+// getAndValidateHiddenQuery.mockReturnValue([])
+
+jest.mock('../../../lib/regionFilter/getRegionsQuery')
+jest.mock('../../../lib/regionFilter/validateRegionsQuery')
+// validateRegionsQuery.mockReturnValue([])
+jest.mock('../../../lib/regionFilter/filterCountriesByRegion')
+
+jest.mock('../../../lib/numberFilter/getNumbersQueryData')
+// getNumberQueryData.mockReturnValue({
+//   activeNumberFilters: [],
+//   currentSelection: {}
+// })
+jest.mock('../../../lib/numberFilter/filterCountriesByNumbers')
+
+jest.mock('../../../lib/sorting/applySorting')
+// applySorting.mockReturnValue({
+//   countries: extraDataCountries,
+//   sortBy: 'sortBy',
+//   sortAsc: true,
+// })
+
 jest.mock('../../header/CountryCount')
 jest.mock('../../filters/Filters')
 jest.mock('../CountryListHeaders')
 jest.mock('../CountryRow')
 
-function setupRender(){
+function setup(){
   render(
-    <CountryList countries={extraDataCountries} filterData={filterDataMock} />
+    <CountryList 
+      countries={extraDataCountries} 
+      filterData={filterDataMock} />
   )
 }
-function setupReturnValue(query, ready = true){
+
+function setMockReturnValues( 
+  activeHidden, activeRegions, activeNumbers
+){
   useRouter.mockReturnValue({
-    isReady: ready,
-    query: query,
+    isReady: true,
+    query: {},
+  })
+  getAndValidateHiddenQuery.mockReturnValue(activeHidden)
+  validateRegionsQuery.mockReturnValue(activeRegions)
+  getNumberQueryData.mockReturnValue({
+    activeNumberFilters: activeNumbers,
+    currentSelection: {}
+  })
+  applySorting.mockReturnValue({
+    countries: extraDataCountries,
+    sortBy: 'sortBy',
+    sortAsc: true,
   })
 }
 
+beforeEach(() => {
+  jest.resetAllMocks()
+  setMockReturnValues([],[],[])
+})
+
 describe('components/countryList/CountryList', () => {
+
+  test('It called all the mocked functions and hooks', () => {
+    setup()
+    expect(useRouter).toHaveBeenCalled()
+    expect(getAndValidateHiddenQuery).toHaveBeenCalled()
+    expect(getRegionsQuery).toHaveBeenCalled()
+    expect(validateRegionsQuery).toHaveBeenCalled()
+    expect(filterCountriesByRegion).toHaveBeenCalled()
+    expect(getNumberQueryData).toHaveBeenCalled()
+    expect(filterCountriesByNumbers).toHaveBeenCalled()
+    expect(applySorting).toHaveBeenCalled()
+  })
   
   test('It renders', () => {
-    setupReturnValue({})
-    setupRender()
-
+    setup()
     expect(CountryCount).toHaveBeenCalled()
     expect(Filters).toHaveBeenCalled()
     expect(screen.getByRole('main')).toBeInTheDocument()
@@ -45,118 +114,167 @@ describe('components/countryList/CountryList', () => {
   })
   
   test('It renders loading', () => {
-    setupReturnValue({}, false)
-    setupRender()
+    useRouter.mockReturnValue({ isReady: false })
+    setup()
     expect(screen.getByText('...loading')).toBeInTheDocument()
   })
 
-  test('Grid has the correct styles with none hidden', () => {
-    setupReturnValue({})
-    setupRender()
-    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(3, minmax(auto, 9em))')
-  })
+  describe('It renders the grid correctly', () => {
+    
+    test('Grid has the correct styles with none hidden', () => {
+      setup()
+      expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(3, minmax(auto, 9em))')
+    })
+  
+    test('Grid has the correct styles with 1 hidden', () => {
+      getAndValidateHiddenQuery.mockReturnValue(['area'])
+      setup()
+      expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(2, minmax(auto, 9em))')
+    })
+    
+    test('Grid has the correct styles with all hidden', () => {
+      getAndValidateHiddenQuery.mockReturnValue(['population', 'area', 'density'])
+      setup()
+      expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em)')
+    })
 
-  test('Grid has the correct styles with 1 hidden', () => {
-    setupReturnValue({ hide: 'area' })
-    setupRender()
-    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em) repeat(2, minmax(auto, 9em))')
   })
-
-  test('Grid has the correct styles with all hidden', () => {
-    setupReturnValue({ hide: 'area,population,density' })
-    setupRender()
-    expect(screen.getByRole('main')).toHaveStyle('gridTemplateColumns: 1.5em minmax(9em, 15em)')
-  })
-
-  test('It displays no results', () => {
-    setupReturnValue({ area: '1,2' })    
-    setupRender()
+  
+  test('It displays the text /no results/', () => {
+    applySorting.mockReturnValue({
+      countries: [],
+      sortBy: 'sortBy',
+      sortAsc: true,
+    })
+    setup()
     expect(screen.getByText(/no results/i)).toBeInTheDocument()
   })
 
-  test('CountryCount mock was called with correct props when all countries are displayed', () => {
-    setupReturnValue({})
-    setupRender()
-    expect(CountryCount).toHaveBeenCalledWith(
-      expect.objectContaining({
-        count: 6
-      }),
-      expect.anything()
-    )
-  })
+  describe('All mocked components where called with the correct props', () => {
 
-  test('CountryCount mock was called with correct props when filters active', () => {
-    setupReturnValue({ area: '0,50000' })
-    setupRender()
-    expect(CountryCount).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        count: 4
-      }),
-      expect.anything()
-    )
-  })
+    test('CountryCount mock was called with correct props when all countries are displayed', () => {
+      setup()
+      expect(CountryCount).toHaveBeenCalledWith(
+        expect.objectContaining({
+          count: 6
+        }),
+        expect.anything()
+      )
+    })
 
-  test('Filters was called with the correct hiddenFields props when nothing hidden', () => {
-    setupReturnValue({})
-    setupRender()
-    expect(Filters).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        hiddenFields: []
-      }),
-      expect.anything()
-    )
-  })
+    describe('Filters mock', () => {
 
-  test('Filters was called with the correct hiddenFields props when area hidden', () => {
-    setupReturnValue({ hide: 'area' })
-    setupRender()
-    expect(Filters).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        hiddenFields: [ 'area' ]
-      }),
-      expect.anything()
-    )
-  })
+      test('Filters mock was called with correct props', () => {
+        setup()
+        expect(Filters).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeHidden: [],
+            activeRegions: [],
+            activeNumbers: expect.objectContaining({
+              activeNumberFilters: []
+            })
+          }),
+          expect.anything()
+        )
+      })
 
-  test('CountryListHeaders gets called with the correct props when default', () => {
-    setupReturnValue({})
-    setupRender()
-    expect(CountryListHeaders).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        sortBy: 'country',
-        sortAsc: true
-      }),
-      expect.anything()
-    )
-  })
+      test('Filters mock was called with correct props when activeHidden population', () => {
+        getAndValidateHiddenQuery.mockReturnValue(['population'])
+        setup()
+        expect(Filters).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeHidden: ['population'],
+          }),
+          expect.anything()
+        )
+      })
 
-  test('CountryListHeaders gets called with the correct props when sort -density', () => {
-    setupReturnValue({ sort: '-density' })
-    setupRender()
-    expect(CountryListHeaders).toHaveBeenLastCalledWith(
-      expect.objectContaining({
-        sortBy: 'density',
-        sortAsc: false,
-      }),
-      expect.anything()
-    )
-  })
+      test('Filters mock was called with correct props when activeRegions Europe', () => {
+        validateRegionsQuery.mockReturnValue(['Europe'])
+        setup()
+        expect(Filters).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeRegions: ['Europe'],
+          }),
+          expect.anything()
+        )
+      })
 
-  test('CountryRow is called with correctly when default filter', () => {
-    setupReturnValue({})
-    setupRender()
-    expect(CountryRow.mock.calls[0][0].country.cca3).toBe('AUT')
-    expect(CountryRow.mock.calls[5][0].country.cca3).toBe('SGS')
-  })
+      test('Filters mock was called with correct props when activeNumbers', () => {
+        getNumberQueryData.mockReturnValue({
+          activeNumberFilters: ['area'],
+          currentSelection: {}
+        })
+        setup()
+        expect(Filters).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeNumbers: expect.objectContaining({
+              activeNumberFilters: ['area'],
+            })
+          }),
+          expect.anything()
+        )
+      })
 
-  test('CountryRow is called with correctly when default filter', () => {
-    setupReturnValue({ population: '0,10000000' })
-    setupRender()
-    expect(CountryRow).toHaveBeenCalledTimes(4)
-    expect(CountryRow.mock.calls[0][0].country.cca3).toBe('AUT')
-    expect(CountryRow.mock.calls[1][0].country.cca3).toBe('DNK')
-    expect(CountryRow.mock.calls[2][0].country.cca3).toBe('PRI')
-    expect(CountryRow.mock.calls[3][0].country.cca3).toBe('SGS')
+    })
+
+    describe('CountryListHeaders', () => {
+
+      test('It was called with the correct hidden props', () => {
+        getAndValidateHiddenQuery.mockReturnValue(['population'])
+        setup()
+        expect(CountryListHeaders).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeHidden: ['population'],
+            sortBy: 'sortBy',
+            sortAsc: true,
+          }),
+          expect.anything()
+        )
+      })
+
+      test('It was called with the correct sort props', () => {
+        applySorting.mockReturnValue({
+          countries: extraDataCountries,
+          sortBy: 'density',
+          sortAsc: false,
+        })
+        setup()
+        expect(CountryListHeaders).toHaveBeenCalledWith(
+          expect.objectContaining({
+            activeHidden: [],
+            sortBy: 'density',
+            sortAsc: false,
+          }),
+          expect.anything()
+        )
+      })
+
+    })
+
+    describe('CountryRow was called with the correct props', () => {
+      
+      test('It got called the correct number of times', () => {
+        setup()
+        expect(CountryRow).toHaveBeenCalledTimes(6)
+      })
+
+      test('The first country was called with the correct props when activeHidden area', () => {
+        getAndValidateHiddenQuery.mockReturnValue(['area'])
+        setup()
+        expect(CountryRow).toHaveBeenNthCalledWith(1,
+          expect.objectContaining({
+            country: expect.objectContaining({
+              cca3: 'AUT',
+            }),
+            activeHidden: ['area']
+          }),
+          expect.anything()
+        )
+      })
+
+    })
+    
   })
 
 })
