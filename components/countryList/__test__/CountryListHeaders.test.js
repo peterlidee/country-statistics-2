@@ -15,7 +15,7 @@ describe('components/countryList/CountryListHeaders', () => {
   test('It renders', () => {
     render(
       <CountryListHeaders 
-        hiddenFields={[]}
+        activeHidden={[]}
         sortBy="country"
         sortAsc={true}
       />
@@ -28,7 +28,7 @@ describe('components/countryList/CountryListHeaders', () => {
   test('It renders correctly with population hidden', () => {
     render(
       <CountryListHeaders 
-        hiddenFields={['population']}
+        activeHidden={['population']}
         sortBy="country"
         sortAsc={true}
       />
@@ -40,7 +40,7 @@ describe('components/countryList/CountryListHeaders', () => {
   test('It renders correctly with everything hidden', () => {
     render(
       <CountryListHeaders 
-        hiddenFields={['population', 'area', 'density']}
+        activeHidden={['population', 'area', 'density']}
         sortBy="country"
         sortAsc={true}
       />
