@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import { useRouter } from 'next/router'
 import FilterCheckBox from '../../region/FilterCheckbox'
+import updateRegionsQuery from '../../../../lib/regionFilter/updateRegionsQuery'
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
 
 jest.mock('next/router', () => ({
@@ -11,6 +12,11 @@ jest.mock('next/router', () => ({
 const mockPush = jest.fn()
 useRouter.mockReturnValue({
   push: mockPush,
+})
+jest.mock('../../../../lib/regionFilter/updateRegionsQuery')
+
+beforeEach(() => {
+  updateRegionsQuery.mockReset()
 })
 
 describe('components/filters/region/FilterCheckBox', () => {
@@ -43,6 +49,7 @@ describe('components/filters/region/FilterCheckBox', () => {
 describe('It calls router.push with the correct props', () => {
   
   test('A click on a subregion that is active and region is also active [1.1.1]', async () => {
+    updateRegionsQuery.mockReturnValue(['Western Europe','Central Europe'])
     render(
       <FilterCheckBox 
         name="Northern Europe"
@@ -65,6 +72,7 @@ describe('It calls router.push with the correct props', () => {
   })
 
   test('A click on a subregion that is active and region is not active [1.1.2]', async () => {
+    updateRegionsQuery.mockReturnValue(['Southeast Europe','Central Europe'])
     render(
       <FilterCheckBox 
         name="Northern Europe"
@@ -87,6 +95,7 @@ describe('It calls router.push with the correct props', () => {
   })
 
   test('A click on a subregion that is not active and all the other subregions are active [1.2.1]', async () => {
+    updateRegionsQuery.mockReturnValue(['Northern Europe','Western Europe','Europe','Central Europe'])
     render(
       <FilterCheckBox 
         name="Central Europe"
@@ -109,6 +118,7 @@ describe('It calls router.push with the correct props', () => {
   })
     
   test('A click on a subregion that is not active and NOT all the other subregions are active [1.2.2]', async () => {
+    updateRegionsQuery.mockReturnValue(['Southeast Europe','Central Europe','Northern Europe'])
     render(
       <FilterCheckBox 
         name="Northern Europe"
@@ -131,6 +141,7 @@ describe('It calls router.push with the correct props', () => {
   })
 
   test('A click on a region that is active [2.1]', async () => {
+    updateRegionsQuery.mockReturnValue([])
     render(
       <FilterCheckBox 
         name="Africa"
@@ -154,6 +165,7 @@ describe('It calls router.push with the correct props', () => {
   })
 
   test('A click on a region that is not active [2.2]', async () => {
+    updateRegionsQuery.mockReturnValue(['Africa', 'Northern Africa'])
     render(
       <FilterCheckBox 
         name="Africa"
