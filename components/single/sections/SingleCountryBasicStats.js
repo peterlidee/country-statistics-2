@@ -1,7 +1,8 @@
-import Proptypes from 'prop-types';
 import formatNumber from '../../../lib/helpers/formatNumber'
 import roundNumber from '../../../lib/helpers/roundNumber'
 import BoxWrapper from '../../general/BoxWrapper'
+
+import Proptypes from 'prop-types'
 
 function SingleCountryBasisStats(props){
 
@@ -30,4 +31,4 @@ SingleCountryBasisStats.propTypes = {
   area: Proptypes.number.isRequired,
 }
 
-export default SingleCountryBasisStats;
+export default SingleCountryBasisStats
