@@ -5,12 +5,14 @@ import { useRouter } from 'next/router'
 import filterDataMock from '../../../../__mock__/data/filterDataMock'
 
 import NumberFilter from '../../number/NumberFilter'
+import validateNumbersAgainstDefaults from '../../../../lib/numberFilter/validateNumbersAgainstDefaults'
 import FilterRange from '../../number/FilterRange'
 
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
 const mockPush = jest.fn()
+jest.mock('../../../../lib/numberFilter/validateNumbersAgainstDefaults')
 jest.mock('../../number/FilterRange')
 
 const setupRender = (activeNumbers) => {
