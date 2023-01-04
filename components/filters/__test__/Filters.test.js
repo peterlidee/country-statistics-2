@@ -4,6 +4,7 @@ import Filters from '../Filters'
 import IconFilters from '../../svgSnippets/IconFilters'
 import FiltersToggle from '../FiltersToggle'
 import Collapse from '../../general/Collapse'
+import isFilterActive from '../../../lib/filter/isFilterActive'
 import RegionFilter from '../region/RegionFilter'
 import NumberFilter from '../number/NumberFilter'
 
@@ -16,6 +17,7 @@ jest.mock('../FiltersToggle', () => {
 jest.mock('../../general/Collapse', () => {
   return jest.fn((props) => <>{props.children}</>)
 })
+jest.mock('../../../lib/filter/isFilterActive')
 jest.mock('../region/RegionFilter')
 jest.mock('../number/NumberFilter')
 
@@ -38,6 +40,7 @@ describe('components/filters/Filters', () => {
     expect(screen.getByText(/filter by/i)).toBeInTheDocument()
     expect(FiltersToggle).toHaveBeenCalled()
     expect(Collapse).toHaveBeenCalledTimes(4)
+    expect(isFilterActive).toHaveBeenCalledTimes(4)
     expect(RegionFilter).toHaveBeenCalledTimes(1)
     expect(NumberFilter).toHaveBeenCalledTimes(3)
   })
@@ -118,6 +121,52 @@ describe('components/filters/Filters', () => {
     )
     expect(Collapse).toHaveBeenCalledTimes(1)
     expect(NumberFilter).not.toHaveBeenCalled()
+  })
+
+  test('It passed the correct boldLabel to Collapse when isFilterActive mock returns true', () => {
+    isFilterActive.mockReturnValue(true)
+    render(
+      <Filters 
+        activeHidden={['population', 'area', 'density']}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
+    expect(Collapse).toHaveBeenCalledTimes(1)
+    expect(Collapse).toHaveBeenCalledWith(
+      expect.objectContaining({
+        boldLabel: true
+      }),
+      expect.anything()
+    )
+    isFilterActive.mockReset()
+  })
+
+  test('It passed the correct boldLabel to Collapse when isFilterActive mock returns true', () => {
+    isFilterActive.mockReturnValue(false)
+    render(
+      <Filters 
+        activeHidden={['population', 'area', 'density']}
+        activeRegions={[]}
+        activeNumbers={{
+          activeNumberFilters: [],
+          currentSelection: {}
+        }}
+        filterData={filterDataMock}
+      />
+    )
+    expect(Collapse).toHaveBeenCalledTimes(1)
+    expect(Collapse).toHaveBeenCalledWith(
+      expect.objectContaining({
+        boldLabel: false
+      }),
+      expect.anything()
+    )
+    isFilterActive.mockReset()
   })
 
 })
