@@ -1,27 +1,31 @@
-import { screen, render } from '@testing-library/react'
+import { render } from '@testing-library/react'
 
 import SingleCountryPopulationChart from '../SingleCountryPopulationChart'
 import SingleCountryFetch from '../../SingleCountryFetch'
 import PopulationChartWidget from '../../chart/PopulationChartWidget'
-
-import populationDataMock from '../../../../__mock__/data/populationDataMock'
-import chartDataMock from '../../../../__mock__/data/chartDataMock'
+import extractPopulationChartData from '../../../../lib/single/extractPopulationChartData'
 
 jest.mock('../../chart/PopulationChartWidget')
-jest.mock('../../SingleCountryFetch', () => jest.fn())
+jest.mock('../../SingleCountryFetch')
+jest.mock('../../../../lib/single/extractPopulationChartData')
+
+beforeEach(() => {
+  jest.resetAllMocks()
+})
+
+function setup(isLoading, error, data){
+  SingleCountryFetch.mockImplementation((props) => (
+    <>{props.children(isLoading, error, data)}</>
+  ))
+  render(<SingleCountryPopulationChart countryCode="DZA" />)
+}
 
 describe('components/single/sections/SingleCountryPopulationChart', () => {
 
-  test('It renders with no data (undefined)', () => {
-    // simulate no data on SingleCountryFetch
-    SingleCountryFetch.mockImplementation((props) => (
-      <>{props.children(false, undefined, undefined)}</>
-    ))
-    render(
-      <SingleCountryPopulationChart 
-        countryCode="DZA" />
-    )
+  test('It renders empty with error', () => {
+    setup(false, true, undefined)
     expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
     expect(PopulationChartWidget).toHaveBeenCalledWith(
       expect.objectContaining({
         years: [],
@@ -31,26 +35,109 @@ describe('components/single/sections/SingleCountryPopulationChart', () => {
       }),
       expect.anything()
     )
+    expect(extractPopulationChartData).not.toHaveBeenCalled()
   })
 
-  test('It renders with mocked data', () => {
-    // simulate no data on SingleCountryFetch
-    SingleCountryFetch.mockImplementation((props) => (
-      <>{props.children(false, undefined, populationDataMock)}</>
-    ))
-    render(
-      <SingleCountryPopulationChart 
-        countryCode="DZA" />
-    )
+  test('It renders empty with isLoading && !data', () => {
+    setup(true, undefined, undefined)
     expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
     expect(PopulationChartWidget).toHaveBeenCalledWith(
       expect.objectContaining({
-        years: chartDataMock.years,
-        femaleTotal: chartDataMock.femaleTotal,
-        maleTotal: chartDataMock.maleTotal,
-        combinedTotal: chartDataMock.combinedTotal,
+        years: [],
+        femaleTotal: [],
+        maleTotal: [],
+        combinedTotal: [],
+      }),
+      expect.anything()
+    )
+    expect(extractPopulationChartData).not.toHaveBeenCalled()
+  })
+
+  test('It renders empty with !data', () => {
+    setup(false, undefined, undefined)
+    expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
+    expect(PopulationChartWidget).toHaveBeenCalledWith(
+      expect.objectContaining({
+        years: [],
+        femaleTotal: [],
+        maleTotal: [],
+        combinedTotal: [],
+      }),
+      expect.anything()
+    )
+    expect(extractPopulationChartData).not.toHaveBeenCalled()
+  })
+
+  test('It renders empty with data[0] has a message prop', () => {
+    setup(false, undefined, [{ message: 'message' }])
+    expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
+    expect(PopulationChartWidget).toHaveBeenCalledWith(
+      expect.objectContaining({
+        years: [],
+        femaleTotal: [],
+        maleTotal: [],
+        combinedTotal: [],
+      }),
+      expect.anything()
+    )
+    expect(extractPopulationChartData).not.toHaveBeenCalled()
+  })
+
+  test('It renders empty with data[0] has a total === 0 prop', () => {
+    setup(false, undefined, [{ total: 0 }])
+    expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
+    expect(PopulationChartWidget).toHaveBeenCalledWith(
+      expect.objectContaining({
+        years: [],
+        femaleTotal: [],
+        maleTotal: [],
+        combinedTotal: [],
+      }),
+      expect.anything()
+    )
+    expect(extractPopulationChartData).not.toHaveBeenCalled()
+  })
+
+  test('It renders with data when isLoading && data', () => {
+    extractPopulationChartData.mockReturnValue(
+      { years: 1, femaleTotal: 2, maleTotal: 3, combinedTotal: 4 }
+    )
+    setup(true, undefined, [])
+    expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(extractPopulationChartData).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
+    expect(PopulationChartWidget).toHaveBeenCalledWith(
+      expect.objectContaining({
+        years: 1,
+        femaleTotal: 2,
+        maleTotal: 3,
+        combinedTotal: 4,
       }),
       expect.anything()
     )
   })
+
+  test('It renders with data when !isLoading !error && data', () => {
+    extractPopulationChartData.mockReturnValue(
+      { years: 1, femaleTotal: 2, maleTotal: 3, combinedTotal: 4 }
+    )
+    setup(false, undefined, [])
+    expect(SingleCountryFetch).toHaveBeenCalled()
+    expect(extractPopulationChartData).toHaveBeenCalled()
+    expect(PopulationChartWidget).toHaveBeenCalledTimes(1)
+    expect(PopulationChartWidget).toHaveBeenCalledWith(
+      expect.objectContaining({
+        years: 1,
+        femaleTotal: 2,
+        maleTotal: 3,
+        combinedTotal: 4,
+      }),
+      expect.anything()
+    )
+  })
+
 })
