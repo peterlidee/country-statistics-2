@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router'
-import PropTypes from 'prop-types'
 import updateRegionsQuery from '../../../lib/regionFilter/updateRegionsQuery'
+
+import PropTypes from 'prop-types'
 
 function FilterCheckbox({ name, region, activeRegions, regionsAndSubregions }){
   
