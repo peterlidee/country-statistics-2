@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import SingleCountryFetch from '../SingleCountryFetch'
 import PopulationChartWidget from '../chart/PopulationChartWidget'
 import extractPopulationChartData from '../../../lib/single/extractPopulationChartData'
+
+import PropTypes from 'prop-types'
 
 function SingleCountryPopulationChart(props){
   
@@ -35,7 +36,7 @@ function SingleCountryPopulationChart(props){
           (isLoading && !data) || 
           !data || 
           (Array.isArray(data) && data[0]?.message) ||
-          (Array.isArray(data) && data[0]?.total == 0)
+          (Array.isArray(data) && data[0]?.total === 0)
         ){
           return <PopulationChartWidget 
                     years={[]}
@@ -46,10 +47,10 @@ function SingleCountryPopulationChart(props){
         // data -> calculate labels and values
         const { years, femaleTotal, maleTotal, combinedTotal } = extractPopulationChartData(data[1]);
         return <PopulationChartWidget 
-                years={years}
-                femaleTotal={femaleTotal}
-                maleTotal={maleTotal}
-                combinedTotal={combinedTotal} />
+                  years={years}
+                  femaleTotal={femaleTotal}
+                  maleTotal={maleTotal}
+                  combinedTotal={combinedTotal} />
       }}
     </SingleCountryFetch>
   )
