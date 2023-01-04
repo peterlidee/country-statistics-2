@@ -25,33 +25,13 @@ import filterDataMock from '../../../__mock__/data/filterDataMock'
 jest.mock('next/router', () => ({
   useRouter: jest.fn()
 }))
-// useRouter.mockReturnValue({
-//   isReady: true,
-//   query: {},
-// })
-
 jest.mock('../../../lib/settings/getAndValidateHiddenQuery')
-// getAndValidateHiddenQuery.mockReturnValue([])
-
 jest.mock('../../../lib/regionFilter/getRegionsQuery')
 jest.mock('../../../lib/regionFilter/validateRegionsQuery')
-// validateRegionsQuery.mockReturnValue([])
 jest.mock('../../../lib/regionFilter/filterCountriesByRegion')
-
 jest.mock('../../../lib/numberFilter/getNumbersQueryData')
-// getNumberQueryData.mockReturnValue({
-//   activeNumberFilters: [],
-//   currentSelection: {}
-// })
 jest.mock('../../../lib/numberFilter/filterCountriesByNumbers')
-
 jest.mock('../../../lib/sorting/applySorting')
-// applySorting.mockReturnValue({
-//   countries: extraDataCountries,
-//   sortBy: 'sortBy',
-//   sortAsc: true,
-// })
-
 jest.mock('../../header/CountryCount')
 jest.mock('../../filters/Filters')
 jest.mock('../CountryListHeaders')
