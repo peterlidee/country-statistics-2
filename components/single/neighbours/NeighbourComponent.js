@@ -1,4 +1,4 @@
-import Sources from '../../sources/Sources';
+import Sources from '../../sources/Sources'
 
 const NeighbourComponent = (props) => (
   <>
@@ -16,4 +16,4 @@ const NeighbourComponent = (props) => (
   </>
 )
 
-export default NeighbourComponent;
+export default NeighbourComponent
