@@ -8,9 +8,6 @@ import NumberFilter from './number/NumberFilter'
 
 import PropTypes from 'prop-types'
 
-// TODO: on hard reload, the regions subregions may be invalid without causing crash
-// TODO on hard reload check faulty hide query value
-
 function Filters({ filterData, activeHidden, activeRegions, activeNumbers }){
 
   // check if the field / filter is to be displayed
