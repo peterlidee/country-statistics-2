@@ -1,4 +1,4 @@
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 const BoxWrapper = (props) => (
   <div className={`single-country__${props.name}`}>
@@ -12,4 +12,4 @@ BoxWrapper.propTypes = {
   name: PropTypes.string.isRequired
 }
 
-export default BoxWrapper;
+export default BoxWrapper
