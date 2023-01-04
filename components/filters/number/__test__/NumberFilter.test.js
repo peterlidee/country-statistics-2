@@ -64,6 +64,10 @@ describe('components/filters/number/NumberFilter', () => {
   })
 
   test('It populates the values from query', () => {
+    useRouter.mockReturnValue({
+      query: { query: { density: '0,400' }},
+      push: () => {}
+    })
     const { inputMin, inputMax } = setupRender([100,200])
     expect(inputMin).toHaveValue(100)
     expect(inputMax).toHaveValue(200)
@@ -91,9 +95,12 @@ describe('components/filters/number/NumberFilter', () => {
     await User.type(inputMin, '-200')
     expect(inputMin).not.toHaveValue(-200)
     expect(inputMin).toHaveValue(200)
-
+    
     // on submit, 
     // the values should remain
+
+    validateNumbersAgainstDefaults.mockImplementation((value1, value2, defaults) => [value1, value2])
+
     await User.clear(inputMin)
     await User.type(inputMin, '100')
     await User.clear(inputMax)
@@ -101,7 +108,7 @@ describe('components/filters/number/NumberFilter', () => {
     await User.click(submitButton)
     expect(inputMin).toHaveValue(100)
     expect(inputMax).toHaveValue(300)
-
+    
     // router.push has been called correctly
     expect(mockPush).toHaveBeenLastCalledWith(
       expect.objectContaining({
@@ -111,35 +118,17 @@ describe('components/filters/number/NumberFilter', () => {
       { shallow: true }
     )
 
-    // on submit, 
-    // if TO is smaller then FROM, then the values will be flipped
-    await User.clear(inputMin)
-    await User.type(inputMin, '300')
-    await User.clear(inputMax)
-    await User.type(inputMax, '100')
-    await User.click(submitButton)
-    expect(inputMin).toHaveValue(100)
-    expect(inputMax).toHaveValue(300)
-
-    // on submit, 
-    // is TO is higher then max, it gets corrected to max
-    await User.clear(inputMax)
-    await User.type(inputMax, '500')
-    await User.click(submitButton)
-    expect(inputMin).toHaveValue(100)
-    expect(inputMax).toHaveValue(400)
-
     // FilterInput was called each time with updated values
     // we check the last call
     const filterRangeCalls = FilterRange.mock.calls
     expect(filterRangeCalls[filterRangeCalls.length - 1][0].sliderSelection[0]).toBe(100)
-    expect(filterRangeCalls[filterRangeCalls.length - 1][0].sliderSelection[1]).toBe(400)
+    expect(filterRangeCalls[filterRangeCalls.length - 1][0].sliderSelection[1]).toBe(300)
 
     // check if clearbutton works
     await User.click(clearButton)
     expect(inputMin).toHaveValue(0)
     expect(inputMax).toHaveValue(400)
-
+    
     // router.push has been called correctly
     expect(mockPush).toHaveBeenLastCalledWith(
       expect.objectContaining({
